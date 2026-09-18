@@ -30,6 +30,8 @@
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
+      --logo-body:#e7eef3;
+      --logo-s:#14486e;
       --backdrop:#05090c;
       --paper:#0e1f2b;
       --ink:#e7eef3;
@@ -40,6 +42,8 @@
     }
   }
   :root[data-theme="dark"]{
+      --logo-body:#e7eef3;
+      --logo-s:#14486e;
       --backdrop:#05090c;
       --paper:#0e1f2b;
       --ink:#e7eef3;
@@ -71,8 +75,8 @@
   /* ---------------- sticky mini nav ---------------- */
   .minav{
     position:sticky; top:14px; z-index:50;
-    max-width:900px; margin:0 auto 30px; padding:0 18px;
-    display:flex; justify-content:center;
+    max-width:1000px; margin:0 auto 30px; padding:0 18px;
+    display:flex; justify-content:center; align-items:center; gap:10px;
   }
   .minav-inner{
     background:var(--navy); color:#eaf3f9; border-radius:999px;
@@ -80,11 +84,35 @@
     overflow-x:auto; max-width:100%;
   }
   .minav a{
-    text-decoration:none; font-size:12.5px; font-family:'IBM Plex Mono',monospace;
-    color:#bcd6e6; padding:8px 13px; border-radius:999px; white-space:nowrap;
+    text-decoration:none; font-size:12px; font-family:'IBM Plex Mono',monospace;
+    color:#bcd6e6; padding:8px 10px; border-radius:999px; white-space:nowrap;
   }
   .minav a:hover{background:rgba(255,255,255,0.1); color:#fff;}
-  @media (max-width:700px){ .minav{display:none;} }
+  @media (max-width:700px){
+    .minav{ position:fixed; top:auto; bottom:14px; right:14px; left:auto;
+            width:auto; max-width:none; margin:0; padding:0; justify-content:flex-end; }
+    .minav-inner{ display:none; }
+  }
+
+  /* ---------------- light / dark toggle ---------------- */
+  .theme-toggle{
+    flex:none; display:flex; align-items:center; justify-content:center;
+    width:38px; height:38px; padding:0;
+    background:var(--navy); color:#eaf3f9; border:1px solid rgba(116,191,235,0.35);
+    border-radius:50%; cursor:pointer;
+    box-shadow:0 12px 30px rgba(8,35,55,0.35);
+  }
+  .theme-toggle:hover{background:var(--navy-deep); border-color:rgba(116,191,235,0.6);}
+  .theme-toggle svg{width:16px; height:16px; stroke:var(--sky); fill:none; stroke-width:2;
+    stroke-linecap:round; stroke-linejoin:round;}
+  .theme-toggle .tt-moon{display:none;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .theme-toggle .tt-sun{display:none;}
+    :root:not([data-theme="light"]) .theme-toggle .tt-moon{display:block;}
+  }
+  :root[data-theme="dark"] .theme-toggle .tt-sun{display:none;}
+  :root[data-theme="dark"] .theme-toggle .tt-moon{display:block;}
+  @media print{ .theme-toggle, .minav{display:none !important;} }
 
   /* ---------------- page shell ---------------- */
   .page{
@@ -157,6 +185,8 @@
     display:flex; flex-wrap:wrap; gap:26px; font-size:13.5px; color:#cfe3ee;
   }
   .cover-contact .cc-item{display:flex; align-items:center; gap:8px;}
+  a.cc-item{color:inherit; text-decoration:none; border-bottom:1px solid transparent;}
+  a.cc-item:hover{border-bottom-color:rgba(116,191,235,0.7);}
   .cover-contact svg{width:15px; height:15px; stroke:#74bfeb; flex:none;}
 
   /* ---------------- table of contents ---------------- */
@@ -283,11 +313,14 @@
   .reach-sub-head .mono{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint);}
 
   /* organization categories - validated categorical steps, separate for each theme */
-  :root{ --cat-tech:#123a5a; --cat-serv:#8e5bb5; --cat-lend:#5aa9dd; --cat-gse:#c9972c; --cat-gov:#2f8a5b; --pie-label:#ffffff; }
+  :root{ --cat-tech:#123a5a; --cat-serv:#8e5bb5; --cat-lend:#5aa9dd; --cat-gse:#c9972c; --cat-gov:#2f8a5b; --pie-label:#ffffff;
+         --val-latest:#0d314c; }
   @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){ --cat-tech:#a8d8f5; --cat-serv:#e08ad6; --cat-lend:#2f7fae; --cat-gse:#e8c25f; --cat-gov:#57c98f; --pie-label:#0b1a24; }
+    :root:not([data-theme="light"]){ --cat-tech:#a8d8f5; --cat-serv:#e08ad6; --cat-lend:#2f7fae; --cat-gse:#e8c25f; --cat-gov:#57c98f; --pie-label:#0b1a24;
+         --val-latest:#e7eef3; }
   }
-  :root[data-theme="dark"]{ --cat-tech:#a8d8f5; --cat-serv:#e08ad6; --cat-lend:#2f7fae; --cat-gse:#e8c25f; --cat-gov:#57c98f; --pie-label:#0b1a24; }
+  :root[data-theme="dark"]{ --cat-tech:#a8d8f5; --cat-serv:#e08ad6; --cat-lend:#2f7fae; --cat-gse:#e8c25f; --cat-gov:#57c98f; --pie-label:#0b1a24;
+         --val-latest:#e7eef3; }
 
   /* ---------------- seniority + function breakdowns ---------------- */
   :root{ --sen-1:#0d314c; --sen-2:#3f96c9; --sen-3:#8fd0f5; --fn-bar:#3f96c9; --track:#e7ebed; }
@@ -353,7 +386,7 @@
   .trend-svg text{font-family:'IBM Plex Mono',monospace;}
   .trend-svg .yr-lbl{font-size:10.5px; letter-spacing:0.08em; fill:var(--ink-faint);}
   .trend-svg .val-lbl{font-size:12.5px; fill:var(--ink-soft);}
-  .trend-svg .val-lbl-latest{font-size:15px; fill:var(--navy); font-weight:600;}
+  .trend-svg .val-lbl-latest{font-size:15px; fill:var(--val-latest); font-weight:600;}
   .trend-svg .x-lbl{font-size:9.5px; fill:var(--ink-faint);}
   .trend-svg .x-lbl-latest{fill:var(--ink); font-weight:600;}
   .growth-badge{
@@ -512,6 +545,16 @@
   .day-chip.selected{background:var(--navy); border-color:var(--navy); color:#fff;}
   .day-chip.taken{color:var(--sold); border-style:dashed; text-decoration:line-through; cursor:not-allowed; opacity:0.6;}
   .day-note{margin:10px 0 0; font-size:11.5px; color:var(--ink-faint);}
+  .upsell{margin-top:14px; border:1px solid var(--line); border-left:3px solid var(--sky-deep);
+    border-radius:0 7px 7px 0; background:rgba(116,191,235,0.07); padding:13px 15px;}
+  .upsell-check{display:flex; align-items:flex-start; gap:10px; cursor:pointer;}
+  .upsell-check input{margin-top:3px; accent-color:var(--navy); flex:none;}
+  .upsell .up-name{display:block; font-family:'Archivo',sans-serif; font-weight:700; font-size:13.5px; color:var(--ink);}
+  .upsell .up-desc{display:block; font-size:12px; color:var(--ink-soft); margin-top:3px; line-height:1.5;}
+  .upsell.on{border-left-color:var(--navy); background:rgba(116,191,235,0.14);}
+  .upsell-ack{margin:11px 0 0 28px; font-size:12px; color:var(--ink-soft); display:none;
+    border-left:2px solid var(--sky); padding-left:11px;}
+  .upsell.on .upsell-ack{display:block;}
   .field-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:14px;}
   @media (max-width:640px){ .field-grid{grid-template-columns:1fr;} }
   .field label{display:block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:6px;}
@@ -549,6 +592,12 @@
   .agree-check{display:flex; align-items:flex-start; gap:10px; font-size:13.5px; color:var(--ink); cursor:pointer;}
   .agree-check input{margin-top:3px; accent-color:var(--navy);}
   .submit-note{margin-top:16px; font-size:12px; color:var(--ink-faint);}
+  .submit-note a{color:var(--sky-deep);}
+  .submit-msg{display:block; font-size:12.5px; line-height:1.6; padding:12px 14px; border-radius:6px; border-left:3px solid;}
+  .submit-msg strong{display:block; margin-bottom:2px;}
+  .submit-msg code{font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.04em; background:#fff; padding:1px 6px; border-radius:3px;}
+  .submit-msg.ok{background:#eef6fb; border-color:var(--sky-deep); color:var(--ink);}
+  .submit-msg.err{background:#fdf1ee; border-color:#c4623f; color:var(--ink);}
   .submit-btn{margin-top:18px; background:var(--navy); color:#fff; border:none; padding:14px 24px; font-family:'Archivo',sans-serif; font-weight:700; font-size:14.5px; border-radius:6px; cursor:pointer;}
   .submit-btn:disabled{opacity:0.45; cursor:not-allowed;}
   .submit-btn:not(:disabled):hover{background:var(--navy-deep);}
@@ -561,7 +610,7 @@
   .backcover-top{padding:48px 48px 0; position:relative; z-index:2;}
   .backcover-top img{height:22px; filter:brightness(0) invert(1);}
   .backcover-top .logo{height:22px;}
-  .logo-white{--logo-body:#fff; --logo-s:var(--navy);}
+  .logo-white{--logo-body:#fff; --logo-s:#14486e;}
   .backcover h2{color:#fff; font-size:clamp(24px,3.6vw,44px); padding:0 48px; margin-top:40px; position:relative; z-index:2; white-space:nowrap;}
   .backcover p{color:#bcd6e6; max-width:none; padding:0 48px; margin-top:16px; font-size:14.5px; position:relative; z-index:2;}
   @media (max-width:640px){ .backcover h2{white-space:normal; font-size:clamp(22px,6vw,30px);} }
@@ -617,7 +666,27 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     <a href="#summary">Summary</a>
     <a href="#contract">Contract</a>
   </div>
+<button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark" title="Switch between light and dark">
+  <svg class="tt-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.2 4.2l1.5 1.5M18.3 18.3l1.5 1.5M2 12h2M20 12h2M4.2 19.8l1.5-1.5M18.3 5.7l1.5-1.5"/></svg>
+  <svg class="tt-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+</button>
 </div>
+<script>
+(function(){
+  var root = document.documentElement, KEY = "mismo.prospectus.theme";
+  try{ var saved = localStorage.getItem(KEY); if(saved === "light" || saved === "dark") root.setAttribute("data-theme", saved); }catch(e){}
+  function current(){
+    var set = root.getAttribute("data-theme");
+    if(set) return set;
+    return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  document.getElementById("theme-toggle").addEventListener("click", function(){
+    var next = current() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try{ localStorage.setItem(KEY, next); }catch(e){}
+  });
+})();
+</script>
 
 <!-- COVER -->
 <div class="page cover" id="cover">
@@ -649,9 +718,9 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       </div>
     </div>
     <div class="cover-contact">
-      <span class="cc-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> kbradshaw@mismo.org</span>
-      <span class="cc-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> amoses@mismo.org</span>
-      <span class="cc-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg> mismo.org</span>
+      <a class="cc-item" href="mailto:kbradshaw@mismo.org"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> kbradshaw@mismo.org</a>
+      <a class="cc-item" href="mailto:amoses@mismo.org"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> amoses@mismo.org</a>
+      <a class="cc-item" href="https://mismo.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg> mismo.org</a>
     </div>
   </div>
 </div>
@@ -828,7 +897,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   <div class="page-pad">
     <div class="kicker"><span class="num">04</span> AUDIENCE &amp; REACH</div>
     <h2 class="page-title">The room your brand will be in.</h2>
-    <p class="page-sub">Attendee figures come from badge scans at the three 2026 Summits, deduplicated by person; organization figures come from MISMO's own workgroup meeting records for the same Summits. Both exclude MISMO and MBA staff. Seniority and function shares reflect the wider Summit attendee profile.</p>
+    <p class="page-sub">Attendee figures come from badge scans at the three 2026 Summits, deduplicated by person; organization figures come from MISMO's own workgroup meeting records for the same Summits; registration figures come from MISMO's registration records. All exclude MISMO and MBA staff. Seniority and function shares reflect the wider Summit attendee profile.</p>
 
     <div class="stat-grid">
       <div class="stat"><div class="stat-num">485</div><div class="stat-label">People engaged across the three 2026 Summits</div></div>
@@ -924,7 +993,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <path d="M 110.0,93.4 C 156.7,93.2 296.7,99.4 390.0,91.8 C 483.3,84.2 623.3,55.1 670.0,47.8" fill="none" stroke="var(--sky-deep)" stroke-width="2.5" stroke-linecap="round"/>
           <circle cx="110.0" cy="93.4" r="4" fill="var(--paper)" stroke="var(--sky-deep)" stroke-width="2.2"/>
           <circle cx="390.0" cy="91.8" r="4" fill="var(--paper)" stroke="var(--sky-deep)" stroke-width="2.2"/>
-          <circle cx="670.0" cy="47.8" r="6.5" fill="var(--navy)" stroke="var(--paper)" stroke-width="2.5"/>
+          <circle cx="670.0" cy="47.8" r="6.5" fill="var(--sky-deep)" stroke="var(--paper)" stroke-width="2.5"/>
           <text x="110.0" y="79.4" text-anchor="middle" class="val-lbl">161</text>
           <text x="390.0" y="77.8" text-anchor="middle" class="val-lbl">164</text>
           <text x="670.0" y="28.8" text-anchor="middle" class="val-lbl val-lbl-latest">244</text>
@@ -933,6 +1002,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <text x="670.0" y="208.0" text-anchor="middle" class="x-lbl x-lbl-latest">Fall 2026</text>
         </svg>
       </div>
+      <p class="chart-note">Unique attendees at each 2026 Summit, from badge scans. Registrations across the three Summits grew 40% over 2025, and the Fall Summit nearly doubled year over year.</p>
     </div>
   </div>
   <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">06</span></div>
@@ -1309,7 +1379,6 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         <tr><td>Afternoon Snack Break Sponsor</td><td>Bronze</td><td class="status-available">4 available</td><td class="status-available">4 available</td></tr>
       </tbody>
     </table>
-    <p class="body-text" style="margin-top:16px; font-size:12.5px;">Interested in sponsoring more than one day of Breakfast, Morning Coffee Break, or Afternoon Snack Break? Contact <a href="mailto:kbradshaw@mismo.org" style="color:var(--sky-deep);">kbradshaw@mismo.org</a> for details.</p>
   </div>
   <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">10</span></div>
 </div>
@@ -1325,7 +1394,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     <div class="steps">
       <div class="step"><div class="step-num">01</div><h4>Choose your tier</h4><p>Select a Winter Summit or Summit Series tier, plus any opportunity within it.</p></div>
       <div class="step"><div class="step-num">02</div><h4>Review &amp; sign</h4><p>Check your selection summary, then review and agree to the Sponsor Contract.</p></div>
-      <div class="step"><div class="step-num">03</div><h4>Send to MISMO</h4><p>Submit your request &mdash; MISMO will confirm and invoice.</p></div>
+      <div class="step"><div class="step-num">03</div><h4>Submit</h4><p>Your request goes into the MISMO sponsorship portal &mdash; we confirm and invoice from there.</p></div>
       <div class="step"><div class="step-num">04</div><h4>Send your logo</h4><p>Provide a high-resolution, transparent-background logo for event materials.</p></div>
     </div>
 
@@ -1399,6 +1468,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         <div class="summary-row"><span class="sr-label">Company</span><span class="sr-val" id="sum-company">&mdash;</span></div>
         <div class="summary-row"><span class="sr-label">Contact</span><span class="sr-val" id="sum-contact">&mdash;</span></div>
         <div class="summary-row"><span class="sr-label">Opportunity</span><span class="sr-val" id="sum-opportunity">&mdash;</span></div>
+        <div class="summary-row" id="sum-multiday-row" style="display:none;"><span class="sr-label">Additional days</span><span class="sr-val" id="sum-multiday">&mdash;</span></div>
         <div class="summary-row"><span class="sr-label">Complimentary registrations</span><span class="sr-val" id="sum-regs">&mdash;</span></div>
       </div>
       <div class="summary-benefits">
@@ -1460,7 +1530,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         <div class="field"><label for="f-signer-date">Date</label><input type="date" id="f-signer-date"></div>
       </div>
       <button type="button" class="submit-btn" id="submit-btn" disabled>Submit Sponsorship Request</button>
-      <p class="submit-note">Submitting opens an email to MISMO (<a href="mailto:kbradshaw@mismo.org" style="color:var(--sky-deep);">kbradshaw@mismo.org</a>) pre-filled with your selection and signature details for confirmation and invoicing. This page does not process payment or store your submission.</p>
+      <p class="submit-note">Submitting sends your selection and signature straight to the MISMO sponsorship portal, where our team is notified and picks it up for confirmation and invoicing. You&rsquo;ll get a reference number on screen. This page does not process payment.</p>
     </div>
   </div>
   <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">13</span></div>
@@ -1474,9 +1544,9 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   <h2>Build what's next, together.</h2>
   <p>Diamond availability is limited to one organization, and several Platinum and Silver opportunities are already spoken for. Reserve your tier before the sponsorships you want are gone.</p>
   <div class="backcover-bottom">
-    <span class="cc-item" style="display:flex; align-items:center; gap:8px; color:#cfe3ee; font-size:13.5px;"><svg viewBox="0 0 24 24" fill="none" stroke="#74bfeb" stroke-width="2" width="15" height="15"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> kbradshaw@mismo.org</span>
-    <span class="cc-item" style="display:flex; align-items:center; gap:8px; color:#cfe3ee; font-size:13.5px;"><svg viewBox="0 0 24 24" fill="none" stroke="#74bfeb" stroke-width="2" width="15" height="15"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> amoses@mismo.org</span>
-    <span class="cc-item" style="display:flex; align-items:center; gap:8px; color:#cfe3ee; font-size:13.5px;"><svg viewBox="0 0 24 24" fill="none" stroke="#74bfeb" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg> mismo.org</span>
+    <a class="cc-item" style="display:flex; align-items:center; gap:8px; color:#cfe3ee; font-size:13.5px;" href="mailto:kbradshaw@mismo.org"><svg viewBox="0 0 24 24" fill="none" stroke="#74bfeb" stroke-width="2" width="15" height="15"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> kbradshaw@mismo.org</a>
+    <a class="cc-item" style="display:flex; align-items:center; gap:8px; color:#cfe3ee; font-size:13.5px;" href="mailto:amoses@mismo.org"><svg viewBox="0 0 24 24" fill="none" stroke="#74bfeb" stroke-width="2" width="15" height="15"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> amoses@mismo.org</a>
+    <a class="cc-item" style="display:flex; align-items:center; gap:8px; color:#cfe3ee; font-size:13.5px;" href="https://mismo.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#74bfeb" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg> mismo.org</a>
   </div>
 </div>
 
@@ -1513,10 +1583,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       bronze: { name:"Bronze Sponsor", price:"$5,000", regs:"2 complimentary registrations",
         benefits:["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","2 complimentary Summit registrations"],
         opportunities:[
-          {id:"breakfast", name:"Breakfast Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[]},
+          {id:"breakfast", name:"Breakfast Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[], multiDay:true},
           {id:"livestream", name:"Livestream Sponsor", note:"1 available", sold:false},
-          {id:"morningcoffee", name:"Morning Coffee Break Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[]},
-          {id:"afternoonsnack", name:"Afternoon Snack Break Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[]}
+          {id:"morningcoffee", name:"Morning Coffee Break Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[], multiDay:true},
+          {id:"afternoonsnack", name:"Afternoon Snack Break Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[], multiDay:true}
         ]}
     },
     series: {
@@ -1549,16 +1619,34 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       bronze: { name:"Bronze Sponsor", price:"$13,500", regs:"2 complimentary registrations",
         benefits:["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","2 complimentary Summit registrations"],
         opportunities:[
-          {id:"breakfast", name:"Breakfast Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[]},
+          {id:"breakfast", name:"Breakfast Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[], multiDay:true},
           {id:"livestream", name:"Livestream Sponsor", note:"1 available", sold:false},
-          {id:"morningcoffee", name:"Morning Coffee Break Sponsor", note:"3 available, 1 sold", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:["Monday"]},
-          {id:"afternoonsnack", name:"Afternoon Snack Break Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[]}
+          {id:"morningcoffee", name:"Morning Coffee Break Sponsor", note:"3 available, 1 sold", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:["Monday"], multiDay:true},
+          {id:"afternoonsnack", name:"Afternoon Snack Break Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[], multiDay:true}
         ]}
     }
   };
 
+  // ---- sponsorship portal endpoint -----------------------------------------
+  // Paste the Power Automate "When an HTTP request is received" URL here. Every
+  // submission posts straight into the Sponsorship Requests list behind the MISMO
+  // dashboard. SUBMIT_SECRET must match the value the flow checks.
+  // While this is empty the Submit button tells the sponsor the portal isn't
+  // accepting requests yet — it never falls back to email.
+  var SUBMIT_ENDPOINT = "";
+  var SUBMIT_SECRET = "mismo-2027-prospectus";
+
+  // Reference shown to the sponsor and stored on the row, so a follow-up email
+  // or a call can be matched to a line in the dashboard.
+  function makeReference(){
+    var d = new Date();
+    var p = function(n){ return (n<10?"0":"") + n; };
+    var rand = Math.random().toString(36).slice(2,6).toUpperCase();
+    return "SP-" + d.getFullYear() + p(d.getMonth()+1) + p(d.getDate()) + "-" + rand;
+  }
+
   var TIER_ORDER = ["diamond","platinum","gold","silver","bronze"];
-  var state = { program:"winter", tier:null, opportunity:null, day:null };
+  var state = { program:"winter", tier:null, opportunity:null, day:null, multiDay:false };
 
   var tierOptionsEl = document.getElementById("tier-options");
   var oppBlockEl = document.getElementById("opp-block");
@@ -1618,7 +1706,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       label.innerHTML = '<input type="radio" name="opportunity" value="'+o.id+'"'+(o.sold?" disabled":"")+(state.opportunity===o.id?" checked":"")+'>'+
         '<span><span class="oc-name">'+o.name+'</span><span class="oc-meta '+statusCls+'">'+noteHtml+'</span></span>';
       if(!o.sold){
-        label.addEventListener("click", function(){ state.opportunity = o.id; state.day = null; renderOpportunities(); updateSummary(); });
+        label.addEventListener("click", function(){ state.opportunity = o.id; state.day = null; state.multiDay = false; renderOpportunities(); updateSummary(); });
       }
       oppOptionsEl.appendChild(label);
     });
@@ -1662,6 +1750,37 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     note.className = "day-note";
     note.textContent = "Each day is its own sponsorship \u2014 once a day is taken it comes off the board.";
     wrap.appendChild(note);
+
+    if(opp.multiDay){
+      var up = document.createElement("div");
+      up.className = "upsell" + (state.multiDay ? " on" : "");
+      var lab = document.createElement("label");
+      lab.className = "upsell-check";
+      var box = document.createElement("input");
+      box.type = "checkbox";
+      box.checked = !!state.multiDay;
+      box.addEventListener("change", function(){
+        state.multiDay = box.checked;
+        renderOpportunities();
+        updateSummary();
+      });
+      var txt = document.createElement("span");
+      var nm = document.createElement("span");
+      nm.className = "up-name";
+      nm.textContent = "Add more days of " + opp.name.replace(" Sponsor","");
+      var ds = document.createElement("span");
+      ds.className = "up-desc";
+      ds.textContent = "One day works well. Several keeps your brand in front of the room across the whole Summit, at a rate set for the full run.";
+      txt.appendChild(nm); txt.appendChild(ds);
+      lab.appendChild(box); lab.appendChild(txt);
+      up.appendChild(lab);
+      var ack = document.createElement("p");
+      ack.className = "upsell-ack";
+      ack.textContent = "Noted \u2014 a member of the MISMO strategic growth team will reach out with pricing for the additional days. Carry on and submit your request; nothing else is needed here.";
+      up.appendChild(ack);
+      wrap.appendChild(up);
+    }
+
     oppOptionsEl.appendChild(wrap);
   }
 
@@ -1671,6 +1790,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       state.tier = null;
       state.opportunity = null;
       state.day = null;
+      state.multiDay = false;
       document.querySelectorAll('#program-options .opt-card').forEach(function(c){ c.classList.remove("selected"); });
       card.classList.add("selected");
       card.querySelector('input').checked = true;
@@ -1718,6 +1838,14 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     var email = document.getElementById("f-email").value;
     document.getElementById("sum-contact").textContent = (contact || email) ? (contact + (contact && email ? " · " : "") + email) : "—";
     document.getElementById("sum-opportunity").textContent = fmtOpportunityLabel();
+    var mdRow = document.getElementById("sum-multiday-row");
+    if(state.multiDay){
+      mdRow.style.display = "";
+      document.getElementById("sum-multiday").textContent =
+        "Requested \u2014 MISMO strategic growth will follow up with pricing";
+    } else {
+      mdRow.style.display = "none";
+    }
     document.getElementById("sum-regs").textContent = t.regs;
     var ul = document.getElementById("sum-benefits");
     ul.innerHTML = "";
@@ -1736,7 +1864,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   var STORE_KEY = "mismo2027.reserve.v1";
   var fields = ["f-company","f-contact","f-email","f-signer-name","f-signer-title","f-signer-date"];
   function snapshot(){
-    var out = {program:state.program, tier:state.tier, opportunity:state.opportunity, day:state.day,
+    var out = {program:state.program, tier:state.tier, opportunity:state.opportunity, day:state.day, multiDay:!!state.multiDay,
                agreed: document.getElementById("f-agree").checked, savedAt: new Date().toISOString()};
     fields.forEach(function(id){ var el=document.getElementById(id); if(el) out[id]=el.value; });
     return out;
@@ -1763,6 +1891,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     state.tier = d.tier || null;
     state.opportunity = d.opportunity || null;
     state.day = d.day || null;
+    state.multiDay = !!d.multiDay;
     fields.forEach(function(id){ var el=document.getElementById(id); if(el && d[id]) el.value=d[id]; });
     var agree=document.getElementById("f-agree"); if(agree) agree.checked = !!d.agreed;
     renderTiers(); renderOpportunities(); updateSummary();
@@ -1779,7 +1908,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   });
   document.getElementById("btn-clear").addEventListener("click", function(){
     try{ localStorage.removeItem(STORE_KEY); }catch(e){}
-    state.tier=null; state.opportunity=null; state.day=null;
+    state.tier=null; state.opportunity=null; state.day=null; state.multiDay=false;
     fields.forEach(function(id){ var el=document.getElementById(id); if(el) el.value=""; });
     var agree=document.getElementById("f-agree"); if(agree) agree.checked=false;
     document.getElementById("resume-note").classList.remove("show");
@@ -1891,23 +2020,53 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     var signerName = document.getElementById("f-signer-name").value;
     var signerTitle = document.getElementById("f-signer-title").value;
     var signerDate = document.getElementById("f-signer-date").value;
-    var subject = "Sponsorship Request — " + company + " — " + t.name + " (" + (state.program==="winter"?"Winter Summit":"Summit Series") + ")";
-    var body = [
-      "MISMO 2027 Sponsorship Request",
-      "",
-      "Program: " + prog.programLabel,
-      "Tier: " + t.name + " (" + t.price + ")",
-      "Opportunity: " + fmtOpportunityLabel(),
-      "",
-      "Company: " + company,
-      "Contact: " + contact + " <" + email + ">",
-      "",
-      "Signed by: " + signerName + (signerTitle ? (", " + signerTitle) : ""),
-      "Date: " + signerDate,
-      "",
-      "This request confirms agreement to the MISMO Event Sponsor Contract."
-    ].join("\\n");
-    window.location.href = "mailto:kbradshaw@mismo.org?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    var reference = makeReference();
+    var payload = {
+      secret: SUBMIT_SECRET,
+      reference: reference,
+      submittedAt: new Date().toISOString(),
+      source: "prospectus-web",
+      program: state.program,
+      programLabel: prog.programLabel,
+      tier: state.tier,
+      tierName: t.name,
+      price: t.price,
+      opportunity: fmtOpportunityLabel(),
+      day: state.day || "",
+      multiDayInterest: !!state.multiDay,
+      company: company,
+      contactName: contact,
+      contactEmail: email,
+      signerName: signerName,
+      signerTitle: signerTitle,
+      signedDate: signerDate,
+      agreed: true
+    };
+    var btn = this;
+    var note = document.querySelector(".submit-note");
+    var original = note ? note.innerHTML : "";
+
+    var showError = function(){
+      btn.disabled = false;
+      if(note) note.innerHTML = "<span class=\"submit-msg err\"><strong>We couldn&rsquo;t reach the sponsorship portal.</strong> Nothing was submitted &mdash; your selection is still on this page. Please try again in a moment, or contact <a href=\"mailto:kbradshaw@mismo.org\">kbradshaw@mismo.org</a> and we&rsquo;ll record it for you.</span>";
+    };
+
+    if(!SUBMIT_ENDPOINT){ showError(); return; }
+
+    btn.disabled = true;
+    if(note) note.textContent = "Submitting to the sponsorship portal\u2026";
+    // text/plain keeps this a simple request, so the browser skips the CORS preflight
+    fetch(SUBMIT_ENDPOINT, { method:"POST", headers:{"Content-Type":"text/plain"}, body: JSON.stringify(payload) })
+      .then(function(res){
+        if(!res.ok) throw new Error("status " + res.status);
+        if(note) note.innerHTML = "<span class=\"submit-msg ok\"><strong>Submitted to the MISMO sponsorship portal.</strong> Your reference is <code>" + reference + "</code>. The MISMO team has been notified and will confirm your sponsorship and invoice from here. Keep the reference for any follow-up.</span>";
+        btn.textContent = "Submitted";
+        try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+      })
+      .catch(function(){
+        if(original && note) note.innerHTML = original;
+        showError();
+      });
   });
 
   renderTiers();
