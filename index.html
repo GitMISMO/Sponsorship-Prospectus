@@ -136,6 +136,7 @@
     font-size:clamp(40px,6.4vw,68px); line-height:0.98; letter-spacing:-0.015em;
   }
   .cover-headline .line.accent{color:var(--sky-deep);}
+  .cover-tag{margin:22px 0 0; font-family:'Archivo',sans-serif; font-weight:600; font-size:clamp(15px,1.9vw,19px); color:var(--ink-soft); letter-spacing:-0.005em;}
   .cover-band{
     margin-top:44px; background:var(--navy); color:#eaf3f9; position:relative;
     padding:38px 48px 34px; flex:1;
@@ -201,11 +202,70 @@
   .info-strip .is-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-faint); margin-bottom:6px;}
   .info-strip .is-val{font-size:14.5px; font-weight:500;}
 
+  /* ---------------- workgroup map ---------------- */
+  .wg-map{margin-top:24px; --s1:#0d314c; --s2:#14456a; --s3:#1d5a88; --s4:#2f7fae; --s5:#3f96c9;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .wg-map{--s1:#1d5a88; --s2:#25699c; --s3:#2f7fae; --s4:#3887be; --s5:#4a9fd4;}
+  }
+  :root[data-theme="dark"] .wg-map{--s1:#1d5a88; --s2:#25699c; --s3:#2f7fae; --s4:#3887be; --s5:#4a9fd4;}
+  .wg-phases{display:grid; grid-template-columns:2fr 2fr 1fr; gap:6px; margin-bottom:7px;}
+  .wg-phases span{font-family:'IBM Plex Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.09em;
+    color:var(--sky-deep); text-align:center; padding-bottom:5px; border-bottom:1px solid var(--line);}
+  @media (max-width:760px){ .wg-phases{display:none;} }
+  .wg-flow{display:grid; grid-template-columns:repeat(5,1fr); gap:3px; margin-bottom:10px;}
+  .wg-step{color:#fff; font-family:'Archivo',sans-serif; font-weight:700; font-size:11.5px; line-height:1.2;
+    padding:10px 10px 10px 20px; clip-path:polygon(0 0, calc(100% - 11px) 0, 100% 50%, calc(100% - 11px) 100%, 0 100%, 11px 50%);}
+  .wg-step:first-child{padding-left:14px; clip-path:polygon(0 0, calc(100% - 11px) 0, 100% 50%, calc(100% - 11px) 100%, 0 100%);}
+  .wg-step:last-child{clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%, 11px 50%);}
+  .wg-step:nth-child(1){background:var(--s1);} .wg-step:nth-child(2){background:var(--s2);}
+  .wg-step:nth-child(3){background:var(--s3);} .wg-step:nth-child(4){background:var(--s4);}
+  .wg-step:nth-child(5){background:var(--s5);}
+  .wg-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; align-items:start;}
+  @media (max-width:760px){ .wg-flow{grid-template-columns:1fr 1fr;} .wg-grid{grid-template-columns:1fr 1fr;}
+    .wg-step{clip-path:none !important; padding:9px 12px !important; border-radius:4px;} }
+  @media (max-width:460px){ .wg-flow, .wg-grid{grid-template-columns:1fr;} }
+  .wg-col{min-width:0; padding-top:2px;}
+  .wg-cop{font-family:'Archivo',sans-serif; font-weight:700; font-size:12px; line-height:1.3; color:var(--ink);
+    padding-left:11px; position:relative; margin-top:12px;}
+  .wg-col > .wg-cop:first-child{margin-top:0;}
+  .wg-cop::before{content:''; position:absolute; left:0; top:5px; width:5px; height:5px; border-radius:1px; background:var(--accent);}
+  .wg-dwgs{margin:6px 0 0 11px; padding:0 0 0 10px; border-left:1px solid var(--line); list-style:none;
+    display:flex; flex-direction:column; gap:5px;}
+  .wg-dwgs li{font-size:11px; line-height:1.35; color:var(--ink-soft);}
+  .wg-col:nth-child(1){--accent:var(--s1);} .wg-col:nth-child(2){--accent:var(--s2);}
+  .wg-col:nth-child(3){--accent:var(--s3);} .wg-col:nth-child(4){--accent:var(--s4);}
+  .wg-col:nth-child(5){--accent:var(--s5);}
+  .wg-rails{margin-top:20px; display:flex; flex-direction:column; gap:10px;}
+  .wg-rail{position:relative; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:center;
+    padding:14px 30px; clip-path:polygon(0 50%, 16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%);}
+  .wg-rail.data{background:rgba(116,191,235,0.16); border:0;}
+  .wg-rail.tech{background:var(--navy);}
+  @media (max-width:640px){ .wg-rail{grid-template-columns:1fr; gap:10px; clip-path:none; border-radius:8px; padding:14px 18px;} }
+  .wg-rail .rail-title{font-family:'Archivo',sans-serif; font-weight:800; font-size:12.5px; line-height:1.2; letter-spacing:-0.005em; white-space:nowrap;}
+  .wg-rail.data .rail-title{color:var(--navy);}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .wg-rail.data .rail-title{color:var(--ink);}
+  }
+  :root[data-theme="dark"] .wg-rail.data .rail-title{color:var(--ink);}
+  .wg-rail.tech .rail-title{color:#fff;}
+  .wg-rail .rail-title small{display:block; font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:9px;
+    letter-spacing:0.07em; text-transform:uppercase; opacity:0.65; margin-top:3px;}
+  .wg-chips{display:flex; flex-wrap:wrap; gap:6px;}
+  .wg-chips span{font-size:11.5px; border-radius:999px; padding:4px 11px;}
+  .wg-rail.data .wg-chips span{color:var(--ink); background:var(--paper); border:1px solid rgba(13,49,76,0.14);}
+  .wg-rail.tech .wg-chips span{color:#eaf3f9; background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.22);}
+  .wg-chips span em{font-style:normal; opacity:0.6; font-size:10.5px;}
+
   /* ---------------- testimonials ---------------- */
   .quote-stack{margin-top:28px; display:flex; flex-direction:column; gap:0;}
-  .quote{border-top:1px solid var(--line); padding:22px 0; display:flex; gap:18px;}
+  .quote{border-top:1px solid var(--line); padding:22px 0; display:grid; grid-template-columns:56px 1fr; gap:18px; align-items:start;}
   .quote:last-child{border-bottom:1px solid var(--line);}
-  .quote .q-mark{font-family:'Archivo', sans-serif; font-size:34px; font-weight:800; color:var(--sky); line-height:1; flex:none; width:34px;}
+  .q-portrait{width:56px; height:56px; border-radius:50%; overflow:hidden; background:var(--navy); color:var(--sky);
+    display:flex; align-items:center; justify-content:center; font-family:'Archivo',sans-serif; font-weight:700;
+    font-size:17px; letter-spacing:0.01em; flex:none;}
+  .q-portrait img{width:100%; height:100%; object-fit:cover; display:block;}
+  .q-body p{position:relative;}
+  .q-body p::before{content:'\201C'; font-family:'Archivo',sans-serif; font-weight:800; color:var(--sky); font-size:26px; line-height:0; margin-right:4px; vertical-align:-2px;}
   .quote p{font-size:14.5px; color:var(--ink); line-height:1.55; margin:0 0 10px;}
   .quote .q-attr{font-size:12.5px; color:var(--ink-soft);}
   .quote .q-attr strong{color:var(--ink); font-weight:600;}
@@ -398,6 +458,21 @@
   .opt-card.disabled{opacity:0.5; cursor:not-allowed; background:var(--line-soft);}
   .opt-card.disabled .oc-meta{color:var(--sold);}
   .opt-card.disabled:hover{border-color:var(--line);}
+
+  /* day-level slots: breakfast and the breaks run Mon-Thu, the reception Mon-Tue */
+  .opp-days{display:flex; gap:4px; margin-top:5px; flex-wrap:wrap;}
+  .opp-days span{font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.04em; text-transform:uppercase;
+    color:var(--ink-soft); border:1px solid var(--line); border-radius:3px; padding:1px 5px;}
+  .opp-days span.taken{color:var(--sold); border-color:rgba(178,59,59,0.4); text-decoration:line-through;}
+  .day-block{margin-top:16px; border-top:1px solid var(--line-soft); padding-top:14px;}
+  .day-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:9px;}
+  .day-picker{display:flex; gap:8px; flex-wrap:wrap;}
+  .day-chip{font-family:'Archivo',sans-serif; font-weight:600; font-size:13px; color:var(--ink); background:var(--paper);
+    border:1px solid var(--line); border-radius:6px; padding:9px 16px; cursor:pointer;}
+  .day-chip:hover:not(:disabled){border-color:var(--sky-deep);}
+  .day-chip.selected{background:var(--navy); border-color:var(--navy); color:#fff;}
+  .day-chip.taken{color:var(--sold); border-style:dashed; text-decoration:line-through; cursor:not-allowed; opacity:0.6;}
+  .day-note{margin:10px 0 0; font-size:11.5px; color:var(--ink-faint);}
   .field-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:14px;}
   @media (max-width:640px){ .field-grid{grid-template-columns:1fr;} }
   .field label{display:block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:6px;}
@@ -490,6 +565,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     <a href="#cover">Cover</a>
     <a href="#toc">Contents</a>
     <a href="#about">About</a>
+    <a href="#workgroups">Workgroups</a>
     <a href="#why">Why Sponsor</a>
     <a href="#reach">Audience</a>
     <a href="#series-overview">Series</a>
@@ -511,8 +587,9 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   </div>
   <div class="cover-headline">
     <span class="line">2027</span>
-    <span class="line accent">Sponsorship</span>
+    <span class="line accent">Summit Sponsorship</span>
     <span class="line">Prospectus</span>
+    <p class="cover-tag">Where our industry builds what's next.</p>
   </div>
   <div class="cover-band">
     <div class="cover-programs">
@@ -532,6 +609,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     </div>
     <div class="cover-contact">
       <span class="cc-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> kbradshaw@mismo.org</span>
+      <span class="cc-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> amoses@mismo.org</span>
       <span class="cc-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg> mismo.org</span>
     </div>
   </div>
@@ -545,18 +623,19 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     <h2 class="page-title">What's inside</h2>
     <div class="toc-list">
       <a class="toc-row" href="#about"><span class="toc-num">01</span><span class="toc-name">About the Summits</span><span class="toc-dots"></span><span class="toc-page">Page 03</span></a>
-      <a class="toc-row" href="#why"><span class="toc-num">02</span><span class="toc-name">Why Sponsor</span><span class="toc-dots"></span><span class="toc-page">Page 04</span></a>
-      <a class="toc-row" href="#reach"><span class="toc-num">03</span><span class="toc-name">Audience &amp; Reach</span><span class="toc-dots"></span><span class="toc-page">Page 05</span></a>
-      <a class="toc-row" href="#series-overview"><span class="toc-num">04</span><span class="toc-name">The 2027 Summit Series</span><span class="toc-dots"></span><span class="toc-page">Page 06</span></a>
-      <a class="toc-row featured" href="#series"><span class="toc-num">05</span><span class="toc-name">Summit Series Tiers</span><span class="toc-dots"></span><span class="toc-page">Page 07</span></a>
-      <a class="toc-row" href="#winter"><span class="toc-num">06</span><span class="toc-name">Winter Summit Tiers</span><span class="toc-dots"></span><span class="toc-page">Page 08</span></a>
-      <a class="toc-row" href="#availability"><span class="toc-num">07</span><span class="toc-name">Availability Snapshot</span><span class="toc-dots"></span><span class="toc-page">Page 09</span></a>
-      <a class="toc-row" href="#reserve"><span class="toc-num">08</span><span class="toc-name">Reserve Your Sponsorship</span><span class="toc-dots"></span><span class="toc-page">Page 10</span></a>
-      <a class="toc-row" href="#summary"><span class="toc-num">09</span><span class="toc-name">Your Sponsorship Summary</span><span class="toc-dots"></span><span class="toc-page">Page 11</span></a>
-      <a class="toc-row" href="#contract"><span class="toc-num">10</span><span class="toc-name">Sponsor Contract</span><span class="toc-dots"></span><span class="toc-page">Page 12</span></a>
+      <a class="toc-row" href="#workgroups"><span class="toc-num">02</span><span class="toc-name">Workgroup Map</span><span class="toc-dots"></span><span class="toc-page">Page 04</span></a>
+      <a class="toc-row" href="#why"><span class="toc-num">03</span><span class="toc-name">Why Sponsor</span><span class="toc-dots"></span><span class="toc-page">Page 05</span></a>
+      <a class="toc-row" href="#reach"><span class="toc-num">04</span><span class="toc-name">Audience &amp; Reach</span><span class="toc-dots"></span><span class="toc-page">Page 06</span></a>
+      <a class="toc-row" href="#series-overview"><span class="toc-num">05</span><span class="toc-name">The 2027 Summit Series</span><span class="toc-dots"></span><span class="toc-page">Page 07</span></a>
+      <a class="toc-row featured" href="#series"><span class="toc-num">06</span><span class="toc-name">Summit Series Tiers</span><span class="toc-dots"></span><span class="toc-page">Page 08</span></a>
+      <a class="toc-row" href="#winter"><span class="toc-num">07</span><span class="toc-name">Winter Summit Tiers</span><span class="toc-dots"></span><span class="toc-page">Page 09</span></a>
+      <a class="toc-row" href="#availability"><span class="toc-num">08</span><span class="toc-name">Availability Snapshot</span><span class="toc-dots"></span><span class="toc-page">Page 10</span></a>
+      <a class="toc-row" href="#reserve"><span class="toc-num">09</span><span class="toc-name">Reserve Your Sponsorship</span><span class="toc-dots"></span><span class="toc-page">Page 11</span></a>
+      <a class="toc-row" href="#summary"><span class="toc-num">10</span><span class="toc-name">Your Sponsorship Summary</span><span class="toc-dots"></span><span class="toc-page">Page 12</span></a>
+      <a class="toc-row" href="#contract"><span class="toc-num">11</span><span class="toc-name">Sponsor Contract</span><span class="toc-dots"></span><span class="toc-page">Page 13</span></a>
     </div>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">02</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">02</span></div>
 </div>
 
 <!-- 01 ABOUT -->
@@ -600,87 +679,146 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       </div>
     </div>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">03</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">03</span></div>
+</div>
+
+
+<!-- 02 WORKGROUP MAP -->
+<div class="page" id="workgroups">
+  <div class="running-head"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="105" height="16"><use href="#mismo-logo"/></svg><span class="rh-label">Workgroup Map</span></div>
+  <div class="page-pad">
+    <div class="kicker"><span class="num">02</span> WORKGROUP MAP</div>
+    <h2 class="page-title">Where the work happens.</h2>
+    <p class="page-sub">MISMO's residential workgroups, communities of practice and development workgroups map to the life of a loan. Sponsorship puts your organization inside these rooms &mdash; not in the hallway outside them.</p>
+
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="stat"><div class="stat-num">26</div><div class="stat-label">Workgroups &amp; communities of practice meeting across the 2026 Summits</div></div>
+      <div class="stat"><div class="stat-num">2,073</div><div class="stat-label">Workgroup seats filled by those 485 people</div></div>
+      <div class="stat"><div class="stat-num">197</div><div class="stat-label">Attendances at the MISMO FRAME Workshop</div></div>
+    </div>
+
+    <div class="wg-map">
+      <div class="wg-phases"><span>Origination</span><span>Supporting services</span><span>Servicing</span></div>
+      <div class="wg-flow">
+        <div class="wg-step">Originate Loans</div>
+        <div class="wg-step">Close &amp; Fund Loans</div>
+        <div class="wg-step">Third-Party Services</div>
+        <div class="wg-step">Sell Loans</div>
+        <div class="wg-step">Service Loans</div>
+      </div>
+      <div class="wg-grid">
+        <div class="wg-col">
+          <div class="wg-cop">Origination CoP</div>
+          <ul class="wg-dwgs"><li>Loan Application Data Exchange DWG</li><li>Mortgage Compliance Dataset DWG</li><li>Reverse Mortgage DWG</li><li>eHELOC DWG</li><li>Housing Counseling DWG</li><li>VA Docs to Data DWG</li></ul>
+        </div>
+        <div class="wg-col">
+          <div class="wg-cop">Title and Closing CoP</div>
+          <ul class="wg-dwgs"><li>Title &amp; Closing Docs to Data DWG</li><li>Fee Modernization DWG</li><li>Title Pricing API DWG</li></ul>
+        </div>
+        <div class="wg-col">
+          <div class="wg-cop">Mortgage Insurance (MI) CoP</div>
+          <ul class="wg-dwgs"><li>MI Claim Submission DWG</li></ul>
+          <div class="wg-cop">Credit Reporting CoP</div>
+          <div class="wg-cop">Property &amp; Valuation Services (PaVS) CoP</div>
+          <ul class="wg-dwgs"><li>Automated Valuation Model (AVM) DWG</li></ul>
+        </div>
+        <div class="wg-col">
+          <div class="wg-cop">HERO CoP</div>
+          <div class="wg-cop">Secondary CoP</div>
+        </div>
+        <div class="wg-col">
+          <div class="wg-cop">Servicing CoP</div>
+          <ul class="wg-dwgs"><li>Servicing Transfers DWG</li><li>Agricultural Finance Data DWG</li></ul>
+        </div>
+      </div>
+      <div class="wg-rails">
+        <div class="wg-rail data"><span class="rail-title">Data Enablement<small>Across every stage</small></span><div class="wg-chips"><span>Business Glossary CoP</span><span>Business Process Model CoP</span><span>Decision Modeling CoP</span><span>Data Governance and Mgmt. CoP</span></div></div>
+        <div class="wg-rail tech"><span class="rail-title">Technology Enablement<small>Across every stage</small></span><div class="wg-chips"><span>eMortgage CoP <em>(Verifiable SMARTDoc DWG; RON)</em></span><span>Digital Interoperability CoP</span><span>Artificial Intelligence CoP</span><span>API CoP</span><span>TIE CoP</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">04</span></div>
 </div>
 
 <!-- 02 WHY SPONSOR -->
 <div class="page" id="why">
   <div class="running-head"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="105" height="16"><use href="#mismo-logo"/></svg><span class="rh-label">Why Sponsor</span></div>
   <div class="page-pad">
-    <div class="kicker"><span class="num">02</span> WHY SPONSOR</div>
+    <div class="kicker"><span class="num">03</span> WHY SPONSOR</div>
     <h2 class="page-title">Sponsors in their own words.</h2>
     <p class="page-sub">Sponsorship is more than brand visibility &mdash; it's a seat at the table where MISMO standards are shaped, and a direct line to the people making technology and partnership decisions across the industry.</p>
     <div class="quote-stack">
       <div class="quote">
-        <span class="q-mark">&#8220;</span>
-        <div>
+        <span class="q-portrait" data-person="Jay Arneja"><img src="data:image/jpeg;base64,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" alt=""></span>
+        <div class="q-body">
           <p>The relationships, partnerships, collaborations formed at MISMO Summits have taken peer group conversations to the next level and have turned into some of the best technical solutions for the industry. If you are truly committed to serving the mortgage industry, MISMO sponsorships are one of the best ways to showcase your commitment.</p>
           <div class="q-attr"><strong>Jay Arneja</strong> &middot; VP, Industry Strategy, nCino</div>
         </div>
       </div>
       <div class="quote">
-        <span class="q-mark">&#8220;</span>
-        <div>
+        <span class="q-portrait" data-person="Heather Mowry"><img src="data:image/jpeg;base64,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" alt=""></span>
+        <div class="q-body">
           <p>Factual Data considers MISMO a crucial element in our mission of Helping Lenders Expand Homeownership. By sponsoring and participating in the summit, we're able to work even more closely with our technical partners and lender customers to help drive innovation and success in the industry.</p>
           <div class="q-attr"><strong>Heather Mowry</strong> &middot; Director, Strategic Solutions, Factual Data</div>
         </div>
       </div>
       <div class="quote">
-        <span class="q-mark">&#8220;</span>
-        <div>
+        <span class="q-portrait" data-person="Michael McCarthy"><img src="data:image/jpeg;base64,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" alt=""></span>
+        <div class="q-body">
           <p>Guidehouse is dedicated to fostering collaboration within the mortgage industry. Sponsoring MISMO summits provides a unique platform to connect with industry leaders and innovators from across the country &mdash; creating a community where ideas are exchanged, partnerships are formed, and the future of the industry is shaped together.</p>
           <div class="q-attr"><strong>Michael McCarthy</strong> &middot; Managing Consultant, Financial Services, Guidehouse</div>
         </div>
       </div>
       <div class="quote">
-        <span class="q-mark">&#8220;</span>
-        <div>
+        <span class="q-portrait" data-person="Charlie Epperson"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwQDAwQEBAQFBQQFBwsHBwYGBw4KCggLEA4RERAOEA8SFBoWEhMYEw8QFh8XGBsbHR0dERYgIh8cIhocHRz/2wBDAQUFBQcGBw0HBw0cEhASHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBz/wAARCADwAPADASIAAhEBAxEB/8QAHQAAAgIDAQEBAAAAAAAAAAAABQYEBwIDCAEACf/EAD8QAAEDAwIDBwIEBAQEBwAAAAEAAgMEBREGIRIxQQcTIjJRYXEIFCMzQoEkUpGhFRY0ciU1YrFDVGOCksHw/8QAGQEAAgMBAAAAAAAAAAAAAAAAAgMAAQQF/8QAIxEAAgIDAAIDAQEBAQAAAAAAAAECEQMhMRJBBCIyYVEFM//aAAwDAQACEQMRAD8A6nhoxLVElM9JSNjYCl2nm4ashNFO7ijG6GPC308nOGf/AEhUu8oRWXdpQ2UYeEGTgUCPVj8N3wkm5jdydqrdjvhJVz/X7IYLYU+Amh2e5NFhqPtrpC7pyStQbyOR+gOK6FPetiC5aapEkYOcZCkh+eRQS3v/AAG/CIwvOcZVRdl2TH+UpD1B/wAxCenbsSLqE/8AEGqPjLXTCiP44Uq6/lKFTEtmbhEq9nHDuOiSuDX0xpXcVMPhKN1OKl3ymaifw07uIgY9Sli5va+odhzT+6jekWuitd/f1S9cfISfRMt4A4ffKWrj+W7PotMOGeRpoPKpbYm/cwn/AKgoVETwqQJT9xD/ALkh/otcLFkGbYQP5Uq0uznfKas5thz/ACpVp/zHfK0gPgRYARhEaSEZyhjDhqm0tQQQAs3sFBZkfC4YTBb/ADBL8Ly8glH7dkuCNlx6M8HlW8KPB5VIHJRDTJh98KSWktGVFGc4wpzR4QiIVIX93X/KbqF2YgfZJVU7grWlNVuqQ6EcPJDHhb6EJAOE5KgT7luFIe4kFRpf0lDkCgaKryO+Ek3Mbv8AVO9T5XfCSroN3IYLZc+ASgP4r0eozirhJ9UBofzno5TnFTD8p70I9FmUEvDTjdFaNxfvjZCKGMfaBw32Rmg8ERc5wDefwhi9EXSa53gwkLUUgbW+LpyUfUfarZ7c+oo2yFtTGcAu5H4SPcO0GkrQ2bvGuHUA7hBKaWh8cbew/cdRstQDxhzgMn0SDc+1u4zTyOie2OnbkBnqlDW2s2CNzY5NnuxgeirqW6S1sz3N5NGAByWeTfo1QgvY53PtKulbUlorHta47gbYUOLV9V9y3NVI9vIb8ykSriljidw5Dz5nHmFFqLjKIxFC0t7tuRjr7oWHX8LSb2jvLiyTBaDjOcogzWlvrR3bpT3hHIDK56qbvJTztc7LYgD+5W2g1MXSBrSIwf1eqpZJx4wXijLqOmrdNHMwOjeCFKYP4mLP8wVKab1vLRVTA4l0f6gVcFouVPdnQz0zw5pIyPRNhl83vply4nDnC1Mf8MO36UpwH8Z/ym4f8u/9qUIfzn/K3ejLLhPYPDhbqVhDwVqj5KXTeZZvZSQZpW7ApgoPOEDpyOEI3QHxBGy10ZIB4VIAwVHpjhqkjmrQ03wx58RUo7BR4XbdFk+YAKyFO3Tao2RqyPLoRkoRdB+OfhbKCoMLQAVUeEl0c3PY1gUKdwdjCg/dufjGcLNjy5uSlTdhQNtR5SPZJl1zl6cZj4T8JPuo8T1cOhT4AKL894RyI4mi+UEoh/EPRlpPHFv1T2Zy1bUQaRgPUJN7R+0Gi0bbnxS/iTvGWxB2Cf3TTbZC2jDh+lmf7Li/tr13Sv1DVsc91bK1xaWu8jUjJLwjofhj5MG647U6+vq2SzxU4gJ8IaBlg9z1SrBqaqnljbRvc4PP9VXFRVyXSvEcMI/EdhjWHO/ouneyjsjfQ0MFbc2AzyjLY8eULNT6bVQFtWk7hfAx9QC1hdnJCLz6QFsYOGPiGdyruhs0FHG1jGAAKFV2oS5zHlp9lHFjE0U5NprvgPBxGQbqHJoc98xzWY6K4G6fDWNzkEclk62BoG3iA6pUosamijrj2bwVsbmyxEHHRVlqPs8rbI/voOJ8DObQF1rLRgZHCCShdxs8FXC5roxnlyS9xDajI42jvVS6oMTGlnBsfVWLonWctjqovxuMZBczK87U+zh1Lx3K2AxuG8rG8iqsoXTB7eN3C4enNOX2VrplkvF+LP0OsF+pNR6ebV0jsjhw9v8AKUFi/Of8qi+yDW9TaamOhfUNfSVHhcHHkVejQBO7HI7roYcnnE5ufH4MIReVTabHGoUPlU2mxxpb6JQcpyMBHLfjiCB0+MDdHLd+YEZa6MlP5VJatMI8IC3FWhp8XcPJanyEDKzf0UaQlU2U3RW91/P/AGUendsFKu356jQjZWl9SS6GYTsPhSot2/ChQHkp0Q8H7pLCx9Nkw8HLolK6M3enCXyfslO6Dd6ZDoUuC1Rj+Kci3IsJ9UKo8/dlFX9Dz3TmIGbVuoP8u6KnqIs/cyR8MYA5r8/9dyuqquaYvbG6RxO/MkrtntVuM1NpOip4o2uNR4clcX6ns01xuToWMDw14Gc7DKx5rcjdgVRGv6fezI3u8/4xWxl9LTHLB0Ll2nbrTHT0xkfgZGw9Ak7sm0tFYtHW6FjAHPYHuPqVYUhLW8OdgjhGlsucrdIBzUwJJ6ZUc0/CCQf2RSUjfZD5peEn1QtIOLZEkLW7Y3Q2qZgn3U+RzXvzsAh9cfdLkOiD5WbE9UNkPRTpnkDCgSguPEDySJIbECXi3xVjHxvaHNeMEEc1y52h6Wl03fHup2k00pyB6LrWRvET1VVdrVnZUW0zBoEjN8oIS8WTIrRSmmq6WmeHMBJa4O4c77LsHTNw/wAWs9FWEeKSPcei4kpp301XkkhuV1/2W1LqnSlK44y0YBHVbfjv7M5vyl9B+h8qnU7cvCgwqbTg8YwmPpiQdp24aEdtw8YQKnzwjCO278wIy10Z4B4Qt2OuVqhyGLcBtuiGmJb7r0QAjcL0c1IaoQqW7j8VRoGlwAHNSrtvMFsssIlqA0qL8lS6SoKeTAODhTY2FrTlMEdCwRHbkh1TCGA7dUloKGiLKPAPhKl05vTZN5R8JVujfFIjh0uXBYpTisKKP5bc8oTT/wCt/dFpPInsSC+06KrrKK2Mjjd9vCON0nRqoirtjDdqaGHhMckocCOZ33XUGqaB9y01AxucNb/+yqAitbW6ojYPyYDsfdZci2bML0dO6ciEdipOFuA2MDC31L8bFatOScVnhH6cYWq5TMheQ+VrR7lE2kiRVyNEr9jhB6trwTvhZ1uoLXbmF9TWwtA/6ghcesbLcXcEVbE53QcQSW0/ZpimjEPc2XxZIK8qt2nY5X05Y+Vr2uBjO+QtF3roaWEyOcGsAQVocmQJCXcitTjwgh3VK1b2j2Shlc2SZziOfCMqLD2m22rfwNpJgw8pC3YpLpexljUQGOKRu0WHv7W/I8OMFNFHe6S6tLoXZczohurKdtVZKkHo0kJbI9nItU0xXKSNoyM7g+i6v7GcDSETWuJa09ei5jutCTcw9o8QcR8rqLskp30+l2tc0t4iCMrZ8Z3I53yvwyx4lOp8h4UGHkpsJIeMJ76c9BynJwEdtp/ECA0zzwhHraT3gRFx6NMXlC3ArXF5AtvTKIafDmpDFEc/BXrakcshQhWN2H4jSt1gP8bH8rXeT4mrCzy93Wxn3Vr8gy6WUB4P2QSu8p+UVjmD4tuoQmr4iHZGyU0w0yHJswJUuvmemuXyApUuvnf6q4dLlwVYv9cPlF5fKUHj2rm/KMSbsKfISPEdI64acdBH53R7Kj9RWV1hrWSyxlkjjw8uZV9aZc91LC0D9KU7pG6+agqYJ+AQ07gGBzc/KzZEbfjryTr0HLC37ewUIfkOLA4pVv8AAbrX8UkndUjARzw4lNFRRXmmnaI6qOS1NiwyHhwWu+UlXmhqLo10MkxaM78GxVT5QeK27Kt1ZatO0Msra6umkkxng4vKPVLWnrVYKyqE1HJVDfAdxeE/CsW/9nlnuj+9fM/vu67pxP6m+iDWnQNHayyOnY8QxbtHElOEfRqhJ+x9tQo7bbMVFW1g4fAZHZVZ6l1G2eWWGOfvqcHHgPNNVFo+gio62WobNIC78NrpCQ0Kp6qzstmpZ6mkDxTEYMbjndDJJOg4p1YXJtstM+qprWJzTkNe3h336lQKTVjrhLNTstPcxQciW+Epy09NUOYQBF3b+beDBPyi9TbC9ue7ijZ1w3mjfj48AUZed2LFoqaGeFlVE5lNKThzeWVMk1DbbnJPbaab7qoaOB8cY3YfdaprfSQv2h5bj3Kn2mCnjfxsgijc4+JzGAOJ9ysbcbqhzjKrKgqdJRWjVNbNUtkkpKThkGeTi7oPhdDWWKGK30f27eGN8eQFWGpbiysvc9vfF0HiHVWhZIjBaLdGTu2NbPi/pmP50fHFEN0/JTYiQ8KFAfCVNhOHp0unJQbpX+EbJhth/EGyXqUgtGyYbXgyAI/RcejTD5QVvUeLygKQrGkWqOBlCnSuHVFaoZCFyNABQ+ymhMvPmaotG7u5Wu9CpV75tUWkGXjKbDgMuj3bKsPawbcltrSHxPygdFxMA4TjCnPke9pDipNJIuBHd5ErXYeJyapPIle7eZyVHoyXBQaf49vyjL/KUGH+vb8oy/ynKfLghFjaNLPtoySOLCDartD7Vdn3KLJglaXEDoQt2loZ3wsdGDj1ThcbY6vtxieQXjfdKyxTWjR8bK8cv4xYhqvurTTz53czKXJ6EN4pwS1x6eqZKpjaeERYAA24RyCC3KVpLGZwFmf9NkO/UV66gkzxu5nfZR47f5pC4gnbdeajvbLbE4l4w3+6H2apmqqZ1fcC5sBOWRA7kdEvyTejYovxtm+6h8EBjjb+GeR9FVN2aaeqleWl2fTmrRuF7NxZPGyldDwcgf1BVJeb1NT3XuoabjizlzyeXsgyK+DMbSVMYtM1UFRIxgdiUeZh5p9noGmn4mjJI6qoRVMdcIa2GMwluxx+oqybZqanrI4qZzwJQ3H+5WpfWmU1u0BLhAe8LXnB6KNQu7mZ0ec7Ihey5kmS3b1QZkzRK1w3Kxz1IY9oH1mn5qq/yVoIIl4GsaOfPfKtLuBSvipx/wCE0BQ9JW7726CUNDoWNy/I5eiI1e9fJ8rq/DhUXL/Tkf8AQy+XjD/CRT8lMhOXhQ6fyn5U6DHGjfTnIN0rQWhMNsb4xugFKPCMJgtjcSBE+Fx6NEOA0LctEXlHqtm/RWNNNQhUx2OEUqeSDTuPRVYSS9ipexyUGndhwPuiF9GAD7rTZY2TXCFjwMEpseCn0O0ME/A1xjPCVNLHNaQ5pCZ4YGBoGBgDZQK6Id3KfTklN2GgE9mYwle8tw9ybOcaVr4PG5SPSSYlk/xzflGH+U/CDO/1zflGTuw/CfLgqPS19Iwj/B4DjmExZwEF0oQbLTY/lCNHkkjRO1NCIZgWjAcMpEu8zg4gDOB0Vl6ppu8pmSY3GyrG4NzM73GCsebUjofFeiqpny6l1HJFIS2kpD5f53J0EDoImte9jW42aTyQZ1sbb7692SG1LSM+hKh6V0NJpjV1fcLrdamvtlc3wNe/LYSOgCDHZtk0xmqKVklG78YcPIYSPdrNb6fikdMwO5lzirQir9JRxSfcTvga5pPC4E4SXqG9aMq7S8W2iqbrWRuOImeFzz8nojlF0Li91TK0ut3tVpgM88xjibzd0KJ6NlpNQN++t8wkgB2I55QrUDf8026G21doZQBuQ+N4BOE1aEtFJaBSW2giEcbDvjqkfwa+WNV/omuhBPnaBt6pMkjNPVcts8k76iquO4ilaegz+yTbo8CrAH6dykzVyIpaLh0LExumxI1oEjyeJ3qgtYMV7/lHdEDh0xCD1JKBVn/MH/K7mFVjRwM7ubN8HI/KmwYL1DhOBn3UmEAvCVLolDBSt8LcFMVsB7wFLlGNgmW1byAlEwo9GSLPCNlvWuLyhZ5VDTVJC6UYCgy2p5GeJHImjhBWbmhwVkKnve4BzlQaJ5imY4bEHKl3d4wFBgPHI1o6pkfyA+lh0V3Mkbc+i+q6kva4E7FarXaz3LM55KRV0XAx3sFnpjEDQfAle+eYpnA/DSxfB4yUyPSmJT/9c35Rp48H7IPKP41vyjLx+H+yfPgmPS2tIO4rLAD0CPJe0ZvZYt0wpA4i3Cm+7pZIv1EbfKqK8wuhqJGuaWvYcEK5XnACqDtI1pp216utGnZHl99uQJbHEc8AHVyVlxuS0PwZPB0xcq6MVLGkjxtOQpdOxkzOGVvE0bEFEjSOilMTxv6obWMdR1HEM8PVZkmjcpXoj1lJSRwuaYmuafVoSjW9zTueIY2MeBsWsATTU1gnYeHp6pWuMcspe8gfsjk9D8bfsSpYWwzPJBL3nck5TDpuobbppKiTo3A9kNfiSV+MHhHXohddcDw91G7HEMbLI9Owp82MsFx7+asuUzsgnDUsVNwDzVVT/JGC93+1Rqy5dxSNgY7c8glbWd8bYdC3muldh8sRgi93noihDykkjPOairOluyXWNq1zoplys8odBE90EjP1Mc3mSOi0Vx/4i/5XCvYR2w1/ZLeO/HHNaK/AraXO2/6gPZdsUN+tup4YbtaKllTQVA4mvafL7FdiDVUcbIt2GYDkFS4R41CgO37qXF59kmXRSGCjJ4QmO1PPGlukdhoTPZm8WCifAo9GONx4QVnx56r5jTwjkshGOXQoRxMgOWBbFppxgLZI4Bu6IhUV4HgUa1Djr6dpPMqdeR+HgZQmlc+CaOQc2nKbBaFyey6oImxRMAHQLCsiD4JPhCrbf4ZqdnGTxAYIWdddWGJ4YckhLcWuhpoA8Xgd7HCWb2fEjvefhuyeqAXlrwONw4WY8xIwqj0t8E2c/wAa35Rt35efZI981jYrRV5q7pTjg5tDt0q376ktK2ePgpYKiqkHUjwrRLgmKdnW2iHA2SPG+6K193oLY0ura6mpx/6soaf7r86dVfWFqyvpm2zTcUdugJwHxfmFKNDcb/qOcV2prxV3Kpdu2KR54Wf0KXHG5Ma3R3J2k/UHZ9NW+ojskja2vDT4x5Y/f3XOvYB95rjtEv2uLm81ElAeGOWTcHi6D4VQ60vzaG3OgjdgtGSM9TsurewrR/8Ak7setkMzcV9cH1MxPMg7tWrHjinQtyZarwJGh/UqDXMiqY+GTZ4/uoumLuy9WyQtcOOB3A/2K31ecYdhy5U1TZ0INqhenpft4nFrgeLp6INVTRsp5Wu3YBz90wVUTJQ4BxGElXuGctcxsjWtzzS2jVHJQp3e5R2+F5Z55c/KUW1L4vxpQeN2zWovcIQyZzsmZ/6eLkFHpbZNUS5DOOV/6neUfCU4JFubmC3NkLmPeczzODGM65PJVn9RV5jppLVpSGUOfA0VFVjpJ6K8bjS0OiLPV6hujhLUwxkwsdya7Gy4nvV4qtQXquu1Y8vqayUvdnp7LZiwvHG5dZhzZVJ+MeGuOXByP6Kzuybtbruza6Pyw1dmn/NpCcAH+YeiqxruRwtrX7o9oTSa2d5aO7fdFanmbS/fGhrHbCOQYb/8lbFK8S8L4nsljduHxHib/VflgZXd4W5O2+xwrJ0V2y6u0S+MUFwfPTMximnOWH2VU3sW4L0fpTQEP5prtDQAFy32Y/VVpnU5iotQQm0XTABl5QE/K6d0xWUt4gbPbquCsiO/FC8Ef90T4BFNPY0t8qybk8lryWnhdsfRSIxkBCNNsRwF7MwvbgL6I5JW1EiFVXAd43HogUsncvwUcB7wOyd0j651HbdI0ZrrnOI2HyRg+J59gtMFoTLo6W2ty0YO3qeShar7SdM6MpzLeLpEyTHhhjPGXf05LkrU/bdfr6XxWyQ2638mhnmePdVrX1Ukj3TzyPmmfuXPcTn+qtwckXHR0Nqn6rZo2yRaftghB8s8p4gffCobVfbFqnU0r3193kDT+iAlgSTcK45Pr6IFI8yHJKDxURt2Equ9zTEvkkfI49XnJQWaokmdjJJcdgvXnIx0UqkpwwhzvzHch6BV0gQstA2nka944pjzJ/SrEglFLTBzT4sc0o2+DxMb1KNXSsbTUTgDg4wtEFSFS2wEWP1Dqm1WwAvdXVLYgPXcFfpFVxi3WqihA4Ww0scJHoQMLhz6WNIya37aYKh0ZfSWKL71x6cXLC7X1xXmOJ4DS1zpCQPQZRY9ka2Vf2O3t3+Lazt73nMdw4mAnorUlm73YbH0VFUFLU6S15JcDGW2+6DJk6d6eitmnubJscR4XLl5YSjN2dONOKZ5cY3sY5wBGUs/4fU3KRwwWRjmSnXhFRHlz2sYObnHYIbJdbPayTPVskxzbEc5V4sOTLqCKlkhjX2Yj12m2/cCNhBIPQKcy1wWan7+dwe47gDqiLNTUtdVObRUWWPcAXvGCPhKOvdQx6ftlyuNW7DKVh4WnqfZdGHwI4H5T2zHl+U8i8Y6Rz59ReuZLjVx2Gnk/DZ4qjB/oFQPCcovdbhPea6pralxdLO8vBP8vQIa1mXLLkflKylo8a0jfotgAO/qvSzAXrW8kFBEd7T9yfhTWAtAJUaQYrAPZSwdvZWimbGu2GQDjllNem+0DUOmJmS2y81tM9hy1olPB/RKQJzjCzyo1ZEdT6V+tTXVoZHFdmUt0hbgeGPheR8q7tF/Wzoy8TMp9Q0k1klfsJHHjaT+y/O1shHI4W1k55EA/IQ0Xo/ZfTurbJqikjq7NdKWsgkGQWSDi/pzR1pJ57L8adM6tumlaxtXZ7jU0M7TnijeT/Zdd9lX1r/awxW7XNM+UMbhtfAOJ7/9wVFV/h0KxzYmzSSflxtL3n0aOa4R7TdfVGutZ3SqklLqKjeaaniz4QAfNj1XZvabcjp7s6v9wDuF3cuiB+Qvza09VuqIKlzjlz5nOP8AVbMb4Jod6Y94OIodc6nxFrSpkcncUeTzIQdzTMSU5lIBVjsSOLuqHEknHVEbmOF5BQlzsnms0+jUSaOOOSfhkdy5D+YqdTZfVNGN8oSN8EbEb5RmlnYYxMPzTs72UiU2MMMrKccbyBhD7rVOmikkdvwjICg9++eXhyduqyu0gjoyxu7i3cprdoFLZZPZ9XXDT+j2WvT9W+mut5qe9qauE4eID+gFdK6c7Qb7S0FJarlRx17omhjZ3ty4j/qPVUV9NtojutygL28Yp2d4c7rp3TlkhrpaxzmgSteS1dnFHC8KUkZJKXm3Zo1JbZLtZCzu2gvHeBgHkd/MEl2jUMoi+2qRiWA8BJ5nHVXFNTB1EyThy+nOHD1akLVuhTJWx3C3S8EdQOWNs+hXL+Z8dteUNnQ+LmSfjI3Ulx+9tVQ15PdNdzS9JRMqpBHFC3iceYCJilmoaSOikLRI3eXh3GUVtVEI2md4xnYLZ8ODw4VZn+RJTyOjTbbUyjhLQMuA2PuucPqvvvc1NrsMcmJnME8zWnm33XWEb4aCmqLhU4FNRRuqH56hu+F+cfaJqqfW+tbzfJncUc8zhTj+WLOwSPl5PrvrJjVsVwOLYDl/ZYuj3OPMOazaCFsI4sHqFzB5Gf0HVbWN2WqoeyJveOOPbqVrBmqcBv4UfU9Sqoh4/wAdfgb4ClAELyCBsDcMHyTzK2c3K0iHw5rLBXzV6M/spRLMeQGeayyvD06rzGcqqLsyDsA7rcydzepwtIGNl4cNBJUoln6NfVFcG0PZLUxsdh80rfCOoX586WPE6f07wnC7L+ra6PFit9KHYa5hJC4y0j+ZLjo8p0VVC/THSrn4YA3phYUDA9jyoVbKeWUQswD45B1wn+wPQs3kBszgAghaeLA3Ry+7TvB6IPSP/HLfULPP9DY8MmR8Ay47+gUuF2A7GwKjHOSOeFtYcAKLTIyfSj8UFa7s7iDgPRZUzsdd1orzxEnrhE+A+zp36QaLvrfebgRkRRGMfK6W0hE18k55EndUR9IFKIezq81BG8lS5iv3STeGqkHQrpYnWITLoWhj4J5IXjwybEpeudTLaqaqpXsa9sh8AdvhNFXM2kMkrxkRjiSVBQz6hbU18spa0uIY32CiyKK8pcK8QJT0b6qQcznmSm2htILWtd5QFJtVrZ3LHHHGOZ9UbbAIwAMbDi/YblFPL5cJVFAfVJrePRHZ6LTSvAut5OI2g791+pcGFoaA0Hwt5K2fqK1sda9ptwljl46G3nuabfZvRyqYDdczPPzkPgqR8wYKyz7cl8eQxzXm+CDzSQzXPA2docQC5u4XkU/GeFww4LaMemyh1T2MczGe9J8ICohN64Xmw5BeNzgcXPqs8jOMKyHoH9F6D6BYh2crIYChD53JY9PRZE/0XgGVCHnI/KwLuJ5HQLNzg0EnkFGe4sZsPEd1TIdnfVxK0x26EHLmRniHouT9GDikqfUOK6M+oa6DUF1ukkZ4ooi0R/0XO2hxxVNwaf05KdVSQHoJXCXhlIRjTbw/ib6pcrJOKZ++2UZ0xIfuQz1Rp/YqtA3UjOCpelyN3BOw+pTVqxmKpwSlJ4d/RKyfoKPCe8YkIHJZMzv7LDchjvULIHdUWSoXYKwqjsT7LGNy+qPEx/wj9FeztL6U4u77Iqx+N3Vx3/ZXZps8FWPlU59L7eDsakPrWE/2Vxae3qx13XQx/wDmIl0JamyYxCw+KU7/AAh9NTGnibFE4tZjfHVE7oO9rcn9IwFrjYAzKpfmmQkUEQa0NGwCRu3LXjez3s6utxjcBcJ2GGkGdy47FP1DGXDhaPG7YfK4o+sXXbLvq+j0vRzcdNa2CaQg7d4eYSsk6TZcVbOZ3ufK98sji6SVxkcT1J3KxDV6TlZAHqsBoPANlgTg8lkc4XxaA3izt1UIaZphDE6R3Ich6laKWF5JqJvzX8h/KF4xprZ++cMQR7Mb6lTuHOSqIYgbdVmdjsvccscliefNWQxJ3JWTSOi15GfZbAMlUQyO4WIOdl6dgsCcbqyGL/E5rfXcrVO4cfsNlsb+qQ/AUV7iQd0LIdE60qD/AIfUOdlziN1Tmiz3d1vLTz7niVtX8mqtUx6lpyqn07H3N0uz+X8PhaJP7IBLRhO7Mjj6lFtNycNxiBOxKCyOJdn3RGyyGOvgPLLlSeyPgT1gzFa73GyTZGbp51eziqAcb4CTJG4cqyLZcTOLenb6grLr8rGn3jkZ6br7mRnoqIboyG7LKQ5jf8LU0k81sfvE/wBeEq0Q7b+mp3ddir3H/wA4f+yufSjOJ3eKlfp6e1nYk3HWqV26QING5/sulDWIRLoQqCH1EnyvQzMZCxLcuLvdb4Gl7gPVASgfqK+x6S0rdb1K4NFFTukYT1eBsF+Wd+u82oL1cbvUvL5a+d05J5jJ5Lsr6z9fG06ctei6GQtqbiRVTuHRo5tXEpxnAGw5BY80r0NxqtnmAQvuhwsl4Rw79OqQMPWDbfmoMxdUzGnY78Nu7yP+y21s/d8EcW8suwHt6rKngEEfANzzc7qSoQzY3AAaMNAwFswR15r4NwFlzHuoQxOw91qkI6c1sccLQ8+ipkMRud1vbyUduVJZyCiIekEAqNK4AAeqkyHDVBjcJanh5hu5UIbJnCONrPZQ985wpExDpCei1cuSFkP/2Q==" alt=""></span>
+        <div class="q-body">
           <p>Attending and supporting MISMO conferences is invaluable; it's where we connect with peers, share insights, and collectively drive the future of mortgage technology. It's an investment in both MISMO and the progress of our entire industry.</p>
           <div class="q-attr"><strong>Charlie Epperson</strong> &middot; Chief Product Officer, FundingShield</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">04</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">05</span></div>
 </div>
 
 <!-- 03 AUDIENCE & REACH -->
 <div class="page" id="reach">
   <div class="running-head"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="105" height="16"><use href="#mismo-logo"/></svg><span class="rh-label">Audience &amp; Reach</span></div>
   <div class="page-pad">
-    <div class="kicker"><span class="num">03</span> AUDIENCE &amp; REACH</div>
+    <div class="kicker"><span class="num">04</span> AUDIENCE &amp; REACH</div>
     <h2 class="page-title">The room your brand will be in.</h2>
-    <p class="page-sub">Organization counts are drawn from MISMO's own workgroup meeting records across the last six Summits &mdash; Winter, Spring, and Fall, 2025 and 2026 &mdash; deduplicated by company and excluding MISMO and MBA staff. Seniority and function shares reflect the wider Summit attendee profile.</p>
+    <p class="page-sub">Attendee figures come from badge scans at the three 2026 Summits, deduplicated by person; organization figures come from MISMO's own workgroup meeting records for the same Summits. Both exclude MISMO and MBA staff. Seniority and function shares reflect the wider Summit attendee profile.</p>
 
     <div class="stat-grid">
-      <div class="stat"><div class="stat-num">268</div><div class="stat-label">Organizations engaged across the last 6 Summits</div></div>
-      <div class="stat"><div class="stat-num">150</div><div class="stat-label">Companies at the most recent Summit (Fall 2026)</div></div>
-      <div class="stat"><div class="stat-num">89</div><div class="stat-label">Tech Providers &mdash; the largest segment</div></div>
-      <div class="stat"><div class="stat-num">21</div><div class="stat-label">Active workgroups &amp; communities of practice on-site</div></div>
+      <div class="stat"><div class="stat-num">485</div><div class="stat-label">People engaged across the three 2026 Summits</div></div>
+      <div class="stat"><div class="stat-num">244</div><div class="stat-label">Organizations engaged across the same three Summits</div></div>
+      <div class="stat"><div class="stat-num">45%</div><div class="stat-label">Are VPs or above</div></div>
+      <div class="stat"><div class="stat-num">+46%</div><div class="stat-label">More lender organizations in 2026 than 2025</div></div>
     </div>
 
     <div class="reach-sub">
-      <div class="reach-sub-head"><h3>Who's in the room</h3><span class="mono">BY UNIQUE ORG, LAST 6 SUMMITS</span></div>
+      <div class="reach-sub-head"><h3>Who's in the room</h3><span class="mono">BY UNIQUE ATTENDEE, 2026 SUMMITS</span></div>
       <div class="pie-block">
-        <svg viewBox="0 0 220 220" class="pie-svg" role="img" aria-label="Organizations by category: Tech Provider 33%; Service Provider 30%; Lender/Servicer 26%; Government agency 7%; GSE 4%">
-          <path d="M 110,110 L 110.00,10.00 A 100,100 0 0 1 196.99,159.32 Z" fill="var(--cat-tech)"><title>Tech Provider &mdash; 89 organizations, 33%</title></path>
-          <path d="M 110,110 L 196.99,159.32 A 100,100 0 0 1 35.27,176.45 Z" fill="var(--cat-serv)"><title>Service Provider &mdash; 81 organizations, 30%</title></path>
-          <path d="M 110,110 L 35.27,176.45 A 100,100 0 0 1 48.97,30.78 Z" fill="var(--cat-lend)"><title>Lender/Servicer &mdash; 70 organizations, 26%</title></path>
-          <path d="M 110,110 L 48.97,30.78 A 100,100 0 0 1 86.77,12.74 Z" fill="var(--cat-gov)"><title>Government agency &mdash; 18 organizations, 7%</title></path>
-          <path d="M 110,110 L 86.77,12.74 A 100,100 0 0 1 110.00,10.00 Z" fill="var(--cat-gse)"><title>GSE &mdash; 10 organizations, 4%</title></path>
-          <text x="163.6" y="78.8" text-anchor="middle" dominant-baseline="middle" class="pie-pct">33%</text>
-          <text x="116.5" y="171.7" text-anchor="middle" dominant-baseline="middle" class="pie-pct">30%</text>
-          <text x="48.3" y="104.2" text-anchor="middle" dominant-baseline="middle" class="pie-pct">26%</text>
+        <svg viewBox="0 0 220 220" class="pie-svg" role="img" aria-label="Attendees by organization category: Service Provider 39%; Tech Provider 30%; Lender/Servicer 15%; GSE 13%; Government agency 4%">
+          <path d="M 110,110 L 110.00,10.00 A 100,100 0 0 1 174.45,186.46 Z" fill="var(--cat-serv)"><title>Service Provider &mdash; 183 people from 67 organizations</title></path>
+          <path d="M 110,110 L 174.45,186.46 A 100,100 0 0 1 18.03,149.27 Z" fill="var(--cat-tech)"><title>Tech Provider &mdash; 140 people from 58 organizations</title></path>
+          <path d="M 110,110 L 18.03,149.27 A 100,100 0 0 1 23.73,59.42 Z" fill="var(--cat-lend)"><title>Lender/Servicer &mdash; 70 people from 36 organizations</title></path>
+          <path d="M 110,110 L 23.73,59.42 A 100,100 0 0 1 87.52,12.56 Z" fill="var(--cat-gse)"><title>GSE &mdash; 61 people from 8 organizations</title></path>
+          <path d="M 110,110 L 87.52,12.56 A 100,100 0 0 1 110.00,10.00 Z" fill="var(--cat-gov)"><title>Government agency &mdash; 17 people from 6 organizations</title></path>
+          <text x="168.2" y="88.7" text-anchor="middle" dominant-baseline="middle" class="pie-pct">39%</text>
+          <text x="95.7" y="170.3" text-anchor="middle" dominant-baseline="middle" class="pie-pct">30%</text>
+          <text x="48.1" y="106.1" text-anchor="middle" dominant-baseline="middle" class="pie-pct">15%</text>
+          <text x="73.3" y="60.0" text-anchor="middle" dominant-baseline="middle" class="pie-pct">13%</text>
         </svg>
         <div class="pie-legend">
-          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-tech);"></span><span class="pl-name">Tech Provider</span><span class="pl-count">89 &middot; 33%</span></div>
-          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-serv);"></span><span class="pl-name">Service Provider</span><span class="pl-count">81 &middot; 30%</span></div>
-          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-lend);"></span><span class="pl-name">Lender/Servicer</span><span class="pl-count">70 &middot; 26%</span></div>
-          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-gov);"></span><span class="pl-name">Government agency</span><span class="pl-count">18 &middot; 7%</span></div>
-          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-gse);"></span><span class="pl-name">GSE <span class="pl-sub">(incl. FHLBs)</span></span><span class="pl-count">10 &middot; 4%</span></div>
+          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-serv);"></span><span class="pl-name">Service Provider</span><span class="pl-count">183 &middot; 39%<span class="pl-sub"> &middot; 67 orgs</span></span></div>
+          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-tech);"></span><span class="pl-name">Tech Provider</span><span class="pl-count">140 &middot; 30%<span class="pl-sub"> &middot; 58 orgs</span></span></div>
+          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-lend);"></span><span class="pl-name">Lender/Servicer</span><span class="pl-count">70 &middot; 15%<span class="pl-sub"> &middot; 36 orgs</span></span></div>
+          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-gse);"></span><span class="pl-name">GSE <span class="pl-sub">(incl. FHLBs)</span></span><span class="pl-count">61 &middot; 13%<span class="pl-sub"> &middot; 8 orgs</span></span></div>
+          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-gov);"></span><span class="pl-name">Government agency</span><span class="pl-count">17 &middot; 4%<span class="pl-sub"> &middot; 6 orgs</span></span></div>
         </div>
       </div>
-      <p class="chart-note">Counts are unique organizations across the last six Summits, excluding MISMO and MBA staff.</p>
+      <p class="chart-note">Slices are unique people from badge scans at the three 2026 Summits; the organization count beside each is from the workgroup trackers. Shares are rounded.</p>
     </div>
 
     <div class="reach-sub">
@@ -723,56 +861,43 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     <div class="reach-sub">
       <div class="reach-sub-head">
         <h3>A growing room</h3>
-        <span class="growth-badge">&#9650; 63% more companies since Winter 2025</span>
+        <span class="growth-badge">&#9650; 52% more attendees than Winter 2026</span>
       </div>
       <div class="trend-chart">
-        <svg viewBox="0 0 780 236" class="trend-svg" role="img" aria-label="Unique companies per Summit, growing from 92 in Winter 2025 to 150 in Fall 2026">
+        <svg viewBox="0 0 780 236" class="trend-svg" role="img" aria-label="Unique attendees per Summit, growing from 161 at Winter 2026 to 244 at Fall 2026">
           <defs>
             <linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="var(--sky)" stop-opacity="0.38"/>
               <stop offset="100%" stop-color="var(--sky)" stop-opacity="0"/>
             </linearGradient>
           </defs>
-          <rect x="36.0" y="30.0" width="354.0" height="152.0" fill="var(--sky)" opacity="0.035"/>
-          <rect x="390.0" y="30.0" width="354.0" height="152.0" fill="var(--navy)" opacity="0.045"/>
+          <rect x="36.0" y="30.0" width="708.0" height="152.0" fill="var(--sky)" opacity="0.035"/>
           <line x1="36" y1="182.0" x2="744" y2="182.0" stroke="var(--line)" stroke-width="1"/>
           <line x1="36" y1="108.0" x2="744" y2="108.0" stroke="var(--line)" stroke-width="1" stroke-dasharray="2,4"/>
           <line x1="36" y1="34.0" x2="744" y2="34.0" stroke="var(--line)" stroke-width="1" stroke-dasharray="2,4"/>
-          <text x="186.0" y="22.0" text-anchor="middle" class="yr-lbl">2025</text>
-          <text x="594.0" y="22.0" text-anchor="middle" class="yr-lbl">2026</text>
-          <path d="M 50.0,101.9 C 72.7,102.3 140.7,105.5 186.0,104.5 C 231.3,103.5 276.7,100.1 322.0,95.8 C 367.3,91.4 412.7,81.0 458.0,78.4 C 503.3,75.7 548.7,84.6 594.0,80.1 C 639.3,75.6 707.3,56.1 730.0,51.3 L 730.0,182.0 L 50.0,182.0 Z" fill="url(#trendFill)"/>
-          <path d="M 50.0,101.9 C 72.7,102.3 140.7,105.5 186.0,104.5 C 231.3,103.5 276.7,100.1 322.0,95.8 C 367.3,91.4 412.7,81.0 458.0,78.4 C 503.3,75.7 548.7,84.6 594.0,80.1 C 639.3,75.6 707.3,56.1 730.0,51.3" fill="none" stroke="var(--sky-deep)" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="390.0" y1="30.0" x2="390.0" y2="182.0" stroke="var(--line)" stroke-width="1" stroke-dasharray="3,4"/>
-          <circle cx="50.0" cy="101.9" r="4" fill="var(--paper)" stroke="var(--sky-deep)" stroke-width="2.2"/>
-          <circle cx="186.0" cy="104.5" r="4" fill="var(--paper)" stroke="var(--sky-deep)" stroke-width="2.2"/>
-          <circle cx="322.0" cy="95.8" r="4" fill="var(--paper)" stroke="var(--sky-deep)" stroke-width="2.2"/>
-          <circle cx="458.0" cy="78.4" r="4" fill="var(--paper)" stroke="var(--sky-deep)" stroke-width="2.2"/>
-          <circle cx="594.0" cy="80.1" r="4" fill="var(--paper)" stroke="var(--sky-deep)" stroke-width="2.2"/>
-          <circle cx="730.0" cy="51.3" r="6.5" fill="var(--navy)" stroke="var(--paper)" stroke-width="2.5"/>
-          <text x="50.0" y="87.9" text-anchor="middle" class="val-lbl">92</text>
-          <text x="186.0" y="90.5" text-anchor="middle" class="val-lbl">89</text>
-          <text x="322.0" y="81.8" text-anchor="middle" class="val-lbl">99</text>
-          <text x="458.0" y="64.4" text-anchor="middle" class="val-lbl">119</text>
-          <text x="594.0" y="66.1" text-anchor="middle" class="val-lbl">117</text>
-          <text x="730.0" y="32.3" text-anchor="middle" class="val-lbl val-lbl-latest">150</text>
-          <text x="50.0" y="208.0" text-anchor="middle" class="x-lbl">Winter 2025</text>
-          <text x="186.0" y="208.0" text-anchor="middle" class="x-lbl">Spring 2025</text>
-          <text x="322.0" y="208.0" text-anchor="middle" class="x-lbl">Fall 2025</text>
-          <text x="458.0" y="208.0" text-anchor="middle" class="x-lbl">Winter 2026</text>
-          <text x="594.0" y="208.0" text-anchor="middle" class="x-lbl">Spring 2026</text>
-          <text x="730.0" y="208.0" text-anchor="middle" class="x-lbl x-lbl-latest">Fall 2026</text>
+          <path d="M 110.0,93.4 C 156.7,93.2 296.7,99.4 390.0,91.8 C 483.3,84.2 623.3,55.1 670.0,47.8 L 670.0,182.0 L 110.0,182.0 Z" fill="url(#trendFill)"/>
+          <path d="M 110.0,93.4 C 156.7,93.2 296.7,99.4 390.0,91.8 C 483.3,84.2 623.3,55.1 670.0,47.8" fill="none" stroke="var(--sky-deep)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="110.0" cy="93.4" r="4" fill="var(--paper)" stroke="var(--sky-deep)" stroke-width="2.2"/>
+          <circle cx="390.0" cy="91.8" r="4" fill="var(--paper)" stroke="var(--sky-deep)" stroke-width="2.2"/>
+          <circle cx="670.0" cy="47.8" r="6.5" fill="var(--navy)" stroke="var(--paper)" stroke-width="2.5"/>
+          <text x="110.0" y="79.4" text-anchor="middle" class="val-lbl">161</text>
+          <text x="390.0" y="77.8" text-anchor="middle" class="val-lbl">164</text>
+          <text x="670.0" y="28.8" text-anchor="middle" class="val-lbl val-lbl-latest">244</text>
+          <text x="110.0" y="208.0" text-anchor="middle" class="x-lbl">Winter 2026</text>
+          <text x="390.0" y="208.0" text-anchor="middle" class="x-lbl">Spring 2026</text>
+          <text x="670.0" y="208.0" text-anchor="middle" class="x-lbl x-lbl-latest">Fall 2026</text>
         </svg>
       </div>
     </div>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">05</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">06</span></div>
 </div>
 
 <!-- 04 SUMMIT SERIES OVERVIEW -->
 <div class="page" id="series-overview">
   <div class="running-head"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="105" height="16"><use href="#mismo-logo"/></svg><span class="rh-label">The 2027 Summit Series</span></div>
   <div class="page-pad">
-    <div class="kicker"><span class="num">04</span> THE 2027 SUMMIT SERIES</div>
+    <div class="kicker"><span class="num">05</span> THE 2027 SUMMIT SERIES</div>
     <h2 class="page-title">Three summits, one community.</h2>
     <p class="page-sub">Sponsor the Winter Summit on its own, or join the full 2027 Series across all three cities.</p>
     <div class="timeline">
@@ -797,14 +922,14 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     </div>
     <div class="discount-strip"><strong>Sponsor all three,</strong> save 10% off individual Summit sponsorship rates with a 2027 Summit Series package.</div>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">06</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">07</span></div>
 </div>
 
 <!-- 05 SERIES TIERS -->
 <div class="page" id="series">
   <div class="running-head"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="105" height="16"><use href="#mismo-logo"/></svg><span class="rh-label">Summit Series Tiers</span></div>
   <div class="page-pad">
-    <div class="kicker"><span class="num">05</span> SPONSORSHIP TIERS</div>
+    <div class="kicker"><span class="num">06</span> SPONSORSHIP TIERS</div>
     <h2 class="page-title">2027 Summit Series</h2>
     <div class="program-tag"><span class="pill">ALL THREE SUMMITS</span> Winter + Spring + Fall &middot; 10% series discount included</div>
     <div class="tier-strip">
@@ -859,7 +984,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
             <thead><tr><th>Opportunity</th><th>Status</th></tr></thead>
             <tbody>
               <tr><td>AI Demo / Case Study Sponsor</td><td>3 available</td></tr>
-              <tr><td>Reception Sponsor</td><td><span class="part-available">1 available</span>, <span class="part-sold">1 sold</span></td></tr>
+              <tr><td>Reception Sponsor<span class="opp-days"><span class="">Mon</span><span class="taken">Tue</span></span></td><td><span class="part-available">1 available</span>, <span class="part-sold">1 sold</span></td></tr>
               <tr class="sold"><td>Badge Sponsor</td><td>Sold</td></tr>
               <tr class="sold"><td>Wi-Fi Sponsor</td><td>Sold</td></tr>
             </tbody>
@@ -942,10 +1067,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <table class="opp-table">
             <thead><tr><th>Opportunity</th><th>Status</th></tr></thead>
             <tbody>
-              <tr><td>Breakfast Sponsor</td><td>4 available</td></tr>
+              <tr><td>Breakfast Sponsor<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td>4 available</td></tr>
               <tr><td>Livestream Sponsor</td><td>1 available</td></tr>
-              <tr><td>Afternoon Snack Break Sponsor</td><td>4 available</td></tr>
-              <tr><td>Morning Coffee Break Sponsor</td><td><span class="part-available">3 available</span>, <span class="part-sold">1 sold</span></td></tr>
+              <tr><td>Afternoon Snack Break Sponsor<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td>4 available</td></tr>
+              <tr><td>Morning Coffee Break Sponsor<span class="opp-days"><span class="taken">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td><span class="part-available">3 available</span>, <span class="part-sold">1 sold</span></td></tr>
             </tbody>
           </table><p class="exclusive-note">One opportunity is selected per sponsorship at this tier.</p>
         </div>
@@ -953,14 +1078,14 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       </div>
     </div>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">07</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">08</span></div>
 </div>
 
 <!-- 06 WINTER TIERS -->
 <div class="page" id="winter">
   <div class="running-head"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="105" height="16"><use href="#mismo-logo"/></svg><span class="rh-label">Winter Summit Tiers</span></div>
   <div class="page-pad">
-    <div class="kicker"><span class="num">06</span> SPONSORSHIP TIERS</div>
+    <div class="kicker"><span class="num">07</span> SPONSORSHIP TIERS</div>
     <h2 class="page-title">Winter Summit</h2>
     <div class="program-tag"><span class="pill">SINGLE EVENT</span> January 11&ndash;14, 2027 &middot; New Orleans, LA</div>
     <div class="tier-strip">
@@ -1015,7 +1140,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
             <thead><tr><th>Opportunity</th><th>Status</th></tr></thead>
             <tbody>
               <tr><td>AI Demo / Case Study Sponsor</td><td>3 available</td></tr>
-              <tr><td>Reception Sponsor</td><td><span class="part-available">1 available</span>, <span class="part-sold">1 sold</span></td></tr>
+              <tr><td>Reception Sponsor<span class="opp-days"><span class="">Mon</span><span class="taken">Tue</span></span></td><td><span class="part-available">1 available</span>, <span class="part-sold">1 sold</span></td></tr>
               <tr class="sold"><td>Badge Sponsor</td><td>Sold</td></tr>
               <tr class="sold"><td>Wi-Fi Sponsor</td><td>Sold</td></tr>
             </tbody>
@@ -1098,10 +1223,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <table class="opp-table">
             <thead><tr><th>Opportunity</th><th>Status</th></tr></thead>
             <tbody>
-              <tr><td>Breakfast Sponsor</td><td>4 available</td></tr>
+              <tr><td>Breakfast Sponsor<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td>4 available</td></tr>
               <tr><td>Livestream Sponsor</td><td>1 available</td></tr>
-              <tr><td>Morning Coffee Break Sponsor</td><td>4 available</td></tr>
-              <tr><td>Afternoon Snack Break Sponsor</td><td>4 available</td></tr>
+              <tr><td>Morning Coffee Break Sponsor<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td>4 available</td></tr>
+              <tr><td>Afternoon Snack Break Sponsor<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td>4 available</td></tr>
             </tbody>
           </table><p class="exclusive-note">One opportunity is selected per sponsorship at this tier.</p>
         </div>
@@ -1109,14 +1234,14 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       </div>
     </div>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">08</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">09</span></div>
 </div>
 
 <!-- 07 AVAILABILITY -->
 <div class="page" id="availability">
   <div class="running-head"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="105" height="16"><use href="#mismo-logo"/></svg><span class="rh-label">Availability Snapshot</span></div>
   <div class="page-pad">
-    <div class="kicker"><span class="num">07</span> AVAILABILITY SNAPSHOT</div>
+    <div class="kicker"><span class="num">08</span> AVAILABILITY SNAPSHOT</div>
     <h2 class="page-title">What's still open.</h2>
     <p class="page-sub">A quick read on what's already spoken for, across both programs. Availability may shift as sponsorships are confirmed &mdash; contact MISMO to reserve.</p>
     <table class="snap-table">
@@ -1141,16 +1266,16 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     </table>
     <p class="body-text" style="margin-top:16px; font-size:12.5px;">Interested in sponsoring more than one day of Breakfast, Morning Coffee Break, or Afternoon Snack Break? Contact <a href="mailto:kbradshaw@mismo.org" style="color:var(--sky-deep);">kbradshaw@mismo.org</a> for details.</p>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">09</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">10</span></div>
 </div>
 
 <!-- 08 RESERVE -->
 <div class="page" id="reserve">
   <div class="running-head"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="105" height="16"><use href="#mismo-logo"/></svg><span class="rh-label">Reserve Your Sponsorship</span></div>
   <div class="page-pad">
-    <div class="kicker"><span class="num">08</span> RESERVE YOUR SPONSORSHIP</div>
+    <div class="kicker"><span class="num">09</span> RESERVE YOUR SPONSORSHIP</div>
     <h2 class="page-title">Build your sponsorship.</h2>
-    <p class="page-sub">Select a program and tier, then the specific opportunity within it. Sold-out opportunities are shown but can't be selected &mdash; availability reflects the snapshot on page 07.</p>
+    <p class="page-sub">Select a program and tier, then the specific opportunity within it. Sold-out opportunities are shown but can't be selected &mdash; availability reflects the Availability Snapshot.</p>
 
     <div class="steps">
       <div class="step"><div class="step-num">01</div><h4>Choose your tier</h4><p>Select a Winter Summit or Summit Series tier, plus any opportunity within it.</p></div>
@@ -1194,14 +1319,14 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       </div>
     </form>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">10</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">11</span></div>
 </div>
 
 <!-- 09 SUMMARY -->
 <div class="page" id="summary">
   <div class="running-head"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="105" height="16"><use href="#mismo-logo"/></svg><span class="rh-label">Your Sponsorship Summary</span></div>
   <div class="page-pad">
-    <div class="kicker"><span class="num">09</span> YOUR SPONSORSHIP SUMMARY</div>
+    <div class="kicker"><span class="num">10</span> YOUR SPONSORSHIP SUMMARY</div>
     <h2 class="page-title">What you're signing up for.</h2>
     <p class="page-sub">This updates automatically from your selections on the previous page.</p>
 
@@ -1225,14 +1350,14 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       </div>
     </div>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">11</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">12</span></div>
 </div>
 
 <!-- 10 CONTRACT -->
 <div class="page" id="contract">
   <div class="running-head"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="105" height="16"><use href="#mismo-logo"/></svg><span class="rh-label">Sponsor Contract</span></div>
   <div class="page-pad">
-    <div class="kicker"><span class="num">10</span> SPONSOR CONTRACT</div>
+    <div class="kicker"><span class="num">11</span> SPONSOR CONTRACT</div>
     <h2 class="page-title">MISMO Event Sponsor Contract</h2>
     <p class="page-sub">Review the terms below. Submitting your sponsorship request confirms you have read and agree to this Contract on behalf of your organization.</p>
 
@@ -1281,7 +1406,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       <p class="submit-note">Submitting opens an email to MISMO (<a href="mailto:kbradshaw@mismo.org" style="color:var(--sky-deep);">kbradshaw@mismo.org</a>) pre-filled with your selection and signature details for confirmation and invoicing. This page does not process payment or store your submission.</p>
     </div>
   </div>
-  <div class="running-foot"><span class="rf-title">MISMO 2027 Sponsorship Prospectus</span><span class="rf-num">12</span></div>
+  <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">13</span></div>
 </div>
 
 <!-- BACK COVER -->
@@ -1293,6 +1418,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   <p>Diamond availability is limited to one organization, and several Platinum and Silver opportunities are already spoken for. Reserve your tier before the sponsorships you want are gone.</p>
   <div class="backcover-bottom">
     <span class="cc-item" style="display:flex; align-items:center; gap:8px; color:#cfe3ee; font-size:13.5px;"><svg viewBox="0 0 24 24" fill="none" stroke="#74bfeb" stroke-width="2" width="15" height="15"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> kbradshaw@mismo.org</span>
+    <span class="cc-item" style="display:flex; align-items:center; gap:8px; color:#cfe3ee; font-size:13.5px;"><svg viewBox="0 0 24 24" fill="none" stroke="#74bfeb" stroke-width="2" width="15" height="15"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-linejoin="round"/></svg> amoses@mismo.org</span>
     <span class="cc-item" style="display:flex; align-items:center; gap:8px; color:#cfe3ee; font-size:13.5px;"><svg viewBox="0 0 24 24" fill="none" stroke="#74bfeb" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg> mismo.org</span>
   </div>
 </div>
@@ -1308,7 +1434,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       platinum: { name:"Platinum Sponsor", price:"$15,000", regs:"6 complimentary registrations",
         benefits:["Premium logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","6 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast"],
         opportunities:[
-          {id:"reception", name:"Reception Sponsor", note:"1 available, 1 sold", sold:false},
+          {id:"reception", name:"Reception Sponsor", note:"1 available, 1 sold", sold:false, days:["Monday","Tuesday"], soldDays:["Tuesday"]},
           {id:"badge", name:"Badge Sponsor", note:"Sold", sold:true},
           {id:"aidemo", name:"AI Demo / Case Study Sponsor", note:"3 available", sold:false},
           {id:"wifi", name:"Wi-Fi Sponsor", note:"Sold", sold:true}
@@ -1330,10 +1456,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       bronze: { name:"Bronze Sponsor", price:"$5,000", regs:"2 complimentary registrations",
         benefits:["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","2 complimentary Summit registrations"],
         opportunities:[
-          {id:"breakfast", name:"Breakfast Sponsor", note:"4 available", sold:false},
+          {id:"breakfast", name:"Breakfast Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[]},
           {id:"livestream", name:"Livestream Sponsor", note:"1 available", sold:false},
-          {id:"morningcoffee", name:"Morning Coffee Break Sponsor", note:"4 available", sold:false},
-          {id:"afternoonsnack", name:"Afternoon Snack Break Sponsor", note:"4 available", sold:false}
+          {id:"morningcoffee", name:"Morning Coffee Break Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[]},
+          {id:"afternoonsnack", name:"Afternoon Snack Break Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[]}
         ]}
     },
     series: {
@@ -1344,7 +1470,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       platinum: { name:"Platinum Sponsor", price:"$40,500", regs:"6 complimentary registrations",
         benefits:["Premium logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","6 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast"],
         opportunities:[
-          {id:"reception", name:"Reception Sponsor", note:"1 available, 1 sold", sold:false},
+          {id:"reception", name:"Reception Sponsor", note:"1 available, 1 sold", sold:false, days:["Monday","Tuesday"], soldDays:["Tuesday"]},
           {id:"badge", name:"Badge Sponsor", note:"Sold", sold:true},
           {id:"aidemo", name:"AI Demo / Case Study Sponsor", note:"3 available", sold:false},
           {id:"wifi", name:"Wi-Fi Sponsor", note:"Sold", sold:true}
@@ -1366,16 +1492,16 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       bronze: { name:"Bronze Sponsor", price:"$13,500", regs:"2 complimentary registrations",
         benefits:["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","2 complimentary Summit registrations"],
         opportunities:[
-          {id:"breakfast", name:"Breakfast Sponsor", note:"4 available", sold:false},
+          {id:"breakfast", name:"Breakfast Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[]},
           {id:"livestream", name:"Livestream Sponsor", note:"1 available", sold:false},
-          {id:"morningcoffee", name:"Morning Coffee Break Sponsor", note:"3 available, 1 sold", sold:false},
-          {id:"afternoonsnack", name:"Afternoon Snack Break Sponsor", note:"4 available", sold:false}
+          {id:"morningcoffee", name:"Morning Coffee Break Sponsor", note:"3 available, 1 sold", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:["Monday"]},
+          {id:"afternoonsnack", name:"Afternoon Snack Break Sponsor", note:"4 available", sold:false, days:["Monday","Tuesday","Wednesday","Thursday"], soldDays:[]}
         ]}
     }
   };
 
   var TIER_ORDER = ["diamond","platinum","gold","silver","bronze"];
-  var state = { program:"winter", tier:null, opportunity:null };
+  var state = { program:"winter", tier:null, opportunity:null, day:null };
 
   var tierOptionsEl = document.getElementById("tier-options");
   var oppBlockEl = document.getElementById("opp-block");
@@ -1400,6 +1526,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   function selectTier(tid){
     state.tier = tid;
     state.opportunity = null;
+    state.day = null;
     renderTiers();
     renderOpportunities();
     updateSummary();
@@ -1434,10 +1561,51 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       label.innerHTML = '<input type="radio" name="opportunity" value="'+o.id+'"'+(o.sold?" disabled":"")+(state.opportunity===o.id?" checked":"")+'>'+
         '<span><span class="oc-name">'+o.name+'</span><span class="oc-meta '+statusCls+'">'+noteHtml+'</span></span>';
       if(!o.sold){
-        label.addEventListener("click", function(){ state.opportunity = o.id; renderOpportunities(); updateSummary(); });
+        label.addEventListener("click", function(){ state.opportunity = o.id; state.day = null; renderOpportunities(); updateSummary(); });
       }
       oppOptionsEl.appendChild(label);
     });
+    renderDayPicker();
+  }
+
+
+  function selectedOpportunity(){
+    var t = TIERS[state.program][state.tier];
+    if(!t || !t.opportunities || !state.opportunity) return null;
+    return t.opportunities.filter(function(o){ return o.id === state.opportunity; })[0] || null;
+  }
+
+  function renderDayPicker(){
+    var opp = selectedOpportunity();
+    if(!opp || !opp.days) return;
+    var wrap = document.createElement("div");
+    wrap.className = "day-block";
+    var lbl = document.createElement("div");
+    lbl.className = "day-label";
+    lbl.textContent = opp.id === "reception" ? "Choose your evening" : "Choose your day";
+    wrap.appendChild(lbl);
+    var row = document.createElement("div");
+    row.className = "day-picker";
+    opp.days.forEach(function(d){
+      var taken = (opp.soldDays || []).indexOf(d) !== -1;
+      var chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "day-chip" + (taken ? " taken" : "") + (state.day === d ? " selected" : "");
+      chip.textContent = d;
+      if(taken){
+        chip.disabled = true;
+        chip.title = d + " is already sponsored";
+      } else {
+        chip.addEventListener("click", function(){ state.day = d; renderOpportunities(); updateSummary(); });
+      }
+      row.appendChild(chip);
+    });
+    wrap.appendChild(row);
+    var note = document.createElement("p");
+    note.className = "day-note";
+    note.textContent = "Each day is its own sponsorship \u2014 once a day is taken it comes off the board.";
+    wrap.appendChild(note);
+    oppOptionsEl.appendChild(wrap);
   }
 
   document.querySelectorAll('#program-options .opt-card').forEach(function(card){
@@ -1445,6 +1613,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       state.program = card.dataset.value;
       state.tier = null;
       state.opportunity = null;
+      state.day = null;
       document.querySelectorAll('#program-options .opt-card').forEach(function(c){ c.classList.remove("selected"); });
       card.classList.add("selected");
       card.querySelector('input').checked = true;
@@ -1464,7 +1633,9 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     if(!t.opportunities) return "Included — Diamond exclusive";
     if(!state.opportunity) return "Not yet selected";
     var found = t.opportunities.filter(function(o){ return o.id===state.opportunity; })[0];
-    return found ? found.name : "Not yet selected";
+    if(!found) return "Not yet selected";
+    if(found.days) return found.name + (state.day ? " \u2014 " + state.day : " \u2014 day not yet selected");
+    return found.name;
   }
 
   function updateSummary(){
@@ -1503,6 +1674,8 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     if(!state.tier) return false;
     var t = TIERS[state.program][state.tier];
     if(t.opportunities && !state.opportunity) return false;
+    var opp = selectedOpportunity();
+    if(opp && opp.days && !state.day) return false;
     var company = document.getElementById("f-company").value.trim();
     var contact = document.getElementById("f-contact").value.trim();
     var email = document.getElementById("f-email").value.trim();
