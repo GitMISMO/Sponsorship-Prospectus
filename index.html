@@ -326,6 +326,22 @@
   .pie-svg{width:100%; max-width:300px; height:auto; margin:0 auto; display:block;}
   .pie-svg path{stroke:var(--paper); stroke-width:2;}
   .pie-svg .pie-pct{font-family:'IBM Plex Mono',monospace; font-size:11px; fill:var(--pie-label); font-weight:500; pointer-events:none;}
+
+  /* who's in the room: pie sized by people, table spelling out both counts */
+  .pie-table{width:100%;}
+  .pt-head, .pt-row{display:grid; grid-template-columns:1fr 58px 50px 48px; gap:10px; align-items:center;}
+  .pt-head{font-family:'IBM Plex Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--ink-faint); border-bottom:1px solid var(--line); padding-bottom:7px;}
+  .pt-head span:not(:first-child), .pt-row span:not(:first-child){text-align:right;}
+  .pt-row{padding:8px 0; border-bottom:1px solid var(--line-soft); font-size:13px;}
+  .pt-row:last-child{border-bottom:none;}
+  .pt-row .pt-name{display:flex; align-items:center; gap:8px; color:var(--ink); text-align:left;}
+  .pt-name .pl-swatch{width:10px; height:10px; border-radius:2px; flex:none;}
+  .pt-row .pt-people{font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--ink);}
+  .pt-row .pt-share, .pt-row .pt-orgs{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);}
+  .pt-foot{display:grid; grid-template-columns:1fr 58px 50px 48px; gap:10px; padding-top:9px; border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint);}
+  .pt-foot span:not(:first-child){text-align:right;}
   .pie-legend{flex:1; min-width:240px; display:grid; grid-template-columns:1fr; gap:4px 20px;}
   .pie-legend-row{display:flex; align-items:center; gap:8px; padding:6px 0; font-size:13px; border-bottom:1px solid var(--line-soft);}
   .pie-legend-row .pl-swatch{width:10px; height:10px; border-radius:2px; flex:none;}
@@ -434,6 +450,29 @@
   .cta-block{margin-top:34px; border:1px solid var(--line); border-radius:6px; padding:26px 26px; display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between;}
 
   /* ---------------- selector form ---------------- */
+
+  /* step guidance + save bar on the reserve page */
+  .form-block{position:relative; transition:background .2s ease;}
+  .form-block.is-next{background:rgba(116,191,235,0.07); box-shadow:0 0 0 1px rgba(63,150,201,0.35);
+    border-radius:8px; padding:16px 18px; margin-left:-18px; margin-right:-18px;}
+  .step-flag{display:none; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.08em;
+    text-transform:uppercase; color:#fff; background:var(--sky-deep); border-radius:3px; padding:3px 7px; margin-left:10px;
+    vertical-align:2px;}
+  .form-block.is-next .step-flag{display:inline-block; animation:stepPulse 1.6s ease-in-out infinite;}
+  .form-block.is-done .form-label h3::after{content:'\2713'; color:var(--available); font-size:14px; margin-left:8px;}
+  @keyframes stepPulse{0%,100%{opacity:1;} 50%{opacity:0.45;}}
+  @media (prefers-reduced-motion: reduce){ .form-block.is-next .step-flag{animation:none;} }
+  .day-block.is-next{box-shadow:0 0 0 1px rgba(63,150,201,0.35); border-radius:8px; padding:14px; background:rgba(116,191,235,0.07);}
+  .save-bar{margin-top:30px; border-top:1px solid var(--line); padding-top:18px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;}
+  .save-btn{font-family:'Archivo',sans-serif; font-weight:700; font-size:13px; color:var(--navy); background:var(--paper);
+    border:1px solid var(--navy); border-radius:6px; padding:9px 16px; cursor:pointer;}
+  .save-btn:hover{background:rgba(116,191,235,0.12);}
+  .save-btn.ghost{color:var(--ink-soft); border-color:var(--line); font-weight:600;}
+  .save-status{font-size:12px; color:var(--ink-faint); flex:1 1 100%;}
+  .save-status.ok{color:var(--available);}
+  .resume-note{margin-top:18px; border:1px solid var(--sky); background:rgba(116,191,235,0.1); border-radius:6px;
+    padding:12px 16px; font-size:13px; display:none; gap:12px; align-items:center; flex-wrap:wrap;}
+  .resume-note.show{display:flex;}
   .form-block{margin-top:34px;}
   .form-block + .form-block{margin-top:38px;}
   .form-label{display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px;}
@@ -460,7 +499,7 @@
   .opt-card.disabled:hover{border-color:var(--line);}
 
   /* day-level slots: breakfast and the breaks run Mon-Thu, the reception Mon-Tue */
-  .opp-days{display:flex; gap:4px; margin-top:5px; flex-wrap:wrap;}
+  .opp-days{display:flex; gap:4px; margin-top:5px; flex-wrap:wrap; justify-content:flex-end;}
   .opp-days span{font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.04em; text-transform:uppercase;
     color:var(--ink-soft); border:1px solid var(--line); border-radius:3px; padding:1px 5px;}
   .opp-days span.taken{color:var(--sold); border-color:rgba(178,59,59,0.4); text-decoration:line-through;}
@@ -520,7 +559,9 @@
   /* ---------------- back cover ---------------- */
   .backcover{background:var(--navy); color:#eaf3f9; min-height:420px; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden;}
   .backcover-top{padding:48px 48px 0; position:relative; z-index:2;}
-  .backcover-top img, .backcover-top .logo{height:22px; filter:brightness(0) invert(1);}
+  .backcover-top img{height:22px; filter:brightness(0) invert(1);}
+  .backcover-top .logo{height:22px;}
+  .logo-white{--logo-body:#fff; --logo-s:var(--navy);}
   .backcover h2{color:#fff; font-size:clamp(24px,3.6vw,44px); padding:0 48px; margin-top:40px; position:relative; z-index:2; white-space:nowrap;}
   .backcover p{color:#bcd6e6; max-width:none; padding:0 48px; margin-top:16px; font-size:14.5px; position:relative; z-index:2;}
   @media (max-width:640px){ .backcover h2{white-space:normal; font-size:clamp(22px,6vw,30px);} }
@@ -532,7 +573,7 @@
 </head>
 <body>
 
-<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="mismo-logo" viewBox="0 0 708 108"><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="#0d314c"><path d="M5917 1065 c-169 -46 -279 -153 -335 -323 -21 -65 -25 -96 -25 -197
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="mismo-logo" viewBox="0 0 708 108"><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="var(--logo-body, #0d314c)"><path d="M5917 1065 c-169 -46 -279 -153 -335 -323 -21 -65 -25 -96 -25 -197
 0 -101 4 -132 25 -197 57 -172 168 -280 335 -323 84 -22 723 -22 808 0 222 58
 355 253 355 520 0 270 -132 459 -361 520 -74 20 -730 20 -802 0z m692 -320
 c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
@@ -551,7 +592,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 -24 215 0 215 0 2 306 3 306 120 -303 120 -304 197 -3 196 -2 118 296 119 297
 3 -296 2 -297 225 0 225 0 0 515 0 515 -338 0 -337 0 -104 -265 c-58 -146
 -106 -263 -108 -261 -2 2 -50 120 -107 262 l-104 259 -340 3 c-300 2 -342 0
--356 -14z"/></g><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="#74bfeb"><path d="M2485 1046 c-44 -20 -111 -94 -136 -151 -27 -60 -37 -198 -20 -263
+-356 -14z"/></g><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="var(--logo-s, #74bfeb)"><path d="M2485 1046 c-44 -20 -111 -94 -136 -151 -27 -60 -37 -198 -20 -263
 13 -48 68 -115 114 -138 64 -34 162 -43 562 -55 239 -6 405 -15 413 -21 19
 -16 15 -66 -7 -78 -26 -13 -563 -13 -612 0 -20 6 -44 19 -54 30 -17 19 -31 20
 -222 20 l-203 0 0 -49 c0 -81 34 -172 86 -230 78 -87 31 -81 672 -81 l568 0
@@ -692,9 +733,9 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     <p class="page-sub">MISMO's residential workgroups, communities of practice and development workgroups map to the life of a loan. Sponsorship puts your organization inside these rooms &mdash; not in the hallway outside them.</p>
 
     <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);">
-      <div class="stat"><div class="stat-num">26</div><div class="stat-label">Workgroups &amp; communities of practice meeting across the 2026 Summits</div></div>
-      <div class="stat"><div class="stat-num">2,073</div><div class="stat-label">Workgroup seats filled by those 485 people</div></div>
-      <div class="stat"><div class="stat-num">197</div><div class="stat-label">Attendances at the MISMO FRAME Workshop</div></div>
+      <div class="stat"><div class="stat-num">66</div><div class="stat-label">Workgroup meetings held across the three 2026 Summits, spanning 26 workgroups</div></div>
+      <div class="stat"><div class="stat-num">2,073</div><div class="stat-label">Seats filled in those meetings &mdash; one person at one meeting</div></div>
+      <div class="stat"><div class="stat-num">160</div><div class="stat-label">People attended the MISMO FRAME Workshop</div></div>
     </div>
 
     <div class="wg-map">
@@ -797,7 +838,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     </div>
 
     <div class="reach-sub">
-      <div class="reach-sub-head"><h3>Who's in the room</h3><span class="mono">BY UNIQUE ATTENDEE, 2026 SUMMITS</span></div>
+      <div class="reach-sub-head"><h3>Who's in the room</h3><span class="mono">THREE 2026 SUMMITS</span></div>
       <div class="pie-block">
         <svg viewBox="0 0 220 220" class="pie-svg" role="img" aria-label="Attendees by organization category: Service Provider 39%; Tech Provider 30%; Lender/Servicer 15%; GSE 13%; Government agency 4%">
           <path d="M 110,110 L 110.00,10.00 A 100,100 0 0 1 174.45,186.46 Z" fill="var(--cat-serv)"><title>Service Provider &mdash; 183 people from 67 organizations</title></path>
@@ -811,14 +852,18 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <text x="73.3" y="60.0" text-anchor="middle" dominant-baseline="middle" class="pie-pct">13%</text>
         </svg>
         <div class="pie-legend">
-          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-serv);"></span><span class="pl-name">Service Provider</span><span class="pl-count">183 &middot; 39%<span class="pl-sub"> &middot; 67 orgs</span></span></div>
-          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-tech);"></span><span class="pl-name">Tech Provider</span><span class="pl-count">140 &middot; 30%<span class="pl-sub"> &middot; 58 orgs</span></span></div>
-          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-lend);"></span><span class="pl-name">Lender/Servicer</span><span class="pl-count">70 &middot; 15%<span class="pl-sub"> &middot; 36 orgs</span></span></div>
-          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-gse);"></span><span class="pl-name">GSE <span class="pl-sub">(incl. FHLBs)</span></span><span class="pl-count">61 &middot; 13%<span class="pl-sub"> &middot; 8 orgs</span></span></div>
-          <div class="pie-legend-row"><span class="pl-swatch" style="background:var(--cat-gov);"></span><span class="pl-name">Government agency</span><span class="pl-count">17 &middot; 4%<span class="pl-sub"> &middot; 6 orgs</span></span></div>
+          <div class="pie-table">
+            <div class="pt-head"><span>Category</span><span>People</span><span>Share</span><span>Orgs</span></div>
+            <div class="pt-row"><span class="pt-name"><span class="pl-swatch" style="background:var(--cat-serv);"></span>Service Provider</span><span class="pt-people">183</span><span class="pt-share">39%</span><span class="pt-orgs">67</span></div>
+            <div class="pt-row"><span class="pt-name"><span class="pl-swatch" style="background:var(--cat-tech);"></span>Tech Provider</span><span class="pt-people">140</span><span class="pt-share">30%</span><span class="pt-orgs">58</span></div>
+            <div class="pt-row"><span class="pt-name"><span class="pl-swatch" style="background:var(--cat-lend);"></span>Lender/Servicer</span><span class="pt-people">70</span><span class="pt-share">15%</span><span class="pt-orgs">36</span></div>
+            <div class="pt-row"><span class="pt-name"><span class="pl-swatch" style="background:var(--cat-gse);"></span>GSE <span class="pl-sub">(incl. FHLBs)</span></span><span class="pt-people">61</span><span class="pt-share">13%</span><span class="pt-orgs">8</span></div>
+            <div class="pt-row"><span class="pt-name"><span class="pl-swatch" style="background:var(--cat-gov);"></span>Government agency</span><span class="pt-people">17</span><span class="pt-share">4%</span><span class="pt-orgs">6</span></div>
+            <div class="pt-foot"><span>Total</span><span>471</span><span>100%</span><span>175</span></div>
+          </div>
         </div>
       </div>
-      <p class="chart-note">Slices are unique people from badge scans at the three 2026 Summits; the organization count beside each is from the workgroup trackers. Shares are rounded.</p>
+      <p class="chart-note">The pie is sized by <strong>people</strong> &mdash; unique attendees from badge scans across the three 2026 Summits. The <strong>orgs</strong> column counts the organizations those people came from: 175 of the 244 engaged overall, the rest having taken part in workgroup meetings without a badge scan. Shares are rounded.</p>
     </div>
 
     <div class="reach-sub">
@@ -984,7 +1029,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
             <thead><tr><th>Opportunity</th><th>Status</th></tr></thead>
             <tbody>
               <tr><td>AI Demo / Case Study Sponsor</td><td>3 available</td></tr>
-              <tr><td>Reception Sponsor<span class="opp-days"><span class="">Mon</span><span class="taken">Tue</span></span></td><td><span class="part-available">1 available</span>, <span class="part-sold">1 sold</span></td></tr>
+              <tr><td>Reception Sponsor</td><td><span class="part-available">1 available</span>, <span class="part-sold">1 sold</span><span class="opp-days"><span class="">Mon</span><span class="taken">Tue</span></span></td></tr>
               <tr class="sold"><td>Badge Sponsor</td><td>Sold</td></tr>
               <tr class="sold"><td>Wi-Fi Sponsor</td><td>Sold</td></tr>
             </tbody>
@@ -1067,10 +1112,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <table class="opp-table">
             <thead><tr><th>Opportunity</th><th>Status</th></tr></thead>
             <tbody>
-              <tr><td>Breakfast Sponsor<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td>4 available</td></tr>
+              <tr><td>Breakfast Sponsor</td><td>4 available<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td></tr>
               <tr><td>Livestream Sponsor</td><td>1 available</td></tr>
-              <tr><td>Afternoon Snack Break Sponsor<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td>4 available</td></tr>
-              <tr><td>Morning Coffee Break Sponsor<span class="opp-days"><span class="taken">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td><span class="part-available">3 available</span>, <span class="part-sold">1 sold</span></td></tr>
+              <tr><td>Afternoon Snack Break Sponsor</td><td>4 available<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td></tr>
+              <tr><td>Morning Coffee Break Sponsor</td><td><span class="part-available">3 available</span>, <span class="part-sold">1 sold</span><span class="opp-days"><span class="taken">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td></tr>
             </tbody>
           </table><p class="exclusive-note">One opportunity is selected per sponsorship at this tier.</p>
         </div>
@@ -1140,7 +1185,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
             <thead><tr><th>Opportunity</th><th>Status</th></tr></thead>
             <tbody>
               <tr><td>AI Demo / Case Study Sponsor</td><td>3 available</td></tr>
-              <tr><td>Reception Sponsor<span class="opp-days"><span class="">Mon</span><span class="taken">Tue</span></span></td><td><span class="part-available">1 available</span>, <span class="part-sold">1 sold</span></td></tr>
+              <tr><td>Reception Sponsor</td><td><span class="part-available">1 available</span>, <span class="part-sold">1 sold</span><span class="opp-days"><span class="">Mon</span><span class="taken">Tue</span></span></td></tr>
               <tr class="sold"><td>Badge Sponsor</td><td>Sold</td></tr>
               <tr class="sold"><td>Wi-Fi Sponsor</td><td>Sold</td></tr>
             </tbody>
@@ -1223,10 +1268,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <table class="opp-table">
             <thead><tr><th>Opportunity</th><th>Status</th></tr></thead>
             <tbody>
-              <tr><td>Breakfast Sponsor<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td>4 available</td></tr>
+              <tr><td>Breakfast Sponsor</td><td>4 available<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td></tr>
               <tr><td>Livestream Sponsor</td><td>1 available</td></tr>
-              <tr><td>Morning Coffee Break Sponsor<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td>4 available</td></tr>
-              <tr><td>Afternoon Snack Break Sponsor<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td><td>4 available</td></tr>
+              <tr><td>Morning Coffee Break Sponsor</td><td>4 available<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td></tr>
+              <tr><td>Afternoon Snack Break Sponsor</td><td>4 available<span class="opp-days"><span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span></span></td></tr>
             </tbody>
           </table><p class="exclusive-note">One opportunity is selected per sponsorship at this tier.</p>
         </div>
@@ -1285,8 +1330,8 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     </div>
 
     <form id="sponsor-form">
-      <div class="form-block">
-        <div class="form-label"><h3>1. Choose a program</h3><span class="select-note">Select one</span></div>
+      <div class="form-block" id="block-program">
+        <div class="form-label"><h3>1. Choose a program<span class="step-flag">Next</span></h3><span class="select-note">Select one</span></div>
         <div class="option-grid" id="program-options">
           <label class="opt-card" data-value="winter">
             <input type="radio" name="program" value="winter" checked>
@@ -1299,18 +1344,18 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         </div>
       </div>
 
-      <div class="form-block">
-        <div class="form-label"><h3>2. Choose a tier</h3><span class="select-note">Select one</span></div>
+      <div class="form-block" id="block-tier">
+        <div class="form-label"><h3>2. Choose a tier<span class="step-flag">Next</span></h3><span class="select-note">Select one</span></div>
         <div class="option-grid" id="tier-options"></div>
       </div>
 
       <div class="form-block" id="opp-block">
-        <div class="form-label"><h3>3. Choose your opportunity</h3><span class="select-note" id="opp-select-note">Select one only</span></div>
+        <div class="form-label"><h3>3. Choose your opportunity<span class="step-flag">Next</span></h3><span class="select-note" id="opp-select-note">Select one only</span></div>
         <div class="option-grid opp-grid" id="opp-options"></div>
       </div>
 
-      <div class="form-block">
-        <div class="form-label"><h3>4. Your details</h3></div>
+      <div class="form-block" id="block-details">
+        <div class="form-label"><h3>4. Your details<span class="step-flag">Next</span></h3></div>
         <div class="field-grid">
           <div class="field"><label for="f-company">Company name</label><input type="text" id="f-company" required></div>
           <div class="field"><label for="f-contact">Contact name</label><input type="text" id="f-contact" required></div>
@@ -1318,6 +1363,18 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         </div>
       </div>
     </form>
+
+      <div class="resume-note" id="resume-note">
+        <span id="resume-text">Saved selection restored.</span>
+        <button type="button" class="save-btn ghost" id="btn-clear">Start over</button>
+      </div>
+      <div class="save-bar">
+        <button type="button" class="save-btn" id="btn-save">Save my progress</button>
+        <button type="button" class="save-btn ghost" id="btn-download">Download a copy</button>
+        <button type="button" class="save-btn ghost" id="btn-restore">Restore from file</button>
+        <input type="file" id="file-restore" accept="application/json" hidden>
+        <p class="save-status" id="save-status">Your selections stay in this browser until you submit &mdash; nothing is sent to MISMO when you save.</p>
+      </div>
   </div>
   <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">11</span></div>
 </div>
@@ -1413,7 +1470,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 <div class="page backcover">
   <div class="bc-ring" style="width:260px; height:260px; bottom:-90px; left:-90px;"></div>
   <div class="bc-ring" style="width:140px; height:140px; bottom:20px; left:120px;"></div>
-  <div class="backcover-top"><svg class="logo" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="144" height="22"><use href="#mismo-logo"/></svg></div>
+  <div class="backcover-top"><svg class="logo logo-white" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="144" height="22"><use href="#mismo-logo"/></svg></div>
   <h2>Build what's next, together.</h2>
   <p>Diamond availability is limited to one organization, and several Platinum and Silver opportunities are already spoken for. Reserve your tier before the sponsorships you want are gone.</p>
   <div class="backcover-bottom">
@@ -1645,6 +1702,8 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       emptyEl.style.display = "block";
       cardEl.style.display = "none";
       updateSubmitState();
+      updateGuidance();
+      autosave();
       return;
     }
     emptyEl.style.display = "none";
@@ -1668,6 +1727,135 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       ul.appendChild(li);
     });
     updateSubmitState();
+    updateGuidance();
+    autosave();
+  }
+
+
+  // ---- save / resume -------------------------------------------------------
+  var STORE_KEY = "mismo2027.reserve.v1";
+  var fields = ["f-company","f-contact","f-email","f-signer-name","f-signer-title","f-signer-date"];
+  function snapshot(){
+    var out = {program:state.program, tier:state.tier, opportunity:state.opportunity, day:state.day,
+               agreed: document.getElementById("f-agree").checked, savedAt: new Date().toISOString()};
+    fields.forEach(function(id){ var el=document.getElementById(id); if(el) out[id]=el.value; });
+    return out;
+  }
+  function isEmpty(s){
+    return !s.tier && !s.opportunity && !fields.some(function(id){ return (s[id]||"").trim(); });
+  }
+  function store(data){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(data)); return true; }catch(e){ return false; }
+  }
+  function autosave(){
+    var snap = snapshot();
+    if(isEmpty(snap)) return;
+    store(snap);
+  }
+  function applySnapshot(d){
+    if(!d) return;
+    if(d.program && TIERS[d.program]) state.program = d.program;
+    document.querySelectorAll('#program-options .opt-card').forEach(function(c){
+      var on = c.dataset.value === state.program;
+      c.classList.toggle("selected", on);
+      if(on) c.querySelector('input').checked = true;
+    });
+    state.tier = d.tier || null;
+    state.opportunity = d.opportunity || null;
+    state.day = d.day || null;
+    fields.forEach(function(id){ var el=document.getElementById(id); if(el && d[id]) el.value=d[id]; });
+    var agree=document.getElementById("f-agree"); if(agree) agree.checked = !!d.agreed;
+    renderTiers(); renderOpportunities(); updateSummary();
+  }
+  function statusMsg(text, ok){
+    var el=document.getElementById("save-status");
+    el.textContent=text; el.className="save-status"+(ok?" ok":"");
+  }
+  document.getElementById("btn-save").addEventListener("click", function(){
+    var snap=snapshot();
+    if(isEmpty(snap)){ statusMsg("Nothing to save yet \u2014 choose a tier first.", false); return; }
+    statusMsg(store(snap) ? "Saved in this browser \u2014 reopen this page on this device to pick up where you left off."
+                          : "This browser won't let the page save locally. Use \u201cDownload a copy\u201d instead.", true);
+  });
+  document.getElementById("btn-clear").addEventListener("click", function(){
+    try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+    state.tier=null; state.opportunity=null; state.day=null;
+    fields.forEach(function(id){ var el=document.getElementById(id); if(el) el.value=""; });
+    var agree=document.getElementById("f-agree"); if(agree) agree.checked=false;
+    document.getElementById("resume-note").classList.remove("show");
+    renderTiers(); renderOpportunities(); updateSummary();
+    statusMsg("Cleared. Nothing is stored on this device any more.", false);
+  });
+  document.getElementById("btn-download").addEventListener("click", function(){
+    var snap=snapshot();
+    if(isEmpty(snap)){ statusMsg("Nothing to download yet \u2014 choose a tier first.", false); return; }
+    var name=(snap["f-company"]||"mismo-sponsorship").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+    var text=JSON.stringify(snap,null,2), file=name+"-mismo-2027.json";
+    var done=function(){ statusMsg("Downloaded. Keep the file \u2014 \u201cRestore from file\u201d brings it back on any device.", true); };
+    var viaLink=function(){
+      var blob=new Blob([text],{type:"application/json"});
+      var a=document.createElement("a");
+      a.href=URL.createObjectURL(blob); a.download=file;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+      done();
+    };
+    if(typeof claude !== "undefined" && claude && typeof claude.use === "function"){
+      Promise.resolve(claude.use("downloads")).then(function(dl){
+        if(dl && dl.save){
+          dl.save({filename:file, data:text}).then(done).catch(function(err){
+            statusMsg(err && err.code === "declined" ? "Download cancelled." : "Couldn't save the file here \u2014 use \u201cSave my progress\u201d instead.", false);
+          });
+        } else { viaLink(); }
+      }).catch(viaLink);
+    } else { viaLink(); }
+  });
+  document.getElementById("btn-restore").addEventListener("click", function(){ document.getElementById("file-restore").click(); });
+  document.getElementById("file-restore").addEventListener("change", function(ev){
+    var f=ev.target.files && ev.target.files[0];
+    if(!f) return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var d=JSON.parse(r.result);
+        applySnapshot(d); store(d);
+        statusMsg("Restored from " + f.name + ".", true);
+      }catch(e){ statusMsg("That file could not be read \u2014 it should be the JSON this page downloaded.", false); }
+      ev.target.value="";
+    };
+    r.readAsText(f);
+  });
+
+  // ---- which step is next --------------------------------------------------
+  function updateGuidance(){
+    var blocks = {program:document.getElementById("block-program"), tier:document.getElementById("block-tier"),
+                  opp:document.getElementById("opp-block"), details:document.getElementById("block-details")};
+    var opp = selectedOpportunity();
+    var t = state.tier ? TIERS[state.program][state.tier] : null;
+    var detailsDone = ["f-company","f-contact","f-email"].every(function(id){
+      var el=document.getElementById(id); return el && el.value.trim();
+    });
+    var next = "tier";
+    if(state.tier){
+      if(t && t.opportunities && !state.opportunity) next="opp";
+      else if(opp && opp.days && !state.day) next="opp";
+      else if(!detailsDone) next="details";
+      else next="done";
+    }
+    Object.keys(blocks).forEach(function(k){
+      var el=blocks[k]; if(!el) return;
+      el.classList.remove("is-next");
+      el.classList.toggle("is-done",
+        (k==="program") || (k==="tier" && !!state.tier) ||
+        (k==="opp" && !!state.opportunity && (!opp || !opp.days || !!state.day)) ||
+        (k==="details" && detailsDone));
+    });
+    if(next!=="done" && blocks[next]) blocks[next].classList.add("is-next");
+    var dayBlock=document.querySelector(".day-block");
+    if(dayBlock) dayBlock.classList.toggle("is-next", !!(opp && opp.days && !state.day));
+    if(next==="done"){
+      statusMsg("All set \u2014 review your summary on the next page, then sign and submit on the Sponsor Contract page.", true);
+    }
   }
 
   function selectionComplete(){
@@ -1688,7 +1876,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     btn.disabled = !(selectionComplete() && agree);
   }
 
-  document.getElementById("f-agree").addEventListener("change", updateSubmitState);
+  document.getElementById("f-agree").addEventListener("change", function(){ updateSubmitState(); autosave(); });
+  ["f-signer-name","f-signer-title","f-signer-date"].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.addEventListener("input", autosave);
+  });
 
   document.getElementById("submit-btn").addEventListener("click", function(){
     if(this.disabled) return;
@@ -1722,6 +1913,21 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   renderTiers();
   renderOpportunities();
   updateSummary();
+
+  (function restoreOnLoad(){
+    var raw=null;
+    try{ raw=localStorage.getItem(STORE_KEY); }catch(e){ raw=null; }
+    if(!raw) return;
+    try{
+      var d=JSON.parse(raw);
+      if(isEmpty(d)) return;
+      applySnapshot(d);
+      var when=d.savedAt ? new Date(d.savedAt) : null;
+      document.getElementById("resume-text").textContent =
+        "Picked up where you left off" + (when ? " \u2014 saved " + when.toLocaleDateString() + " at " + when.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}) : "") + ".";
+      document.getElementById("resume-note").classList.add("show");
+    }catch(e){}
+  })();
 })();
 </script>
 </body>
