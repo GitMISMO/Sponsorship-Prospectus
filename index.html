@@ -673,7 +673,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 </div>
 <script>
 (function(){
-  var root = document.documentElement, KEY = "mismo.prospectus.theme";
+  var root = document.documentElement, KEY = "resources:sponsorship:theme";
   try{ var saved = localStorage.getItem(KEY); if(saved === "light" || saved === "dark") root.setAttribute("data-theme", saved); }catch(e){}
   function current(){
     var set = root.getAttribute("data-theme");
@@ -1861,7 +1861,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
 
   // ---- save / resume -------------------------------------------------------
-  var STORE_KEY = "mismo2027.reserve.v1";
+  var STORE_KEY = "resources:sponsorship:reserve";
   var fields = ["f-company","f-contact","f-email","f-signer-name","f-signer-title","f-signer-date"];
   function snapshot(){
     var out = {program:state.program, tier:state.tier, opportunity:state.opportunity, day:state.day, multiDay:!!state.multiDay,
