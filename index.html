@@ -3,12 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MISMO 2027 Sponsorship Prospectus</title>
+<title>MISMO 2027 Summit Sponsorship Prospectus</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
+    /* shared MISMO left-nav metrics - identical on every MISMO page */
+    --hq-h:64px;
+    --rail-w:240px;
+    --rail-mini:62px;
+    /* brand tokens the left-nav reads */
+    --navy-mid:#14486e;
+    --surface:#ffffff;
+    --sunk:#f6fafd;
+    --border-strong:#adc4d6;
+    --accent-soft:#e4f2fb;
+    --ink-3:#7794aa;
+    --display:'IBM Plex Sans','Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --ui:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
     --navy:#0d314c;
     --navy-deep:#082337;
     --sky:#74bfeb;
@@ -30,6 +44,11 @@
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
+      --surface:#0d2837;
+      --sunk:#123143;
+      --border-strong:#2f6688;
+      --accent-soft:#173c52;
+      --ink-3:#7a9db4;
       --logo-body:#e7eef3;
       --logo-s:#14486e;
       --backdrop:#05090c;
@@ -42,6 +61,11 @@
     }
   }
   :root[data-theme="dark"]{
+      --surface:#0d2837;
+      --sunk:#123143;
+      --border-strong:#2f6688;
+      --accent-soft:#173c52;
+      --ink-3:#7a9db4;
       --logo-body:#e7eef3;
       --logo-s:#14486e;
       --backdrop:#05090c;
@@ -53,6 +77,9 @@
       --line-soft:#182a34;
   }
 
+  :root{color-scheme:light;}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){color-scheme:dark;} }
+  :root[data-theme="dark"]{color-scheme:dark;}
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -63,7 +90,7 @@
     font-size:16px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
-    padding:36px 0 60px;
+    padding:0 0 60px;
   }
   img{max-width:100%; display:block;}
   .logo{display:block; width:auto; aspect-ratio:708/108; flex:none;}
@@ -72,64 +99,193 @@
   h1,h2,h3,h4{font-family:'Archivo', sans-serif; margin:0; color:var(--ink); letter-spacing:-0.01em;}
   svg{display:block;}
 
-  /* ---------------- sticky mini nav ---------------- */
-  .minav{
-    position:sticky; top:14px; z-index:50;
-    max-width:1000px; margin:0 auto 30px; padding:0 18px;
-    display:flex; justify-content:center; align-items:center; gap:10px;
+  /* ---------------- masthead + left nav (mismo-left-nav) ---------------- */
+  .hqtop{position:sticky;top:env(safe-area-inset-top,0px);z-index:97;height:var(--hq-h);
+    background:var(--navy);color:#fff;display:flex;align-items:center;gap:0;
+    padding:0 22px;box-shadow:0 1px 0 rgba(80,164,219,.28);
+    margin-left:calc(0px - var(--rail-w));width:calc(100% + var(--rail-w));
+    transition:margin-left .2s cubic-bezier(.4,0,.2,1), width .2s cubic-bezier(.4,0,.2,1)}
+  body.railmini .hqtop{margin-left:calc(0px - var(--rail-mini));width:calc(100% + var(--rail-mini))}
+  @media (prefers-reduced-motion:reduce){ .hqtop{transition:none} }
+  .hqtop .mastrule{display:block;width:2px;height:34px;flex:0 0 auto;
+    margin-inline:20px;border-radius:1px;background:var(--sky)}
+  .hqtop .hqname{font-family:var(--display);font-size:15.5px;font-weight:700;
+    letter-spacing:-.005em;color:var(--sky);white-space:nowrap;
+    min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .hqtop-r{margin-left:auto;display:flex;align-items:center;gap:13px}
+  .hqtop .eyebrow-m{font-family:var(--display);font-size:10.5px;letter-spacing:.11em;
+    text-transform:uppercase;color:rgba(255,255,255,.62);font-weight:600;white-space:nowrap}
+  @media(max-width:700px){.hqtop .eyebrow-m{display:none}}
+  .logoplate{background:#fff;border-radius:7px;padding:8px 14px;display:flex;
+    align-items:center;line-height:0;flex:0 0 auto;position:relative}
+  .logoplate .wordmark{height:24px;width:157px;display:block}
+  @media(max-width:560px){
+    .hqtop{padding:0 14px}
+    .hqtop .mastrule{margin-inline:12px;height:30px}
+    .logoplate{padding:7px 10px}
+    .logoplate .wordmark{height:20px;width:131px}
+    .hqtop .hqname{font-size:13.5px;letter-spacing:-.01em}
   }
-  .minav-inner{
-    background:var(--navy); color:#eaf3f9; border-radius:999px;
-    padding:8px 8px; display:flex; gap:2px; box-shadow:0 12px 30px rgba(8,35,55,0.35);
-    overflow-x:auto; max-width:100%;
-  }
-  .minav a{
-    text-decoration:none; font-size:12px; font-family:'IBM Plex Mono',monospace;
-    color:#bcd6e6; padding:8px 10px; border-radius:999px; white-space:nowrap;
-  }
-  .minav a:hover{background:rgba(255,255,255,0.1); color:#fff;}
-  @media (max-width:700px){
-    .minav{ position:fixed; top:auto; bottom:14px; right:14px; left:auto;
-            width:auto; max-width:none; margin:0; padding:0; justify-content:flex-end; }
-    .minav-inner{ display:none; }
+  /* the page name is long, so a phone-width masthead gives the logo plate and
+     the rule less room rather than truncating it */
+  @media(max-width:430px){
+    .hqtop{padding:0 11px}
+    .hqtop .mastrule{margin-inline:9px;height:26px}
+    .logoplate{padding:6px 8px}
+    .logoplate .wordmark{height:17px;width:111px}
+    .hqtop .hqname{font-size:12.5px;letter-spacing:-.015em}
   }
 
-  /* ---------------- light / dark toggle ---------------- */
-  .theme-toggle{
-    flex:none; display:flex; align-items:center; justify-content:center;
-    width:38px; height:38px; padding:0;
-    background:var(--navy); color:#eaf3f9; border:1px solid rgba(116,191,235,0.35);
-    border-radius:50%; cursor:pointer;
-    box-shadow:0 12px 30px rgba(8,35,55,0.35);
+  /* the sections, down the left, beneath it */
+  .hq.rail{position:fixed;left:0;top:calc(var(--hq-h) + env(safe-area-inset-top,0px));bottom:0;width:var(--rail-w);z-index:95;
+    background:var(--navy);color:#fff;display:flex;flex-direction:column;
+    gap:0;padding:0;overflow:hidden auto;overscroll-behavior:contain;
+    box-shadow:1px 0 0 rgba(80,164,219,.22), 4px 0 18px rgba(6,32,47,.14);
+    transition:width .2s cubic-bezier(.4,0,.2,1)}
+  body{padding-left:var(--rail-w);transition:padding-left .2s cubic-bezier(.4,0,.2,1)}
+  @media (prefers-reduced-motion:reduce){ .hq.rail,body{transition:none} }
+
+  /* Narrowed: the icons and nothing else */
+  body.railmini{padding-left:var(--rail-mini)}
+  body.railmini .hq.rail{width:var(--rail-mini)}
+  body.railmini .rail-top{justify-content:center;padding:10px 0 9px}
+  body.railmini .rail-lbl{display:none}
+  body.railmini .railhide{margin:0}
+  body.railmini .railhide svg{transform:scaleX(-1)}
+  body.railmini .railfind{padding:9px 0 2px;display:flex;justify-content:center}
+  body.railmini .railfind .fi,
+  body.railmini .railfind input,
+  body.railmini .railq-x,
+  body.railmini .railhits{display:none}
+  body.railmini .railfind-b{display:flex}
+  body.railmini .hq nav{padding:6px 0 4px;align-items:center;gap:4px}
+  body.railmini .hq nav button{width:42px;padding:10px 0;justify-content:center;
+    border-radius:9px;box-shadow:none}
+  body.railmini .hq nav button span{display:none}
+  body.railmini .hq nav button svg{width:19px;height:19px}
+  body.railmini .hq nav button[aria-current]{background:var(--sky);color:var(--navy-deep,#06202f)}
+  body.railmini .hq nav button[aria-current] svg{stroke:var(--navy-deep,#06202f);opacity:1}
+  body.railmini .railsum{display:none}
+  body.railmini .hq .mast-right{gap:3px;padding:8px 0 11px;align-items:center}
+  body.railmini .hq .mast-right .theme-btn{width:42px;padding:9px 0;font-size:0;
+    justify-content:center;border-radius:9px}
+  body.railmini .hq .mast-right .theme-btn .ti{width:19px;height:19px}
+  body.railmini .hq .mast-right .theme-btn span{display:none}
+  body.railmini .hq .mast-right #theme-btn{margin-top:4px;padding-top:10px;border-radius:9px}
+
+  /* the magnifier that stands in for the search box when it is narrow */
+  .railfind-b{display:none;width:34px;height:30px;border:1px solid rgba(255,255,255,.18);
+    border-radius:7px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);
+    align-items:center;justify-content:center;padding:0;cursor:pointer}
+  .railfind-b svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+  .railfind-b:hover{background:rgba(255,255,255,.18);color:#fff}
+
+  .rail-top{display:flex;align-items:center;gap:8px;padding:11px 10px 9px;
+    border-bottom:1px solid rgba(80,164,219,.2);flex:0 0 auto}
+  .rail-lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+    font-weight:700;color:rgba(255,255,255,.55);padding-left:3px}
+  .railhide{margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,.18);
+    border-radius:5px;color:rgba(255,255,255,.75);width:24px;height:24px;flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
+  .railhide svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;
+    stroke-linecap:round;stroke-linejoin:round}
+  .railhide:hover{background:rgba(255,255,255,.14);color:#fff}
+
+  /* search */
+  .railfind{position:relative;padding:11px 12px 3px;flex:0 0 auto}
+  .railfind .fi{position:absolute;left:21px;top:20px;width:14px;height:14px;
+    fill:none;stroke:rgba(255,255,255,.5);stroke-width:2;stroke-linecap:round;pointer-events:none}
+  .railfind input{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+    border-radius:6px;color:#fff;font:inherit;font-family:var(--ui);font-size:12.5px;padding:6px 26px 6px 30px}
+  .railfind input::placeholder{color:rgba(255,255,255,.5)}
+  .railfind input:focus{outline:2px solid var(--sky);outline-offset:-1px;background:rgba(255,255,255,.16)}
+  .railfind input::-webkit-search-cancel-button{display:none}
+  .railq-x{position:absolute;right:17px;top:16px;width:20px;height:20px;border:0;border-radius:4px;
+    background:transparent;color:rgba(255,255,255,.6);font-size:15px;line-height:1;padding:0;cursor:pointer}
+  .railq-x:hover{background:rgba(255,255,255,.16);color:#fff}
+  .railhits{margin-top:7px;background:var(--surface);border:1px solid var(--border-strong);
+    border-radius:6px;box-shadow:0 10px 26px rgba(6,32,47,.3);overflow:hidden auto;
+    max-height:min(52vh,420px)}
+  .railhits .rh-g{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;
+    font-weight:700;color:var(--ink-3);background:var(--sunk);padding:4px 10px;
+    border-bottom:1px solid var(--line);position:sticky;top:0}
+  .railhits .rh{display:block;width:100%;text-align:left;background:none;border:0;
+    border-bottom:1px solid var(--line);padding:6px 10px;color:var(--ink);font-family:var(--ui);cursor:pointer}
+  .railhits .rh:last-child{border-bottom:0}
+  .railhits .rh:hover,.railhits .rh.on{background:var(--accent-soft)}
+  .railhits .rh b{display:block;font-size:12.5px;font-weight:600;line-height:1.3;overflow-wrap:anywhere}
+  .railhits .rh i{display:block;font-style:normal;font-family:var(--mono);font-size:9.5px;
+    letter-spacing:.03em;color:var(--ink-3);margin-top:1px;overflow-wrap:anywhere}
+  .railhits .rh-none{padding:10px;font-size:12px;color:var(--ink-3)}
+
+  .hq nav{display:flex;flex-direction:column;gap:1px;padding:8px 8px 4px;flex:0 0 auto}
+  .hq nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+    background:none;border:0;border-radius:6px;color:rgba(255,255,255,.76);
+    padding:8px 10px;font:inherit;font-family:var(--display);font-size:13px;font-weight:500;
+    cursor:pointer;white-space:nowrap}
+  .hq nav button svg{width:17px;height:17px;flex:0 0 auto;fill:none;stroke:currentColor;
+    stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+  .hq nav button:hover{color:#fff;background:rgba(255,255,255,.09)}
+  .hq nav button[aria-current]{color:#fff;font-weight:600;background:var(--navy-mid);
+    box-shadow:inset 3px 0 0 var(--sky)}
+  .hq nav button[aria-current] svg{opacity:1;stroke:var(--sky)}
+  .hq nav button:focus-visible{outline:2px solid var(--sky);outline-offset:-2px}
+
+  /* the foot: theme toggle */
+  .hq .mast-right{margin-top:auto;display:flex;flex-direction:column;align-items:stretch;gap:1px;
+    padding:8px 8px 10px;border-top:1px solid rgba(80,164,219,.2);flex:0 0 auto}
+  .theme-btn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+    background:none;border:0;border-radius:6px;color:rgba(255,255,255,.76);
+    padding:8px 10px;font:inherit;font-family:var(--display);font-size:13px;font-weight:500;
+    cursor:pointer;white-space:nowrap}
+  .theme-btn .ti{width:17px;height:17px;flex:0 0 auto;fill:none;stroke:currentColor;
+    stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+  .theme-btn .ti-sun{display:none}
+  :root[data-theme="dark"] .theme-btn .ti-moon{display:none}
+  :root[data-theme="dark"] .theme-btn .ti-sun{display:block}
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]) .theme-btn .ti-moon{display:none}
+    :root:not([data-theme="light"]) .theme-btn .ti-sun{display:block} }
+  .theme-btn:hover:not(:disabled){color:#fff;background:rgba(255,255,255,.09)}
+  .theme-btn:focus-visible{outline:2px solid var(--sky);outline-offset:-2px}
+
+  /* on a narrow screen the rail covers the page rather than squeezing it */
+  .railscrim{position:fixed;inset:0;z-index:94;background:rgba(6,32,47,.42);border:0;padding:0;display:none}
+  @media(max-width:900px){
+    body:not(.railmini){padding-left:var(--rail-mini)}
+    body:not(.railmini) .hqtop{margin-left:calc(0px - var(--rail-mini));width:calc(100% + var(--rail-mini))}
+    body:not(.railmini) .hq.rail{box-shadow:4px 0 26px rgba(6,32,47,.4)}
+    body:not(.railmini) .railscrim{display:block}
   }
-  .theme-toggle:hover{background:var(--navy-deep); border-color:rgba(116,191,235,0.6);}
-  .theme-toggle svg{width:16px; height:16px; stroke:var(--sky); fill:none; stroke-width:2;
-    stroke-linecap:round; stroke-linejoin:round;}
-  .theme-toggle .tt-moon{display:none;}
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]) .theme-toggle .tt-sun{display:none;}
-    :root:not([data-theme="light"]) .theme-toggle .tt-moon{display:block;}
+
+  /* a search hit flashes the row it landed on */
+  @keyframes railFlash{0%,100%{background:transparent}18%,62%{background:var(--accent-soft)}}
+  .rail-flash{animation:railFlash 1.9s ease-in-out 1}
+  @media (prefers-reduced-motion:reduce){ .rail-flash{animation:none;background:var(--accent-soft)} }
+
+  @media print{
+    body{padding-left:0 !important}
+    .hqtop, .hq.rail, .railscrim{display:none !important}
   }
-  :root[data-theme="dark"] .theme-toggle .tt-sun{display:none;}
-  :root[data-theme="dark"] .theme-toggle .tt-moon{display:block;}
-  @media print{ .theme-toggle, .minav{display:none !important;} }
 
   /* ---------------- page shell ---------------- */
   .page{
     background:var(--paper);
-    width:min(900px, 94vw);
+    width:min(900px, 94%);
     margin:0 auto 34px;
     box-shadow:0 24px 60px rgba(8,35,55,0.16), 0 2px 8px rgba(8,35,55,0.08);
     position:relative;
   }
+  .page{scroll-margin-top:calc(var(--hq-h) + 18px);}
+  .page.cover{margin-top:30px;}
   .page-pad{padding:56px 56px 46px;}
-  @media (max-width:640px){ .page-pad{padding:38px 24px 34px;} }
+  @media (max-width:702px){ .page-pad{padding:38px 24px 34px;} }
 
   .running-head{
     display:flex; align-items:center; justify-content:space-between;
     padding:22px 56px 0; gap:16px;
   }
-  @media (max-width:640px){ .running-head{padding:18px 24px 0;} }
+  @media (max-width:702px){ .running-head{padding:18px 24px 0;} }
   .running-head img, .running-head .logo{height:16px; width:auto;}
   .running-head .rh-label{
     font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em;
@@ -139,7 +295,7 @@
     display:flex; align-items:center; justify-content:space-between; gap:16px;
     padding:20px 56px 26px; border-top:1px solid var(--line-soft); margin-top:10px;
   }
-  @media (max-width:640px){ .running-foot{padding:16px 24px 22px;} }
+  @media (max-width:702px){ .running-foot{padding:16px 24px 22px;} }
   .running-foot .rf-title{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint); letter-spacing:0.04em;}
   .running-foot .rf-num{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint);}
 
@@ -150,7 +306,7 @@
   }
   .kicker .num{background:var(--navy); color:#fff; border-radius:4px; padding:2px 8px; letter-spacing:0.02em;}
   .page-title{font-size:clamp(24px,3.2vw,36px); font-weight:800; margin-bottom:6px; white-space:nowrap;}
-  @media (max-width:560px){ .page-title{white-space:normal; font-size:clamp(22px,6vw,30px);} }
+  @media (max-width:622px){ .page-title{white-space:normal; font-size:clamp(22px,6vw,30px);} }
   .page-sub{color:var(--ink-soft); font-size:15px; max-width:none; margin-top:14px;}
 
   /* ---------------- cover ---------------- */
@@ -170,9 +326,9 @@
     padding:38px 48px 34px; flex:1;
     clip-path:polygon(0 26px, 100% 0, 100% 100%, 0% 100%);
   }
-  @media (max-width:640px){ .cover-band{clip-path:none;} }
+  @media (max-width:702px){ .cover-band{clip-path:none;} }
   .cover-programs{display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:640px;}
-  @media (max-width:640px){ .cover-programs{grid-template-columns:1fr; gap:22px;} }
+  @media (max-width:702px){ .cover-programs{grid-template-columns:1fr; gap:22px;} }
   .cover-program .cp-label{
     font-family:'Archivo',sans-serif; font-weight:700; font-size:14.5px; color:var(--sky);
     margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.22);
@@ -201,7 +357,7 @@
   }
   .toc-row .toc-name{font-family:'Archivo', sans-serif; font-weight:600; font-size:16.5px; flex:0 0 auto; white-space:nowrap;}
   .toc-row .toc-dots{flex:1 1 auto; min-width:16px; border-bottom:1px dotted var(--line); height:0; margin:0 6px; display:none;}
-  @media (min-width:560px){ .toc-row .toc-dots{display:block;} }
+  @media (min-width:622px){ .toc-row .toc-dots{display:block;} }
   .toc-row .toc-page{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-faint); flex:none;}
   .toc-row.featured{
     background:var(--navy); color:#fff; border-radius:6px; padding:15px 16px;
@@ -216,7 +372,7 @@
 
   /* ---------------- pillar / goals grid ---------------- */
   .pillars{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:30px;}
-  @media (max-width:560px){ .pillars{grid-template-columns:1fr;} }
+  @media (max-width:622px){ .pillars{grid-template-columns:1fr;} }
   .pillar{border:1px solid var(--line); padding:20px 20px 18px; border-radius:6px;}
   .pillar svg{width:22px; height:22px; stroke:var(--sky-deep); margin-bottom:14px;}
   .pillar h4{font-size:15px; margin-bottom:6px;}
@@ -226,7 +382,7 @@
     margin-top:30px; display:grid; grid-template-columns:repeat(3,1fr); gap:0;
     border:1px solid var(--line); border-radius:6px; overflow:hidden;
   }
-  @media (max-width:560px){ .info-strip{grid-template-columns:1fr;} }
+  @media (max-width:622px){ .info-strip{grid-template-columns:1fr;} }
   .info-strip div{padding:18px 20px; border-right:1px solid var(--line);}
   .info-strip div:last-child{border-right:none;}
   .info-strip .is-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-faint); margin-bottom:6px;}
@@ -241,7 +397,7 @@
   .wg-phases{display:grid; grid-template-columns:2fr 2fr 1fr; gap:6px; margin-bottom:7px;}
   .wg-phases span{font-family:'IBM Plex Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.09em;
     color:var(--sky-deep); text-align:center; padding-bottom:5px; border-bottom:1px solid var(--line);}
-  @media (max-width:760px){ .wg-phases{display:none;} }
+  @media (max-width:822px){ .wg-phases{display:none;} }
   .wg-flow{display:grid; grid-template-columns:repeat(5,1fr); gap:3px; margin-bottom:10px;}
   .wg-step{color:#fff; font-family:'Archivo',sans-serif; font-weight:700; font-size:11.5px; line-height:1.2;
     padding:10px 10px 10px 20px; clip-path:polygon(0 0, calc(100% - 11px) 0, 100% 50%, calc(100% - 11px) 100%, 0 100%, 11px 50%);}
@@ -251,9 +407,9 @@
   .wg-step:nth-child(3){background:var(--s3);} .wg-step:nth-child(4){background:var(--s4);}
   .wg-step:nth-child(5){background:var(--s5);}
   .wg-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; align-items:start;}
-  @media (max-width:760px){ .wg-flow{grid-template-columns:1fr 1fr;} .wg-grid{grid-template-columns:1fr 1fr;}
+  @media (max-width:822px){ .wg-flow{grid-template-columns:1fr 1fr;} .wg-grid{grid-template-columns:1fr 1fr;}
     .wg-step{clip-path:none !important; padding:9px 12px !important; border-radius:4px;} }
-  @media (max-width:460px){ .wg-flow, .wg-grid{grid-template-columns:1fr;} }
+  @media (max-width:522px){ .wg-flow, .wg-grid{grid-template-columns:1fr;} }
   .wg-col{min-width:0; padding-top:2px;}
   .wg-cop{font-family:'Archivo',sans-serif; font-weight:700; font-size:12px; line-height:1.3; color:var(--ink);
     padding-left:11px; position:relative; margin-top:12px;}
@@ -270,7 +426,7 @@
     padding:14px 30px; clip-path:polygon(0 50%, 16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%);}
   .wg-rail.data{background:rgba(116,191,235,0.16); border:0;}
   .wg-rail.tech{background:var(--navy);}
-  @media (max-width:640px){ .wg-rail{grid-template-columns:1fr; gap:10px; clip-path:none; border-radius:8px; padding:14px 18px;} }
+  @media (max-width:702px){ .wg-rail{grid-template-columns:1fr; gap:10px; clip-path:none; border-radius:8px; padding:14px 18px;} }
   .wg-rail .rail-title{font-family:'Archivo',sans-serif; font-weight:800; font-size:12.5px; line-height:1.2; letter-spacing:-0.005em; white-space:nowrap;}
   .wg-rail.data .rail-title{color:var(--navy);}
   @media (prefers-color-scheme: dark){
@@ -302,7 +458,7 @@
 
   /* ---------------- stats ---------------- */
   .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:28px;}
-  @media (max-width:640px){ .stat-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:702px){ .stat-grid{grid-template-columns:1fr 1fr;} }
   .stat{border:1px solid var(--line); border-radius:6px; padding:20px 18px;}
   .stat .stat-num{font-family:'Archivo', sans-serif; font-weight:800; font-size:clamp(26px,3.4vw,34px); color:var(--sky-deep); line-height:1;}
   .stat .stat-label{margin-top:8px; font-size:12.5px; color:var(--ink-soft); max-width:20ch;}
@@ -330,7 +486,7 @@
   :root[data-theme="dark"]{ --sen-1:#e3f2fd; --sen-2:#74bfeb; --sen-3:#2f7fae; --fn-bar:#74bfeb; --track:#1b2e3a; }
 
   .sen-block{display:grid; grid-template-columns:190px 1fr; gap:30px; align-items:start; border-top:1px solid var(--line); padding-top:22px;}
-  @media (max-width:640px){ .sen-block{grid-template-columns:1fr; gap:20px;} }
+  @media (max-width:702px){ .sen-block{grid-template-columns:1fr; gap:20px;} }
   .sen-hero{border-left:3px solid var(--sky); padding-left:16px;}
   .sen-hero .sh-num{font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(34px,4.4vw,42px); color:var(--sky-deep); line-height:1;}
   .sen-hero .sh-label{margin-top:8px; font-size:13px; color:var(--ink-soft); line-height:1.4;}
@@ -343,19 +499,19 @@
   .sen-seg.s3{background:var(--sen-3);}
   .sen-seg.s-rest{background:transparent; border:1px solid var(--line); box-sizing:border-box;}
   .sen-legend{display:grid; grid-template-columns:1fr 1fr; gap:0 24px;}
-  @media (max-width:560px){ .sen-legend{grid-template-columns:1fr;} }
+  @media (max-width:622px){ .sen-legend{grid-template-columns:1fr;} }
 
   .fn-rows{border-top:1px solid var(--line); padding-top:6px;}
   .fn-row{display:grid; grid-template-columns:minmax(140px,240px) 1fr 42px; gap:16px; align-items:center; padding:9px 0; border-bottom:1px solid var(--line-soft);}
   .fn-row:last-child{border-bottom:none;}
-  @media (max-width:560px){ .fn-row{grid-template-columns:1fr 42px; gap:6px 12px;} .fn-row .fn-track{grid-column:1 / -1;} }
+  @media (max-width:622px){ .fn-row{grid-template-columns:1fr 42px; gap:6px 12px;} .fn-row .fn-track{grid-column:1 / -1;} }
   .fn-name{font-size:13px; color:var(--ink); line-height:1.35;}
   .fn-track{height:10px; background:var(--track); border-radius:5px;}
   .fn-fill{display:block; height:100%; background:var(--fn-bar); border-radius:2px 4px 4px 2px;}
   .fn-val{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft); text-align:right;}
   .chart-note{margin-top:14px; font-size:11.5px; color:var(--ink-faint); line-height:1.5;}
   .pie-block{display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:24px; border-top:1px solid var(--line); padding-top:20px;}
-  @media (max-width:560px){ .pie-block{grid-template-columns:1fr;} }
+  @media (max-width:760px){ .pie-block{grid-template-columns:1fr;} }
   .pie-svg{width:100%; max-width:300px; height:auto; margin:0 auto; display:block;}
   .pie-svg path{stroke:var(--paper); stroke-width:2;}
   .pie-svg .pie-pct{font-family:'IBM Plex Mono',monospace; font-size:11px; fill:var(--pie-label); font-weight:500; pointer-events:none;}
@@ -398,7 +554,7 @@
 
   /* ---------------- timeline ---------------- */
   .timeline{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:30px;}
-  @media (max-width:640px){ .timeline{grid-template-columns:1fr;} }
+  @media (max-width:702px){ .timeline{grid-template-columns:1fr;} }
   .tl-item{border:1px solid var(--line); border-radius:6px; padding:20px 20px 18px;}
   .tl-item .tl-step{
     width:26px; height:26px; border-radius:50%; background:var(--navy); color:#fff;
@@ -429,9 +585,9 @@
   .tier-header .t-name{font-family:'Archivo', sans-serif; font-weight:700; font-size:19px;}
   .tier-header .t-price{font-family:'IBM Plex Mono',monospace; font-size:16px; color:var(--accent); white-space:nowrap;}
   .tier-body-full{display:grid; grid-template-columns:1fr 1fr; gap:0; align-items:stretch;}
-  @media (max-width:700px){ .tier-body-full{grid-template-columns:1fr;} }
+  @media (max-width:762px){ .tier-body-full{grid-template-columns:1fr;} }
   .benefits-col{padding-right:28px;}
-  @media (max-width:700px){ .benefits-col{padding-right:0; margin-bottom:22px;} }
+  @media (max-width:762px){ .benefits-col{padding-right:0; margin-bottom:22px;} }
   .col-heading{
     font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.06em;
     color:var(--ink-faint); font-weight:500; margin:0 0 9px; padding-bottom:8px; border-bottom:1px solid var(--line);
@@ -439,7 +595,7 @@
   .benefits-full{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:9px;}
   .benefits-full li{position:relative; padding-left:15px; font-size:13px; color:var(--ink); line-height:1.45;}
   .opp-col{min-width:0; border-left:1px solid var(--line); padding-left:28px;}
-  @media (max-width:700px){ .opp-col{border-left:none; padding-left:0; border-top:1px solid var(--line); padding-top:20px;} }
+  @media (max-width:762px){ .opp-col{border-left:none; padding-left:0; border-top:1px solid var(--line); padding-top:20px;} }
   .benefits-full li::before{content:''; position:absolute; left:0; top:8px; width:5px; height:1px; background:var(--ink-soft);}
   .opp-table{width:100%; border-collapse:collapse; margin-top:0;}
   .opp-table td{padding:9px 10px 9px 0; border-bottom:1px solid var(--line-soft); font-size:12.5px; color:var(--ink); white-space:nowrap;}
@@ -470,11 +626,11 @@
   .snap-table td .part-available, .opp-table td .part-available, .opt-card .oc-meta .part-available{color:var(--available); text-transform:uppercase; font-family:'IBM Plex Mono',monospace;}
   .snap-table td .part-sold, .opp-table td .part-sold, .opt-card .oc-meta .part-sold{color:var(--sold); text-transform:uppercase; font-family:'IBM Plex Mono',monospace;}
   .snap-table td .part-available, .snap-table td .part-sold{font-size:11.5px;}
-  @media (max-width:600px){ .snap-table th:nth-child(3), .snap-table td:nth-child(3){display:none;} }
+  @media (max-width:662px){ .snap-table th:nth-child(3), .snap-table td:nth-child(3){display:none;} }
 
   /* ---------------- steps ---------------- */
   .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:28px;}
-  @media (max-width:640px){ .steps{grid-template-columns:1fr 1fr;} }
+  @media (max-width:702px){ .steps{grid-template-columns:1fr 1fr;} }
   .step{border:1px solid var(--line); border-radius:6px; padding:18px 18px 16px;}
   .step .step-num{width:24px; height:24px; border-radius:50%; background:var(--sky); color:var(--navy); font-family:'IBM Plex Mono',monospace; font-size:11.5px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; font-weight:600;}
   .step h4{font-size:14px; margin-bottom:5px;}
@@ -513,7 +669,7 @@
   .form-label .select-note{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.05em;}
   .option-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
   .option-grid.opp-grid{grid-template-columns:1fr;}
-  @media (max-width:560px){ .option-grid{grid-template-columns:1fr;} }
+  @media (max-width:622px){ .option-grid{grid-template-columns:1fr;} }
   .opt-card{
     position:relative; border:1px solid var(--line); border-radius:6px; padding:14px 16px;
     cursor:pointer; display:flex; align-items:flex-start; gap:11px; background:var(--paper);
@@ -556,7 +712,7 @@
     border-left:2px solid var(--sky); padding-left:11px;}
   .upsell.on .upsell-ack{display:block;}
   .field-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:14px;}
-  @media (max-width:640px){ .field-grid{grid-template-columns:1fr;} }
+  @media (max-width:702px){ .field-grid{grid-template-columns:1fr;} }
   .field label{display:block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:6px;}
   .field input{
     width:100%; border:1px solid var(--line); border-radius:5px; padding:10px 12px;
@@ -578,7 +734,7 @@
   .summary-benefits{padding:4px 24px 22px;}
   .summary-benefits h5{font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:10px;}
   .summary-benefits ul{margin:0; padding:0; list-style:none; columns:2; column-gap:22px;}
-  @media (max-width:560px){ .summary-benefits ul{columns:1;} }
+  @media (max-width:622px){ .summary-benefits ul{columns:1;} }
   .summary-benefits li{position:relative; padding-left:15px; font-size:13px; color:var(--ink); margin-bottom:7px; line-height:1.45; break-inside:avoid;}
   .summary-benefits li::before{content:''; position:absolute; left:0; top:8px; width:5px; height:1px; background:var(--ink-soft);}
   .empty-state{border:1px dashed var(--line); border-radius:8px; padding:30px 24px; text-align:center; color:var(--ink-faint); font-size:13.5px; margin-top:30px;}
@@ -613,12 +769,57 @@
   .logo-white{--logo-body:#fff; --logo-s:#14486e;}
   .backcover h2{color:#fff; font-size:clamp(24px,3.6vw,44px); padding:0 48px; margin-top:40px; position:relative; z-index:2; white-space:nowrap;}
   .backcover p{color:#bcd6e6; max-width:none; padding:0 48px; margin-top:16px; font-size:14.5px; position:relative; z-index:2;}
-  @media (max-width:640px){ .backcover h2{white-space:normal; font-size:clamp(22px,6vw,30px);} }
+  @media (max-width:702px){ .backcover h2{white-space:normal; font-size:clamp(22px,6vw,30px);} }
   .backcover-bottom{padding:26px 48px 34px; display:flex; flex-wrap:wrap; gap:22px; align-items:center; border-top:1px solid rgba(255,255,255,0.15); margin-top:34px; position:relative; z-index:2;}
   .backcover .bc-ring{position:absolute; border:2px solid rgba(116,191,235,0.3); border-radius:50%;}
 
+  /* ---- room for the left nav ----------------------------------------
+     The rail takes 62px off a narrow screen, so a handful of things that
+     were set to hold one line have to be allowed to wrap. Written against
+     the width the CONTENT ends up with, not the viewport. */
+  @media (max-width:822px){
+    .opp-table td{white-space:normal;}
+    .opp-table td:last-child{white-space:nowrap;}
+    .opp-table th{white-space:normal;}
+  }
+  @media (max-width:702px){
+    .toc-row{gap:12px;}
+    .toc-row .toc-name{white-space:normal; flex:1 1 auto;}
+    .stat-grid[style]{grid-template-columns:repeat(2,1fr) !important;}
+  }
+  @media (max-width:522px){
+    .pt-head, .pt-row, .pt-foot{grid-template-columns:1fr 46px 42px 38px; gap:7px;}
+    .snap-table td, .snap-table th{padding-right:8px;}
+  }
+  @media (max-width:430px){
+    .page-pad{padding:32px 16px 28px;}
+    .running-head, .running-foot{padding-left:16px; padding-right:16px;}
+    .pt-head, .pt-row, .pt-foot{grid-template-columns:1fr 40px 38px 32px; gap:5px; font-size:12.5px;}
+    .pt-row .pt-share, .pt-row .pt-orgs{font-size:11px;}
+    .opp-table td:last-child{white-space:normal;}
+    .opp-table td, .opp-table th{padding-right:6px;}
+  }
+  @media (max-width:760px){
+    .pie-legend{min-width:0;}
+  }
+  @media (max-width:622px){
+    .growth-badge{white-space:normal;}
+  }
+  /* wide screen, rail open: the content column is 240px narrower than the
+     viewport, so the opportunity tables need the same room to wrap */
+  @media (min-width:901px) and (max-width:1100px){
+    body:not(.railmini) .opp-table td{white-space:normal;}
+    body:not(.railmini) .opp-table td:last-child{white-space:nowrap;}
+    body:not(.railmini) .opp-table th{white-space:normal;}
+  }
+
   ::selection{background:var(--sky); color:var(--navy);}
 </style>
+<script>
+  /* shared with every other MISMO page, so a light/dark choice carries across */
+  try{ var s = localStorage.getItem("mismo.portal.theme");
+       if(s === "light" || s === "dark") document.documentElement.setAttribute("data-theme", s); }catch(e){}
+</script>
 </head>
 <body>
 
@@ -650,41 +851,404 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 355 -41 13 -18 24 -19 218 -17 l204 3 3 44 c4 60 -31 168 -70 215 -17 21 -52
 52 -77 67 l-45 29 -550 0 c-440 -1 -557 -3 -581 -14z"/></g></symbol></svg>
 
-<div class="minav">
-  <div class="minav-inner">
-    <a href="#cover">Cover</a>
-    <a href="#toc">Contents</a>
-    <a href="#about">About</a>
-    <a href="#workgroups">Workgroups</a>
-    <a href="#why">Why Sponsor</a>
-    <a href="#reach">Audience</a>
-    <a href="#series-overview">Series</a>
-    <a href="#series">Series Tiers</a>
-    <a href="#winter">Winter Tiers</a>
-    <a href="#availability">Availability</a>
-    <a href="#reserve">Reserve</a>
-    <a href="#summary">Summary</a>
-    <a href="#contract">Contract</a>
+<header class="hqtop">
+  <span class="logoplate"><svg class="wordmark" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="157" height="24"><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="#0f314c"><path d="M5917 1065 c-169 -46 -279 -153 -335 -323 -21 -65 -25 -96 -25 -197
+0 -101 4 -132 25 -197 57 -172 168 -280 335 -323 84 -22 723 -22 808 0 222 58
+355 253 355 520 0 270 -132 459 -361 520 -74 20 -730 20 -802 0z m692 -320
+c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
+-297 0 -307 2 -346 83 -30 61 -31 198 -2 262 41 93 68 100 368 97 219 -2 243
+-4 274 -22z M0 545 l0 -515 225 0 225 0 2 296 3 296 116 -294 116 -293 197 0 198
+0 119 295 118 295 1 -297 0 -298 225 0 225 0 0 515 0 515 -337 -2 -338 -3
+-104 -264 c-80 -204 -107 -260 -113 -245 -5 10 -52 129 -106 264 l-98 245
+-337 3 -337 2 0 -515z M1892 1044 l-22 -15 0 -483 c0 -455 1 -484 18 -499 16 -15 48 -17
+246 -17 128 0 235 4 246 10 32 17 34 57 4 95 -33 44 -64 143 -64 206 l0 49
+203 0 c191 0 205 -1 222 -20 10 -11 34 -24 54 -30 49 -13 586 -13 612 0 22 12
+26 62 7 78 -8 6 -174 15 -413 21 -502 15 -549 23 -628 110 -43 48 -57 93 -57
+187 0 82 19 156 55 208 30 44 32 77 7 99 -27 25 -456 25 -490 1z M3716 1044 c-23 -22 -20 -31 19 -77 43 -49 78 -155 73 -218 l-3 -44
+-204 -3 c-194 -2 -205 -1 -218 17 -24 35 -78 41 -355 41 -255 0 -269 -1 -288
+-20 -27 -27 -26 -58 3 -70 12 -5 202 -14 422 -19 421 -12 476 -18 555 -62 92
+-51 132 -159 111 -299 -12 -77 -34 -129 -77 -179 -23 -28 -25 -36 -16 -57 l12
+-24 215 0 215 0 2 306 3 306 120 -303 120 -304 197 -3 196 -2 118 296 119 297
+3 -296 2 -297 225 0 225 0 0 515 0 515 -338 0 -337 0 -104 -265 c-58 -146
+-106 -263 -108 -261 -2 2 -50 120 -107 262 l-104 259 -340 3 c-300 2 -342 0
+-356 -14z"/></g><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="#50a4db"><path d="M2485 1046 c-44 -20 -111 -94 -136 -151 -27 -60 -37 -198 -20 -263
+13 -48 68 -115 114 -138 64 -34 162 -43 562 -55 239 -6 405 -15 413 -21 19
+-16 15 -66 -7 -78 -26 -13 -563 -13 -612 0 -20 6 -44 19 -54 30 -17 19 -31 20
+-222 20 l-203 0 0 -49 c0 -81 34 -172 86 -230 78 -87 31 -81 672 -81 l568 0
+46 29 c79 50 122 121 139 231 21 140 -19 248 -111 299 -79 44 -134 50 -555 62
+-220 5 -410 14 -422 19 -29 12 -30 43 -3 70 19 19 33 20 288 20 277 0 331 -6
+355 -41 13 -18 24 -19 218 -17 l204 3 3 44 c4 60 -31 168 -70 215 -17 21 -52
+52 -77 67 l-45 29 -550 0 c-440 -1 -557 -3 -581 -14z"/></g></svg></span>
+  <span class="mastrule"></span>
+  <span class="hqname">Summit Sponsorship Prospectus</span>
+  <span class="hqtop-r"><span class="eyebrow-m">2027 Summit Series</span></span>
+</header>
+
+<aside class="hq rail" id="rail">
+  <div class="rail-top">
+    <span class="rail-lbl">Sections</span>
+    <button class="railhide" id="rail-hide" type="button" aria-label="Narrow the menu" title="Narrow the menu (backslash)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
   </div>
-<button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark" title="Switch between light and dark">
-  <svg class="tt-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.2 4.2l1.5 1.5M18.3 18.3l1.5 1.5M2 12h2M20 12h2M4.2 19.8l1.5-1.5M18.3 5.7l1.5-1.5"/></svg>
-  <svg class="tt-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
-</button>
-</div>
+
+  <div class="railfind">
+    <button class="railfind-b" id="rail-qb" type="button" aria-label="Search" title="Search" tabindex="-1">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+    </button>
+    <svg class="fi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+    <input type="search" id="rail-q" autocomplete="off" spellcheck="false"
+           placeholder="Search" aria-label="Search tiers, opportunities and sections">
+    <button class="railq-x" id="rail-qx" type="button" aria-label="Clear the search" hidden>&times;</button>
+    <div class="railhits" id="rail-hits" hidden></div>
+  </div>
+
+  <nav aria-label="Summit Sponsorship Prospectus">
+    <button type="button" data-hq="cover" aria-current="page" title="Cover">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h5"/></svg>
+      <span>Cover</span></button>
+    <button type="button" data-hq="toc" title="Contents">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      <span>Contents</span></button>
+    <button type="button" data-hq="about" title="About the Summits">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6h.01"/></svg>
+      <span>About the Summits</span></button>
+    <button type="button" data-hq="workgroups" title="Workgroup Map">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.6"/><circle cx="18" cy="6" r="2.6"/><circle cx="12" cy="18" r="2.6"/><path d="M7.6 8.1l3.2 7.6M16.4 8.1l-3.2 7.6"/></svg>
+      <span>Workgroup Map</span></button>
+    <button type="button" data-hq="why" title="Why Sponsor">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6l2.5 5.6 6.1.6-4.6 4.1 1.3 6-5.3-3.1-5.3 3.1 1.3-6L3.4 9.8l6.1-.6z"/></svg>
+      <span>Why Sponsor</span></button>
+    <button type="button" data-hq="reach" title="Audience &amp; Reach">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16.2 5.6a3 3 0 010 5.7M17.8 14.6c1.9.9 3.2 2.9 3.2 5.4"/></svg>
+      <span>Audience &amp; Reach</span></button>
+    <button type="button" data-hq="series-overview" title="The 2027 Summit Series">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      <span>The 2027 Series</span></button>
+    <button type="button" data-hq="series" title="Summit Series Tiers">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4l8.6 4.6L12 12.6 3.4 8z"/><path d="M3.4 13.2L12 17.8l8.6-4.6"/></svg>
+      <span>Series Tiers</span></button>
+    <button type="button" data-hq="winter" title="Winter Summit Tiers">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/></svg>
+      <span>Winter Tiers</span></button>
+    <button type="button" data-hq="availability" title="Availability Snapshot">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M9 9.5V20"/></svg>
+      <span>Availability</span></button>
+    <button type="button" data-hq="reserve" title="Reserve Your Sponsorship">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20.5h16"/><path d="M14.6 4.4l4.6 4.6L9.4 18.8H4.8v-4.6z"/></svg>
+      <span>Reserve</span></button>
+    <button type="button" data-hq="summary" title="Your Sponsorship Summary">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9.5 8h5M9.5 12h5"/></svg>
+      <span>Your Summary</span></button>
+    <button type="button" data-hq="contract" title="Sponsor Contract">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 3H14l4.5 4.6V21h-13z"/><path d="M14 3v4.6h4.5"/><path d="M8.6 15.6c2-2 4 2 6 0"/></svg>
+      <span>Sponsor Contract</span></button>
+  </nav>
+
+  <div class="mast-right">
+    <button class="theme-btn" id="theme-btn" type="button">
+      <svg class="ti ti-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6.4 6.4 0 009 9 9 9 0 11-9-9z"/></svg>
+      <svg class="ti ti-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.1"/><path d="M12 2.4v2.3M12 19.3v2.3M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.4 12h2.3M19.3 12h2.3M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+      <span id="theme-lab">Dark Mode</span>
+    </button>
+  </div>
+</aside>
+<div class="railscrim" id="rail-scrim"></div>
+
 <script>
+/* ---- the MISMO left nav: collapse, remember, search ---------------------
+   Same mechanics as Summit HQ and the Sponsorship Portal. The prospectus is a
+   scrolling document rather than a tabbed app, so a nav button scrolls to its
+   page and the button for whatever page is on screen stays lit. ---------- */
 (function(){
-  var root = document.documentElement, KEY = "resources:sponsorship:theme";
-  try{ var saved = localStorage.getItem(KEY); if(saved === "light" || saved === "dark") root.setAttribute("data-theme", saved); }catch(e){}
-  function current(){
-    var set = root.getAttribute("data-theme");
-    if(set) return set;
-    return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  "use strict";
+  var KEY='hq.rail.off';
+
+  function set(off, remember){
+    document.body.classList.toggle('railmini', !!off);
+    var h=document.getElementById('rail-hide');
+    if(h){ h.setAttribute('aria-expanded', off?'false':'true');
+      h.setAttribute('aria-label', off?'Open the menu':'Narrow the menu');
+      h.title = (off?'Open the menu':'Narrow the menu')+' (backslash)'; }
+    if(off) close();
+    if(remember!==false){ try{ localStorage.setItem(KEY, off?'1':'0'); }catch(e){} }
+    setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 230);
   }
-  document.getElementById("theme-toggle").addEventListener("click", function(){
-    var next = current() === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    try{ localStorage.setItem(KEY, next); }catch(e){}
+  function toggle(){ set(!document.body.classList.contains('railmini')); }
+
+  var BTNS=[];
+
+  /* Jump to a page. The prospectus is ~20,000px tall, and a smooth scroll over
+     that distance either crawls or is abandoned outright on a phone - which
+     looks exactly like the tap doing nothing. So: glide only when the target is
+     close, jump when it is far, and check afterwards that the page actually
+     moved, falling back to a plain jump and then to the address bar. */
+  function targetY(el){
+    var m = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    return Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - m);
+  }
+  function go(id){
+    var el=document.getElementById(id);
+    if(!el) return;
+    mark(id);
+    var from = window.pageYOffset;
+    var to = targetY(el);
+    var near = Math.abs(to - from) < window.innerHeight * 2.5;
+    try{
+      window.scrollTo({top:to, behavior: near ? 'smooth' : 'auto'});
+    }catch(e){
+      window.scrollTo(0, to);
+    }
+    lastJump = to; settle(el);
+    setTimeout(function(){
+      if(Math.abs(window.pageYOffset - from) >= 2) return;   // it moved, nothing to do
+      if(Math.abs(to - from) < 2) return;                    // already there
+      to = targetY(el); lastJump = to; window.scrollTo(0, to);
+      setTimeout(function(){
+        // the document itself is not what scrolls here - let the address bar do it
+        if(Math.abs(window.pageYOffset - from) < 2){ try{ location.hash = '#' + id; }catch(e){} }
+      }, 150);
+    }, near ? 600 : 120);
+  }
+
+  /* Web fonts and photographs arrive after the tap, and every one of them changes
+     how tall the pages above the target are - so the spot worked out at tap time
+     drifts, and you can end up in the gap between two pages looking at nothing.
+     Re-check a few times and correct, unless the reader has taken over scrolling. */
+  var lastJump = null, settling = null;
+  function settle(el){
+    settling = el;
+    [120, 400, 900, 1600].forEach(function(ms){
+      setTimeout(function(){
+        if(settling !== el || lastJump === null) return;
+        if(Math.abs(window.pageYOffset - lastJump) > 60){ settling = null; return; } // reader scrolled
+        var y = targetY(el);
+        if(Math.abs(window.pageYOffset - y) > 4){ window.scrollTo(0, y); lastJump = y; }
+      }, ms);
+    });
+  }
+  function mark(id){
+    BTNS.forEach(function(b){
+      if(b.dataset.hq===id) b.setAttribute('aria-current','page');
+      else b.removeAttribute('aria-current');
+    });
+  }
+  function spy(){
+    var line = (window.innerHeight * 0.32) + 64, best=null;
+    BTNS.forEach(function(b){
+      var el=document.getElementById(b.dataset.hq);
+      if(!el) return;
+      var top=el.getBoundingClientRect().top;
+      if(top <= line) best=b.dataset.hq;
+    });
+    if(!best && BTNS.length) best=BTNS[0].dataset.hq;
+    if(best) mark(best);
+  }
+
+  function start(){
+    var off=null;
+    try{ var v=localStorage.getItem(KEY); if(v!==null) off=(v==='1'); }catch(e){}
+    if(off===null) off = window.matchMedia('(max-width:900px)').matches;
+    set(off, false);
+    var h=document.getElementById('rail-hide'); if(h) h.addEventListener('click',toggle);
+    var sc=document.getElementById('rail-scrim'); if(sc) sc.addEventListener('click',function(){ set(true); });
+    var qb=document.getElementById('rail-qb');
+    if(qb) qb.addEventListener('click',function(){ set(false);
+      setTimeout(function(){ var q=document.getElementById('rail-q'); if(q) q.focus(); },230); });
+
+    BTNS = Array.prototype.slice.call(document.querySelectorAll('.hq nav button[data-hq]'));
+    BTNS.forEach(function(b){
+      b.addEventListener('click',function(){
+        var narrow = window.matchMedia('(max-width:900px)').matches;
+        if(narrow){ set(true); mark(b.dataset.hq); }
+        setTimeout(function(){ go(b.dataset.hq); }, narrow ? 60 : 0);
+      });
+    });
+    var tick=null;
+    window.addEventListener('scroll',function(){
+      if(tick) return;
+      tick=setTimeout(function(){ tick=null; spy(); }, 120);
+    }, {passive:true});
+    spy();
+    wireFind();
+  }
+
+  document.addEventListener('keydown',function(e){
+    var t=e.target;
+    var typing = t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable);
+    if(e.key==='\\' && !typing && !e.metaKey && !e.ctrlKey && !e.altKey){ e.preventDefault(); toggle(); }
+    if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='k'){
+      e.preventDefault(); set(false);
+      setTimeout(function(){ var q=document.getElementById('rail-q');
+        if(q){ q.focus(); q.select(); } }, 230);
+    }
   });
+
+  var HITS=function(){ return document.getElementById('rail-hits'); };
+  var picked=-1, rows=[];
+  function norm(x){ return String(x||'').replace(/\s+/g,' ').trim().toLowerCase(); }
+
+  /* scroll to a tier page, then flash the row the sponsor was looking for */
+  function flashRow(pageId, oppName){
+    go(pageId);
+    setTimeout(function(){
+      var page=document.getElementById(pageId);
+      if(!page) return;
+      var cells=page.querySelectorAll('.opp-table tbody tr td:first-child');
+      for(var i=0;i<cells.length;i++){
+        if(norm(cells[i].textContent)===norm(oppName)){
+          var tr=cells[i].parentNode;
+          tr.classList.remove('rail-flash');
+          void tr.offsetWidth;
+          tr.classList.add('rail-flash');
+          var ty = Math.max(0, tr.getBoundingClientRect().top + window.pageYOffset
+                     - (window.innerHeight/2) + (tr.offsetHeight/2));
+          try{ window.scrollTo({top:ty, behavior:'smooth'}); }catch(e){ window.scrollTo(0, ty); }
+          setTimeout(function(){ tr.classList.remove('rail-flash'); }, 2200);
+          return;
+        }
+      }
+    }, 500);
+  }
+
+  var PROGRAM_PAGE = {winter:'winter', series:'series'};
+  var PROGRAM_NAME = {winter:'Winter Summit', series:'2027 Summit Series'};
+
+  function gather(q){
+    var t=norm(q); if(t.length<2) return [];
+    var out=[];
+    var score=function(name){ var n=norm(name);
+      return n===t ? 3 : n.indexOf(t)===0 ? 2 : n.indexOf(t)>=0 ? 1 : 0; };
+    var push=function(group,name,where,fn){
+      if(out.length<60) out.push({group:group,name:name,where:where,go:fn,s:score(name)});
+    };
+
+    /* the prospectus's own sections */
+    try{
+      BTNS.forEach(function(b){
+        var full = b.getAttribute('title') || b.textContent;
+        if(norm(full).indexOf(t)<0) return;
+        push('Sections', full.trim(), 'Jump to this page', (function(id){
+          return function(){ go(id); };
+        })(b.dataset.hq));
+      });
+    }catch(e){}
+
+    /* tiers and opportunities, straight off the page's own tier data */
+    try{
+      var P = window.__prospectus ? window.__prospectus() : null;
+      if(P){
+        P.order.forEach(function(prog){
+          var page = PROGRAM_PAGE[prog], pname = PROGRAM_NAME[prog];
+          P.tierOrder.forEach(function(tid){
+            var tier = P.tiers[prog][tid];
+            if(!tier) return;
+            if(norm(tier.name).indexOf(t)>=0){
+              push('Sponsorship Tiers', tier.name, pname + ' · ' + tier.price,
+                (function(pg){ return function(){ go(pg); }; })(page));
+            }
+            (tier.opportunities||[]).forEach(function(o){
+              if(norm(o.name).indexOf(t)<0) return;
+              push('Opportunities', o.name,
+                pname + ' · ' + tier.name + ' · ' + (o.sold ? 'Sold' : o.note),
+                (function(pg,nm){ return function(){ flashRow(pg, nm); }; })(page, o.name));
+            });
+          });
+        });
+      }
+    }catch(e){}
+
+    var best={};
+    out.forEach(function(h){ best[h.group]=Math.max(best[h.group]||0, h.s); });
+    var ORDER=['Sponsorship Tiers','Opportunities','Sections'];
+    out.sort(function(a,b){
+      return (best[b.group]-best[a.group])
+        || (ORDER.indexOf(a.group)-ORDER.indexOf(b.group))
+        || (b.s-a.s)
+        || String(a.name).localeCompare(String(b.name)); });
+    return out;
+  }
+
+  function draw(list){
+    var box=HITS(); if(!box) return;
+    box.textContent=''; rows=[]; picked=-1;
+    if(!list.length){
+      var n=document.createElement('div'); n.className='rh-none';
+      n.textContent='Nothing matches.'; box.appendChild(n); box.hidden=false; return;
+    }
+    var g=null;
+    list.slice(0,24).forEach(function(h){
+      if(h.group!==g){ g=h.group;
+        var hd=document.createElement('div'); hd.className='rh-g'; hd.textContent=g; box.appendChild(hd); }
+      var b=document.createElement('button'); b.type='button'; b.className='rh';
+      var nm=document.createElement('b'); nm.textContent=h.name; b.appendChild(nm);
+      if(h.where){ var w=document.createElement('i'); w.textContent=h.where; b.appendChild(w); }
+      b.addEventListener('click',function(){ close(); h.go(); });
+      rows.push(b); box.appendChild(b);
+    });
+    box.hidden=false;
+  }
+  function close(){ var b=HITS(); if(b){ b.hidden=true; b.textContent=''; } rows=[]; picked=-1; }
+  function markHit(){ rows.forEach(function(r,i){ r.classList.toggle('on', i===picked); });
+    if(rows[picked]) try{ rows[picked].scrollIntoView({block:'nearest'}); }catch(e){} }
+
+  function wireFind(){
+    var q=document.getElementById('rail-q'), x=document.getElementById('rail-qx');
+    if(!q) return;
+    var tmr=null;
+    var run=function(){ var v=q.value;
+      if(x) x.hidden = !v;
+      if(norm(v).length<2){ close(); return; }
+      draw(gather(v)); };
+    q.addEventListener('input',function(){ clearTimeout(tmr); tmr=setTimeout(run,150); });
+    q.addEventListener('focus',function(){ if(norm(q.value).length>=2) run(); });
+    q.addEventListener('keydown',function(e){
+      if(e.key==='Escape'){ close(); q.blur(); return; }
+      if(!rows.length) return;
+      if(e.key==='ArrowDown'){ e.preventDefault(); picked=(picked+1)%rows.length; markHit(); }
+      else if(e.key==='ArrowUp'){ e.preventDefault(); picked=(picked-1+rows.length)%rows.length; markHit(); }
+      else if(e.key==='Enter'){ e.preventDefault(); (rows[picked]||rows[0]).click(); }
+    });
+    if(x) x.addEventListener('click',function(){ q.value=''; x.hidden=true; close(); q.focus(); });
+    document.addEventListener('click',function(e){
+      if(!e.target.closest('.railfind')) close();
+    });
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start);
+  else start();
+  window.__rail={ show:function(){ set(false); }, hide:function(){ set(true); }, toggle:toggle,
+    mini:function(){ return document.body.classList.contains('railmini'); } };
+})();
+
+/* ---- the shared MISMO theme toggle -------------------------------------
+   mismo.portal.theme is the key every MISMO page uses, so a light/dark
+   choice made on one carries to the next. -------------------------------- */
+(function theme(){
+  var btn = document.getElementById("theme-btn");
+  if(!btn) return;
+  function cur(){
+    var t = document.documentElement.getAttribute("data-theme");
+    if(t) return t;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function paint(){
+    var dark = cur() === "dark";
+    var lab = document.getElementById("theme-lab");
+    if(lab) lab.textContent = dark ? "Light Mode" : "Dark Mode";
+    btn.title = "Switch to " + (dark ? "light" : "dark") + " mode";
+  }
+  btn.addEventListener("click", function(){
+    document.documentElement.setAttribute("data-theme", cur() === "dark" ? "light" : "dark");
+    paint();
+    try{ localStorage.setItem("mismo.portal.theme", cur()); }catch(e){}
+    window.dispatchEvent(new Event("resize"));
+  });
+  try{
+    var saved = localStorage.getItem("mismo.portal.theme");
+    if(saved) document.documentElement.setAttribute("data-theme", saved);
+  }catch(e){}
+  paint();
 })();
 </script>
 
@@ -1127,8 +1691,8 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <table class="opp-table">
             <thead><tr><th>Opportunity</th><th>Status</th></tr></thead>
             <tbody>
-              <tr><td>Workshop Sponsor</td><td>5 available</td></tr>
               <tr><td>Session Introduction</td><td>5 available</td></tr>
+              <tr><td>Workshop Sponsor</td><td><span class="part-available">4 available</span>, <span class="part-sold">1 sold</span></td></tr>
             </tbody>
           </table><p class="exclusive-note">One opportunity is selected per sponsorship at this tier.</p>
         </div>
@@ -1283,8 +1847,8 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <table class="opp-table">
             <thead><tr><th>Opportunity</th><th>Status</th></tr></thead>
             <tbody>
-              <tr><td>Workshop Sponsor</td><td>5 available</td></tr>
               <tr><td>Session Introduction</td><td>5 available</td></tr>
+              <tr><td>Workshop Sponsor</td><td><span class="part-available">4 available</span>, <span class="part-sold">1 sold</span></td></tr>
             </tbody>
           </table><p class="exclusive-note">One opportunity is selected per sponsorship at this tier.</p>
         </div>
@@ -1367,7 +1931,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         <tr><td>Badge Sponsor</td><td>Platinum</td><td class="status-sold">Sold</td><td class="status-sold">Sold</td></tr>
         <tr><td>AI Demo / Case Study Sponsor</td><td>Platinum</td><td class="status-available">3 available</td><td class="status-available">3 available</td></tr>
         <tr><td>Wi-Fi Sponsor</td><td>Platinum</td><td class="status-sold">Sold</td><td class="status-sold">Sold</td></tr>
-        <tr><td>Workshop Sponsor</td><td>Gold</td><td class="status-available">5 available</td><td class="status-available">5 available</td></tr>
+        <tr><td>Workshop Sponsor</td><td>Gold</td><td><span class="part-available">4 available</span>, <span class="part-sold">1 sold</span></td><td><span class="part-available">4 available</span>, <span class="part-sold">1 sold</span></td></tr>
         <tr><td>Session Introduction</td><td>Gold</td><td class="status-available">5 available</td><td class="status-available">5 available</td></tr>
         <tr><td>Event App Sponsor</td><td>Silver</td><td class="status-available">1 available</td><td class="status-available">1 available</td></tr>
         <tr><td>Newcomer Luncheon Sponsor</td><td>Silver</td><td class="status-available">1 available</td><td class="status-available">1 available</td></tr>
@@ -1569,7 +2133,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       gold: { name:"Gold Sponsor", price:"$10,000", regs:"5 complimentary registrations",
         benefits:["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","Branded swag chair drop on General Session Day","5 complimentary Summit registrations"],
         opportunities:[
-          {id:"workshop", name:"Workshop Sponsor", note:"5 available", sold:false},
+          {id:"workshop", name:"Workshop Sponsor", note:"4 available, 1 sold", sold:false},
           {id:"sessionintro", name:"Session Introduction", note:"5 available", sold:false}
         ]},
       silver: { name:"Silver Sponsor", price:"$7,500", regs:"4 complimentary registrations",
@@ -1605,7 +2169,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       gold: { name:"Gold Sponsor", price:"$27,000", regs:"5 complimentary registrations",
         benefits:["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","Branded swag chair drop on General Session Day","5 complimentary Summit registrations"],
         opportunities:[
-          {id:"workshop", name:"Workshop Sponsor", note:"5 available", sold:false},
+          {id:"workshop", name:"Workshop Sponsor", note:"4 available, 1 sold", sold:false},
           {id:"sessionintro", name:"Session Introduction", note:"5 available", sold:false}
         ]},
       silver: { name:"Silver Sponsor", price:"$20,250", regs:"4 complimentary registrations",
@@ -1633,7 +2197,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   // dashboard. SUBMIT_SECRET must match the value the flow checks.
   // While this is empty the Submit button tells the sponsor the portal isn't
   // accepting requests yet — it never falls back to email.
-  var SUBMIT_ENDPOINT = "";
+  // Set 24 September 2026 to the intake flow Jonna built (INTAKE-SETUP.md phase 2f).
+  // The address is public by design: it sits in this page, which anyone can view.
+  // SUBMIT_SECRET is what keeps junk out, and the flow ignores anything without it.
+  var SUBMIT_ENDPOINT = "https://default867e5d11bde4499fb45e61572f9f33.7c.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/28/workflows/b11fe7bcb02748988ed5a065111f915c/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=tl9_JTtwnQQTYW3C6w1EPUlKd_yxcvATU4s7rMLpSxM";
   var SUBMIT_SECRET = "mismo-2027-prospectus";
 
   // Reference shown to the sponsor and stored on the row, so a follow-up email
@@ -1646,6 +2213,12 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   }
 
   var TIER_ORDER = ["diamond","platinum","gold","silver","bronze"];
+
+  // read-only view of the tier data, so the left nav's search box can find
+  // tiers and opportunities without keeping a second copy of them
+  window.__prospectus = function(){
+    return { tiers: TIERS, tierOrder: TIER_ORDER, order: ["winter","series"] };
+  };
   var state = { program:"winter", tier:null, opportunity:null, day:null, multiDay:false };
 
   var tierOptionsEl = document.getElementById("tier-options");
@@ -1861,7 +2434,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
 
   // ---- save / resume -------------------------------------------------------
-  var STORE_KEY = "resources:sponsorship:reserve";
+  var STORE_KEY = "mismo2027.reserve.v1";
   var fields = ["f-company","f-contact","f-email","f-signer-name","f-signer-title","f-signer-date"];
   function snapshot(){
     var out = {program:state.program, tier:state.tier, opportunity:state.opportunity, day:state.day, multiDay:!!state.multiDay,
@@ -2055,11 +2628,19 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
     btn.disabled = true;
     if(note) note.textContent = "Submitting to the sponsorship portal\u2026";
-    // text/plain keeps this a simple request, so the browser skips the CORS preflight
-    fetch(SUBMIT_ENDPOINT, { method:"POST", headers:{"Content-Type":"text/plain"}, body: JSON.stringify(payload) })
-      .then(function(res){
-        if(!res.ok) throw new Error("status " + res.status);
-        if(note) note.innerHTML = "<span class=\"submit-msg ok\"><strong>Submitted to the MISMO sponsorship portal.</strong> Your reference is <code>" + reference + "</code>. The MISMO team has been notified and will confirm your sponsorship and invoice from here. Keep the reference for any follow-up.</span>";
+    /* text/plain keeps this a simple request, so the browser skips the CORS preflight.
+       mode:"no-cors" is the other half: the Power Automate flow answers without any
+       Access-Control-Allow-Origin header, so an ordinary fetch REJECTS even when the
+       request went through — which would tell the sponsor it failed and invite them
+       to submit the same sponsorship twice. This sends once and cannot read the reply,
+       so the page says it has been sent and MISMO confirms by email. A genuine network
+       failure still rejects, and is still reported.
+       If a Response action carrying Access-Control-Allow-Origin is ever added to the
+       flow, drop the mode and put the res.ok check back. */
+    fetch(SUBMIT_ENDPOINT, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain"},
+                             body: JSON.stringify(payload) })
+      .then(function(){
+        if(note) note.innerHTML = "<span class=\"submit-msg ok\"><strong>Submitted to the MISMO sponsorship portal.</strong> Your reference is <code>" + reference + "</code>. The MISMO team picks it up from here to confirm your sponsorship and invoice. Keep the reference &mdash; if you haven&rsquo;t heard back within two working days, send it to <a href=\"mailto:kbradshaw@mismo.org\">kbradshaw@mismo.org</a>.</span>";
         btn.textContent = "Submitted";
         try{ localStorage.removeItem(STORE_KEY); }catch(e){}
       })
