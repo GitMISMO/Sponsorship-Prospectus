@@ -725,6 +725,29 @@
   }
   .field input:focus{outline:2px solid var(--sky-deep); outline-offset:1px; border-color:var(--sky-deep);}
 
+  /* the logo upload: required, one file, sent with the application */
+  .logo-field{margin-top:14px;}
+  .logo-field > .logo-label{display:block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:6px;}
+  .logo-input{position:absolute; width:1px; height:1px; opacity:0; overflow:hidden; clip:rect(0 0 0 0);}
+  .logo-drop{display:flex; align-items:center; gap:14px; border:1px dashed var(--line); border-radius:6px;
+    padding:12px 14px; cursor:pointer; background:var(--paper); transition:border-color .12s ease, background .12s ease;}
+  .logo-drop:hover, .logo-field.dragging .logo-drop{border-color:var(--sky-deep); background:rgba(116,191,235,0.07);}
+  .logo-field:focus-within .logo-drop{outline:2px solid var(--sky-deep); outline-offset:1px;}
+  .logo-thumb{width:52px; height:52px; flex:none; border-radius:5px; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; overflow:hidden; color:var(--ink-faint);
+    background:repeating-conic-gradient(rgba(134,152,166,0.14) 0% 25%, transparent 0% 50%) 50% / 12px 12px;}
+  .logo-thumb svg{width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;}
+  .logo-thumb img{max-width:100%; max-height:100%; object-fit:contain; display:block;}
+  .logo-thumb .ext{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500; color:var(--ink-soft); text-transform:uppercase;}
+  .logo-text{min-width:0;}
+  .logo-main{display:block; font-family:'Archivo',sans-serif; font-weight:600; font-size:14px; color:var(--ink); overflow-wrap:anywhere;}
+  .logo-sub{display:block; font-size:12px; color:var(--ink-soft); margin-top:2px; line-height:1.45;}
+  .logo-field.has-file .logo-drop{border-style:solid; border-color:var(--available);}
+  .logo-field.bad .logo-drop{border-color:var(--sold);}
+  .logo-msg{margin:7px 0 0; font-size:12px; color:var(--ink-faint); min-height:0;}
+  .logo-msg:empty{display:none;}
+  .logo-field.bad .logo-msg{color:var(--sold);}
+
   /* ---------------- summary sheet ---------------- */
   .summary-card{border:1px solid var(--line); border-radius:8px; padding:0; margin-top:30px; overflow:hidden;}
   .summary-head{background:var(--navy); color:#eaf3f9; padding:20px 24px;}
@@ -1963,9 +1986,9 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
     <div class="steps">
       <div class="step"><div class="step-num">01</div><h4>Choose your tier</h4><p>Select a Winter Summit or Summit Series tier, plus any opportunity within it.</p></div>
-      <div class="step"><div class="step-num">02</div><h4>Review &amp; sign</h4><p>Check your selection summary, then review and agree to the Sponsor Contract.</p></div>
-      <div class="step"><div class="step-num">03</div><h4>Submit</h4><p>Your request goes into the MISMO sponsorship portal &mdash; we confirm and invoice from there.</p></div>
-      <div class="step"><div class="step-num">04</div><h4>Send your logo</h4><p>Provide a high-resolution, transparent-background logo for event materials.</p></div>
+      <div class="step"><div class="step-num">02</div><h4>Add your details &amp; logo</h4><p>Tell us who to contact and attach a high-resolution, transparent-background logo for event materials.</p></div>
+      <div class="step"><div class="step-num">03</div><h4>Review &amp; sign</h4><p>Check your selection summary, then review and agree to the Sponsor Contract.</p></div>
+      <div class="step"><div class="step-num">04</div><h4>Submit</h4><p>Your request and logo go into the MISMO sponsorship portal &mdash; we confirm and invoice from there.</p></div>
     </div>
 
     <form id="sponsor-form">
@@ -2000,6 +2023,19 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <div class="field"><label for="f-contact">Contact name</label><input type="text" id="f-contact" autocomplete="name" required></div>
           <div class="field"><label for="f-email">Contact email</label><input type="email" id="f-email" autocomplete="email" required></div>
           <div class="field"><label for="f-phone">Contact phone</label><input type="tel" id="f-phone" autocomplete="tel" inputmode="tel" required></div>
+        </div>
+        <div class="logo-field" id="logo-field">
+          <span class="logo-label" id="logo-label">Company logo</span>
+          <label class="logo-drop" for="f-logo">
+            <span class="logo-thumb" id="logo-thumb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3"/></svg></span>
+            <span class="logo-text">
+              <span class="logo-main" id="logo-main">Choose your logo file</span>
+              <span class="logo-sub" id="logo-sub">PNG, SVG, EPS, AI or PDF &middot; up to 10 MB &middot; high resolution, with a transparent background if you have one</span>
+            </span>
+          </label>
+          <input type="file" id="f-logo" class="logo-input" aria-labelledby="logo-label" required
+                 accept=".png,.svg,.eps,.ai,.pdf,image/png,image/svg+xml,application/pdf,application/postscript,application/illustrator">
+          <p class="logo-msg" id="logo-msg" role="status"></p>
         </div>
       </div>
     </form>
@@ -2039,6 +2075,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         <div class="summary-row"><span class="sr-label">Company</span><span class="sr-val" id="sum-company">&mdash;</span></div>
         <div class="summary-row"><span class="sr-label">Contact</span><span class="sr-val" id="sum-contact">&mdash;</span></div>
         <div class="summary-row"><span class="sr-label">Phone</span><span class="sr-val" id="sum-phone">&mdash;</span></div>
+        <div class="summary-row"><span class="sr-label">Logo</span><span class="sr-val" id="sum-logo">&mdash;</span></div>
         <div class="summary-row"><span class="sr-label">Opportunity</span><span class="sr-val" id="sum-opportunity">&mdash;</span></div>
         <div class="summary-row" id="sum-multiday-row" style="display:none;"><span class="sr-label">Additional days</span><span class="sr-val" id="sum-multiday">&mdash;</span></div>
         <div class="summary-row"><span class="sr-label">Complimentary registrations</span><span class="sr-val" id="sum-regs">&mdash;</span></div>
@@ -2395,6 +2432,93 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     document.getElementById(id).addEventListener("input", updateSummary);
   });
 
+  // ---- the logo --------------------------------------------------------------
+  // Required since 25 September 2026. The file travels with the application as
+  // base64; the intake flow saves it to the Sponsor Logos library on the MISMO
+  // Summits site as "<reference> - <company>.<ext>". It is held in memory only:
+  // a logo can be far bigger than browser storage allows, so Save my progress and
+  // Download a copy leave it out and the sponsor attaches it again.
+  var LOGO_MAX = 10 * 1024 * 1024;
+  var LOGO_TYPES = {png:"image/png", svg:"image/svg+xml", eps:"application/postscript",
+                    ai:"application/postscript", pdf:"application/pdf"};
+  var logo = null;          // {name, ext, type, size, data}
+  var logoPreview = null;   // object URL for the thumbnail
+  function fmtBytes(n){
+    if(n >= 1024*1024) return (n/1024/1024).toFixed(1).replace(/\.0$/,"") + " MB";
+    return Math.max(1, Math.round(n/1024)) + " KB";
+  }
+  function logoSay(text, bad){
+    var f = document.getElementById("logo-field");
+    document.getElementById("logo-msg").textContent = text || "";
+    f.classList.toggle("bad", !!bad);
+  }
+  function paintLogo(){
+    var f = document.getElementById("logo-field");
+    var thumb = document.getElementById("logo-thumb");
+    f.classList.toggle("has-file", !!logo);
+    if(!logo){
+      document.getElementById("logo-main").textContent = "Choose your logo file";
+      document.getElementById("logo-sub").innerHTML = "PNG, SVG, EPS, AI or PDF &middot; up to 10 MB &middot; high resolution, with a transparent background if you have one";
+      thumb.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3"/></svg>';
+      return;
+    }
+    document.getElementById("logo-main").textContent = logo.name;
+    document.getElementById("logo-sub").textContent = fmtBytes(logo.size) + " \u00b7 attached \u2014 click to choose a different file";
+    thumb.innerHTML = "";
+    if(logoPreview && (logo.ext === "png" || logo.ext === "svg")){
+      var im = document.createElement("img"); im.src = logoPreview; im.alt = "";
+      im.onerror = function(){ thumb.innerHTML = '<span class="ext">' + logo.ext + '</span>'; };
+      thumb.appendChild(im);
+    } else {
+      thumb.innerHTML = '<span class="ext">' + logo.ext + '</span>';
+    }
+  }
+  function clearLogo(){
+    logo = null;
+    if(logoPreview){ try{ URL.revokeObjectURL(logoPreview); }catch(e){} logoPreview = null; }
+    var inp = document.getElementById("f-logo"); if(inp) inp.value = "";
+    logoSay(""); paintLogo();
+  }
+  function takeLogo(file){
+    if(!file) return;
+    var ext = (String(file.name).split(".").pop() || "").toLowerCase();
+    if(!LOGO_TYPES[ext]){
+      logoSay("That file type can\u2019t be used. Please choose a PNG, SVG, EPS, AI or PDF file.", true);
+      return;
+    }
+    if(file.size > LOGO_MAX){
+      logoSay("That file is " + fmtBytes(file.size) + " \u2014 the limit is 10 MB. Please choose a smaller version.", true);
+      return;
+    }
+    if(!file.size){ logoSay("That file is empty. Please choose another.", true); return; }
+    var r = new FileReader();
+    r.onload = function(){
+      var url = String(r.result || ""), i = url.indexOf(",");
+      if(i < 0){ logoSay("That file couldn\u2019t be read. Please try again.", true); return; }
+      if(logoPreview){ try{ URL.revokeObjectURL(logoPreview); }catch(e){} }
+      try{ logoPreview = URL.createObjectURL(file); }catch(e){ logoPreview = null; }
+      logo = {name:file.name, ext:ext, type:file.type || LOGO_TYPES[ext], size:file.size, data:url.slice(i+1)};
+      logoSay(""); paintLogo(); updateSummary();
+    };
+    r.onerror = function(){ logoSay("That file couldn\u2019t be read. Please try again.", true); };
+    r.readAsDataURL(file);
+  }
+  document.getElementById("f-logo").addEventListener("change", function(ev){
+    var f = ev.target.files && ev.target.files[0];
+    if(f) takeLogo(f);
+  });
+  (function(){
+    var drop = document.querySelector("#logo-field .logo-drop"), fld = document.getElementById("logo-field");
+    ["dragenter","dragover"].forEach(function(t){ drop.addEventListener(t, function(e){ e.preventDefault(); fld.classList.add("dragging"); }); });
+    ["dragleave","drop"].forEach(function(t){ drop.addEventListener(t, function(e){ e.preventDefault(); fld.classList.remove("dragging"); }); });
+    drop.addEventListener("drop", function(e){ var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; if(f) takeLogo(f); });
+  })();
+  // SharePoint refuses these characters in a file name
+  function safeFileName(s){
+    return String(s || "").replace(/["*:<>?\/\\|#%~&{}]+/g, " ").replace(/\s+/g, " ").trim()
+      .replace(/^[.\s]+|[.\s]+$/g, "").slice(0, 120) || "logo";
+  }
+
   function fmtOpportunityLabel(){
     if(!state.tier) return "—";
     var t = TIERS[state.program][state.tier];
@@ -2429,6 +2553,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     var email = document.getElementById("f-email").value;
     document.getElementById("sum-contact").textContent = (contact || email) ? (contact + (contact && email ? " · " : "") + email) : "—";
     document.getElementById("sum-phone").textContent = document.getElementById("f-phone").value.trim() || "—";
+    document.getElementById("sum-logo").textContent = logo ? logo.name : "Not attached yet";
     document.getElementById("sum-opportunity").textContent = fmtOpportunityLabel();
     var mdRow = document.getElementById("sum-multiday-row");
     if(state.multiDay){
@@ -2503,6 +2628,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     state.tier=null; state.opportunity=null; state.day=null; state.multiDay=false;
     fields.forEach(function(id){ var el=document.getElementById(id); if(el) el.value=""; });
     var agree=document.getElementById("f-agree"); if(agree) agree.checked=false;
+    clearLogo();
     document.getElementById("resume-note").classList.remove("show");
     renderTiers(); renderOpportunities(); updateSummary();
     statusMsg("Cleared. Nothing is stored on this device any more.", false);
@@ -2540,7 +2666,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       try{
         var d=JSON.parse(r.result);
         applySnapshot(d); store(d);
-        statusMsg("Restored from " + f.name + ".", true);
+        statusMsg("Restored from " + f.name + "." + (logo ? "" : " Your logo isn\u2019t kept in the file \u2014 attach it again under Your details."), true);
       }catch(e){ statusMsg("That file could not be read \u2014 it should be the JSON this page downloaded.", false); }
       ev.target.value="";
     };
@@ -2553,7 +2679,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
                   opp:document.getElementById("opp-block"), details:document.getElementById("block-details")};
     var opp = selectedOpportunity();
     var t = state.tier ? TIERS[state.program][state.tier] : null;
-    var detailsDone = DETAIL_FIELDS.every(function(id){
+    var detailsDone = !!logo && DETAIL_FIELDS.every(function(id){
       var el=document.getElementById(id); return el && el.value.trim();
     });
     var next = "tier";
@@ -2585,6 +2711,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     if(t.opportunities && !state.opportunity) return false;
     var opp = selectedOpportunity();
     if(opp && opp.days && !state.day) return false;
+    if(!logo) return false;
     return DETAIL_FIELDS.every(function(id){
       var el = document.getElementById(id); return !!(el && el.value.trim());
     });
@@ -2630,6 +2757,9 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       contactName: contact,
       contactEmail: email,
       contactPhone: phone,
+      logoFileName: safeFileName(reference + " - " + company) + "." + logo.ext,
+      logoContentType: logo.type,
+      logoBase64: logo.data,
       signerName: signerName,
       signerTitle: signerTitle,
       signedDate: signerDate,
@@ -2647,7 +2777,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     if(!SUBMIT_ENDPOINT){ showError(); return; }
 
     btn.disabled = true;
-    if(note) note.textContent = "Submitting to the sponsorship portal\u2026";
+    if(note) note.textContent = "Submitting to the sponsorship portal and sending your logo\u2026 this can take a moment.";
     /* text/plain keeps this a simple request, so the browser skips the CORS preflight.
        mode:"no-cors" is the other half: the Power Automate flow answers without any
        Access-Control-Allow-Origin header, so an ordinary fetch REJECTS even when the
@@ -2808,7 +2938,8 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       applySnapshot(d);
       var when=d.savedAt ? new Date(d.savedAt) : null;
       document.getElementById("resume-text").textContent =
-        "Picked up where you left off" + (when ? " \u2014 saved " + when.toLocaleDateString() + " at " + when.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}) : "") + ".";
+        "Picked up where you left off" + (when ? " \u2014 saved " + when.toLocaleDateString() + " at " + when.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}) : "") + "." +
+        " Your logo isn\u2019t saved with your progress, so attach it again under Your details.";
       document.getElementById("resume-note").classList.add("show");
     }catch(e){}
   })();
