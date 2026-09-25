@@ -657,6 +657,9 @@
     border:1px solid var(--navy); border-radius:6px; padding:9px 16px; cursor:pointer;}
   .save-btn:hover{background:rgba(116,191,235,0.12);}
   .save-btn.ghost{color:var(--ink-soft); border-color:var(--line); font-weight:600;}
+  /* navy-on-navy in dark mode made "Save my progress" all but invisible */
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .save-btn:not(.ghost){color:var(--ink); border-color:var(--sky-deep);} }
+  :root[data-theme="dark"] .save-btn:not(.ghost){color:var(--ink); border-color:var(--sky-deep);}
   .save-status{font-size:12px; color:var(--ink-faint); flex:1 1 100%;}
   .save-status.ok{color:var(--available);}
   .resume-note{margin-top:18px; border:1px solid var(--sky); background:rgba(116,191,235,0.1); border-radius:6px;
@@ -712,7 +715,9 @@
     border-left:2px solid var(--sky); padding-left:11px;}
   .upsell.on .upsell-ack{display:block;}
   .field-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:14px;}
-  @media (max-width:702px){ .field-grid{grid-template-columns:1fr;} }
+  /* Your details: four boxes, two by two, so none is left alone on a row */
+  .field-grid.two{grid-template-columns:repeat(2,1fr);}
+  @media (max-width:702px){ .field-grid, .field-grid.two{grid-template-columns:1fr;} }
   .field label{display:block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:6px;}
   .field input{
     width:100%; border:1px solid var(--line); border-radius:5px; padding:10px 12px;
@@ -1990,10 +1995,11 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
       <div class="form-block" id="block-details">
         <div class="form-label"><h3>4. Your details<span class="step-flag">Next</span></h3></div>
-        <div class="field-grid">
-          <div class="field"><label for="f-company">Company name</label><input type="text" id="f-company" required></div>
-          <div class="field"><label for="f-contact">Contact name</label><input type="text" id="f-contact" required></div>
-          <div class="field"><label for="f-email">Contact email</label><input type="email" id="f-email" required></div>
+        <div class="field-grid two">
+          <div class="field"><label for="f-company">Company name</label><input type="text" id="f-company" autocomplete="organization" required></div>
+          <div class="field"><label for="f-contact">Contact name</label><input type="text" id="f-contact" autocomplete="name" required></div>
+          <div class="field"><label for="f-email">Contact email</label><input type="email" id="f-email" autocomplete="email" required></div>
+          <div class="field"><label for="f-phone">Contact phone</label><input type="tel" id="f-phone" autocomplete="tel" inputmode="tel" required></div>
         </div>
       </div>
     </form>
@@ -2032,6 +2038,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       <div class="summary-rows">
         <div class="summary-row"><span class="sr-label">Company</span><span class="sr-val" id="sum-company">&mdash;</span></div>
         <div class="summary-row"><span class="sr-label">Contact</span><span class="sr-val" id="sum-contact">&mdash;</span></div>
+        <div class="summary-row"><span class="sr-label">Phone</span><span class="sr-val" id="sum-phone">&mdash;</span></div>
         <div class="summary-row"><span class="sr-label">Opportunity</span><span class="sr-val" id="sum-opportunity">&mdash;</span></div>
         <div class="summary-row" id="sum-multiday-row" style="display:none;"><span class="sr-label">Additional days</span><span class="sr-val" id="sum-multiday">&mdash;</span></div>
         <div class="summary-row"><span class="sr-label">Complimentary registrations</span><span class="sr-val" id="sum-regs">&mdash;</span></div>
@@ -2381,7 +2388,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     });
   });
 
-  ["f-company","f-contact","f-email"].forEach(function(id){
+  // The four "Your details" boxes. Phone was added 24 September 2026, at Jonna's
+  // request, as its own required field.
+  var DETAIL_FIELDS = ["f-company","f-contact","f-email","f-phone"];
+  DETAIL_FIELDS.forEach(function(id){
     document.getElementById(id).addEventListener("input", updateSummary);
   });
 
@@ -2418,6 +2428,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     var contact = document.getElementById("f-contact").value;
     var email = document.getElementById("f-email").value;
     document.getElementById("sum-contact").textContent = (contact || email) ? (contact + (contact && email ? " · " : "") + email) : "—";
+    document.getElementById("sum-phone").textContent = document.getElementById("f-phone").value.trim() || "—";
     document.getElementById("sum-opportunity").textContent = fmtOpportunityLabel();
     var mdRow = document.getElementById("sum-multiday-row");
     if(state.multiDay){
@@ -2443,7 +2454,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
   // ---- save / resume -------------------------------------------------------
   var STORE_KEY = "mismo2027.reserve.v1";
-  var fields = ["f-company","f-contact","f-email","f-signer-name","f-signer-title","f-signer-date"];
+  var fields = ["f-company","f-contact","f-email","f-phone","f-signer-name","f-signer-title","f-signer-date"];
   function snapshot(){
     var out = {program:state.program, tier:state.tier, opportunity:state.opportunity, day:state.day, multiDay:!!state.multiDay,
                agreed: document.getElementById("f-agree").checked, savedAt: new Date().toISOString()};
@@ -2542,7 +2553,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
                   opp:document.getElementById("opp-block"), details:document.getElementById("block-details")};
     var opp = selectedOpportunity();
     var t = state.tier ? TIERS[state.program][state.tier] : null;
-    var detailsDone = ["f-company","f-contact","f-email"].every(function(id){
+    var detailsDone = DETAIL_FIELDS.every(function(id){
       var el=document.getElementById(id); return el && el.value.trim();
     });
     var next = "tier";
@@ -2574,10 +2585,9 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     if(t.opportunities && !state.opportunity) return false;
     var opp = selectedOpportunity();
     if(opp && opp.days && !state.day) return false;
-    var company = document.getElementById("f-company").value.trim();
-    var contact = document.getElementById("f-contact").value.trim();
-    var email = document.getElementById("f-email").value.trim();
-    return !!(company && contact && email);
+    return DETAIL_FIELDS.every(function(id){
+      var el = document.getElementById(id); return !!(el && el.value.trim());
+    });
   }
 
   function updateSubmitState(){
@@ -2598,6 +2608,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     var company = document.getElementById("f-company").value;
     var contact = document.getElementById("f-contact").value;
     var email = document.getElementById("f-email").value;
+    var phone = document.getElementById("f-phone").value.trim();
     var signerName = document.getElementById("f-signer-name").value;
     var signerTitle = document.getElementById("f-signer-title").value;
     var signerDate = document.getElementById("f-signer-date").value;
@@ -2618,6 +2629,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       company: company,
       contactName: contact,
       contactEmail: email,
+      contactPhone: phone,
       signerName: signerName,
       signerTitle: signerTitle,
       signedDate: signerDate,
