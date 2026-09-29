@@ -2745,9 +2745,12 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       reference: reference,
       submittedAt: new Date().toISOString(),
       source: "prospectus-web",
-      program: state.program,
+      /* program and tier go out in the Sponsorship Requests list's own wording
+         (its Program and Tier choice columns), so the intake flow can drop them
+         straight in with no formula. Changed 28 September 2026. */
+      program: state.program === "series" ? "Summit Series" : "Winter Summit",
       programLabel: prog.programLabel,
-      tier: state.tier,
+      tier: state.tier.charAt(0).toUpperCase() + state.tier.slice(1),
       tierName: t.name,
       price: t.price,
       opportunity: fmtOpportunityLabel(),
