@@ -844,6 +844,9 @@
   }
 
   ::selection{background:var(--sky); color:var(--navy);}
+
+/* the logo leads to www.mismo.org (a page read outside MISMO) and grows on hover (Perry, 7 Oct 2026) */
+[data-mismo-home]{text-decoration:none;color:inherit;cursor:pointer;transition:transform .15s ease;transform-origin:left center}[data-mismo-home]:hover,[data-mismo-home]:focus-visible{transform:scale(1.06)}[data-mismo-home]:focus-visible{outline:2px solid #50a4db;outline-offset:3px}
 </style>
 <script>
   /* shared with every other MISMO page, so a light/dark choice carries across */
@@ -882,7 +885,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 52 -77 67 l-45 29 -550 0 c-440 -1 -557 -3 -581 -14z"/></g></symbol></svg>
 
 <header class="hqtop">
-  <span class="logoplate"><svg class="wordmark" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="157" height="24"><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="#0f314c"><path d="M5917 1065 c-169 -46 -279 -153 -335 -323 -21 -65 -25 -96 -25 -197
+  <a class="logoplate" href="https://www.mismo.org/" data-mismo-home aria-label="MISMO, www.mismo.org" title="MISMO, www.mismo.org"><svg class="wordmark" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="157" height="24"><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="#0f314c"><path d="M5917 1065 c-169 -46 -279 -153 -335 -323 -21 -65 -25 -96 -25 -197
 0 -101 4 -132 25 -197 57 -172 168 -280 335 -323 84 -22 723 -22 808 0 222 58
 355 253 355 520 0 270 -132 459 -361 520 -74 20 -730 20 -802 0z m692 -320
 c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
@@ -908,7 +911,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 46 29 c79 50 122 121 139 231 21 140 -19 248 -111 299 -79 44 -134 50 -555 62
 -220 5 -410 14 -422 19 -29 12 -30 43 -3 70 19 19 33 20 288 20 277 0 331 -6
 355 -41 13 -18 24 -19 218 -17 l204 3 3 44 c4 60 -31 168 -70 215 -17 21 -52
-52 -77 67 l-45 29 -550 0 c-440 -1 -557 -3 -581 -14z"/></g></svg></span>
+52 -77 67 l-45 29 -550 0 c-440 -1 -557 -3 -581 -14z"/></g></svg></a>
   <span class="mastrule"></span>
   <span class="hqname">Summit Sponsorship Prospectus</span>
   <span class="hqtop-r"><span class="eyebrow-m">2027 Summit Series</span></span>
