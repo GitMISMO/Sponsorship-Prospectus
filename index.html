@@ -785,6 +785,10 @@
   .submit-btn{margin-top:18px; background:var(--navy); color:#fff; border:none; padding:14px 24px; font-family:'Archivo',sans-serif; font-weight:700; font-size:14.5px; border-radius:6px; cursor:pointer;}
   .submit-btn:disabled{opacity:0.45; cursor:not-allowed;}
   .submit-btn:not(:disabled):hover{background:var(--navy-deep);}
+  .submit-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:18px;}
+  .submit-row .submit-btn{margin-top:0;}
+  .submit-row .save-btn{padding:13px 20px; font-size:14px;}
+  .agree-block .save-status{margin-top:10px;}
   .cta-btn{background:var(--navy); color:#fff; text-decoration:none; padding:13px 22px; font-family:'Archivo', sans-serif; font-weight:700; font-size:14px; border-radius:6px;}
   .cta-contact{font-size:13.5px; color:var(--ink-soft);}
   .cta-contact a{color:var(--sky-deep); text-decoration:underline;}
@@ -844,9 +848,6 @@
   }
 
   ::selection{background:var(--sky); color:var(--navy);}
-
-/* the logo leads to www.mismo.org (a page read outside MISMO) and grows on hover (Perry, 7 Oct 2026) */
-[data-mismo-home]{text-decoration:none;color:inherit;cursor:pointer;transition:transform .15s ease;transform-origin:left center}[data-mismo-home]:hover,[data-mismo-home]:focus-visible{transform:scale(1.06)}[data-mismo-home]:focus-visible{outline:2px solid #50a4db;outline-offset:3px}
 </style>
 <script>
   /* shared with every other MISMO page, so a light/dark choice carries across */
@@ -885,7 +886,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 52 -77 67 l-45 29 -550 0 c-440 -1 -557 -3 -581 -14z"/></g></symbol></svg>
 
 <header class="hqtop">
-  <a class="logoplate" href="https://www.mismo.org/" data-mismo-home aria-label="MISMO, www.mismo.org" title="MISMO, www.mismo.org"><svg class="wordmark" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="157" height="24"><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="#0f314c"><path d="M5917 1065 c-169 -46 -279 -153 -335 -323 -21 -65 -25 -96 -25 -197
+  <span class="logoplate"><svg class="wordmark" role="img" aria-label="MISMO" viewBox="0 0 708 108" width="157" height="24"><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="#0f314c"><path d="M5917 1065 c-169 -46 -279 -153 -335 -323 -21 -65 -25 -96 -25 -197
 0 -101 4 -132 25 -197 57 -172 168 -280 335 -323 84 -22 723 -22 808 0 222 58
 355 253 355 520 0 270 -132 459 -361 520 -74 20 -730 20 -802 0z m692 -320
 c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
@@ -911,7 +912,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 46 29 c79 50 122 121 139 231 21 140 -19 248 -111 299 -79 44 -134 50 -555 62
 -220 5 -410 14 -422 19 -29 12 -30 43 -3 70 19 19 33 20 288 20 277 0 331 -6
 355 -41 13 -18 24 -19 218 -17 l204 3 3 44 c4 60 -31 168 -70 215 -17 21 -52
-52 -77 67 l-45 29 -550 0 c-440 -1 -557 -3 -581 -14z"/></g></svg></a>
+52 -77 67 l-45 29 -550 0 c-440 -1 -557 -3 -581 -14z"/></g></svg></span>
   <span class="mastrule"></span>
   <span class="hqname">Summit Sponsorship Prospectus</span>
   <span class="hqtop-r"><span class="eyebrow-m">2027 Summit Series</span></span>
@@ -1295,7 +1296,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   <div class="cover-headline">
     <span class="line">2027</span>
     <span class="line accent">Summit Sponsorship</span>
-    <span class="line">Prospectus</span>
+    <span class="line">Prospectus and Application</span>
     <p class="cover-tag">Where our industry builds what's next.</p>
   </div>
   <div class="cover-band">
@@ -1400,8 +1401,8 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
     <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);">
       <div class="stat"><div class="stat-num">66</div><div class="stat-label">Workgroup meetings held across the three 2026 Summits, spanning 26 workgroups</div></div>
-      <div class="stat"><div class="stat-num">2,073</div><div class="stat-label">Seats filled in those meetings &mdash; one person at one meeting</div></div>
-      <div class="stat"><div class="stat-num">160</div><div class="stat-label">People attended the MISMO FRAME Workshop</div></div>
+      <div class="stat"><div class="stat-num">2,073</div><div class="stat-label">Seats filled at the Summits</div></div>
+      <div class="stat"><div class="stat-num">160</div><div class="stat-label">People attended the MISMO FRAME Workshop during the Fall 2026 Summit</div></div>
     </div>
 
     <div class="wg-map">
@@ -1497,7 +1498,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
     <div class="stat-grid">
       <div class="stat"><div class="stat-num">1,021</div><div class="stat-label">Registrations across the three 2026 Summits &middot; 683 unique people</div></div>
-      <div class="stat"><div class="stat-num">313</div><div class="stat-label">Organizations engaged across the same three Summits</div></div>
+      <div class="stat"><div class="stat-num">313</div><div class="stat-label">Unique organizations across the same three Summits</div></div>
       <div class="stat"><div class="stat-num">45%</div><div class="stat-label">Are VPs or above</div></div>
       <div class="stat"><div class="stat-num">+46%</div><div class="stat-label">More lender organizations in 2026 than 2025</div></div>
     </div>
@@ -2044,13 +2045,6 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         <span id="resume-text">Saved selection restored.</span>
         <button type="button" class="save-btn ghost" id="btn-clear">Start over</button>
       </div>
-      <div class="save-bar">
-        <button type="button" class="save-btn" id="btn-save">Save my progress</button>
-        <button type="button" class="save-btn ghost" id="btn-download">Download a copy</button>
-        <button type="button" class="save-btn ghost" id="btn-restore">Restore from file</button>
-        <input type="file" id="file-restore" accept="application/json" hidden>
-        <p class="save-status" id="save-status">Your selections stay in this browser until you submit &mdash; nothing is sent to MISMO when you save.</p>
-      </div>
   </div>
   <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">11</span></div>
 </div>
@@ -2138,7 +2132,11 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         <div class="field"><label for="f-signer-title">Signer title</label><input type="text" id="f-signer-title"></div>
         <div class="field"><label for="f-signer-date">Date</label><input type="date" id="f-signer-date"></div>
       </div>
-      <button type="button" class="submit-btn" id="submit-btn" disabled>Submit Sponsorship Request</button>
+      <div class="submit-row">
+        <button type="button" class="submit-btn" id="submit-btn" disabled>Submit Sponsorship Request</button>
+        <button type="button" class="save-btn" id="btn-save">Save my progress</button>
+      </div>
+      <p class="save-status" id="save-status">Not ready to submit? Save my progress keeps your selections in this browser &mdash; nothing is sent to MISMO when you save.</p>
       <p class="submit-note">Submitting sends your selection and signature straight to the MISMO sponsorship portal, where our team is notified and picks it up for confirmation and invoicing. You&rsquo;ll get a reference number on screen. This page does not process payment.</p>
     </div>
   </div>
@@ -2437,7 +2435,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   // base64; the intake flow saves it to the Sponsor Logos library on the MISMO
   // Summits site as "<reference> - <company>.<ext>". It is held in memory only:
   // a logo can be far bigger than browser storage allows, so Save my progress and
-  // Download a copy leave it out and the sponsor attaches it again.
+  // a restore leave it out and the sponsor attaches it again.
   var LOGO_MAX = 10 * 1024 * 1024;
   var LOGO_TYPES = {png:"image/png", svg:"image/svg+xml", eps:"application/postscript",
                     ai:"application/postscript", pdf:"application/pdf"};
@@ -2621,7 +2619,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     var snap=snapshot();
     if(isEmpty(snap)){ statusMsg("Nothing to save yet \u2014 choose a tier first.", false); return; }
     statusMsg(store(snap) ? "Saved in this browser \u2014 reopen this page on this device to pick up where you left off."
-                          : "This browser won't let the page save locally. Use \u201cDownload a copy\u201d instead.", true);
+                          : "This browser won't let the page save your progress. Finish and submit in one sitting, or try another browser.", true);
   });
   document.getElementById("btn-clear").addEventListener("click", function(){
     try{ localStorage.removeItem(STORE_KEY); }catch(e){}
@@ -2632,45 +2630,6 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     document.getElementById("resume-note").classList.remove("show");
     renderTiers(); renderOpportunities(); updateSummary();
     statusMsg("Cleared. Nothing is stored on this device any more.", false);
-  });
-  document.getElementById("btn-download").addEventListener("click", function(){
-    var snap=snapshot();
-    if(isEmpty(snap)){ statusMsg("Nothing to download yet \u2014 choose a tier first.", false); return; }
-    var name=(snap["f-company"]||"mismo-sponsorship").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-    var text=JSON.stringify(snap,null,2), file=name+"-mismo-2027.json";
-    var done=function(){ statusMsg("Downloaded. Keep the file \u2014 \u201cRestore from file\u201d brings it back on any device.", true); };
-    var viaLink=function(){
-      var blob=new Blob([text],{type:"application/json"});
-      var a=document.createElement("a");
-      a.href=URL.createObjectURL(blob); a.download=file;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
-      done();
-    };
-    if(typeof claude !== "undefined" && claude && typeof claude.use === "function"){
-      Promise.resolve(claude.use("downloads")).then(function(dl){
-        if(dl && dl.save){
-          dl.save({filename:file, data:text}).then(done).catch(function(err){
-            statusMsg(err && err.code === "declined" ? "Download cancelled." : "Couldn't save the file here \u2014 use \u201cSave my progress\u201d instead.", false);
-          });
-        } else { viaLink(); }
-      }).catch(viaLink);
-    } else { viaLink(); }
-  });
-  document.getElementById("btn-restore").addEventListener("click", function(){ document.getElementById("file-restore").click(); });
-  document.getElementById("file-restore").addEventListener("change", function(ev){
-    var f=ev.target.files && ev.target.files[0];
-    if(!f) return;
-    var r=new FileReader();
-    r.onload=function(){
-      try{
-        var d=JSON.parse(r.result);
-        applySnapshot(d); store(d);
-        statusMsg("Restored from " + f.name + "." + (logo ? "" : " Your logo isn\u2019t kept in the file \u2014 attach it again under Your details."), true);
-      }catch(e){ statusMsg("That file could not be read \u2014 it should be the JSON this page downloaded.", false); }
-      ev.target.value="";
-    };
-    r.readAsText(f);
   });
 
   // ---- which step is next --------------------------------------------------
