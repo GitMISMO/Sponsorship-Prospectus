@@ -2733,7 +2733,24 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
     var showError = function(){
       btn.disabled = false;
-      if(note) note.innerHTML = "<span class=\"submit-msg err\"><strong>We couldn&rsquo;t reach the sponsorship portal.</strong> Nothing was submitted &mdash; your selection is still on this page. Please try again in a moment, or contact <a href=\"mailto:kbradshaw@mismo.org\">kbradshaw@mismo.org</a> and we&rsquo;ll record it for you.</span>";
+      /* Since 2 November 2026 the page only says "Submitted" when the intake flow confirms it.
+         When it can't (a company network that blocks Power Automate, a timeout, an error reply),
+         the sponsor gets an email to Kelly with every detail filled in, so nothing is lost. */
+      var lines = [
+        "Reference: " + payload.reference,
+        "Company: " + payload.company,
+        "Contact: " + payload.contactName + " (" + payload.contactEmail + (payload.contactPhone ? ", " + payload.contactPhone : "") + ")",
+        "Program: " + payload.programLabel,
+        "Level: " + payload.tierName + " (" + payload.price + ")",
+        "Opportunity: " + payload.opportunity,
+        "Signed by: " + payload.signerName + ", " + payload.signerTitle + ", " + payload.signedDate,
+        "",
+        "Our logo is attached."
+      ];
+      var mail = "mailto:kbradshaw@mismo.org?subject=" +
+        encodeURIComponent("Sponsorship application " + payload.reference + " \u2014 " + payload.company) +
+        "&body=" + encodeURIComponent("The online prospectus couldn\u2019t send our sponsorship application, so here it is by email.\n\n" + lines.join("\n"));
+      if(note) note.innerHTML = "<span class=\"submit-msg err\"><strong>Your application didn&rsquo;t reach MISMO.</strong> Nothing was submitted &mdash; your selection is still on this page. Please try again in a moment. If it still won&rsquo;t go through (some company networks block it), <a href=\"" + mail.replace(/&/g, "&amp;") + "\">email it to kbradshaw@mismo.org</a> instead &mdash; the details are filled in for you, just attach your logo.</span>";
     };
 
     if(!SUBMIT_ENDPOINT){ showError(); return; }
@@ -2741,17 +2758,21 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     btn.disabled = true;
     if(note) note.textContent = "Submitting to the sponsorship portal and sending your logo\u2026 this can take a moment.";
     /* text/plain keeps this a simple request, so the browser skips the CORS preflight.
-       mode:"no-cors" is the other half: the Power Automate flow answers without any
-       Access-Control-Allow-Origin header, so an ordinary fetch REJECTS even when the
-       request went through — which would tell the sponsor it failed and invite them
-       to submit the same sponsorship twice. This sends once and cannot read the reply,
-       so the page says it has been sent and MISMO confirms by email. A genuine network
-       failure still rejects, and is still reported.
-       If a Response action carrying Access-Control-Allow-Origin is ever added to the
-       flow, drop the mode and put the res.ok check back. */
-    fetch(SUBMIT_ENDPOINT, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain"},
+       Since 2 November 2026 the Sponsorship Intake flow answers every request: 200 {"ok":true}
+       once the Sponsorship Requests item is created, 403 when the request isn't accepted, and
+       500 when a step fails. Each reply carries Access-Control-Allow-Origin, so the page can
+       read it and only says "Submitted" when the flow confirms. Anything else (a blocked
+       network, no reply within 90 seconds, an error reply) shows the error and the email fallback. */
+    var ctl = (typeof AbortController === "function") ? new AbortController() : null;
+    if(ctl) setTimeout(function(){ ctl.abort(); }, 90000);
+    fetch(SUBMIT_ENDPOINT, { method:"POST", signal: ctl ? ctl.signal : undefined, headers:{"Content-Type":"text/plain"},
                              body: JSON.stringify(payload) })
-      .then(function(){
+      .then(function(res){
+      return res.json().catch(function(){ return {}; }).then(function(j){
+        if(!res.ok || !j || j.ok !== true) throw new Error("not received");
+      });
+    })
+    .then(function(){
         if(note) note.innerHTML = "<span class=\"submit-msg ok\"><strong>Submitted to the MISMO sponsorship portal.</strong> Your reference is <code>" + reference + "</code>. The MISMO team picks it up from here to confirm your sponsorship and invoice. Keep the reference &mdash; if you haven&rsquo;t heard back within two working days, send it to <a href=\"mailto:kbradshaw@mismo.org\">kbradshaw@mismo.org</a>.</span>";
         btn.textContent = "Submitted";
         try{ localStorage.removeItem(STORE_KEY); }catch(e){}
