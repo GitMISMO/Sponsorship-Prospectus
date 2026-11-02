@@ -2773,7 +2773,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       });
     })
     .then(function(){
-        if(note) note.innerHTML = "<span class=\"submit-msg ok\"><strong>Submitted to the MISMO sponsorship portal.</strong> Your reference is <code>" + reference + "</code>. The MISMO team picks it up from here to confirm your sponsorship and invoice. Keep the reference &mdash; if you haven&rsquo;t heard back within two working days, send it to <a href=\"mailto:kbradshaw@mismo.org\">kbradshaw@mismo.org</a>.</span>";
+        if(note) note.innerHTML = "<span class=\"submit-msg ok\"><strong>Submitted to the MISMO sponsorship portal.</strong> Your reference is <code>" + reference + "</code>. A confirmation email is on its way to <strong>" + String(payload.contactEmail || "your contact address").replace(/[<>&"]/g, "") + "</strong> &mdash; if it doesn&rsquo;t arrive within the hour, check your junk folder, then send your reference to <a href=\"mailto:kbradshaw@mismo.org\">kbradshaw@mismo.org</a>. The MISMO team picks it up from here to confirm your sponsorship and invoice. Keep the reference &mdash; if you haven&rsquo;t heard back within two working days, send it to <a href=\"mailto:kbradshaw@mismo.org\">kbradshaw@mismo.org</a>.</span>";
         btn.textContent = "Submitted";
         try{ localStorage.removeItem(STORE_KEY); }catch(e){}
       })
