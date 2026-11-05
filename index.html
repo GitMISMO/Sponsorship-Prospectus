@@ -2707,7 +2707,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       /* program and tier go out in the Sponsorship Requests list's own wording
          (its Program and Tier choice columns), so the intake flow can drop them
          straight in with no formula. Changed 28 September 2026. */
-      program: state.program === "series" ? "Summit Series" : "Winter Summit",
+      program: ({series:"Summit Series", winter:"Winter Summit", spring:"Spring Summit", fall:"Fall Summit"})[state.program] || "Winter Summit",
       programLabel: prog.programLabel,
       tier: state.tier.charAt(0).toUpperCase() + state.tier.slice(1),
       tierName: t.name,
@@ -2826,28 +2826,91 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     return '<td class="status-available">' + o.note + '</td>';
   }
 
-  function applyAvailability(rows){
-    if(!rows || !rows.length && !Array.isArray(rows)) return false;
-    /* how many of each opportunity are gone, and which days */
-    var taken = {}, days = {};
-    rows.forEach(function(r){
-      var k = oppKey(cellText(r.opportunity));
-      if(!k) return;
-      taken[k] = (taken[k] || 0) + 1;
-      var d = dayName(r.day) || dayName(r.opportunity);
-      if(d){ (days[k] = days[k] || {})[d] = 1; }
-    });
+  var PROGRAM_ORDER = ["winter", "series"];   // the programs this page sells
+  var SNAP_COLS = ["series", "winter"];       // the Availability table's status columns, left to right
+  var LEGACY_OK = true;        // see applyAvailability
+  /* ---- which summit each program on this page sells (November 2026) ---------
+     The Spring and Fall 2027 prospectuses are their own pages, built from this
+     one. A slot belongs to a summit: a Series sponsor holds it at Winter, Spring
+     and Fall, a single-summit sponsor only at theirs. The Availability flow sends
+     each taken slot's Program (and, for a custom Series package, its per-summit
+     Summit Lines), so each page counts only what is gone at its own summit. A
+     Series tier needs the slot free at all three. */
+  var PROGRAM_SEASON = {winter:"Winter", spring:"Spring", fall:"Fall", series:"Series"};
+  var SEASONS = ["Winter","Spring","Fall"];
+  var DAY_ABBR = {Monday:"Mon", Tuesday:"Tue", Wednesday:"Wed", Thursday:"Thu", Friday:"Fri"};
 
-    ["winter","series"].forEach(function(prog){
+  function seasonOf(v){
+    var m = /(Winter|Spring|Fall|Series)/i.exec(cellText(v));
+    return m ? m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase() : "";
+  }
+  /* Summit Lines: a custom Series package's own slot at each summit, as JSON
+     [{"s":"Spring","tier":"PLATINUM","opp":"AI Demo / Case Study Sponsor","day":""}] */
+  function parseLines(v){
+    var s = cellText(v).trim();
+    if(!s) return null;
+    try{ var a = JSON.parse(s); return (Array.isArray(a) && a.length) ? a : null; }catch(e){ return null; }
+  }
+  function slotKey(tier, opp){
+    return /^\s*diamond\s*$/i.test(cellText(tier)) ? "diamond" : oppKey(cellText(opp));
+  }
+  /* every slot one row takes: [{season, key, day}] */
+  function slotsOf(r, legacy){
+    var key = slotKey(r.tier, r.opportunity);
+    var day = dayName(r.day) || dayName(r.opportunity);
+    var all = function(){ return SEASONS.map(function(s){ return {season:s, key:key, day:day}; }); };
+    if(legacy) return all();
+    var se = seasonOf(r.program);
+    if(se === "Series"){
+      var lines = parseLines(r.lines);
+      if(!lines) return all();
+      return lines.map(function(l){
+        return {season: seasonOf(l.s), key: slotKey(l.tier, l.opp), day: dayName(l.day) || dayName(l.opp)};
+      });
+    }
+    return se ? [{season:se, key:key, day:day}] : [];
+  }
+
+  function applyAvailability(rows){
+    if(!Array.isArray(rows)) return false;
+    /* Before the flow sent Program, every row counted everywhere. That is still
+       right for a Winter + Series page, but a Spring or Fall page can't tell a
+       Winter-only sale from its own, so it keeps its built-in snapshot. */
+    var legacy = !rows.some(function(r){ return r && Object.prototype.hasOwnProperty.call(r, "program"); });
+    if(legacy && rows.length && !LEGACY_OK) return false;
+
+    var taken = {}, days = {};
+    SEASONS.forEach(function(s){ taken[s] = {}; days[s] = {}; });
+    rows.forEach(function(r){
+      if(!r) return;
+      slotsOf(r, legacy).forEach(function(sl){
+        if(!sl.key || !taken[sl.season]) return;
+        taken[sl.season][sl.key] = (taken[sl.season][sl.key] || 0) + 1;
+        if(sl.day) (days[sl.season][sl.key] = days[sl.season][sl.key] || {})[sl.day] = 1;
+      });
+    });
+    function seasonsFor(prog){
+      var se = PROGRAM_SEASON[prog];
+      return se === "Series" ? SEASONS : [se];
+    }
+    function countFor(prog, key){
+      return Math.max.apply(null, seasonsFor(prog).map(function(s){ return taken[s][key] || 0; }));
+    }
+    function daysFor(prog, key){
+      var out = {};
+      seasonsFor(prog).forEach(function(s){ Object.keys(days[s][key] || {}).forEach(function(d){ out[d] = 1; }); });
+      return out;
+    }
+
+    PROGRAM_ORDER.forEach(function(prog){
       TIER_ORDER.forEach(function(tid){
         var t = TIERS[prog][tid];
         if(!t) return;
         if(!t.opportunities){
           /* Diamond: the tier is the slot */
           if(t.cap !== undefined && t.oppName){
-            var n = taken[oppKey(t.oppName)] || 0;
-            var d = noteFor(t.cap, n);
-            t.avail = d.sold ? "Sold" : (d.note + " \u00b7 exclusive");
+            var d = noteFor(t.cap, countFor(prog, "diamond"));
+            t.avail = d.sold ? "Sold" : (d.note + " · exclusive");
             t.soldOut = d.sold;
           }
           return;
@@ -2855,42 +2918,64 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         t.opportunities.forEach(function(o){
           var k = oppKey(o.name);
           if(o.days){
-            var sold = Object.keys(days[k] || {}).filter(function(d){ return o.days.indexOf(d) >= 0; });
+            var gone = daysFor(prog, k);
+            var sold = o.days.filter(function(d){ return gone[d]; });
             o.soldDays = sold;
-            var r2 = noteFor(o.days.length, sold.length);
+            /* a slot held with no day chosen yet (a custom Series line) still counts */
+            var r2 = noteFor(o.days.length, Math.max(sold.length, countFor(prog, k)));
             o.note = r2.note; o.sold = r2.sold;
           } else {
-            var r3 = noteFor(o.cap, taken[k] || 0);
+            var r3 = noteFor(o.cap, countFor(prog, k));
             o.note = r3.note; o.sold = r3.sold;
           }
         });
       });
     });
 
-    /* repaint the reserve page, and the snapshot table with it */
+    /* repaint the reserve page, the tier pages and the snapshot table */
     renderTiers(); renderOpportunities(); updateSummary();
+    function lookup(prog, k){
+      var hit = null;
+      TIER_ORDER.forEach(function(tid){
+        var t = TIERS[prog][tid]; if(!t || hit) return;
+        if(!t.opportunities){
+          if(t.oppName && (oppKey(t.oppName) === k || oppKey(t.name) === k))
+            hit = {note: t.soldOut ? "Sold" : String(t.avail).split(" · ")[0], sold: !!t.soldOut};
+          return;
+        }
+        t.opportunities.forEach(function(o){ if(!hit && oppKey(o.name) === k) hit = o; });
+      });
+      return hit;
+    }
     document.querySelectorAll(".snap-table tbody tr[data-opp]").forEach(function(tr){
       var k = oppKey(tr.getAttribute("data-opp"));
-      var found = null, foundW = null;
-      ["series","winter"].forEach(function(prog){
-        TIER_ORDER.forEach(function(tid){
-          var t = TIERS[prog][tid]; if(!t) return;
-          if(!t.opportunities){
-            if(t.oppName && oppKey(t.oppName) === k){
-              var d = {note: t.soldOut ? "Sold" : String(t.avail).split(" \u00b7 ")[0], sold: !!t.soldOut};
-              if(prog === "series") found = d; else foundW = d;
-            }
-            return;
-          }
-          t.opportunities.forEach(function(o){
-            if(oppKey(o.name) !== k) return;
-            if(prog === "series") found = o; else foundW = o;
-          });
-        });
-      });
       var tds = tr.querySelectorAll("td");
-      if(found && tds[2]) tds[2].outerHTML = statusCell(found);
-      if(foundW && tds[3]) tds[3].outerHTML = statusCell(foundW);
+      SNAP_COLS.forEach(function(prog, i){
+        var o = lookup(prog, k);
+        if(o && tds[2 + i]) tds[2 + i].outerHTML = statusCell(o);
+      });
+    });
+    PROGRAM_ORDER.forEach(function(prog){
+      var page = document.getElementById(prog);
+      if(!page) return;
+      page.querySelectorAll(".opp-table tbody tr").forEach(function(tr){
+        var tds = tr.querySelectorAll("td");
+        if(tds.length < 2) return;
+        var o = lookup(prog, oppKey(tds[0].textContent));
+        if(!o) return;
+        var h;
+        if(o.note === "Unlimited") h = "Unlimited";
+        else if(o.sold) h = "Sold";
+        else {
+          var m = /^(\d+ available), (\d+ sold)$/.exec(o.note);
+          h = m ? '<span class="part-available">' + m[1] + '</span>, <span class="part-sold">' + m[2] + '</span>' : o.note;
+          if(o.days) h += '<span class="opp-days">' + o.days.map(function(d){
+            return '<span class="' + ((o.soldDays || []).indexOf(d) >= 0 ? "taken" : "") + '">' + (DAY_ABBR[d] || d) + '</span>';
+          }).join("") + '</span>';
+        }
+        tds[1].innerHTML = h;
+        tr.classList.toggle("sold", !!o.sold);
+      });
     });
     var stamp = document.getElementById("avail-stamp");
     if(stamp){
