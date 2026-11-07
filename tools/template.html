@@ -2027,6 +2027,8 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
           <div class="field"><label for="f-email">Contact email</label><input type="email" id="f-email" autocomplete="email" required></div>
           <div class="field"><label for="f-phone">Contact phone</label><input type="tel" id="f-phone" autocomplete="tel" inputmode="tel" required></div>
         </div>
+        <!-- spam trap (November 2026): hidden from people and screen readers; a robot filling every box fills this too -->
+        <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;"><label for="f-website">Website</label><input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
         <div class="logo-field" id="logo-field">
           <span class="logo-label" id="logo-label">Company logo</span>
           <label class="logo-drop" for="f-logo">
@@ -2578,6 +2580,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
 
   // ---- save / resume -------------------------------------------------------
+  var PAGE_OPENED = Date.now();   // spam check: a person takes more than a few seconds
   var STORE_KEY = "mismo2027.reserve.v1";
   var fields = ["f-company","f-contact","f-email","f-phone","f-signer-name","f-signer-title","f-signer-date"];
   function snapshot(){
@@ -2701,6 +2704,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     var signerTitle = document.getElementById("f-signer-title").value;
     var signerDate = document.getElementById("f-signer-date").value;
     var reference = makeReference();
+    var trap = document.getElementById("f-website");
     var payload = {
       secret: SUBMIT_SECRET,
       reference: reference,
@@ -2730,7 +2734,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       agreed: true,
       /* which wording they agreed to (November 7, 2026): the exact text of every version is
          kept in contracts/ and never changes */
-      contractVersion: (document.querySelector(".contract-box") || {getAttribute:function(){ return ""; }}).getAttribute("data-contract-version") || ""
+      contractVersion: (document.querySelector(".contract-box") || {getAttribute:function(){ return ""; }}).getAttribute("data-contract-version") || "",
+      /* spam signs the portal checks (November 2026): the hidden box, and how long the page was open */
+      hp: trap ? trap.value : "",
+      secondsOnPage: Math.round((Date.now() - PAGE_OPENED) / 1000)
     };
     var btn = this;
     var note = document.querySelector(".submit-note");
