@@ -1882,7 +1882,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     <h2 class="page-title">MISMO Event Sponsor Contract</h2>
     <p class="page-sub">Review the terms below. Submitting your sponsorship request confirms you have read and agree to this Contract on behalf of your organization.</p>
 
-    <div class="contract-box">
+    <div class="contract-box" data-contract-version="2027-v1">
           <p><strong>Scope.</strong> This agreement relates to the event presented by or on behalf of, the Mortgage Information Standards Maintenance Organization, Inc. (&ldquo;MISMO&rdquo;), as identified in the companion Sponsorship Program and Application (&ldquo;Application&rdquo;). The completed Application incorporates by reference all of the terms of this Sponsor Contract. In submitting a signed Application, Sponsor agrees to the terms set forth in this Contract. The term &ldquo;Contract,&rdquo; as used herein, refers to the terms set forth in this Sponsor Contract. &ldquo;Event&rdquo; refers to the referenced MISMO conference, education session, or workshop. &ldquo;Sponsor&rdquo; is an entity whose Sponsorship Application has been accepted by MISMO. Subject to the availability of sponsorships at the level selected, the Application for Sponsorship for a particular Event becomes a binding contract upon MISMO&rsquo;s issuance of a confirmation notice after receiving a fully completed Application and good funds in the amount owed.</p>
           <p><strong>Objectives of MISMO Events.</strong> MISMO&rsquo;s objective for each Event will vary depending upon the target audience of the event. It may provide a unique educational framework for the dissemination of the newest ideas in the real estate finance industry, or in-depth training, or a workshop to provide opportunities for industry participants to address specific issues of interest. These objectives are accomplished through the assembly of individuals from either a broad or targeted range of industry participants. Events typically involve the presentation of program activities to facilitate the exchange of information directed at solving needs related to the financing of either commercial or residential real estate, or both.</p>
           <p><strong>Terms of Sponsorship.</strong> Sponsor agrees to sponsor the Event and to make a contribution in the amount and in the manner specified in the Application for the Sponsorship level selected by Sponsor. It is understood and agreed that Sponsor&rsquo;s sponsorship of the Event is not contingent upon any specific attendance levels or other manner of participation by MISMO subscribers and non-subscribers at the Event. The payment schedule for the sponsorship contribution is set forth in the Application. To the extent that any portion of a payment under this Section 1(a) would not (if made as a separate payment) be deemed a qualified sponsorship payment under Section 513(i) of the Code, such portion of the payment and the other portion of such payment shall be deemed and treated as separate payments.</p>
@@ -2480,7 +2480,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       signerName: signerName,
       signerTitle: signerTitle,
       signedDate: signerDate,
-      agreed: true
+      agreed: true,
+      /* which wording they agreed to (November 7, 2026): the exact text of every version is
+         kept in contracts/ and never changes */
+      contractVersion: (document.querySelector(".contract-box") || {getAttribute:function(){ return ""; }}).getAttribute("data-contract-version") || ""
     };
     var btn = this;
     var note = document.querySelector(".submit-note");
