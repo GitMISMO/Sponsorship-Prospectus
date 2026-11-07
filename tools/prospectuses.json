@@ -1,0 +1,112 @@
+{
+  "about": "Which prospectuses tools/build.py makes, and what it needs to know about each summit. Prices are in ../catalog.json. 'taken' is the built-in availability shown until the live availability arrives (the Sponsorship Portal's Inventory, Nov 5, 2026): {opportunity: [how many sold, [days sold]]}.",
+  "pages": [
+    {
+      "folder": "spring-2027",
+      "program": "spring",
+      "summits": [
+        "Spring"
+      ]
+    },
+    {
+      "folder": "fall-2027",
+      "program": "fall",
+      "summits": [
+        "Fall"
+      ]
+    },
+    {
+      "folder": "spring-fall-2027",
+      "program": "springfall",
+      "summits": [
+        "Spring",
+        "Fall"
+      ],
+      "package": "springfall"
+    }
+  ],
+  "summits": {
+    "Spring": {
+      "short": "Jun 7&ndash;10, 2027",
+      "long": "June 7&ndash;10, 2027",
+      "short_js": "Jun 7–10, 2027",
+      "city": "Salt Lake City, UT",
+      "venue": "Salt Lake Marriott Downtown at City Creek, 75 South West Temple",
+      "icon": "<path d=\"M12 21v-8.6\"/><path d=\"M12 12.4c0-4.3 3-7.4 8-7.4 0 4.3-3 7.4-8 7.4z\"/><path d=\"M12 14.6c0-3.4-2.6-6-7-6 0 3.4 2.6 6 7 6z\"/>"
+    },
+    "Fall": {
+      "short": "Sep 13&ndash;16, 2027",
+      "long": "September 13&ndash;16, 2027",
+      "short_js": "Sep 13–16, 2027",
+      "city": "Bethesda, MD",
+      "venue": "The Bethesdan Hotel, 8120 Wisconsin Avenue",
+      "icon": "<path d=\"M5 19C5 10.6 10.4 5 20 4c-.6 9.8-6.4 15-15 15z\"/><path d=\"M5 19l8.4-8.4\"/>"
+    }
+  },
+  "taken": {
+    "Spring": {
+      "Reception Sponsor": [
+        1,
+        [
+          "Tuesday"
+        ]
+      ],
+      "Badge Sponsor": [
+        1,
+        []
+      ],
+      "Wi-Fi Sponsor": [
+        1,
+        []
+      ],
+      "AI Demo / Case Study Sponsor": [
+        1,
+        []
+      ],
+      "Workshop Sponsor": [
+        1,
+        []
+      ],
+      "Morning Coffee Break Sponsor": [
+        1,
+        []
+      ],
+      "Afternoon Snack Break Sponsor": [
+        1,
+        [
+          "Tuesday"
+        ]
+      ]
+    },
+    "Fall": {
+      "Reception Sponsor": [
+        1,
+        [
+          "Tuesday"
+        ]
+      ],
+      "Badge Sponsor": [
+        1,
+        []
+      ],
+      "Wi-Fi Sponsor": [
+        1,
+        []
+      ],
+      "Workshop Sponsor": [
+        2,
+        []
+      ],
+      "Morning Coffee Break Sponsor": [
+        1,
+        []
+      ],
+      "Afternoon Snack Break Sponsor": [
+        1,
+        [
+          "Tuesday"
+        ]
+      ]
+    }
+  }
+}
