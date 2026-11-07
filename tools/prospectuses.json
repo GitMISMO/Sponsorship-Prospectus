@@ -1,5 +1,5 @@
 {
-  "about": "Which prospectuses tools/build.py makes, and what it needs to know about each summit. Prices are in ../catalog.json. 'taken' is the built-in availability shown until the live availability arrives (the Sponsorship Portal's Inventory, Nov 5, 2026): {opportunity: [how many sold, [days sold]]}.",
+  "about": "Which prospectuses tools/build.py makes, and what it needs to know about each summit. Prices are in ../catalog.json. 'taken' is the built-in availability shown until the live availability arrives (the Sponsorship Portal's Inventory, Nov 5, 2026; First American's coffee break set to Tuesday Nov 7): {opportunity: [how many sold, [days sold]]}.",
   "pages": [
     {
       "folder": "spring-2027",
@@ -69,7 +69,9 @@
       ],
       "Morning Coffee Break Sponsor": [
         1,
-        []
+        [
+          "Tuesday"
+        ]
       ],
       "Afternoon Snack Break Sponsor": [
         1,
@@ -99,7 +101,9 @@
       ],
       "Morning Coffee Break Sponsor": [
         1,
-        []
+        [
+          "Tuesday"
+        ]
       ],
       "Afternoon Snack Break Sponsor": [
         1,
