@@ -1,0 +1,37 @@
+{
+  "about": "The 2027 sponsorship price list: the ONE place tiers, prices, registrations, slot counts and days are set. The three prospectuses and the Sponsorship Portal are checked against this file after every change (sponsorship repo, tests/checks.js), and the portal checks every new application's price against it. To change a price or a slot count: edit this file, then run node tests/apply-catalog.js in the sponsorship repo to carry it onto the pages, run the checks, and publish.",
+  "year": 2027,
+  "seriesNote": "Series price = three single-summit prices less 10%.",
+  "summits": {
+    "Winter": {"label": "Winter 2027 Summit", "opens": "2027-01-11", "dates": "Jan 11–14, 2027", "city": "New Orleans, LA"},
+    "Spring": {"label": "Spring 2027 Summit", "opens": "2027-06-07", "dates": "Jun 7–10, 2027", "city": "Salt Lake City, UT"},
+    "Fall":   {"label": "Fall 2027 Summit",   "opens": "2027-09-13", "dates": "Sep 13–16, 2027", "city": "Bethesda, MD"}
+  },
+  "tiers": [
+    {"key": "diamond", "name": "DIAMOND", "single": 22500, "series": 60750, "comps": 8, "items": [
+      {"opp": "Exclusive", "cap": 1, "exclusive": true, "alt": ["Diamond Exclusive", "Diamond Sponsor"]}
+    ]},
+    {"key": "platinum", "name": "PLATINUM", "single": 15000, "series": 40500, "comps": 6, "items": [
+      {"opp": "Reception Sponsor", "cap": 2, "days": ["Monday", "Tuesday"]},
+      {"opp": "Badge Sponsor", "cap": 1},
+      {"opp": "AI Demo / Case Study Sponsor", "cap": 3, "alt": ["AI Demo Sponsor", "Case Study Sponsor"]},
+      {"opp": "Wi-Fi Sponsor", "cap": 1, "alt": ["WiFi Sponsor"]}
+    ]},
+    {"key": "gold", "name": "GOLD", "single": 10000, "series": 27000, "comps": 5, "items": [
+      {"opp": "Workshop Sponsor", "cap": 5},
+      {"opp": "Session Introduction", "cap": 5, "alt": ["Session Introduction Sponsor", "Session Intro"]}
+    ]},
+    {"key": "silver", "name": "SILVER", "single": 7500, "series": 20250, "comps": 4, "items": [
+      {"opp": "Event App Sponsor", "cap": 1},
+      {"opp": "Newcomer Luncheon Sponsor", "cap": 1},
+      {"opp": "Banner Sponsor", "cap": 5},
+      {"opp": "Silver Branding Sponsor", "cap": null}
+    ]},
+    {"key": "bronze", "name": "BRONZE", "single": 5000, "series": 13500, "comps": 2, "items": [
+      {"opp": "Breakfast Sponsor", "cap": 4, "days": ["Monday", "Tuesday", "Wednesday", "Thursday"]},
+      {"opp": "Livestream Sponsor", "cap": 1},
+      {"opp": "Morning Coffee Break Sponsor", "cap": 4, "days": ["Monday", "Tuesday", "Wednesday", "Thursday"]},
+      {"opp": "Afternoon Snack Break Sponsor", "cap": 4, "days": ["Monday", "Tuesday", "Wednesday", "Thursday"]}
+    ]}
+  ]
+}
