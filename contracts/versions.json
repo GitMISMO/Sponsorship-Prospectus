@@ -1,0 +1,12 @@
+{
+  "about": "Every version of the Sponsor Contract wording sponsors have agreed to. A version's file never changes. sha256 is of the contract box's HTML with runs of whitespace collapsed to one space (sponsorship repo, tests/checks.js).",
+  "current": "2027-v1",
+  "versions": [
+    {
+      "version": "2027-v1",
+      "from": "2026-09-16",
+      "file": "sponsor-contract-2027-v1.html",
+      "sha256": "c08ab2092d871ab2d5ffc192cceb7cbc50bc38c77523843686da573e81db5305"
+    }
+  ]
+}
