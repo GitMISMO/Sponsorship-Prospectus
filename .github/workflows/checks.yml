@@ -1,0 +1,32 @@
+# Runs the Sponsorship Portal's tests/checks.js after every change to a prospectus (and every Monday, so the
+# checks notice if something has gone stale). A red X on a commit means a check failed; GitHub
+# emails whoever made the change. The checks use made-up practice data only.
+name: Checks
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "47 13 * * 1"
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: Sponsorship-Prospectus
+      - uses: actions/checkout@v4
+        with:
+          repository: GitMISMO/sponsorship
+          path: sponsorship
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install the test browser
+        working-directory: sponsorship/tests
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Run the checks
+        working-directory: sponsorship/tests
+        run: node checks.js ../../Sponsorship-Prospectus
