@@ -2331,6 +2331,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 
 
   // ---- save / resume -------------------------------------------------------
+  var PACKAGE_KEY = "";   // a discounted package of summits, or ""
   var STORE_KEY = "mismo2027.spring.reserve.v1";
   var fields = ["f-company","f-contact","f-email","f-phone","f-signer-name","f-signer-title","f-signer-date"];
   function snapshot(){
@@ -2462,7 +2463,11 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       /* program and tier go out in the Sponsorship Requests list's own wording
          (its Program and Tier choice columns), so the intake flow can drop them
          straight in with no formula. Changed 28 September 2026. */
-      program: ({series:"Summit Series", winter:"Winter Summit", spring:"Spring Summit", fall:"Fall Summit"})[state.program] || "Winter Summit",
+      program: ({series:"Summit Series", winter:"Winter Summit", spring:"Spring Summit", fall:"Fall Summit", springfall:"Summit Series"})[state.program] || "Winter Summit",
+      /* a package of some summits (Spring & Fall) goes to the list as a Series, and the
+         portal makes it a package of just these summits (November 2026) */
+      summits: (PROGRAM_SEASONS[state.program] || []).join(","),
+      package: PACKAGE_KEY,
       programLabel: prog.programLabel,
       tier: state.tier.charAt(0).toUpperCase() + state.tier.slice(1),
       tierName: t.name,
@@ -2594,8 +2599,10 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
      each taken slot's Program (and, for a custom Series package, its per-summit
      Summit Lines), so each page counts only what is gone at its own summit. A
      Series tier needs the slot free at all three. */
-  var PROGRAM_SEASON = {winter:"Winter", spring:"Spring", fall:"Fall", series:"Series"};
   var SEASONS = ["Winter","Spring","Fall"];
+  /* the summits each program sells: a Series needs the slot free at all three, a package
+     (Spring & Fall) at each of its own */
+  var PROGRAM_SEASONS = {winter:["Winter"], spring:["Spring"], fall:["Fall"], series:SEASONS, springfall:["Spring","Fall"]};
   var DAY_ABBR = {Monday:"Mon", Tuesday:"Tue", Wednesday:"Wed", Thursday:"Thu", Friday:"Fri"};
 
   function seasonOf(v){
@@ -2647,10 +2654,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         if(sl.day) (days[sl.season][sl.key] = days[sl.season][sl.key] || {})[sl.day] = 1;
       });
     });
-    function seasonsFor(prog){
-      var se = PROGRAM_SEASON[prog];
-      return se === "Series" ? SEASONS : [se];
-    }
+    function seasonsFor(prog){ return PROGRAM_SEASONS[prog] || []; }
     function countFor(prog, key){
       return Math.max.apply(null, seasonsFor(prog).map(function(s){ return taken[s][key] || 0; }));
     }
