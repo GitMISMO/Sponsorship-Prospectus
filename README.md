@@ -36,6 +36,15 @@ Prospectuses tab.
 **A price change:** edit `catalog.json`, run `node tests/apply-catalog.js` in the sponsorship
 repo (it updates the template and the portal too), then run the build.
 
+## Download PDF
+
+The **Download PDF** button in each page's top bar opens the browser's Save as PDF, with the file
+named from the page title. The print layout (`@media print` in the template) scales the pages to
+letter size, starts each section on a new sheet, shows today's availability and a note on where to
+apply, and leaves out the application form, the summary and the signing. Adding `?pdf` to an
+address opens it by itself once the live availability is in; the portal's Prospectuses tab uses
+that for its Download PDF links.
+
 ## Practice copy
 
 Add `?practice` to any prospectus address to try it on made-up data. Nothing is sent to the
