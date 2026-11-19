@@ -265,9 +265,43 @@
   .rail-flash{animation:railFlash 1.9s ease-in-out 1}
   @media (prefers-reduced-motion:reduce){ .rail-flash{animation:none;background:var(--accent-soft)} }
 
+  /* ---------------- Download PDF (Jonna, November 19, 2026) ----------------
+     The button prints the page as it is right now (live availability included) through
+     the browser's Save as PDF; the file is named from the page title. The PDF leaves out
+     the application form and the signing, and says where to apply. */
+  .pdfbtn{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 12px;
+    border:1px solid rgba(116,191,235,.55);border-radius:6px;background:rgba(255,255,255,.08);
+    color:#fff;font:600 12.5px/1 var(--display);letter-spacing:.01em;cursor:pointer;white-space:nowrap}
+  .pdfbtn:hover{background:rgba(116,191,235,.22)}
+  .pdfbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+  @media(max-width:560px){.pdfbtn .pdf-l{display:none}.pdfbtn{padding:0 9px}}
+  .print-only{display:none}
   @media print{
-    body{padding-left:0 !important}
-    .hqtop, .hq.rail, .railscrim{display:none !important}
+    @page{size:letter;margin:0.45in 0.4in}
+    html, body{background:#fff !important}
+    body{padding-left:0 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .hqtop, .hq.rail, .railscrim, .pdfbtn, #practice-bar, .resume-note, #resume-note{display:none !important}
+    .page{width:auto !important;margin:0 !important;box-shadow:none !important;break-before:page;page-break-before:always}
+    .page.cover{break-before:auto;page-break-before:auto;margin-top:0 !important}
+    .page-pad{padding:28px 30px 20px}
+    .running-head{padding:14px 30px 0}
+    .running-foot{padding:12px 30px 4px}
+    .running-foot{display:none !important}
+    /* the covers fill their sheet (a letter page is about 1,180px tall at this scale) */
+    .page.cover, .page.backcover{min-height:1100px}
+    /* the parts a sponsor fills in stay on the web page */
+    #reserve, #summary, .agree-block, .toc-row[href="#reserve"], .toc-row[href="#summary"]{display:none !important}
+    .toc-page, .toc-dots{visibility:hidden}
+    /* the pages are laid out 900px wide; a letter page holds about 740px, so scale rather than reflow */
+    body{zoom:.82}
+    .contract-box{max-height:none !important;overflow:visible !important}
+    .page-pad > *:not(.contract-box):not(.tier-strip):not(.quote-stack):not(.toc-list),
+    .tier-row, .quote, .stat, .opp-table tr, .contract-box p, .toc-row, .snap-table tr{break-inside:avoid;page-break-inside:avoid}
+    .print-only{display:block}
+    .print-note{margin:22px 0 0;padding:14px 16px;border:1px solid #d5e2ed;border-left:4px solid #74bfeb;
+      border-radius:6px;background:#f4f9fc;font-size:13px;line-height:1.55;color:#0d314c}
+    .print-note b{font-weight:700}
+    a[href^="http"]{text-decoration:none}
   }
 
   /* ---------------- page shell ---------------- */
@@ -917,7 +951,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
 52 -77 67 l-45 29 -550 0 c-440 -1 -557 -3 -581 -14z"/></g></svg></span>
   <span class="mastrule"></span>
   <span class="hqname">Summit Sponsorship Prospectus</span>
-  <span class="hqtop-r"><span class="eyebrow-m">Spring 2027 Summit</span></span>
+  <span class="hqtop-r"><span class="eyebrow-m">Spring 2027 Summit</span><button type="button" class="pdfbtn" id="pdf-btn" title="Save this prospectus as a PDF, with today&rsquo;s availability"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg><span class="pdf-l">Download PDF</span></button></span>
 </header>
 
 <aside class="hq rail" id="rail">
@@ -1335,6 +1369,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       <a class="toc-row" href="#summary"><span class="toc-num">08</span><span class="toc-name">Your Sponsorship Summary</span><span class="toc-dots"></span><span class="toc-page">Page 10</span></a>
       <a class="toc-row" href="#contract"><span class="toc-num">09</span><span class="toc-name">Sponsor Contract</span><span class="toc-dots"></span><span class="toc-page">Page 11</span></a>
     </div>
+    <div class="print-only print-note" id="print-note">Availability shown is as of the day this PDF was made, and opportunities are confirmed in the order requests arrive. <b>To reserve a sponsorship, apply online</b> at the address on this prospectus&rsquo;s web page.</div>
   </div>
   <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">02</span></div>
 </div>
@@ -2755,15 +2790,36 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   }
 
   (function liveAvailability(){
-    if(!AVAIL_ENDPOINT) return;
+    if(!AVAIL_ENDPOINT){ availSettled = true; return; }
     // text/plain keeps this a simple request, so the browser sends it without a
     // preflight the flow would not answer. The reply IS readable here, because the
     // flow's Response carries an Access-Control-Allow-Origin header.
     fetch(AVAIL_ENDPOINT, {method:"POST", headers:{"Content-Type":"text/plain"}, body:"{}"})
       .then(function(res){ if(!res.ok) throw new Error("status " + res.status); return res.json(); })
-      .then(function(rows){ applyAvailability(Array.isArray(rows) ? rows : (rows && rows.value) || []); })
-      .catch(function(){ /* leave the built-in snapshot exactly as it is */ });
+      .then(function(rows){ applyAvailability(Array.isArray(rows) ? rows : (rows && rows.value) || []); availSettled = true; })
+      .catch(function(){ availSettled = true; /* leave the built-in snapshot exactly as it is */ });
   })();
+
+  /* Download PDF: the browser's Save as PDF, named from the page title. ?pdf (the portal's
+     Download PDF link) opens it by itself once the live availability is in. */
+  var availSettled = availSettled || false;   // liveAvailability, above, may have settled already
+  function pdfNote(){
+    var n = document.getElementById("print-note"); if(!n) return;
+    var url = location.origin + location.pathname;
+    var day = new Date().toLocaleDateString("en-US", {month:"long", day:"numeric", year:"numeric"});
+    n.innerHTML = "Availability shown is as of <b>" + day + "</b>; opportunities are confirmed in the order requests arrive. " +
+      "<b>To reserve a sponsorship, apply online at " + url.replace(/^https?:\/\//, "") + "</b>, or contact Kelly Bradshaw (kbradshaw@mismo.org) or Amy Moses (amoses@mismo.org).";
+  }
+  window.addEventListener("beforeprint", pdfNote);
+  var pdfBtn = document.getElementById("pdf-btn");
+  if(pdfBtn) pdfBtn.addEventListener("click", function(){ pdfNote(); window.print(); });
+  if(/[?&]pdf\b/.test(location.search)){
+    var tries = 0;
+    (function waitThenPrint(){
+      if(availSettled || ++tries > 20){ pdfNote(); setTimeout(function(){ window.print(); }, 400); return; }
+      setTimeout(waitThenPrint, 300);
+    })();
+  }
 
   (function restoreOnLoad(){
     var raw=null;
