@@ -1,5 +1,6 @@
 # Changelog
 
+- 2026-11-23: Once an application is submitted, the page's PDF ends the Sponsor Contract with a Signed Application block (sponsor, program, level, opportunity, contact, signer, title, date, reference, contract version), and the confirmation has a Save a Signed Copy (PDF) button. Before, the PDF left out the signing part, so a sponsor's saved copy had no signature (Guidehouse).
 - 2026-11-19: Download PDF on every prospectus: the browser's Save as PDF, named from the page title, with today's availability and a note on where to apply; the application form, summary and signing stay on the web page. `?pdf` opens it straight away (the portal's Download PDF link).
 - 2026-11-07: A hidden spam-trap box and the time on the page go with each application, for the portal's spam check.
 - 2026-11-07: Spring & Fall 2027 package prospectus (`spring-fall-2027/`), 10% off, for after the Winter Summit.
