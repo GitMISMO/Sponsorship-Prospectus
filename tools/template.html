@@ -276,6 +276,20 @@
   .pdfbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
   @media(max-width:560px){.pdfbtn .pdf-l{display:none}.pdfbtn{padding:0 9px}}
   .print-only{display:none}
+  /* the signed copy (Jonna, November 23, 2026): Guidehouse saved the page as a PDF after submitting
+     and the signing part wasn't in it, since the PDF leaves out the form. Once an application is
+     submitted, the PDF carries what was signed, right after the contract terms. */
+  .signed-print{display:none}
+  @media print{
+    .signed-print.on{display:block !important;margin:24px 0 0;padding:16px 20px;border:1.5px solid #0d314c;border-radius:4px;
+      break-inside:avoid;page-break-inside:avoid;color:#0d314c;font-size:13px;line-height:1.5}
+    .signed-print h3{margin:0 0 2px;font:700 17px/1.3 var(--display);color:#0d314c}
+    .signed-print .sp-lead{margin:0 0 14px;color:#4a5d70}
+    .signed-print .sp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px}
+    .signed-print .sp-k{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:#6b7b8c}
+    .signed-print .sp-v{border-bottom:1px solid #3b4b5c;padding:1px 0 3px;font-weight:600}
+    body.is-signed .print-note{display:none !important}
+  }
   @media print{
     @page{size:letter;margin:0.45in 0.4in}
     html, body{background:#fff !important}
@@ -2178,6 +2192,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       <p class="save-status" id="save-status">Not ready to submit? Save my progress keeps your selections in this browser &mdash; nothing is sent to MISMO when you save.</p>
       <p class="submit-note">Submitting sends your selection and signature straight to the MISMO sponsorship portal, where our team is notified and picks it up for confirmation and invoicing. You&rsquo;ll get a reference number on screen. This page does not process payment.</p>
     </div>
+    <div class="signed-print" id="signed-print"></div>
   </div>
   <div class="running-foot"><span class="rf-title">Where our industry builds what&rsquo;s next.</span><span class="rf-num">13</span></div>
 </div>
@@ -2727,6 +2742,31 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     var el=document.getElementById(id); if(el) el.addEventListener("input", autosave);
   });
 
+  /* the signed copy: once submitted, the page's PDF ends the contract with what was signed */
+  function signedCopy(p){
+    var box = document.getElementById("signed-print"); if(!box) return;
+    var h = function(v){ return String(v == null ? "" : v).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); };
+    var day = function(v){ var d = v ? new Date(String(v).slice(0, 10) + "T12:00:00") : null;
+      return d && !isNaN(d) ? d.toLocaleDateString("en-US", {month:"long", day:"numeric", year:"numeric"}) : (v || ""); };
+    var rows = [["Sponsor", p.company], ["Program", p.programLabel], ["Level", p.tierName + (p.price ? " (" + p.price + ")" : "")],
+      ["Opportunity", p.opportunity], ["Contact", [p.contactName, p.contactEmail].filter(Boolean).join(", ")],
+      ["Signed By", p.signerName], ["Title", p.signerTitle], ["Date Signed", day(p.signedDate)],
+      ["Reference", p.reference], ["Contract Version", p.contractVersion]];
+    box.innerHTML = "<h3>Signed Application</h3><p class=\"sp-lead\">Agreed to online by checking the agreement box and submitting this application to MISMO on " +
+      h(new Date(p.submittedAt || Date.now()).toLocaleDateString("en-US", {month:"long", day:"numeric", year:"numeric"})) + ".</p><div class=\"sp-grid\">" + rows.filter(function(r){ return r[1]; }).map(function(r){
+        return "<div><div class=\"sp-k\">" + h(r[0]) + "</div><div class=\"sp-v\">" + h(r[1]) + "</div></div>"; }).join("") + "</div>";
+    box.classList.add("on");
+    document.body.classList.add("is-signed");
+    var note = document.querySelector(".submit-note");
+    if(note && !document.getElementById("signed-pdf-btn")){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "save-btn"; b.id = "signed-pdf-btn"; b.style.marginTop = "12px";
+      b.textContent = "Save a Signed Copy (PDF)";
+      b.addEventListener("click", function(){ window.print(); });
+      note.appendChild(b);
+    }
+  }
+
   document.getElementById("submit-btn").addEventListener("click", function(){
     if(this.disabled) return;
     var prog = TIERS[state.program];
@@ -2822,6 +2862,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     .then(function(){
         if(note) note.innerHTML = "<span class=\"submit-msg ok\"><strong>Submitted to the MISMO sponsorship portal.</strong> Your reference is <code>" + reference + "</code>. A confirmation email is on its way to <strong>" + String(payload.contactEmail || "your contact address").replace(/[<>&"]/g, "") + "</strong> &mdash; if it doesn&rsquo;t arrive within the hour, check your junk folder, then send your reference to <a href=\"mailto:kbradshaw@mismo.org\">kbradshaw@mismo.org</a>. The MISMO team picks it up from here to confirm your sponsorship and invoice. Keep the reference &mdash; if you haven&rsquo;t heard back within two working days, send it to <a href=\"mailto:kbradshaw@mismo.org\">kbradshaw@mismo.org</a>.</span>";
         btn.textContent = "Submitted";
+        signedCopy(payload);
         try{ localStorage.removeItem(STORE_KEY); }catch(e){}
       })
       .catch(function(){
