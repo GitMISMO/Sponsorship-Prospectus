@@ -45,6 +45,15 @@ apply, and leaves out the application form, the summary and the signing. Adding 
 address opens it by itself once the live availability is in; the portal's Prospectuses tab uses
 that for its Download PDF links.
 
+## Back button
+
+The browser's Back button goes to the last page you were on (a jump from the menu, the Contents
+or the search, or the page you stopped scrolling on); Forward goes again. It never undoes
+anything on the form, and the address never changes. It's the shared
+resources.mismo.org/assets/back.js, loaded in the template's `<head>` (never copy it here); the
+template tells it which page you're on (`MismoBack.pages`). The prospectus has no side panels or
+drawers, so there is nothing for Back to close first. `tools/back-check.js` checks it (CN-033).
+
 ## Practice copy
 
 Add `?practice` to any prospectus address to try it on made-up data. Nothing is sent to the
@@ -53,4 +62,5 @@ flows; the application shows up in the practice portal (resources.mismo.org/spon
 ## Checks
 
 The checks live in the `sponsorship` repo (`tests/checks.js`). GitHub runs them after every
-change here; a red X on a change means one failed.
+change here, then this repo's `tools/back-check.js` (the Back button: `node tools/back-check.js
+<sponsorship repo folder>`); a red X on a change means one failed.

@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <!-- ?practice runs this page on test data; without it this does nothing (see /sponsorship/practice.js) -->
 <script src="/sponsorship/practice.js"></script>
+<!-- the browser's Back button: each page you jump to is a Back step (the shared copy; see /assets/back.js, CN-033) -->
+<script src="/assets/back.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MISMO Fall 2027 Summit Sponsorship Prospectus</title>
 <link rel="icon" type="image/png" sizes="48x48" href="https://resources.mismo.org/assets/favicon-48x48.png">
@@ -1070,6 +1072,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     var el=document.getElementById(id);
     if(!el) return;
     mark(id);
+    jumpUntil = Date.now() + 1800; setHere(id);
     var from = window.pageYOffset;
     var to = targetY(el);
     var near = Math.abs(to - from) < window.innerHeight * 2.5;
@@ -1122,6 +1125,25 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     });
     if(!best && BTNS.length) best=BTNS[0].dataset.hq;
     if(best) mark(best);
+    return best;
+  }
+
+  /* The browser's Back button (CN-033). The shared /assets/back.js makes each change
+     of page a Back step. Here the lit menu button moves as the reader scrolls past
+     pages, so Back follows where the reader went instead: a jump from the menu, the
+     Contents or the search, or the page they stopped scrolling on. Back never undoes
+     anything on the form; the address bar never changes. */
+  var here = '', jumpUntil = 0, resting = null;
+  function setHere(id){
+    if(!id || id === here) return;
+    here = id;
+    if(window.MismoBack) window.MismoBack.check();
+  }
+  function rested(){
+    resting = null;
+    var wait = jumpUntil - Date.now();
+    if(wait > 0){ resting = setTimeout(rested, wait + 50); return; }   // a jump is still landing
+    setHere(spy());
   }
 
   function start(){
@@ -1145,10 +1167,19 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     });
     var tick=null;
     window.addEventListener('scroll',function(){
-      if(tick) return;
-      tick=setTimeout(function(){ tick=null; spy(); }, 120);
+      if(!tick) tick=setTimeout(function(){ tick=null; spy(); }, 120);
+      clearTimeout(resting); resting=setTimeout(rested, 400);
     }, {passive:true});
-    spy();
+    here = spy();
+    /* the Contents rows jump like the menu does, so they are Back steps too */
+    Array.prototype.forEach.call(document.querySelectorAll('a.toc-row[href^="#"]'), function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('href').slice(1);
+        if(!document.getElementById(id) || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        e.preventDefault(); go(id);
+      });
+    });
+    if(window.MismoBack) window.MismoBack.pages({ current: function(){ return here; }, go: go });
     wireFind();
   }
 
