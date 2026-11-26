@@ -15,7 +15,7 @@
 <style>
   :root{
     /* shared MISMO left-nav metrics - identical on every MISMO page */
-    --hq-h:64px;
+    --hq-h:68px;
     --rail-w:240px;
     --rail-mini:62px;
     /* brand tokens the left-nav reads */
@@ -105,40 +105,43 @@
   svg{display:block;}
 
   /* ---------------- masthead + left nav (mismo-left-nav) ---------------- */
+  /* The masthead matches Certification Management's exactly (CN-053), so the MISMO logo
+     sits in the same spot in every tool: 13px above and below the logo box, 22px in from
+     the left, 68px tall; 14px between the box, the divider and the name. */
   .hqtop{position:sticky;top:env(safe-area-inset-top,0px);z-index:97;height:var(--hq-h);
-    background:var(--navy);color:#fff;display:flex;align-items:center;gap:0;
-    padding:0 22px;box-shadow:0 1px 0 rgba(80,164,219,.28);
+    background:var(--navy);color:#fff;display:flex;align-items:center;gap:14px;
+    padding:13px 22px;box-shadow:0 1px 0 rgba(80,164,219,.28);
     margin-left:calc(0px - var(--rail-w));width:calc(100% + var(--rail-w));
     transition:margin-left .2s cubic-bezier(.4,0,.2,1), width .2s cubic-bezier(.4,0,.2,1)}
   body.railmini .hqtop{margin-left:calc(0px - var(--rail-mini));width:calc(100% + var(--rail-mini))}
   @media (prefers-reduced-motion:reduce){ .hqtop{transition:none} }
-  .hqtop .mastrule{display:block;width:2px;height:34px;flex:0 0 auto;
-    margin-inline:20px;border-radius:1px;background:var(--sky)}
-  .hqtop .hqname{font-family:var(--display);font-size:15.5px;font-weight:700;
-    letter-spacing:-.005em;color:var(--sky);white-space:nowrap;
+  .hqtop .mastrule{display:block;width:1px;align-self:stretch;flex:0 0 auto;
+    background:rgba(80,164,219,.4)}
+  .hqtop .hqname{font-family:var(--display);font-size:16px;font-weight:500;
+    letter-spacing:0;color:#94c8e9;white-space:nowrap;
     min-width:0;overflow:hidden;text-overflow:ellipsis}
   .hqtop-r{margin-left:auto;display:flex;align-items:center;gap:13px}
   .hqtop .eyebrow-m{font-family:var(--display);font-size:10.5px;letter-spacing:.11em;
     text-transform:uppercase;color:rgba(255,255,255,.62);font-weight:600;white-space:nowrap}
   @media(max-width:700px){.hqtop .eyebrow-m{display:none}}
-  .logoplate{background:#fff;border-radius:7px;padding:8px 14px;display:flex;
-    align-items:center;line-height:0;flex:0 0 auto;position:relative}
-  .logoplate .wordmark{height:24px;width:157px;display:block}
+  .logoplate{background:#fff;border-radius:5px;padding:9px 13px;display:flex;
+    align-items:center;line-height:0;flex:0 0 auto;position:relative;
+    box-shadow:0 1px 0 rgba(80,164,219,.35)}
+  .logoplate .wordmark{height:24px;width:auto;display:block}
+  /* At phone width, as Certification Management does: everything shrinks a little so the
+     masthead stays on one line. Its bar is 62px tall there (the sign-in chip and menu button
+     make it so), with the 33px logo box in the middle, so this one is too. */
   @media(max-width:560px){
-    .hqtop{padding:0 14px}
-    .hqtop .mastrule{margin-inline:12px;height:30px}
+    :root{--hq-h:62px}
+    .hqtop{padding:11px 16px;gap:11px}
     .logoplate{padding:7px 10px}
-    .logoplate .wordmark{height:20px;width:131px}
-    .hqtop .hqname{font-size:13.5px;letter-spacing:-.01em}
+    .logoplate .wordmark{height:19px}
+    .hqtop .hqname{font-size:13px}
   }
-  /* the page name is long, so a phone-width masthead gives the logo plate and
-     the rule less room rather than truncating it */
+  /* the page name is long: on the narrowest phones it gets a touch smaller before it
+     is cut short (the logo box stays where it is) */
   @media(max-width:430px){
-    .hqtop{padding:0 11px}
-    .hqtop .mastrule{margin-inline:9px;height:26px}
-    .logoplate{padding:6px 8px}
-    .logoplate .wordmark{height:17px;width:111px}
-    .hqtop .hqname{font-size:12.5px;letter-spacing:-.015em}
+    .hqtop .hqname{font-size:12px;letter-spacing:-.01em}
   }
 
   /* the sections, down the left, beneath it */
@@ -1116,7 +1119,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     });
   }
   function spy(){
-    var line = (window.innerHeight * 0.32) + 64, best=null;
+    var line = (window.innerHeight * 0.32) + (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hq-h')) || 68), best=null;
     BTNS.forEach(function(b){
       var el=document.getElementById(b.dataset.hq);
       if(!el) return;
