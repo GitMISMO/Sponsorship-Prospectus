@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- BUILT PAGE: made by tools/build_app.py from tools/app-template.html and the built prospectuses.
+     Change tools/app-template.html (layout) or tools/template.html (tiers, prices, wording), never this file. -->
+<!-- ?practice runs this page on test data; without it this does nothing (see /sponsorship/practice.js) -->
+<script src="/sponsorship/practice.js"></script>
+<!-- the browser's and the phone's Back button: each step is a Back step (the shared copy; see /assets/back.js) -->
+<script src="/assets/back.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://resources.mismo.org; connect-src 'self' https://*.environment.api.powerplatform.com; form-action 'none'; base-uri 'none'">
+<title>Sponsor a MISMO Summit</title>
+<meta name="description" content="Sponsor a 2027 MISMO Summit: levels, prices, live availability and the application, made for your phone.">
+<meta name="theme-color" content="#0d314c">
+<link rel="icon" type="image/png" sizes="48x48" href="https://resources.mismo.org/assets/favicon-48x48.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<script>
+(function () {
+  /* the same light / dark choice as MyMISMO and the other MISMO tools */
+  try { var t = localStorage.getItem('mismo.portal.theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+})();
+</script>
+<style>
+:root{
+  color-scheme:light;
+  --navy:#0d314c; --navy-deep:#06202f; --navy-mid:#14486e; --sky:#74bfeb; --sky-deep:#3f96c9; --sky-soft:#a9d8f3; --sky-wash:#e4f2fb;
+  --ground:#f1f6fa; --surface:#ffffff; --surface-2:#f6fafd; --surface-3:#e9f1f8;
+  --border:#d5e2ed; --border-strong:#adc4d6; --rule:#e5eef5;
+  --ink:#0d314c; --ink-2:#456179; --ink-3:#56708a;
+  --good:#0f7b5c; --good-wash:#e3f4ee; --bad:#b3372c; --bad-wash:#fbe9e7; --warn:#a2701a;
+  --link:#14486e; --accent-fill:#0d314c; --accent-ink:#ffffff; --sel:#e4f2fb;
+  --shadow:0 1px 2px rgba(13,49,76,.06), 0 6px 18px rgba(13,49,76,.07);
+  --bar-bg:rgba(255,255,255,.94);
+  --t-diamond:#3f96c9; --t-platinum:#7f8c94; --t-gold:#a9832d; --t-silver:#6f7a80; --t-bronze:#9c6b43;
+  --cond:"IBM Plex Sans Condensed","IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --bar-h:76px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#061722; --surface:#0d2837; --surface-2:#123143; --surface-3:#173c52;
+    --border:#1f4a63; --border-strong:#2f6688; --rule:#173547;
+    --ink:#e9f4fb; --ink-2:#a6c5d9; --ink-3:#8fb0c6;
+    --good:#4fc79b; --good-wash:#0f3a2f; --bad:#f08579; --bad-wash:#3d1d1a; --warn:#e0a83c;
+    --link:#74bfeb; --accent-fill:#74bfeb; --accent-ink:#06202f; --sel:#173c52;
+    --shadow:none; --bar-bg:rgba(13,40,55,.95);
+    --t-diamond:#74bfeb; --t-platinum:#b3bec4; --t-gold:#d9b25a; --t-silver:#a3adb2; --t-bronze:#c98f61;
+    --logo-body:#0f314c;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#061722; --surface:#0d2837; --surface-2:#123143; --surface-3:#173c52;
+  --border:#1f4a63; --border-strong:#2f6688; --rule:#173547;
+  --ink:#e9f4fb; --ink-2:#a6c5d9; --ink-3:#8fb0c6;
+  --good:#4fc79b; --good-wash:#0f3a2f; --bad:#f08579; --bad-wash:#3d1d1a; --warn:#e0a83c;
+  --link:#74bfeb; --accent-fill:#74bfeb; --accent-ink:#06202f; --sel:#173c52;
+  --shadow:none; --bar-bg:rgba(13,40,55,.95);
+  --t-diamond:#74bfeb; --t-platinum:#b3bec4; --t-gold:#d9b25a; --t-silver:#a3adb2; --t-bronze:#c98f61;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ground); color:var(--ink); font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.45; -webkit-font-smoothing:antialiased; font-variant-numeric:tabular-nums; -webkit-tap-highlight-color:transparent}
+button,input{font-family:inherit; font-size:inherit; color:inherit}
+a{color:var(--link)}
+h1,h2,h3{margin:0; letter-spacing:-.012em}
+:focus-visible{outline:2px solid var(--sky); outline-offset:2px}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+
+/* ---------- top bar ---------- */
+.mast{position:sticky; top:0; z-index:30; background:var(--navy); color:#fff; padding-top:env(safe-area-inset-top)}
+.mast-in{display:flex; align-items:center; gap:10px; height:58px; padding:0 12px; max-width:720px; margin:0 auto}
+.m-back{width:40px; height:40px; display:grid; place-items:center; border-radius:4px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.1); color:#fff; cursor:pointer; flex:none; text-decoration:none}
+.m-back svg{width:20px; height:20px}
+.lplate{background:#fff; border-radius:5px; padding:7px 10px; line-height:0; flex:none}
+.lplate svg{height:17px; width:auto; display:block}
+.vrule{width:1px; height:26px; background:rgba(116,191,235,.4)}
+.appname{color:var(--sky-soft); font-weight:500; font-size:15.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+@media (max-width:359px){ .mast-in{gap:8px; padding:0 10px} .m-back{width:36px; height:36px} .lplate{padding:6px 7px} .lplate svg{height:13px} .appname{font-size:13.5px} }
+.steps{background:var(--navy); padding:0 12px 10px}
+.steps-in{max-width:720px; margin:0 auto}
+.steps-lbl{display:flex; justify-content:space-between; gap:10px; font-size:12.5px; color:var(--sky-soft); margin-bottom:6px}
+.steps-lbl b{color:#fff; font-weight:600}
+.segs{display:grid; grid-template-columns:repeat(5,1fr); gap:4px}
+.segs i{height:4px; border-radius:2px; background:rgba(255,255,255,.18); transition:background .25s}
+.segs i.sg-done{background:var(--sky)}
+.segs i.sg-now{background:#fff}
+
+main{max-width:720px; margin:0 auto; padding:14px 14px calc(var(--bar-h) + 26px + env(safe-area-inset-bottom))}
+body.no-bar main{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+.step{display:none}
+.step.on{display:block; animation:stepin .28s ease both}
+.step.on.back{animation-name:stepback}
+@keyframes stepin{from{opacity:0; transform:translateX(18px)} to{opacity:1; transform:none}}
+@keyframes stepback{from{opacity:0; transform:translateX(-18px)} to{opacity:1; transform:none}}
+@media (prefers-reduced-motion: reduce){ .step.on{animation:none} }
+
+.h-sec{font-family:var(--cond); font-size:22px; font-weight:700; margin:26px 2px 10px; letter-spacing:-.005em}
+.h-sec:first-child{margin-top:4px}
+.lead{color:var(--ink-2); margin:-4px 2px 14px; font-size:14.5px}
+.card{background:var(--surface); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow)}
+.tag{display:inline-block; border-radius:3px; padding:2px 7px; font-size:11.5px; font-weight:700; letter-spacing:.02em; white-space:nowrap; background:var(--surface-3); color:var(--ink-2)}
+.tag.good{background:var(--good-wash); color:var(--good)}
+.tag.bad{background:var(--bad-wash); color:var(--bad)}
+.tag.sky{background:var(--sky); color:#06202f}
+
+/* ---------- hero ---------- */
+.hero{position:relative; overflow:hidden; isolation:isolate; border-radius:14px; color:#fff; padding:24px 20px 20px; background:var(--navy-deep)}
+.hero:before{content:""; position:absolute; inset:0; z-index:-2;
+  background:radial-gradient(120% 90% at 100% 0%, rgba(116,191,235,.34), rgba(116,191,235,0) 55%), radial-gradient(90% 70% at 0% 100%, rgba(20,72,110,.9), rgba(20,72,110,0) 70%), linear-gradient(160deg, #0d314c 0%, #06202f 70%)}
+.hero:after{content:""; position:absolute; inset:0; z-index:-1; opacity:.16;
+  background-image:linear-gradient(rgba(116,191,235,.55) 1px, transparent 1px), linear-gradient(90deg, rgba(116,191,235,.55) 1px, transparent 1px);
+  background-size:28px 28px; -webkit-mask-image:linear-gradient(180deg, #000, transparent); mask-image:linear-gradient(180deg, #000, transparent)}
+.hero .eye{font-weight:600; color:var(--sky-soft); font-size:14px}
+.hero h1{font-family:var(--cond); font-size:clamp(34px, 10vw, 46px); line-height:1; font-weight:700; margin:4px 0 10px}
+.hero p{margin:0; color:#d6e9f6; font-size:15px; max-width:34em}
+.hero-stats{display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:18px; background:rgba(116,191,235,.25); border-radius:8px; overflow:hidden}
+.hero-stats div{background:rgba(6,32,47,.72); padding:11px 12px}
+.hero-stats b{display:block; font-family:var(--cond); font-size:24px; line-height:1.05; color:#fff}
+.hero-stats span{display:block; font-size:12px; color:#b9d6ea; line-height:1.3; margin-top:2px}
+
+/* ---------- program cards ---------- */
+.progs{display:grid; gap:10px}
+.prog{display:grid; grid-template-columns:1fr auto; gap:4px 12px; align-items:center; width:100%; text-align:left; cursor:pointer; padding:16px 16px 15px;
+  background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--sky); border-radius:10px; box-shadow:var(--shadow); transition:transform .12s}
+.prog:active{transform:scale(.985)}
+.prog .p-name{font-family:var(--cond); font-size:22px; font-weight:700; line-height:1.1; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.prog .p-when{font-size:14px; color:var(--ink-2); grid-column:1}
+.prog .p-foot{grid-column:1; display:flex; gap:10px; align-items:baseline; margin-top:6px; font-size:13px; color:var(--ink-3)}
+.prog .p-foot b{font-size:15px; color:var(--ink)}
+.prog .p-go{grid-column:2; grid-row:1 / span 3; width:36px; height:36px; display:grid; place-items:center; border-radius:4px; background:var(--surface-3); color:var(--ink)}
+.prog .p-go svg{width:18px; height:18px}
+.prog.feature{background:var(--navy); border-color:var(--navy); border-left-color:var(--sky); color:#fff}
+.prog.feature .p-when{color:#cfe5f4}
+.prog.feature .p-foot{color:#a9cbe2}
+.prog.feature .p-foot b{color:#fff}
+.prog.feature .p-go{background:var(--sky); color:#06202f}
+:root[data-theme="dark"] .prog.feature{background:#14486e; border-color:#2f6688}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .prog.feature{background:#14486e; border-color:#2f6688} }
+.none{padding:18px 16px; text-align:center; color:var(--ink-2)}
+
+/* ---------- the room ---------- */
+.room{padding:14px 16px}
+.room-row{display:grid; grid-template-columns:1fr auto; gap:2px 10px; font-size:13.5px; padding:6px 0}
+.room-row b{font-weight:600}
+.room-row span{color:var(--ink-3); font-size:12.5px}
+.room-row .rbar{grid-column:1 / -1; height:8px; border-radius:2px; background:var(--surface-3); overflow:hidden}
+.room-row .rbar i{display:block; height:100%; background:var(--sky-deep); border-radius:2px}
+.quotes{display:grid; grid-auto-flow:column; grid-auto-columns:88%; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; padding:2px 2px 8px; margin:0 -2px;
+  scrollbar-width:none}
+.quotes::-webkit-scrollbar{display:none}
+.quote{margin:0; scroll-snap-align:start; padding:16px; display:flex; flex-direction:column; gap:12px}
+.quote p{margin:0; font-size:14px; color:var(--ink-2); display:-webkit-box; -webkit-line-clamp:7; -webkit-box-orient:vertical; overflow:hidden}
+.quote.open p{-webkit-line-clamp:unset; display:block}
+.q-who{display:flex; align-items:center; gap:10px; margin-top:auto}
+.q-who img{width:42px; height:42px; border-radius:50%; object-fit:cover; flex:none}
+.q-who b{display:block; font-size:13.5px}
+.q-who span{display:block; font-size:12.5px; color:var(--ink-3)}
+.dots{display:flex; justify-content:center; gap:6px; margin-top:4px}
+.dots i{width:6px; height:6px; border-radius:50%; background:var(--border-strong)}
+.dots i.on{background:var(--ink)}
+.ask{display:flex; gap:12px; align-items:center; padding:14px 16px; margin-top:12px}
+.ask svg{width:22px; height:22px; flex:none; color:var(--sky-deep)}
+.ask div{font-size:14px; color:var(--ink-2)}
+.ask a{font-weight:600}
+
+/* ---------- step heads ---------- */
+.sel-head{padding:14px 16px; margin-bottom:12px; display:flex; gap:12px; align-items:flex-start}
+.sel-head .sh-in{flex:1 1 auto; min-width:0}
+.sel-head h2{font-family:var(--cond); font-size:24px; font-weight:700; line-height:1.1}
+.sel-head p{margin:3px 0 0; font-size:13.5px; color:var(--ink-2)}
+.live{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-3); margin-top:6px}
+.live i{width:8px; height:8px; border-radius:50%; background:var(--border-strong)}
+.live.on i{background:var(--good); box-shadow:0 0 0 3px var(--good-wash)}
+
+/* ---------- tiers ---------- */
+.tiers{display:grid; gap:10px}
+.tier{position:relative; width:100%; text-align:left; cursor:pointer; padding:15px 16px 14px 20px; background:var(--surface); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow); overflow:hidden}
+.tier:before{content:""; position:absolute; left:0; top:0; bottom:0; width:6px; background:var(--tc)}
+.tier.sel{border-color:var(--sky-deep); box-shadow:0 0 0 2px var(--sky-deep)}
+.tier.out{opacity:.62; cursor:default}
+.t-top{display:flex; justify-content:space-between; align-items:center; gap:10px}
+.t-eye{font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--tc)}
+.t-price{font-family:var(--cond); font-size:32px; font-weight:700; line-height:1.05; margin:4px 0 2px}
+.t-price small{font-family:"IBM Plex Sans",sans-serif; font-size:13px; font-weight:500; color:var(--ink-3); margin-left:6px}
+.t-regs{font-size:13.5px; color:var(--ink-2)}
+.t-ben{list-style:none; margin:10px 0 0; padding:10px 0 0; border-top:1px solid var(--rule); display:grid; gap:6px}
+.t-ben li{display:grid; grid-template-columns:18px 1fr; gap:6px; font-size:13.5px; line-height:1.35}
+.t-ben li svg{width:16px; height:16px; margin-top:1px; color:var(--good)}
+.t-more{margin-top:8px; font-size:13px; font-weight:600; color:var(--link)}
+.t-opps{margin-top:10px; font-size:12.5px; color:var(--ink-3)}
+.t-right{display:flex; align-items:center; gap:8px}
+.t-check{width:24px; height:24px; border-radius:50%; background:var(--sky-deep); color:#fff; display:none; place-items:center; flex:none}
+.t-check svg{width:15px; height:15px}
+.tier.sel .t-check{display:grid}
+
+/* ---------- opportunities ---------- */
+.opps{display:grid; gap:8px}
+.opp{background:var(--surface); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow); overflow:hidden}
+.opp.sel{border-color:var(--sky-deep); box-shadow:0 0 0 2px var(--sky-deep)}
+.opp-row{display:grid; grid-template-columns:22px 1fr auto; gap:12px; align-items:center; width:100%; text-align:left; padding:14px 14px; background:none; border:0; cursor:pointer; min-height:56px}
+.opp.out .opp-row{cursor:default}
+.opp.out .o-name{color:var(--ink-3); text-decoration:line-through}
+.radio{width:22px; height:22px; border-radius:50%; border:2px solid var(--border-strong); display:grid; place-items:center}
+.opp.sel .radio{border-color:var(--sky-deep)}
+.opp.sel .radio:after{content:""; width:10px; height:10px; border-radius:50%; background:var(--sky-deep)}
+.o-name{font-weight:600; font-size:15px; line-height:1.3}
+.o-sub{display:block; font-size:12.5px; color:var(--ink-3); font-weight:400}
+.opp-more{padding:0 14px 14px 48px}
+.o-lbl{font-size:12.5px; font-weight:600; color:var(--ink-2); margin-bottom:6px}
+.days{display:grid; grid-template-columns:repeat(auto-fill, minmax(92px, 1fr)); gap:6px}
+.day{padding:10px 6px; border:1px solid var(--border-strong); border-radius:6px; background:var(--surface); font-weight:600; font-size:14px; cursor:pointer; text-align:center}
+.day small{display:block; font-weight:500; font-size:11.5px; color:var(--ink-3)}
+.day.sel{background:var(--accent-fill); color:var(--accent-ink); border-color:var(--accent-fill)}
+.day.sel small{color:inherit; opacity:.8}
+.day:disabled{cursor:default; color:var(--ink-3); background:var(--surface-3); text-decoration:line-through; border-style:dashed}
+.multi{display:grid; grid-template-columns:22px 1fr; gap:10px; margin-top:10px; padding:11px 12px; border:1px dashed var(--border-strong); border-radius:6px; cursor:pointer; font-size:13.5px}
+.multi input{width:20px; height:20px; margin:1px 0 0; accent-color:var(--sky-deep)}
+.multi b{display:block}
+.multi span{color:var(--ink-3); font-size:12.5px}
+.inc{padding:12px 16px 14px}
+.inc .t-ben{margin:0; padding:0; border:0}
+.inc .inc-regs{font-weight:600; margin-bottom:8px}
+.diamond-note{padding:16px; display:grid; grid-template-columns:28px 1fr; gap:12px}
+.diamond-note svg{width:26px; height:26px; color:var(--t-diamond)}
+
+/* ---------- forms ---------- */
+.form{padding:6px 16px 16px}
+.fld{display:block; margin-top:12px}
+.fld > span{display:block; font-size:13px; font-weight:600; color:var(--ink-2); margin-bottom:5px}
+.fld input{width:100%; height:48px; padding:0 12px; font-size:16px; border:1px solid var(--border-strong); border-radius:6px; background:var(--surface); color:var(--ink)}
+.fld input:focus{outline:none; border-color:var(--sky-deep); box-shadow:0 0 0 3px rgba(63,150,201,.22)}
+.fld.bad input{border-color:var(--bad); box-shadow:0 0 0 3px rgba(179,55,44,.14)}
+.fld .err{display:none; font-size:12.5px; color:var(--bad); margin-top:4px}
+.fld.bad .err{display:block}
+.trap{position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden}
+.logo-pick{display:grid; grid-template-columns:64px 1fr; gap:14px; align-items:center; padding:14px 16px; cursor:pointer; position:relative}
+.logo-pick input{position:absolute; inset:0; opacity:0; cursor:pointer; width:100%}
+.lp-thumb{width:64px; height:64px; border-radius:8px; border:1.5px dashed var(--border-strong); display:grid; place-items:center; background:var(--surface-2); overflow:hidden; color:var(--ink-3)}
+.lp-thumb svg{width:26px; height:26px}
+.lp-thumb img{max-width:100%; max-height:100%; object-fit:contain; background:#fff}
+.lp-thumb .ext{font-weight:700; text-transform:uppercase; font-size:13px; color:var(--ink-2)}
+.logo-pick.has .lp-thumb{border-style:solid}
+.lp-main{font-weight:600; font-size:15px; overflow-wrap:anywhere}
+.lp-sub{font-size:12.5px; color:var(--ink-3); margin-top:2px}
+.logo-pick.bad{border-color:var(--bad); box-shadow:0 0 0 2px rgba(179,55,44,.25)}
+.lp-msg{font-size:12.5px; color:var(--bad); margin:6px 2px 0}
+
+/* ---------- review and sign ---------- */
+.sum{padding:4px 16px}
+.sum-row{display:grid; grid-template-columns:104px 1fr auto; gap:10px; align-items:baseline; padding:11px 0; border-top:1px solid var(--rule); font-size:14px}
+.sum-row:first-child{border-top:0}
+.sum-row dt{font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-3)}
+.sum-row dd{margin:0; font-weight:500; overflow-wrap:anywhere; white-space:pre-line}
+.sum-row button{background:none; border:0; color:var(--link); font-weight:600; font-size:13px; cursor:pointer; padding:4px 0 4px 6px}
+.sum-total{display:flex; justify-content:space-between; align-items:baseline; padding:12px 0 14px; border-top:2px solid var(--ink); margin-top:2px}
+.sum-total span{font-weight:600}
+.sum-total b{font-family:var(--cond); font-size:28px}
+.k-box{padding:14px 16px}
+.k-head{display:flex; justify-content:space-between; gap:10px; align-items:baseline}
+.k-head b{font-size:15px}
+.k-head span{font-size:12px; color:var(--ink-3); white-space:nowrap}
+.k-peek{position:relative; max-height:118px; overflow:hidden; margin:8px 0 10px; font-size:13px; color:var(--ink-2)}
+.k-peek:after{content:""; position:absolute; left:0; right:0; bottom:0; height:56px; background:linear-gradient(rgba(255,255,255,0), var(--surface))}
+.k-peek p{margin:0 0 8px}
+.agree + .form{margin-top:10px}
+.agree{display:grid; grid-template-columns:26px 1fr; gap:10px; padding:14px 16px; cursor:pointer; font-size:14px; margin-top:10px}
+.agree input{width:24px; height:24px; margin:0; accent-color:var(--sky-deep)}
+.agree.bad{border-color:var(--bad); box-shadow:0 0 0 2px rgba(179,55,44,.25)}
+.fine{font-size:12.5px; color:var(--ink-3); margin:12px 2px 0}
+.msg{padding:14px 16px; margin-top:12px; font-size:14px}
+.msg.err{border-color:var(--bad); background:var(--bad-wash)}
+.msg.err b{color:var(--bad)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid var(--border-strong); background:var(--surface); color:var(--ink);
+  border-radius:6px; padding:0 16px; height:46px; font-weight:600; font-size:15px; cursor:pointer; white-space:nowrap; text-decoration:none}
+.btn.primary{background:var(--accent-fill); color:var(--accent-ink); border-color:var(--accent-fill)}
+.btn.wide{width:100%}
+.btn svg{width:18px; height:18px}
+.btn:disabled{opacity:.55; cursor:default}
+
+/* ---------- the bottom bar ---------- */
+.bar{position:fixed; left:0; right:0; bottom:0; z-index:25; background:var(--bar-bg); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  border-top:1px solid var(--border); padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+.bar-in{max-width:720px; margin:0 auto; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; min-height:52px}
+.bar-sum{min-width:0}
+.bar-sum b{display:block; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.bar-sum span{display:block; font-size:12.5px; color:var(--ink-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.bar-sum span.hint{color:var(--bad); font-weight:600}
+.bar .btn{height:50px; min-width:132px; font-size:16px}
+body.no-bar .bar{display:none}
+
+/* ---------- the contract sheet ---------- */
+.sheet{position:fixed; inset:0; z-index:40; display:flex; flex-direction:column; background:var(--surface); transform:translateY(100%); transition:transform .28s ease; visibility:hidden}
+.sheet.on{transform:none; visibility:visible}
+.sheet-hd{display:flex; align-items:center; gap:12px; padding:calc(10px + env(safe-area-inset-top)) 14px 10px; border-bottom:1px solid var(--border); background:var(--surface)}
+.sheet-hd h2{font-size:17px; flex:1 1 auto}
+.sheet-hd small{display:block; font-size:12px; color:var(--ink-3); font-weight:500}
+.x{width:40px; height:40px; display:grid; place-items:center; border-radius:4px; border:1px solid var(--border-strong); background:var(--surface); cursor:pointer}
+.x svg{width:18px; height:18px}
+.sheet-bd{flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:16px 18px 24px; font-size:14px; color:var(--ink-2)}
+.sheet-bd p{margin:0 0 12px}
+.sheet-bd strong{color:var(--ink)}
+.sheet-ft{padding:10px 14px calc(10px + env(safe-area-inset-bottom)); border-top:1px solid var(--border)}
+@media (prefers-reduced-motion: reduce){ .sheet{transition:none} }
+
+/* ---------- done ---------- */
+.done{padding:26px 18px 20px; text-align:center}
+.done .ok{width:64px; height:64px; margin:0 auto 12px; border-radius:50%; background:var(--good-wash); color:var(--good); display:grid; place-items:center}
+.done .ok svg{width:34px; height:34px}
+.done h2{font-family:var(--cond); font-size:28px}
+.done p{color:var(--ink-2); margin:8px 0 0; font-size:14.5px}
+.ref{margin:16px auto 0; display:inline-block; padding:10px 16px; border-radius:6px; background:var(--surface-3); font-weight:700; font-size:18px; letter-spacing:.04em; user-select:all}
+.done-acts{display:grid; gap:8px; margin-top:18px}
+.next{padding:14px 16px; margin-top:12px}
+.next ol{margin:6px 0 0; padding-left:20px; font-size:14px; color:var(--ink-2)}
+.next li{margin:4px 0}
+
+.restore{display:flex; gap:10px; align-items:center; justify-content:space-between; padding:11px 14px; margin-bottom:12px; font-size:13.5px}
+.restore button{background:none; border:0; color:var(--link); font-weight:600; cursor:pointer; font-size:13.5px; padding:6px 0}
+.stamp{text-align:center; font-size:11.5px; color:var(--ink-3); margin-top:22px}
+
+/* ---------- the saved copy (print / Save as PDF) ---------- */
+#print{display:none}
+@media print{
+  @page{margin:16mm 15mm}
+  body{background:#fff; color:#000}
+  body > *:not(#print){display:none !important}
+  #print{display:block; font-size:10.5pt; line-height:1.4}
+  #print h1{font-size:18pt; margin:0 0 4pt}
+  #print h2{font-size:12pt; margin:14pt 0 6pt}
+  #print .pr-k p{margin:0 0 6pt}
+  #print .pr-grid{display:grid; grid-template-columns:1fr 1fr; gap:6pt 16pt; border:1px solid #888; padding:10pt; margin-top:8pt; break-inside:avoid}
+  #print .pr-grid div b{display:block; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; color:#444}
+  #print .lp{line-height:0; margin-bottom:10pt}
+  #print .lp svg{height:22px; width:auto}
+}
+</style>
+</head>
+<body class="no-bar">
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+@@LOGO@@
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-go" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-tick" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+<symbol id="i-gem" viewBox="0 0 24 24"><path d="M6 4h12l3 5-9 11L3 9z M3 9h18 M9 4l3 16 3-16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z M14 3v5h5 M10 13h6 M10 17h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="mast">
+  <div class="mast-in">
+    <a class="m-back" id="m-back" href="/mymismo/" aria-label="Back"><svg><use href="#i-back"/></svg></a>
+    <div class="lplate"><svg viewBox="0 0 708 108" role="img" aria-label="MISMO"><use href="#mismo-logo"/></svg></div>
+    <div class="vrule"></div>
+    <div class="appname">Sponsor a Summit</div>
+  </div>
+  <div class="steps" id="steps" hidden>
+    <div class="steps-in">
+      <div class="steps-lbl"><span id="steps-n">Step 1 of 5</span><b id="steps-name">Choose a Summit</b></div>
+      <div class="segs" id="segs"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- 1. pick a summit -->
+  <section class="step on" id="s-start" data-step="start">
+    <div class="card restore" id="restore" hidden><span>We kept what you picked last time.</span><button type="button" id="restore-clear">Start Over</button></div>
+    <div class="hero">
+      <div class="eye">MISMO 2027 Summits</div>
+      <h1>Sponsor a Summit</h1>
+      <p>Put your brand in the room where the mortgage industry builds its standards, and in front of the people who choose its technology.</p>
+      <div class="hero-stats" id="hero-stats"></div>
+    </div>
+    <h2 class="h-sec">Choose a Summit</h2>
+    <div class="progs" id="prog-list"></div>
+    <h2 class="h-sec">Who&rsquo;s in the Room</h2>
+    <p class="lead" id="room-lead">Registrants across the three 2026 Summits.</p>
+    <div class="card room" id="room"></div>
+    <h2 class="h-sec">Sponsors in Their Own Words</h2>
+    <div class="quotes" id="quotes"></div>
+    <div class="dots" id="qdots"></div>
+    <div class="card ask"><svg><use href="#i-mail"/></svg><div>Questions, or want something custom? Email <a href="mailto:kbradshaw@mismo.org">kbradshaw@mismo.org</a> or <a href="mailto:amoses@mismo.org">amoses@mismo.org</a>.</div></div>
+    <div class="stamp">Version @@BUILD@@</div>
+  </section>
+
+  <!-- 2. pick a level -->
+  <section class="step" id="s-level" data-step="level">
+    <div class="card sel-head"><div class="sh-in"><h2 id="lv-name"></h2><p id="lv-when"></p>
+      <div class="live" id="avail-stamp"><i></i><span>Availability as of this week</span></div></div></div>
+    <div class="tiers" id="tier-list"></div>
+  </section>
+
+  <!-- 3. pick an opportunity -->
+  <section class="step" id="s-opp" data-step="opp">
+    <h2 class="h-sec">Choose Your Opportunity</h2>
+    <p class="lead" id="op-lead"></p>
+    <div class="opps" id="opp-list"></div>
+    <h2 class="h-sec" id="inc-h">Included With Your Level</h2>
+    <div class="card inc" id="inc"></div>
+  </section>
+
+  <!-- 4. your details -->
+  <section class="step" id="s-details" data-step="details">
+    <h2 class="h-sec">Your Details</h2>
+    <p class="lead">Who we&rsquo;ll confirm with and invoice.</p>
+    <div class="card form">
+      <label class="fld" data-f="company"><span>Company</span><input id="f-company" autocomplete="organization" enterkeyhint="next"><div class="err">Add your company&rsquo;s name.</div></label>
+      <label class="fld" data-f="contact"><span>Your Name</span><input id="f-contact" autocomplete="name" enterkeyhint="next"><div class="err">Add your name.</div></label>
+      <label class="fld" data-f="email"><span>Email</span><input id="f-email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" enterkeyhint="next"><div class="err">Add an email address we can reach you at.</div></label>
+      <label class="fld" data-f="phone"><span>Phone</span><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="done"><div class="err">Add a phone number.</div></label>
+      <div class="trap" aria-hidden="true"><label for="f-website">Website</label><input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+    </div>
+    <h2 class="h-sec">Your Logo</h2>
+    <p class="lead">For the signs, screens and website. High resolution, with a transparent background if you have one.</p>
+    <label class="card logo-pick" id="logo-pick">
+      <input type="file" id="f-logo" accept=".png,.svg,.eps,.ai,.pdf,image/png,image/svg+xml,application/pdf,application/postscript" aria-label="Choose your logo file">
+      <div class="lp-thumb" id="lp-thumb"><svg><use href="#i-up"/></svg></div>
+      <div><div class="lp-main" id="lp-main">Choose Your Logo File</div><div class="lp-sub" id="lp-sub">PNG, SVG, EPS, AI or PDF &middot; up to 10 MB</div></div>
+    </label>
+    <p class="lp-msg" id="lp-msg" hidden></p>
+  </section>
+
+  <!-- 5. review and sign -->
+  <section class="step" id="s-sign" data-step="sign">
+    <h2 class="h-sec">Review and Sign</h2>
+    <dl class="card sum" id="sum"></dl>
+    <h2 class="h-sec">Sponsor Contract</h2>
+    <div class="card k-box">
+      <div class="k-head"><b>MISMO Event Sponsor Contract</b><span>Version @@CONTRACT_VERSION@@</span></div>
+      <div class="k-peek" id="k-peek"></div>
+      <button type="button" class="btn wide" id="read-contract"><svg><use href="#i-doc"/></svg>Read the Full Contract</button>
+    </div>
+    <label class="card agree" id="agree"><input type="checkbox" id="f-agree"><span>I have read and agree to the MISMO Event Sponsor Contract on behalf of <b id="agree-co">my company</b>.</span></label>
+    <div class="card form">
+      <label class="fld" data-f="signer"><span>Signer Name</span><input id="f-signer-name" autocomplete="name"><div class="err">Add the name of the person signing.</div></label>
+      <label class="fld" data-f="title"><span>Signer Title</span><input id="f-signer-title" autocomplete="organization-title"><div class="err">Add their title.</div></label>
+      <label class="fld" data-f="date"><span>Date</span><input id="f-signer-date" type="date"><div class="err">Add today&rsquo;s date.</div></label>
+    </div>
+    <p class="fine">Submitting sends your application and signature to MISMO&rsquo;s sponsorship team, who confirm it and send the invoice. Nothing is charged here.</p>
+    <div class="card msg err" id="send-err" hidden></div>
+  </section>
+
+  <!-- 6. sent -->
+  <section class="step" id="s-done" data-step="done">
+    <div class="card done">
+      <div class="ok"><svg><use href="#i-tick"/></svg></div>
+      <h2>Application Sent</h2>
+      <p id="done-lead">Thank you. MISMO&rsquo;s sponsorship team has it.</p>
+      <div class="ref" id="done-ref"></div>
+      <p id="done-mail"></p>
+      <div class="done-acts">
+        <button type="button" class="btn primary wide" id="signed-pdf-btn"><svg><use href="#i-doc"/></svg>Save a Signed Copy (PDF)</button>
+        <a class="btn wide" id="done-home" href="/mymismo/">Back to MyMISMO</a>
+      </div>
+    </div>
+    <div class="card next"><b>What Happens Next</b>
+      <ol><li>A confirmation email is on its way to you now. If it isn&rsquo;t there within the hour, check your junk folder.</li>
+      <li>MISMO confirms your sponsorship and sends the invoice, usually within two working days.</li>
+      <li>Keep your reference. If you haven&rsquo;t heard back, send it to <a href="mailto:kbradshaw@mismo.org">kbradshaw@mismo.org</a>.</li></ol></div>
+  </section>
+</main>
+
+<div class="bar" id="bar">
+  <div class="bar-in">
+    <div class="bar-sum" id="bar-sum"><b></b><span></span></div>
+    <button type="button" class="btn primary" id="go">Continue</button>
+  </div>
+</div>
+
+<div class="sheet" id="contract-sheet" role="dialog" aria-modal="true" aria-labelledby="k-title" aria-hidden="true">
+  <div class="sheet-hd"><h2 id="k-title">MISMO Event Sponsor Contract<small>Version @@CONTRACT_VERSION@@</small></h2><button type="button" class="x" id="k-close" aria-label="Close"><svg><use href="#i-x"/></svg></button></div>
+  <div class="sheet-bd contract-box" id="k-body" data-contract-version="@@CONTRACT_VERSION@@">
+@@CONTRACT@@
+  </div>
+  <div class="sheet-ft"><button type="button" class="btn primary wide" id="k-done">Done Reading</button></div>
+</div>
+
+<div id="print"></div>
+
+<script>
+(function(){
+  "use strict";
+  var APP = @@DATA@@;
+
+  /* The same two flows the prospectus pages use (copied from them by tools/build_app.py). The
+     Intake address is public by design; SUBMIT_SECRET keeps junk out. */
+  var SUBMIT_ENDPOINT = "@@SUBMIT_ENDPOINT@@";
+  var SUBMIT_SECRET = "@@SUBMIT_SECRET@@";
+  var AVAIL_ENDPOINT = "@@AVAIL_ENDPOINT@@";
+  /* Which prospectuses to offer: the Sponsorship Portal's Publish on MyMISMO boxes, made public by
+     the website's sponsors job. Until that file is there, Series + Winter. ?show=all previews all. */
+  var PUBLISHED_FEED = "/sponsors/prospectus-app.json";
+  var DEFAULT_PUBLISHED = {"series-winter":true};
+  var STORE_KEY = "mismo2027.app.reserve.v1";
+  var TIER_ORDER = ["diamond","platinum","gold","silver","bronze"];
+  var SEASONS = ["Winter","Spring","Fall"];
+  var PROGRAM_SEASONS = {winter:["Winter"], spring:["Spring"], fall:["Fall"], series:SEASONS, springfall:["Spring","Fall"]};
+  var PROGRAM_LIST = {series:"Summit Series", winter:"Winter Summit", spring:"Spring Summit", fall:"Fall Summit", springfall:"Summit Series"};
+  var LOGO_MAX = 10 * 1024 * 1024;
+  var LOGO_TYPES = {png:"image/png", svg:"image/svg+xml", eps:"application/postscript", ai:"application/postscript", pdf:"application/pdf"};
+  var STEP_NAMES = {start:"Choose a Summit", level:"Choose Your Level", opp:"Choose Your Opportunity", details:"Your Details", sign:"Review and Sign"};
+  var PAGE_OPENED = Date.now();
+  var PRACTICE = /[?&]practice(\b|=|&|$)/.test(location.search);
+
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = function(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]; }); };
+  var P = APP.programs;
+  var state = {program:null, tier:null, opp:null, day:null, multi:false};
+  var step = "start";
+  var published = null;     // the program keys on offer
+  var logo = null, logoUrl = null;
+  var live = false;
+  var sent = null;
+
+  /* ---------- prices ---------- */
+  function num(price){ return Number(String(price || "").replace(/[^0-9.]/g, "")) || 0; }
+  function money(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+  function lowest(k){ return Math.min.apply(null, TIER_ORDER.map(function(t){ return num(P[k].tiers[t].price); })); }
+
+  /* ---------- which programs are on offer ---------- */
+  function setPublished(pages){
+    var keys = [];
+    Object.keys(APP.groups).forEach(function(g){ if(pages[g]) keys = keys.concat(APP.groups[g]); });
+    published = APP.order.filter(function(k){ return keys.indexOf(k) >= 0; });
+    paintPrograms();
+    if(state.program && published.indexOf(state.program) < 0 && step !== "done"){ clearSel(); show("start", true); }
+  }
+  function loadPublished(){
+    if(/[?&]show=all\b/.test(location.search)){ var all = {}; Object.keys(APP.groups).forEach(function(g){ all[g] = true; }); setPublished(all); return; }
+    setPublished(DEFAULT_PUBLISHED);
+    fetch(PUBLISHED_FEED + "?t=" + Date.now(), {cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(j){ var pg = j && (j.pages || j); if(pg && typeof pg === "object") setPublished(pg); })
+      .catch(function(){ /* keep the default */ });
+  }
+
+  /* ---------- the start page ---------- */
+  function paintStart(){
+    $("hero-stats").innerHTML = APP.stats.map(function(s){
+      var l = s.l.replace(/ · .*$/, "");
+      return "<div><b>" + esc(s.n) + "</b><span>" + esc(l) + "</span></div>"; }).join("");
+    var tot = APP.room.reduce(function(a, r){ return a + r.n; }, 0) || 1;
+    var max = Math.max.apply(null, APP.room.map(function(r){ return r.n; }));
+    $("room-lead").textContent = "Registrants across the three 2026 Summits: " + tot.toLocaleString("en-US") + " people.";
+    $("room").innerHTML = APP.room.map(function(r){
+      return '<div class="room-row"><b>' + esc(r.k) + '</b><span>' + Math.round(r.n * 100 / tot) + '% &middot; ' + r.o + ' orgs</span><div class="rbar"><i style="width:' + (r.n * 100 / max).toFixed(1) + '%"></i></div></div>';
+    }).join("");
+    $("quotes").innerHTML = APP.quotes.map(function(q, i){
+      return '<figure class="card quote" data-q="' + i + '"><p>' + esc(q.text) + '</p><figcaption class="q-who">' +
+        (q.img ? '<img src="' + q.img + '" alt="">' : "") + '<div><b>' + esc(q.who) + '</b><span>' + esc(q.role) + '</span></div></figcaption></figure>';
+    }).join("");
+    $("qdots").innerHTML = APP.quotes.map(function(_, i){ return '<i' + (i ? "" : ' class="on"') + '></i>'; }).join("");
+    var qs = $("quotes");
+    qs.addEventListener("scroll", function(){
+      var w = qs.firstElementChild ? qs.firstElementChild.getBoundingClientRect().width + 10 : 1;
+      var n = Math.round(qs.scrollLeft / w);
+      Array.prototype.forEach.call($("qdots").children, function(d, i){ d.classList.toggle("on", i === n); });
+    }, {passive:true});
+    qs.addEventListener("click", function(e){ var f = e.target.closest(".quote"); if(f) f.classList.toggle("open"); });
+  }
+  function paintPrograms(){
+    var el = $("prog-list");
+    if(!published.length){
+      el.innerHTML = '<div class="card none">Sponsorships for the next MISMO Summits open soon. Email <a href="mailto:kbradshaw@mismo.org">kbradshaw@mismo.org</a> to be the first to hear.</div>';
+      return;
+    }
+    el.innerHTML = published.map(function(k){
+      var p = P[k];
+      return '<button type="button" class="prog' + (k === "series" ? " feature" : "") + '" data-prog="' + k + '">' +
+        '<span class="p-name">' + esc(p.name) + (p.save ? ' <span class="tag sky">Save ' + p.save + '%</span>' : "") + '</span>' +
+        '<span class="p-when">' + esc(p.when) + ' &middot; ' + esc(p.where) + '</span>' +
+        '<span class="p-foot">From <b>' + money(lowest(k)) + '</b> &middot; 5 levels</span>' +
+        '<span class="p-go"><svg><use href="#i-go"/></svg></span></button>';
+    }).join("");
+  }
+  $("prog-list").addEventListener("click", function(e){
+    var b = e.target.closest(".prog"); if(!b) return;
+    var k = b.getAttribute("data-prog");
+    if(state.program !== k){ state.program = k; state.tier = null; state.opp = null; state.day = null; state.multi = false; }
+    save(); show("level");
+  });
+
+  /* ---------- levels ---------- */
+  function tierOut(t){ return t.opportunities ? t.opportunities.every(function(o){ return o.sold; }) : !!t.soldOut; }
+  function tierChip(t){
+    if(!t.opportunities){
+      if(t.soldOut) return '<span class="tag bad">Sold</span>';
+      return '<span class="tag good">Open &middot; Exclusive</span>';
+    }
+    var open = t.opportunities.filter(function(o){ return !o.sold; }).length;
+    if(!open) return '<span class="tag bad">Sold Out</span>';
+    return '<span class="tag good">' + open + ' of ' + t.opportunities.length + ' Open</span>';
+  }
+  function paintLevels(){
+    var p = P[state.program]; if(!p) return;
+    $("lv-name").textContent = p.name;
+    $("lv-when").textContent = p.when + " · " + (p.venue ? p.venue + ", " + p.city : p.where) + (p.save ? " · " + p.save + "% off included" : "");
+    $("tier-list").innerHTML = TIER_ORDER.map(function(tid){
+      var t = p.tiers[tid]; if(!t) return "";
+      var out = tierOut(t), sel = state.tier === tid;
+      var ben = t.benefits || [], showAll = sel;
+      var list = (showAll ? ben : ben.slice(0, 3)).map(function(b){ return '<li><svg><use href="#i-tick"/></svg><span>' + esc(b) + '</span></li>'; }).join("");
+      var more = !showAll && ben.length > 3 ? '<div class="t-more">+ ' + (ben.length - 3) + ' more benefits</div>' : "";
+      var opps = t.opportunities ? '<div class="t-opps">Choose one: ' + esc(t.opportunities.map(function(o){ return o.name.replace(/ Sponsor$/, ""); }).join(", ")) + '</div>' :
+        '<div class="t-opps">One sponsor only. The exclusive is included.</div>';
+      return '<button type="button" class="tier' + (sel ? " sel" : "") + (out ? " out" : "") + '" data-tier="' + tid + '" style="--tc:var(--t-' + tid + ')"' + (out ? ' aria-disabled="true"' : "") + ' aria-pressed="' + sel + '">' +
+        '<div class="t-top"><span class="t-eye">' + esc(t.name.replace(/ Sponsor$/, "")) + '</span><span class="t-right">' + tierChip(t) + '<span class="t-check"><svg><use href="#i-tick"/></svg></span></span></div>' +
+        '<div class="t-price">' + esc(t.price) + (state.program === "series" ? '<small>for all three</small>' : (p.summits.length > 1 ? '<small>for both</small>' : "")) + '</div>' +
+        '<div class="t-regs">' + esc(t.regs) + '</div>' +
+        '<ul class="t-ben">' + list + '</ul>' + more + opps + '</button>';
+    }).join("");
+  }
+  $("tier-list").addEventListener("click", function(e){
+    var b = e.target.closest(".tier"); if(!b || b.classList.contains("out")) return;
+    var tid = b.getAttribute("data-tier");
+    if(state.tier !== tid){ state.tier = tid; state.opp = null; state.day = null; state.multi = false; }
+    paintLevels(); paintBar(); save();
+    var again = document.querySelector('.tier[data-tier="' + tid + '"]');
+    if(again && again.scrollIntoView){ var r = again.getBoundingClientRect(); if(r.bottom > innerHeight - 90 || r.top < 110) again.scrollIntoView({block:"nearest", behavior:"smooth"}); }
+  });
+
+  /* ---------- opportunities ---------- */
+  function curTier(){ var p = P[state.program]; return p && state.tier ? p.tiers[state.tier] : null; }
+  function curOpp(){ var t = curTier(); if(!t || !t.opportunities) return null; return t.opportunities.filter(function(o){ return o.id === state.opp; })[0] || null; }
+  /* "Jan 11" for a day of a single summit; "Each summit" when the day repeats at several */
+  function dateOf(d){
+    var p = P[state.program], i = ["Monday","Tuesday","Wednesday","Thursday","Friday"].indexOf(d);
+    if(!p || !p.opens || i < 0) return p && p.summits.length > 1 ? "Each summit" : d;
+    var x = new Date(p.opens + "T12:00:00"); x.setDate(x.getDate() + i);
+    return x.toLocaleDateString("en-US", {month:"short", day:"numeric"});
+  }
+  function oppStatus(o){
+    if(o.note === "Unlimited") return '<span class="tag good">Open</span>';
+    if(o.sold) return '<span class="tag bad">Sold</span>';
+    var left = /^(\d+) available/.exec(o.note || "");
+    return '<span class="tag good">' + (left ? left[1] + " Left" : esc(o.note)) + '</span>';
+  }
+  function paintOpps(){
+    var t = curTier(); if(!t) return;
+    $("inc-h").textContent = "Included With " + t.name.replace(/ Sponsor$/, "");
+    $("inc").innerHTML = '<div class="inc-regs">' + esc(t.regs) + '</div><ul class="t-ben">' + (t.benefits || []).map(function(b){
+      return '<li><svg><use href="#i-tick"/></svg><span>' + esc(b) + '</span></li>'; }).join("") + '</ul>';
+    var el = $("opp-list");
+    if(!t.opportunities){
+      $("op-lead").textContent = "Diamond is one sponsor per summit.";
+      el.innerHTML = '<div class="card diamond-note"><svg><use href="#i-gem"/></svg><div><b>Diamond Exclusive is included.</b><br><span style="color:var(--ink-2); font-size:14px">' + esc((t.benefits || []).slice(-1)[0] || "") + '</span></div></div>';
+      return;
+    }
+    $("op-lead").textContent = "Your " + t.name.replace(/ Sponsor$/, "") + " sponsorship includes one of these. Each one is first come, first served.";
+    el.innerHTML = t.opportunities.map(function(o){
+      var sel = state.opp === o.id, more = "";
+      if(sel && o.days){
+        more = '<div class="opp-more"><div class="o-lbl">' + (o.id === "reception" ? "Choose your evening" : "Choose your day") + '</div><div class="days">' +
+          o.days.map(function(d){
+            var gone = (o.soldDays || []).indexOf(d) >= 0;
+            return '<button type="button" class="day' + (state.day === d ? " sel" : "") + '" data-day="' + d + '"' + (gone ? " disabled" : "") + '>' + d.slice(0, 3) + '<small>' + (gone ? "Taken" : dateOf(d)) + '</small></button>';
+          }).join("") + '</div>' +
+          (o.multiDay ? '<label class="multi"><input type="checkbox" id="f-multi"' + (state.multi ? " checked" : "") + '><span><b>I&rsquo;d like more than one day</b><span>The team will be in touch with a rate for the extra days. Pick your first day above.</span></span></label>' : "") +
+          '</div>';
+      }
+      var sub = o.days ? (o.days.length === 1 ? o.days[0] : o.days.length + " days to choose from") : (o.cap == null ? "Open to every " + t.name.replace(/ Sponsor$/, "") + " sponsor" : (o.cap === 1 ? "One sponsor" : o.cap + " sponsors"));
+      return '<div class="opp' + (sel ? " sel" : "") + (o.sold ? " out" : "") + '" data-opp="' + o.id + '"><button type="button" class="opp-row"' + (o.sold ? ' aria-disabled="true"' : "") + ' aria-pressed="' + sel + '">' +
+        '<span class="radio"></span><span class="o-name">' + esc(o.name) + '<span class="o-sub">' + esc(sub) + '</span></span>' + oppStatus(o) + '</button>' + more + '</div>';
+    }).join("");
+  }
+  $("opp-list").addEventListener("click", function(e){
+    var d = e.target.closest(".day");
+    if(d){ if(!d.disabled){ state.day = d.getAttribute("data-day"); paintOpps(); paintBar(); save(); } return; }
+    var row = e.target.closest(".opp-row"); if(!row) return;
+    var box = row.parentNode; if(box.classList.contains("out")) return;
+    var id = box.getAttribute("data-opp");
+    if(state.opp !== id){ state.opp = id; state.day = null; state.multi = false; }
+    paintOpps(); paintBar(); save();
+  });
+  $("opp-list").addEventListener("change", function(e){ if(e.target.id === "f-multi"){ state.multi = e.target.checked; save(); } });
+
+  /* ---------- details and logo ---------- */
+  var FIELDS = {company:"f-company", contact:"f-contact", email:"f-email", phone:"f-phone", signer:"f-signer-name", title:"f-signer-title", date:"f-signer-date"};
+  function val(k){ return ($(FIELDS[k]).value || "").trim(); }
+  function okEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s); }
+  function okPhone(s){ return (s.replace(/\D/g, "").length >= 7); }
+  Object.keys(FIELDS).forEach(function(k){
+    $(FIELDS[k]).addEventListener("input", function(){ var f = $(FIELDS[k]).closest(".fld"); f.classList.remove("bad"); paintBar(); save(); });
+  });
+  ["f-company","f-contact","f-email"].forEach(function(id, i, a){
+    $(id).addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); $(a[i + 1] || "f-phone").focus(); } });
+  });
+  /* the contact is usually the signer: fill it in once, never over what they typed */
+  $("f-contact").addEventListener("change", function(){ if(!val("signer")) $("f-signer-name").value = val("contact"); });
+
+  function fmtBytes(n){ return n >= 1048576 ? (n / 1048576).toFixed(1).replace(/\.0$/, "") + " MB" : Math.max(1, Math.round(n / 1024)) + " KB"; }
+  function logoSay(t){ var m = $("lp-msg"); m.textContent = t || ""; m.hidden = !t; $("logo-pick").classList.toggle("bad", !!t); }
+  function paintLogo(){
+    var pick = $("logo-pick"), th = $("lp-thumb");
+    pick.classList.toggle("has", !!logo);
+    if(!logo){ $("lp-main").textContent = "Choose Your Logo File"; $("lp-sub").innerHTML = "PNG, SVG, EPS, AI or PDF &middot; up to 10 MB"; th.innerHTML = '<svg><use href="#i-up"/></svg>'; return; }
+    $("lp-main").textContent = logo.name;
+    $("lp-sub").textContent = fmtBytes(logo.size) + " · attached · tap to change";
+    if(logoUrl && (logo.ext === "png" || logo.ext === "svg")) th.innerHTML = '<img alt="" src="' + logoUrl + '">';
+    else th.innerHTML = '<span class="ext">' + esc(logo.ext) + '</span>';
+  }
+  $("f-logo").addEventListener("change", function(e){
+    var file = e.target.files && e.target.files[0]; if(!file) return;
+    var ext = (String(file.name).split(".").pop() || "").toLowerCase();
+    if(!LOGO_TYPES[ext]) return logoSay("That file type can’t be used. Please choose a PNG, SVG, EPS, AI or PDF file.");
+    if(file.size > LOGO_MAX) return logoSay("That file is " + fmtBytes(file.size) + ". The limit is 10 MB, so please choose a smaller version.");
+    if(!file.size) return logoSay("That file is empty. Please choose another.");
+    var r = new FileReader();
+    r.onload = function(){
+      var url = String(r.result || ""), i = url.indexOf(",");
+      if(i < 0) return logoSay("That file couldn’t be read. Please try again.");
+      if(logoUrl){ try{ URL.revokeObjectURL(logoUrl); }catch(x){} }
+      try{ logoUrl = URL.createObjectURL(file); }catch(x){ logoUrl = null; }
+      logo = {name:file.name, ext:ext, type:file.type || LOGO_TYPES[ext], size:file.size, data:url.slice(i + 1)};
+      logoSay(""); paintLogo(); paintBar();
+    };
+    r.onerror = function(){ logoSay("That file couldn’t be read. Please try again."); };
+    r.readAsDataURL(file);
+  });
+  function safeFileName(s){
+    return String(s || "").replace(/["*:<>?\/\\|#%~&{}]+/g, " ").replace(/\s+/g, " ").trim().replace(/^[.\s]+|[.\s]+$/g, "").slice(0, 120) || "logo";
+  }
+
+  /* ---------- review ---------- */
+  function oppLabel(){
+    var t = curTier(); if(!t) return "—";
+    if(!t.opportunities) return "Included — Diamond exclusive";
+    var o = curOpp(); if(!o) return "Not yet selected";
+    if(o.days) return o.name + (state.day ? " — " + state.day : " — day not yet selected");
+    return o.name;
+  }
+  function paintSum(){
+    var p = P[state.program], t = curTier(); if(!p || !t) return;
+    var rows = [["Summit", p.name + " · " + p.when, "start"], ["Level", t.name, "level"],
+      ["Opportunity", oppLabel().replace("Included — Diamond exclusive", "Diamond Exclusive (included)") + (state.multi ? " (interested in more days)" : ""), t.opportunities ? "opp" : ""],
+      ["Company", val("company"), "details"], ["Contact", [val("contact"), val("email"), val("phone")].filter(Boolean).join("\n"), "details"],
+      ["Logo", logo ? logo.name : "", "details"]];
+    $("sum").innerHTML = rows.map(function(r){
+      return '<div class="sum-row"><dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd>' + (r[2] ? '<button type="button" data-edit="' + r[2] + '">Edit</button>' : "<span></span>") + '</div>';
+    }).join("") + '<div class="sum-total"><span>Sponsorship</span><b>' + esc(t.price) + '</b></div>';
+    $("agree-co").textContent = val("company") || "my company";
+  }
+  $("sum").addEventListener("click", function(e){ var b = e.target.closest("[data-edit]"); if(b) show(b.getAttribute("data-edit"), true); });
+
+  /* ---------- the contract ---------- */
+  (function(){
+    var ps = $("k-body").querySelectorAll("p");
+    $("k-peek").innerHTML = Array.prototype.slice.call(ps, 0, 2).map(function(p){ return p.outerHTML; }).join("");
+  })();
+  var sheetOpen = false;
+  function openSheet(){ sheetOpen = true; var s = $("contract-sheet"); s.classList.add("on"); s.setAttribute("aria-hidden", "false"); $("k-body").scrollTop = 0; document.body.style.overflow = "hidden"; setTimeout(function(){ $("k-close").focus(); }, 50); if(window.MismoBack) MismoBack.check(); }
+  function closeSheet(){ sheetOpen = false; var s = $("contract-sheet"); s.classList.remove("on"); s.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; $("read-contract").focus(); if(window.MismoBack) MismoBack.check(); }
+  $("read-contract").addEventListener("click", openSheet);
+  $("k-peek").addEventListener("click", openSheet);
+  $("k-close").addEventListener("click", closeSheet);
+  $("k-done").addEventListener("click", closeSheet);
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && sheetOpen) closeSheet(); });
+  $("f-agree").addEventListener("change", function(){ $("agree").classList.remove("bad"); paintBar(); });
+
+  /* ---------- steps ---------- */
+  function flow(){ var t = curTier(); return ["start","level"].concat(t && !t.opportunities ? [] : ["opp"]).concat(["details","sign"]); }
+  function missing(s){
+    var t = curTier();
+    if(s === "level") return t ? "" : "Choose a level to continue";
+    if(s === "opp"){
+      if(!t || !t.opportunities) return "";
+      var o = curOpp(); if(!o) return "Choose an opportunity to continue";
+      if(o.days && !state.day) return "Choose your day to continue";
+      return "";
+    }
+    if(s === "details"){
+      if(!val("company")) return "company"; if(!val("contact")) return "contact";
+      if(!okEmail(val("email"))) return "email"; if(!okPhone(val("phone"))) return "phone";
+      if(!logo) return "logo"; return "";
+    }
+    if(s === "sign"){
+      if(!$("f-agree").checked) return "agree"; if(!val("signer")) return "signer"; if(!val("title")) return "title"; if(!val("date")) return "date";
+      return "";
+    }
+    return "";
+  }
+  var HINTS = {company:"Add your company to continue", contact:"Add your name to continue", email:"Check your email address", phone:"Add a phone number to continue",
+    logo:"Add your logo to continue", agree:"Check the box to agree to the contract", signer:"Add the signer’s name", title:"Add the signer’s title", date:"Add the date"};
+  var nagged = false;
+  function paintBar(){
+    var t = curTier(), p = P[state.program];
+    var b = $("bar-sum").firstElementChild, s = $("bar-sum").lastElementChild;
+    if(!p){ return; }
+    var o = curOpp();
+    b.textContent = t ? t.name.replace(/ Sponsor$/, "") + " · " + t.price : p.name;
+    var sub = t ? (t.opportunities ? (o ? o.name + (state.day ? ", " + state.day : "") : "Opportunity not chosen yet") : "Diamond Exclusive") : "Choose a level below";
+    var m = missing(step);
+    if(nagged && m){ s.textContent = HINTS[m] || m; s.className = "hint"; }
+    else { s.textContent = sub; s.className = ""; }
+    $("go").textContent = step === "sign" ? (sending ? "Sending…" : "Submit") : "Continue";
+    $("go").disabled = !!sending;
+  }
+  function paintSteps(){
+    var f = flow(), i = f.indexOf(step);
+    $("steps").hidden = (step === "start" || step === "done");
+    var n = ["start","level","opp","details","sign"].indexOf(step);
+    $("steps-n").textContent = "Step " + (n + 1) + " of 5";
+    $("steps-name").textContent = STEP_NAMES[step] || "";
+    Array.prototype.forEach.call($("segs").children, function(seg, k){
+      var key = ["start","level","opp","details","sign"][k];
+      var skipped = key === "opp" && f.indexOf("opp") < 0;
+      seg.className = (k < n || skipped) ? "sg-done" : (k === n ? "sg-now" : "");
+    });
+    void i;
+  }
+  function show(s, back){
+    if(s === step) return;
+    var was = step;
+    step = s;
+    nagged = false;
+    document.querySelectorAll(".step").forEach(function(el){ el.classList.toggle("on", el.getAttribute("data-step") === s); el.classList.toggle("back", !!back); });
+    document.body.classList.toggle("no-bar", s === "start" || s === "done");
+    if(s === "level") paintLevels();
+    if(s === "opp") paintOpps();
+    if(s === "sign"){ paintSum(); if(!val("date")) $("f-signer-date").value = todayIso(); if(!val("signer") && val("contact")) $("f-signer-name").value = val("contact"); }
+    paintSteps(); paintBar();
+    var bk = $("m-back");
+    if(s === "start" || s === "done"){ bk.setAttribute("href", "/mymismo/"); bk.setAttribute("aria-label", "Back to MyMISMO"); }
+    else { bk.setAttribute("href", "#"); bk.setAttribute("aria-label", "Back"); }
+    window.scrollTo(0, 0);
+    if(was !== s && window.MismoBack) MismoBack.check();
+    save();
+  }
+  function prev(){
+    var f = flow(), i = f.indexOf(step);
+    if(i > 0) show(f[i - 1], true);
+  }
+  $("m-back").addEventListener("click", function(e){
+    if(step === "start" || step === "done") return;     // a real link to MyMISMO
+    e.preventDefault(); prev();
+  });
+  function flag(m){
+    nagged = true; paintBar();
+    if(m === "logo"){ logoSay("Please add your logo file to continue."); $("logo-pick").scrollIntoView({block:"center", behavior:"smooth"}); return; }
+    if(m === "agree"){ $("agree").classList.add("bad"); $("agree").scrollIntoView({block:"center", behavior:"smooth"}); return; }
+    if(FIELDS[m]){ var f = $(FIELDS[m]).closest(".fld"); f.classList.add("bad"); $(FIELDS[m]).focus(); f.scrollIntoView({block:"center", behavior:"smooth"}); return; }
+    var first = document.querySelector(step === "level" ? ".tier:not(.out)" : ".opp.sel .day:not(:disabled), .opp:not(.out)");
+    if(first) first.scrollIntoView({block:"center", behavior:"smooth"});
+  }
+  $("go").addEventListener("click", function(){
+    var m = missing(step);
+    if(m) return flag(m);
+    if(step === "sign") return submit();
+    var f = flow(), i = f.indexOf(step);
+    show(f[i + 1]);
+  });
+
+  /* ---------- availability (the prospectus pages' summit-aware count, on the app's data) ---------- */
+  function cellText(v){ if(v === null || v === undefined) return ""; if(typeof v === "object") return String(v.Value || v.value || ""); return String(v); }
+  function oppKey(s){
+    return String(s || "").replace(/[—–]/g, "-").replace(/\s+-\s+(Monday|Tuesday|Wednesday|Thursday|Friday)\b.*$/i, "")
+      .replace(/\(.*?\)/g, " ").toLowerCase().replace(/[^a-z0-9]+/g, "");
+  }
+  function dayName(v){ var m = /(Monday|Tuesday|Wednesday|Thursday|Friday)/i.exec(cellText(v).trim()); return m ? m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase() : ""; }
+  function noteFor(cap, taken){
+    if(cap === null || cap === undefined) return {note:"Unlimited", sold:false};
+    var left = Math.max(0, cap - taken);
+    if(left === 0) return {note:"Sold", sold:true};
+    return {note: taken ? (left + " available, " + taken + " sold") : (left + " available"), sold:false};
+  }
+  function seasonOf(v){ var m = /(Winter|Spring|Fall|Series)/i.exec(cellText(v)); return m ? m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase() : ""; }
+  function parseLines(v){ var s = cellText(v).trim(); if(!s) return null; try{ var a = JSON.parse(s); return (Array.isArray(a) && a.length) ? a : null; }catch(e){ return null; } }
+  function slotKey(tier, opp){ return /^\s*diamond\s*$/i.test(cellText(tier)) ? "diamond" : oppKey(cellText(opp)); }
+  function slotsOf(r, legacy){
+    var key = slotKey(r.tier, r.opportunity), day = dayName(r.day) || dayName(r.opportunity);
+    var all = function(){ return SEASONS.map(function(s){ return {season:s, key:key, day:day}; }); };
+    if(legacy) return all();
+    var se = seasonOf(r.program);
+    if(se === "Series"){
+      var lines = parseLines(r.lines);
+      if(!lines) return all();
+      return lines.map(function(l){ return {season:seasonOf(l.s), key:slotKey(l.tier, l.opp), day:dayName(l.day) || dayName(l.opp)}; });
+    }
+    return se ? [{season:se, key:key, day:day}] : [];
+  }
+  function applyAvailability(rows){
+    if(!Array.isArray(rows)) return false;
+    var legacy = !rows.some(function(r){ return r && Object.prototype.hasOwnProperty.call(r, "program"); });
+    var taken = {}, days = {};
+    SEASONS.forEach(function(s){ taken[s] = {}; days[s] = {}; });
+    rows.forEach(function(r){
+      if(!r) return;
+      slotsOf(r, legacy).forEach(function(sl){
+        if(!sl.key || !taken[sl.season]) return;
+        taken[sl.season][sl.key] = (taken[sl.season][sl.key] || 0) + 1;
+        if(sl.day) (days[sl.season][sl.key] = days[sl.season][sl.key] || {})[sl.day] = 1;
+      });
+    });
+    var countFor = function(prog, key){ return Math.max.apply(null, PROGRAM_SEASONS[prog].map(function(s){ return taken[s][key] || 0; })); };
+    var daysFor = function(prog, key){ var out = {}; PROGRAM_SEASONS[prog].forEach(function(s){ Object.keys(days[s][key] || {}).forEach(function(d){ out[d] = 1; }); }); return out; };
+    APP.order.forEach(function(prog){
+      /* an answer from before the flow sent Program can't tell one summit from another: the
+         Spring and Fall pages keep their built-in snapshot then, and so does the app */
+      if(legacy && rows.length && prog !== "winter" && prog !== "series") return;
+      TIER_ORDER.forEach(function(tid){
+        var t = P[prog].tiers[tid]; if(!t) return;
+        if(!t.opportunities){
+          if(t.cap !== undefined && t.oppName){ var d = noteFor(t.cap, countFor(prog, "diamond")); t.avail = d.sold ? "Sold" : (d.note + " · exclusive"); t.soldOut = d.sold; }
+          return;
+        }
+        t.opportunities.forEach(function(o){
+          var k = oppKey(o.name);
+          if(o.days){
+            var gone = daysFor(prog, k), sold = o.days.filter(function(x){ return gone[x]; });
+            o.soldDays = sold;
+            var r2 = noteFor(o.days.length, Math.max(sold.length, countFor(prog, k))); o.note = r2.note; o.sold = r2.sold;
+          } else { var r3 = noteFor(o.cap, countFor(prog, k)); o.note = r3.note; o.sold = r3.sold; }
+        });
+      });
+    });
+    /* a choice that has just gone comes off, so nobody applies for something already taken */
+    var t = curTier();
+    if(t && tierOut(t) && step !== "done"){ state.tier = null; state.opp = null; state.day = null; }
+    var o = curOpp();
+    if(o && o.sold){ state.opp = null; state.day = null; }
+    if(o && state.day && (o.soldDays || []).indexOf(state.day) >= 0) state.day = null;
+    live = true;
+    var st = $("avail-stamp"); st.classList.add("on"); st.lastElementChild.textContent = "Live availability, checked just now";
+    if(step === "level") paintLevels();
+    if(step === "opp") paintOpps();
+    paintBar();
+    return true;
+  }
+  window.__app = {state:function(){ return JSON.parse(JSON.stringify(state)); }, programs:P, step:function(){ return step; }, published:function(){ return published.slice(); }};
+  function loadAvailability(){
+    if(!AVAIL_ENDPOINT) return;
+    fetch(AVAIL_ENDPOINT, {method:"POST", headers:{"Content-Type":"text/plain"}, body:"{}"})
+      .then(function(res){ if(!res.ok) throw new Error("status " + res.status); return res.json(); })
+      .then(function(rows){ applyAvailability(Array.isArray(rows) ? rows : (rows && rows.value) || []); })
+      .catch(function(){ /* keep the built-in snapshot */ });
+  }
+
+  /* ---------- sending ---------- */
+  var sending = false;
+  function todayIso(){ var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function makeReference(){
+    var d = new Date(), p = function(n){ return (n < 10 ? "0" : "") + n; };
+    return "SP-" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+  }
+  /* the same fields, in the same wording, as the prospectus pages send */
+  function payloadFor(reference){
+    var p = P[state.program], t = curTier(), trap = $("f-website");
+    return {
+      secret: SUBMIT_SECRET, reference: reference, submittedAt: new Date().toISOString(), source: "prospectus-web",
+      program: PROGRAM_LIST[state.program] || "Winter Summit",
+      summits: (PROGRAM_SEASONS[state.program] || []).join(","),
+      package: p.package || "",
+      programLabel: p.label,
+      tier: state.tier.charAt(0).toUpperCase() + state.tier.slice(1),
+      tierName: t.name, price: t.price,
+      opportunity: oppLabel(), day: state.day || "", multiDayInterest: !!state.multi,
+      company: val("company"), contactName: val("contact"), contactEmail: val("email"), contactPhone: val("phone"),
+      logoFileName: safeFileName(reference + " - " + val("company")) + "." + logo.ext,
+      logoContentType: logo.type, logoBase64: logo.data,
+      signerName: val("signer"), signerTitle: val("title"), signedDate: val("date"), agreed: true,
+      contractVersion: $("k-body").getAttribute("data-contract-version") || "",
+      hp: trap ? trap.value : "", secondsOnPage: Math.round((Date.now() - PAGE_OPENED) / 1000)
+    };
+  }
+  function submit(){
+    if(sending) return;
+    var payload = payloadFor(makeReference());
+    var err = $("send-err"); err.hidden = true;
+    sending = true; paintBar();
+    var ctl = (typeof AbortController === "function") ? new AbortController() : null;
+    if(ctl) setTimeout(function(){ ctl.abort(); }, 90000);
+    fetch(SUBMIT_ENDPOINT, {method:"POST", signal: ctl ? ctl.signal : undefined, headers:{"Content-Type":"text/plain"}, body: JSON.stringify(payload)})
+      .then(function(res){ return res.json().catch(function(){ return {}; }).then(function(j){ if(!res.ok || !j || j.ok !== true) throw new Error("not received"); }); })
+      .then(function(){ sending = false; done(payload); })
+      .catch(function(){
+        sending = false; paintBar();
+        var lines = ["Reference: " + payload.reference, "Company: " + payload.company,
+          "Contact: " + payload.contactName + " (" + payload.contactEmail + (payload.contactPhone ? ", " + payload.contactPhone : "") + ")",
+          "Program: " + payload.programLabel, "Level: " + payload.tierName + " (" + payload.price + ")", "Opportunity: " + payload.opportunity,
+          "Signed by: " + payload.signerName + ", " + payload.signerTitle + ", " + payload.signedDate, "", "Our logo is attached."];
+        var mail = "mailto:kbradshaw@mismo.org?subject=" + encodeURIComponent("Sponsorship application " + payload.reference + " — " + payload.company) +
+          "&body=" + encodeURIComponent("The MyMISMO app couldn’t send our sponsorship application, so here it is by email.\n\n" + lines.join("\n"));
+        err.innerHTML = "<b>Your application didn&rsquo;t reach MISMO.</b> Nothing was sent, and everything you entered is still here. Please try Submit again in a moment. If it still won&rsquo;t go (some company networks block it), <a href=\"" + esc(mail) + "\">email it to kbradshaw@mismo.org</a> instead: the details are filled in for you, just attach your logo.";
+        err.hidden = false; err.scrollIntoView({block:"center", behavior:"smooth"});
+      });
+  }
+  function done(p){
+    sent = p;
+    $("done-ref").textContent = p.reference;
+    $("done-lead").textContent = "Thank you" + (p.contactName ? ", " + p.contactName.split(" ")[0] : "") + ". " + p.company + "’s " + p.tierName.replace(/ Sponsor$/, "") + " application for the " + P[state.program].name + " is with MISMO’s sponsorship team. Your reference:";
+    $("done-mail").textContent = "A confirmation email is on its way to " + p.contactEmail + ".";
+    buildPrint(p);
+    try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+    show("done");
+  }
+  function buildPrint(p){
+    var day = function(v){ var d = v ? new Date(String(v).slice(0, 10) + "T12:00:00") : null; return d && !isNaN(d) ? d.toLocaleDateString("en-US", {month:"long", day:"numeric", year:"numeric"}) : (v || ""); };
+    var rows = [["Sponsor", p.company], ["Program", p.programLabel], ["Level", p.tierName + (p.price ? " (" + p.price + ")" : "")], ["Opportunity", p.opportunity],
+      ["Contact", [p.contactName, p.contactEmail].filter(Boolean).join(", ")], ["Signed By", p.signerName], ["Title", p.signerTitle], ["Date Signed", day(p.signedDate)],
+      ["Reference", p.reference], ["Contract Version", p.contractVersion]];
+    $("print").innerHTML = '<div class="lp"><svg viewBox="0 0 708 108"><use href="#mismo-logo"/></svg></div><h1>MISMO Event Sponsor Contract</h1>' +
+      '<div class="pr-k">' + $("k-body").innerHTML + '</div><h2>Signed Application</h2><p>Agreed to online by checking the agreement box and submitting this application to MISMO on ' +
+      esc(day(p.submittedAt.slice(0, 10))) + '.</p><div class="pr-grid">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return "<div><b>" + esc(r[0]) + "</b>" + esc(r[1]) + "</div>"; }).join("") + '</div>';
+    document.title = "MISMO Signed Sponsor Contract - " + p.company + " - " + p.reference;
+  }
+  $("signed-pdf-btn").addEventListener("click", function(){ window.print(); });
+
+  /* ---------- keep the selections on this phone (never the logo, never once sent) ---------- */
+  function save(){
+    if(step === "done") return;
+    var d = {at:Date.now(), state:state, step:step, f:{}};
+    Object.keys(FIELDS).forEach(function(k){ if(k !== "date") d.f[k] = val(k); });
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(d)); }catch(e){}
+  }
+  function restore(){
+    var d = null;
+    try{ d = JSON.parse(localStorage.getItem(STORE_KEY) || "null"); }catch(e){}
+    if(!d || !d.state || !d.state.program || !P[d.state.program] || Date.now() - (d.at || 0) > 30 * 864e5) return;
+    state = {program:d.state.program, tier:d.state.tier || null, opp:d.state.opp || null, day:d.state.day || null, multi:!!d.state.multi};
+    Object.keys(d.f || {}).forEach(function(k){ if(FIELDS[k] && d.f[k]) $(FIELDS[k]).value = d.f[k]; });
+    $("restore").hidden = false;
+  }
+  function clearSel(){ state = {program:null, tier:null, opp:null, day:null, multi:false}; }
+  $("restore-clear").addEventListener("click", function(){
+    try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+    clearSel(); Object.keys(FIELDS).forEach(function(k){ $(FIELDS[k]).value = ""; }); logo = null; paintLogo();
+    $("restore").hidden = true;
+  });
+
+  /* ---------- Back: each step is a page; the contract sheet is a layer ---------- */
+  if(window.MismoBack){
+    MismoBack.layer({isOpen:function(){ return sheetOpen; }, close:closeSheet});
+    MismoBack.pages({current:function(){ return step; }, go:function(n){ if(STEP_NAMES[n] || n === "done") show(n, flow().indexOf(n) < flow().indexOf(step)); }});
+  }
+
+  restore();
+  paintStart();
+  loadPublished();
+  loadAvailability();
+  paintLogo();
+  if(/[?&]from=mymismo\b/.test(location.search) || /\/mymismo\//.test(document.referrer || "")) document.body.classList.add("in-app");
+})();
+</script>
+</body>
+</html>

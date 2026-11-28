@@ -512,3 +512,11 @@ def build(spec):
 
 for pg in CONF["pages"]:
     build(pg)
+
+# ---------------------------------------------------------------------------
+# 4. The phone version for the MyMISMO app (app/index.html), from the pages just built.
+# ---------------------------------------------------------------------------
+sys.path.insert(0, HERE)
+sys.dont_write_bytecode = True
+import build_app
+build_app.build(REPO)
