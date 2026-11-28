@@ -551,10 +551,9 @@ body.no-bar .bar{display:none}
       var l = s.l.replace(/ · .*$/, "");
       return "<div><b>" + esc(s.n) + "</b><span>" + esc(l) + "</span></div>"; }).join("");
     var tot = APP.room.reduce(function(a, r){ return a + r.n; }, 0) || 1;
-    var max = Math.max.apply(null, APP.room.map(function(r){ return r.n; }));
-    $("room-lead").textContent = "Registrants across the three 2026 Summits: " + tot.toLocaleString("en-US") + " people.";
+    $("room-lead").textContent = "The " + tot.toLocaleString("en-US") + " people who registered for the three 2026 Summits, by the kind of organization they work for. Each bar is that group\u2019s share of the room.";
     $("room").innerHTML = APP.room.map(function(r){
-      return '<div class="room-row"><b>' + esc(r.k) + '</b><span>' + Math.round(r.n * 100 / tot) + '% &middot; ' + r.o + ' orgs</span><div class="rbar"><i style="width:' + (r.n * 100 / max).toFixed(1) + '%"></i></div></div>';
+      return '<div class="room-row"><b>' + esc(r.k) + '</b><span>' + Math.round(r.n * 100 / tot) + '% &middot; ' + r.o + ' orgs</span><div class="rbar"><i style="width:' + (r.n * 100 / tot).toFixed(1) + '%"></i></div></div>';
     }).join("");
     $("quotes").innerHTML = APP.quotes.map(function(q, i){
       return '<figure class="card quote" data-q="' + i + '"><p>' + esc(q.text) + '</p><figcaption class="q-who">' +
