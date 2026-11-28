@@ -417,7 +417,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     <div class="quotes" id="quotes"></div>
     <div class="dots" id="qdots"></div>
     <div class="card ask"><svg><use href="#i-mail"/></svg><div>Questions, or want something custom? Email <a href="mailto:kbradshaw@mismo.org">kbradshaw@mismo.org</a> or <a href="mailto:amoses@mismo.org">amoses@mismo.org</a>.</div></div>
-    <div class="stamp">Version cde324f2</div>
+    <div class="stamp">Version 7e200340</div>
   </section>
 
   <!-- 2. pick a level -->
@@ -604,10 +604,9 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       var l = s.l.replace(/ · .*$/, "");
       return "<div><b>" + esc(s.n) + "</b><span>" + esc(l) + "</span></div>"; }).join("");
     var tot = APP.room.reduce(function(a, r){ return a + r.n; }, 0) || 1;
-    var max = Math.max.apply(null, APP.room.map(function(r){ return r.n; }));
-    $("room-lead").textContent = "Registrants across the three 2026 Summits: " + tot.toLocaleString("en-US") + " people.";
+    $("room-lead").textContent = "The " + tot.toLocaleString("en-US") + " people who registered for the three 2026 Summits, by the kind of organization they work for. Each bar is that group\u2019s share of the room.";
     $("room").innerHTML = APP.room.map(function(r){
-      return '<div class="room-row"><b>' + esc(r.k) + '</b><span>' + Math.round(r.n * 100 / tot) + '% &middot; ' + r.o + ' orgs</span><div class="rbar"><i style="width:' + (r.n * 100 / max).toFixed(1) + '%"></i></div></div>';
+      return '<div class="room-row"><b>' + esc(r.k) + '</b><span>' + Math.round(r.n * 100 / tot) + '% &middot; ' + r.o + ' orgs</span><div class="rbar"><i style="width:' + (r.n * 100 / tot).toFixed(1) + '%"></i></div></div>';
     }).join("");
     $("quotes").innerHTML = APP.quotes.map(function(q, i){
       return '<figure class="card quote" data-q="' + i + '"><p>' + esc(q.text) + '</p><figcaption class="q-who">' +
