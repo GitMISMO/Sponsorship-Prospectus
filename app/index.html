@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- BUILT PAGE: made by tools/build_app.py from tools/app-template.html and the built prospectuses.
+     Change tools/app-template.html (layout) or tools/template.html (tiers, prices, wording), never this file. -->
+<!-- ?practice runs this page on test data; without it this does nothing (see /sponsorship/practice.js) -->
+<script src="/sponsorship/practice.js"></script>
+<!-- the browser's and the phone's Back button: each step is a Back step (the shared copy; see /assets/back.js) -->
+<script src="/assets/back.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://resources.mismo.org; connect-src 'self' https://*.environment.api.powerplatform.com; form-action 'none'; base-uri 'none'">
+<title>Sponsor a MISMO Summit</title>
+<meta name="description" content="Sponsor a 2027 MISMO Summit: levels, prices, live availability and the application, made for your phone.">
+<meta name="theme-color" content="#0d314c">
+<link rel="icon" type="image/png" sizes="48x48" href="https://resources.mismo.org/assets/favicon-48x48.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<script>
+(function () {
+  /* the same light / dark choice as MyMISMO and the other MISMO tools */
+  try { var t = localStorage.getItem('mismo.portal.theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+})();
+</script>
+<style>
+:root{
+  color-scheme:light;
+  --navy:#0d314c; --navy-deep:#06202f; --navy-mid:#14486e; --sky:#74bfeb; --sky-deep:#3f96c9; --sky-soft:#a9d8f3; --sky-wash:#e4f2fb;
+  --ground:#f1f6fa; --surface:#ffffff; --surface-2:#f6fafd; --surface-3:#e9f1f8;
+  --border:#d5e2ed; --border-strong:#adc4d6; --rule:#e5eef5;
+  --ink:#0d314c; --ink-2:#456179; --ink-3:#56708a;
+  --good:#0f7b5c; --good-wash:#e3f4ee; --bad:#b3372c; --bad-wash:#fbe9e7; --warn:#a2701a;
+  --link:#14486e; --accent-fill:#0d314c; --accent-ink:#ffffff; --sel:#e4f2fb;
+  --shadow:0 1px 2px rgba(13,49,76,.06), 0 6px 18px rgba(13,49,76,.07);
+  --bar-bg:rgba(255,255,255,.94);
+  --t-diamond:#3f96c9; --t-platinum:#7f8c94; --t-gold:#a9832d; --t-silver:#6f7a80; --t-bronze:#9c6b43;
+  --cond:"IBM Plex Sans Condensed","IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --bar-h:76px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#061722; --surface:#0d2837; --surface-2:#123143; --surface-3:#173c52;
+    --border:#1f4a63; --border-strong:#2f6688; --rule:#173547;
+    --ink:#e9f4fb; --ink-2:#a6c5d9; --ink-3:#8fb0c6;
+    --good:#4fc79b; --good-wash:#0f3a2f; --bad:#f08579; --bad-wash:#3d1d1a; --warn:#e0a83c;
+    --link:#74bfeb; --accent-fill:#74bfeb; --accent-ink:#06202f; --sel:#173c52;
+    --shadow:none; --bar-bg:rgba(13,40,55,.95);
+    --t-diamond:#74bfeb; --t-platinum:#b3bec4; --t-gold:#d9b25a; --t-silver:#a3adb2; --t-bronze:#c98f61;
+    --logo-body:#0f314c;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#061722; --surface:#0d2837; --surface-2:#123143; --surface-3:#173c52;
+  --border:#1f4a63; --border-strong:#2f6688; --rule:#173547;
+  --ink:#e9f4fb; --ink-2:#a6c5d9; --ink-3:#8fb0c6;
+  --good:#4fc79b; --good-wash:#0f3a2f; --bad:#f08579; --bad-wash:#3d1d1a; --warn:#e0a83c;
+  --link:#74bfeb; --accent-fill:#74bfeb; --accent-ink:#06202f; --sel:#173c52;
+  --shadow:none; --bar-bg:rgba(13,40,55,.95);
+  --t-diamond:#74bfeb; --t-platinum:#b3bec4; --t-gold:#d9b25a; --t-silver:#a3adb2; --t-bronze:#c98f61;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ground); color:var(--ink); font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.45; -webkit-font-smoothing:antialiased; font-variant-numeric:tabular-nums; -webkit-tap-highlight-color:transparent}
+button,input{font-family:inherit; font-size:inherit; color:inherit}
+a{color:var(--link)}
+h1,h2,h3{margin:0; letter-spacing:-.012em}
+:focus-visible{outline:2px solid var(--sky); outline-offset:2px}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+
+/* ---------- top bar ---------- */
+.mast{position:sticky; top:0; z-index:30; background:var(--navy); color:#fff; padding-top:env(safe-area-inset-top)}
+.mast-in{display:flex; align-items:center; gap:10px; height:58px; padding:0 12px; max-width:720px; margin:0 auto}
+.m-back{width:40px; height:40px; display:grid; place-items:center; border-radius:4px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.1); color:#fff; cursor:pointer; flex:none; text-decoration:none}
+.m-back svg{width:20px; height:20px}
+.lplate{background:#fff; border-radius:5px; padding:7px 10px; line-height:0; flex:none}
+.lplate svg{height:17px; width:auto; display:block}
+.vrule{width:1px; height:26px; background:rgba(116,191,235,.4)}
+.appname{color:var(--sky-soft); font-weight:500; font-size:15.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+@media (max-width:359px){ .mast-in{gap:8px; padding:0 10px} .m-back{width:36px; height:36px} .lplate{padding:6px 7px} .lplate svg{height:13px} .appname{font-size:13.5px} }
+.steps{background:var(--navy); padding:0 12px 10px}
+.steps-in{max-width:720px; margin:0 auto}
+.steps-lbl{display:flex; justify-content:space-between; gap:10px; font-size:12.5px; color:var(--sky-soft); margin-bottom:6px}
+.steps-lbl b{color:#fff; font-weight:600}
+.segs{display:grid; grid-template-columns:repeat(5,1fr); gap:4px}
+.segs i{height:4px; border-radius:2px; background:rgba(255,255,255,.18); transition:background .25s}
+.segs i.sg-done{background:var(--sky)}
+.segs i.sg-now{background:#fff}
+
+main{max-width:720px; margin:0 auto; padding:14px 14px calc(var(--bar-h) + 26px + env(safe-area-inset-bottom))}
+body.no-bar main{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+.step{display:none}
+.step.on{display:block; animation:stepin .28s ease both}
+.step.on.back{animation-name:stepback}
+@keyframes stepin{from{opacity:0; transform:translateX(18px)} to{opacity:1; transform:none}}
+@keyframes stepback{from{opacity:0; transform:translateX(-18px)} to{opacity:1; transform:none}}
+@media (prefers-reduced-motion: reduce){ .step.on{animation:none} }
+
+.h-sec{font-family:var(--cond); font-size:22px; font-weight:700; margin:26px 2px 10px; letter-spacing:-.005em}
+.h-sec:first-child{margin-top:4px}
+.lead{color:var(--ink-2); margin:-4px 2px 14px; font-size:14.5px}
+.card{background:var(--surface); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow)}
+.tag{display:inline-block; border-radius:3px; padding:2px 7px; font-size:11.5px; font-weight:700; letter-spacing:.02em; white-space:nowrap; background:var(--surface-3); color:var(--ink-2)}
+.tag.good{background:var(--good-wash); color:var(--good)}
+.tag.bad{background:var(--bad-wash); color:var(--bad)}
+.tag.sky{background:var(--sky); color:#06202f}
+
+/* ---------- hero ---------- */
+.hero{position:relative; overflow:hidden; isolation:isolate; border-radius:14px; color:#fff; padding:24px 20px 20px; background:var(--navy-deep)}
+.hero:before{content:""; position:absolute; inset:0; z-index:-2;
+  background:radial-gradient(120% 90% at 100% 0%, rgba(116,191,235,.34), rgba(116,191,235,0) 55%), radial-gradient(90% 70% at 0% 100%, rgba(20,72,110,.9), rgba(20,72,110,0) 70%), linear-gradient(160deg, #0d314c 0%, #06202f 70%)}
+.hero:after{content:""; position:absolute; inset:0; z-index:-1; opacity:.16;
+  background-image:linear-gradient(rgba(116,191,235,.55) 1px, transparent 1px), linear-gradient(90deg, rgba(116,191,235,.55) 1px, transparent 1px);
+  background-size:28px 28px; -webkit-mask-image:linear-gradient(180deg, #000, transparent); mask-image:linear-gradient(180deg, #000, transparent)}
+.hero .eye{font-weight:600; color:var(--sky-soft); font-size:14px}
+.hero h1{font-family:var(--cond); font-size:clamp(34px, 10vw, 46px); line-height:1; font-weight:700; margin:4px 0 10px}
+.hero p{margin:0; color:#d6e9f6; font-size:15px; max-width:34em}
+.hero-stats{display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:18px; background:rgba(116,191,235,.25); border-radius:8px; overflow:hidden}
+.hero-stats div{background:rgba(6,32,47,.72); padding:11px 12px}
+.hero-stats b{display:block; font-family:var(--cond); font-size:24px; line-height:1.05; color:#fff}
+.hero-stats span{display:block; font-size:12px; color:#b9d6ea; line-height:1.3; margin-top:2px}
+
+/* ---------- program cards ---------- */
+.progs{display:grid; gap:10px}
+.prog{display:grid; grid-template-columns:1fr auto; gap:4px 12px; align-items:center; width:100%; text-align:left; cursor:pointer; padding:16px 16px 15px;
+  background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--sky); border-radius:10px; box-shadow:var(--shadow); transition:transform .12s}
+.prog:active{transform:scale(.985)}
+.prog .p-name{font-family:var(--cond); font-size:22px; font-weight:700; line-height:1.1; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.prog .p-when{font-size:14px; color:var(--ink-2); grid-column:1}
+.prog .p-foot{grid-column:1; display:flex; gap:10px; align-items:baseline; margin-top:6px; font-size:13px; color:var(--ink-3)}
+.prog .p-foot b{font-size:15px; color:var(--ink)}
+.prog .p-go{grid-column:2; grid-row:1 / span 3; width:36px; height:36px; display:grid; place-items:center; border-radius:4px; background:var(--surface-3); color:var(--ink)}
+.prog .p-go svg{width:18px; height:18px}
+.prog.feature{background:var(--navy); border-color:var(--navy); border-left-color:var(--sky); color:#fff}
+.prog.feature .p-when{color:#cfe5f4}
+.prog.feature .p-foot{color:#a9cbe2}
+.prog.feature .p-foot b{color:#fff}
+.prog.feature .p-go{background:var(--sky); color:#06202f}
+:root[data-theme="dark"] .prog.feature{background:#14486e; border-color:#2f6688}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .prog.feature{background:#14486e; border-color:#2f6688} }
+.none{padding:18px 16px; text-align:center; color:var(--ink-2)}
+
+/* ---------- the room ---------- */
+.room{padding:14px 16px}
+.room-row{display:grid; grid-template-columns:1fr auto; gap:2px 10px; font-size:13.5px; padding:6px 0}
+.room-row b{font-weight:600}
+.room-row span{color:var(--ink-3); font-size:12.5px}
+.room-row .rbar{grid-column:1 / -1; height:8px; border-radius:2px; background:var(--surface-3); overflow:hidden}
+.room-row .rbar i{display:block; height:100%; background:var(--sky-deep); border-radius:2px}
+.quotes{display:grid; grid-auto-flow:column; grid-auto-columns:88%; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; padding:2px 2px 8px; margin:0 -2px;
+  scrollbar-width:none}
+.quotes::-webkit-scrollbar{display:none}
+.quote{margin:0; scroll-snap-align:start; padding:16px; display:flex; flex-direction:column; gap:12px}
+.quote p{margin:0; font-size:14px; color:var(--ink-2); display:-webkit-box; -webkit-line-clamp:7; -webkit-box-orient:vertical; overflow:hidden}
+.quote.open p{-webkit-line-clamp:unset; display:block}
+.q-who{display:flex; align-items:center; gap:10px; margin-top:auto}
+.q-who img{width:42px; height:42px; border-radius:50%; object-fit:cover; flex:none}
+.q-who b{display:block; font-size:13.5px}
+.q-who span{display:block; font-size:12.5px; color:var(--ink-3)}
+.dots{display:flex; justify-content:center; gap:6px; margin-top:4px}
+.dots i{width:6px; height:6px; border-radius:50%; background:var(--border-strong)}
+.dots i.on{background:var(--ink)}
+.ask{display:flex; gap:12px; align-items:center; padding:14px 16px; margin-top:12px}
+.ask svg{width:22px; height:22px; flex:none; color:var(--sky-deep)}
+.ask div{font-size:14px; color:var(--ink-2)}
+.ask a{font-weight:600}
+
+/* ---------- step heads ---------- */
+.sel-head{padding:14px 16px; margin-bottom:12px; display:flex; gap:12px; align-items:flex-start}
+.sel-head .sh-in{flex:1 1 auto; min-width:0}
+.sel-head h2{font-family:var(--cond); font-size:24px; font-weight:700; line-height:1.1}
+.sel-head p{margin:3px 0 0; font-size:13.5px; color:var(--ink-2)}
+.live{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-3); margin-top:6px}
+.live i{width:8px; height:8px; border-radius:50%; background:var(--border-strong)}
+.live.on i{background:var(--good); box-shadow:0 0 0 3px var(--good-wash)}
+
+/* ---------- tiers ---------- */
+.tiers{display:grid; gap:10px}
+.tier{position:relative; width:100%; text-align:left; cursor:pointer; padding:15px 16px 14px 20px; background:var(--surface); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow); overflow:hidden}
+.tier:before{content:""; position:absolute; left:0; top:0; bottom:0; width:6px; background:var(--tc)}
+.tier.sel{border-color:var(--sky-deep); box-shadow:0 0 0 2px var(--sky-deep)}
+.tier.out{opacity:.62; cursor:default}
+.t-top{display:flex; justify-content:space-between; align-items:center; gap:10px}
+.t-eye{font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--tc)}
+.t-price{font-family:var(--cond); font-size:32px; font-weight:700; line-height:1.05; margin:4px 0 2px}
+.t-price small{font-family:"IBM Plex Sans",sans-serif; font-size:13px; font-weight:500; color:var(--ink-3); margin-left:6px}
+.t-regs{font-size:13.5px; color:var(--ink-2)}
+.t-ben{list-style:none; margin:10px 0 0; padding:10px 0 0; border-top:1px solid var(--rule); display:grid; gap:6px}
+.t-ben li{display:grid; grid-template-columns:18px 1fr; gap:6px; font-size:13.5px; line-height:1.35}
+.t-ben li svg{width:16px; height:16px; margin-top:1px; color:var(--good)}
+.t-more{margin-top:8px; font-size:13px; font-weight:600; color:var(--link)}
+.t-opps{margin-top:10px; font-size:12.5px; color:var(--ink-3)}
+.t-right{display:flex; align-items:center; gap:8px}
+.t-check{width:24px; height:24px; border-radius:50%; background:var(--sky-deep); color:#fff; display:none; place-items:center; flex:none}
+.t-check svg{width:15px; height:15px}
+.tier.sel .t-check{display:grid}
+
+/* ---------- opportunities ---------- */
+.opps{display:grid; gap:8px}
+.opp{background:var(--surface); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow); overflow:hidden}
+.opp.sel{border-color:var(--sky-deep); box-shadow:0 0 0 2px var(--sky-deep)}
+.opp-row{display:grid; grid-template-columns:22px 1fr auto; gap:12px; align-items:center; width:100%; text-align:left; padding:14px 14px; background:none; border:0; cursor:pointer; min-height:56px}
+.opp.out .opp-row{cursor:default}
+.opp.out .o-name{color:var(--ink-3); text-decoration:line-through}
+.radio{width:22px; height:22px; border-radius:50%; border:2px solid var(--border-strong); display:grid; place-items:center}
+.opp.sel .radio{border-color:var(--sky-deep)}
+.opp.sel .radio:after{content:""; width:10px; height:10px; border-radius:50%; background:var(--sky-deep)}
+.o-name{font-weight:600; font-size:15px; line-height:1.3}
+.o-sub{display:block; font-size:12.5px; color:var(--ink-3); font-weight:400}
+.opp-more{padding:0 14px 14px 48px}
+.o-lbl{font-size:12.5px; font-weight:600; color:var(--ink-2); margin-bottom:6px}
+.days{display:grid; grid-template-columns:repeat(auto-fill, minmax(92px, 1fr)); gap:6px}
+.day{padding:10px 6px; border:1px solid var(--border-strong); border-radius:6px; background:var(--surface); font-weight:600; font-size:14px; cursor:pointer; text-align:center}
+.day small{display:block; font-weight:500; font-size:11.5px; color:var(--ink-3)}
+.day.sel{background:var(--accent-fill); color:var(--accent-ink); border-color:var(--accent-fill)}
+.day.sel small{color:inherit; opacity:.8}
+.day:disabled{cursor:default; color:var(--ink-3); background:var(--surface-3); text-decoration:line-through; border-style:dashed}
+.multi{display:grid; grid-template-columns:22px 1fr; gap:10px; margin-top:10px; padding:11px 12px; border:1px dashed var(--border-strong); border-radius:6px; cursor:pointer; font-size:13.5px}
+.multi input{width:20px; height:20px; margin:1px 0 0; accent-color:var(--sky-deep)}
+.multi b{display:block}
+.multi span{color:var(--ink-3); font-size:12.5px}
+.inc{padding:12px 16px 14px}
+.inc .t-ben{margin:0; padding:0; border:0}
+.inc .inc-regs{font-weight:600; margin-bottom:8px}
+.diamond-note{padding:16px; display:grid; grid-template-columns:28px 1fr; gap:12px}
+.diamond-note svg{width:26px; height:26px; color:var(--t-diamond)}
+
+/* ---------- forms ---------- */
+.form{padding:6px 16px 16px}
+.fld{display:block; margin-top:12px}
+.fld > span{display:block; font-size:13px; font-weight:600; color:var(--ink-2); margin-bottom:5px}
+.fld input{width:100%; height:48px; padding:0 12px; font-size:16px; border:1px solid var(--border-strong); border-radius:6px; background:var(--surface); color:var(--ink)}
+.fld input:focus{outline:none; border-color:var(--sky-deep); box-shadow:0 0 0 3px rgba(63,150,201,.22)}
+.fld.bad input{border-color:var(--bad); box-shadow:0 0 0 3px rgba(179,55,44,.14)}
+.fld .err{display:none; font-size:12.5px; color:var(--bad); margin-top:4px}
+.fld.bad .err{display:block}
+.trap{position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden}
+.logo-pick{display:grid; grid-template-columns:64px 1fr; gap:14px; align-items:center; padding:14px 16px; cursor:pointer; position:relative}
+.logo-pick input{position:absolute; inset:0; opacity:0; cursor:pointer; width:100%}
+.lp-thumb{width:64px; height:64px; border-radius:8px; border:1.5px dashed var(--border-strong); display:grid; place-items:center; background:var(--surface-2); overflow:hidden; color:var(--ink-3)}
+.lp-thumb svg{width:26px; height:26px}
+.lp-thumb img{max-width:100%; max-height:100%; object-fit:contain; background:#fff}
+.lp-thumb .ext{font-weight:700; text-transform:uppercase; font-size:13px; color:var(--ink-2)}
+.logo-pick.has .lp-thumb{border-style:solid}
+.lp-main{font-weight:600; font-size:15px; overflow-wrap:anywhere}
+.lp-sub{font-size:12.5px; color:var(--ink-3); margin-top:2px}
+.logo-pick.bad{border-color:var(--bad); box-shadow:0 0 0 2px rgba(179,55,44,.25)}
+.lp-msg{font-size:12.5px; color:var(--bad); margin:6px 2px 0}
+
+/* ---------- review and sign ---------- */
+.sum{padding:4px 16px}
+.sum-row{display:grid; grid-template-columns:104px 1fr auto; gap:10px; align-items:baseline; padding:11px 0; border-top:1px solid var(--rule); font-size:14px}
+.sum-row:first-child{border-top:0}
+.sum-row dt{font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-3)}
+.sum-row dd{margin:0; font-weight:500; overflow-wrap:anywhere; white-space:pre-line}
+.sum-row button{background:none; border:0; color:var(--link); font-weight:600; font-size:13px; cursor:pointer; padding:4px 0 4px 6px}
+.sum-total{display:flex; justify-content:space-between; align-items:baseline; padding:12px 0 14px; border-top:2px solid var(--ink); margin-top:2px}
+.sum-total span{font-weight:600}
+.sum-total b{font-family:var(--cond); font-size:28px}
+.k-box{padding:14px 16px}
+.k-head{display:flex; justify-content:space-between; gap:10px; align-items:baseline}
+.k-head b{font-size:15px}
+.k-head span{font-size:12px; color:var(--ink-3); white-space:nowrap}
+.k-peek{position:relative; max-height:118px; overflow:hidden; margin:8px 0 10px; font-size:13px; color:var(--ink-2)}
+.k-peek:after{content:""; position:absolute; left:0; right:0; bottom:0; height:56px; background:linear-gradient(rgba(255,255,255,0), var(--surface))}
+.k-peek p{margin:0 0 8px}
+.agree + .form{margin-top:10px}
+.agree{display:grid; grid-template-columns:26px 1fr; gap:10px; padding:14px 16px; cursor:pointer; font-size:14px; margin-top:10px}
+.agree input{width:24px; height:24px; margin:0; accent-color:var(--sky-deep)}
+.agree.bad{border-color:var(--bad); box-shadow:0 0 0 2px rgba(179,55,44,.25)}
+.fine{font-size:12.5px; color:var(--ink-3); margin:12px 2px 0}
+.msg{padding:14px 16px; margin-top:12px; font-size:14px}
+.msg.err{border-color:var(--bad); background:var(--bad-wash)}
+.msg.err b{color:var(--bad)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid var(--border-strong); background:var(--surface); color:var(--ink);
+  border-radius:6px; padding:0 16px; height:46px; font-weight:600; font-size:15px; cursor:pointer; white-space:nowrap; text-decoration:none}
+.btn.primary{background:var(--accent-fill); color:var(--accent-ink); border-color:var(--accent-fill)}
+.btn.wide{width:100%}
+.btn svg{width:18px; height:18px}
+.btn:disabled{opacity:.55; cursor:default}
+
+/* ---------- the bottom bar ---------- */
+.bar{position:fixed; left:0; right:0; bottom:0; z-index:25; background:var(--bar-bg); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  border-top:1px solid var(--border); padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+.bar-in{max-width:720px; margin:0 auto; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; min-height:52px}
+.bar-sum{min-width:0}
+.bar-sum b{display:block; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.bar-sum span{display:block; font-size:12.5px; color:var(--ink-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.bar-sum span.hint{color:var(--bad); font-weight:600}
+.bar .btn{height:50px; min-width:132px; font-size:16px}
+body.no-bar .bar{display:none}
+
+/* ---------- the contract sheet ---------- */
+.sheet{position:fixed; inset:0; z-index:40; display:flex; flex-direction:column; background:var(--surface); transform:translateY(100%); transition:transform .28s ease; visibility:hidden}
+.sheet.on{transform:none; visibility:visible}
+.sheet-hd{display:flex; align-items:center; gap:12px; padding:calc(10px + env(safe-area-inset-top)) 14px 10px; border-bottom:1px solid var(--border); background:var(--surface)}
+.sheet-hd h2{font-size:17px; flex:1 1 auto}
+.sheet-hd small{display:block; font-size:12px; color:var(--ink-3); font-weight:500}
+.x{width:40px; height:40px; display:grid; place-items:center; border-radius:4px; border:1px solid var(--border-strong); background:var(--surface); cursor:pointer}
+.x svg{width:18px; height:18px}
+.sheet-bd{flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:16px 18px 24px; font-size:14px; color:var(--ink-2)}
+.sheet-bd p{margin:0 0 12px}
+.sheet-bd strong{color:var(--ink)}
+.sheet-ft{padding:10px 14px calc(10px + env(safe-area-inset-bottom)); border-top:1px solid var(--border)}
+@media (prefers-reduced-motion: reduce){ .sheet{transition:none} }
+
+/* ---------- done ---------- */
+.done{padding:26px 18px 20px; text-align:center}
+.done .ok{width:64px; height:64px; margin:0 auto 12px; border-radius:50%; background:var(--good-wash); color:var(--good); display:grid; place-items:center}
+.done .ok svg{width:34px; height:34px}
+.done h2{font-family:var(--cond); font-size:28px}
+.done p{color:var(--ink-2); margin:8px 0 0; font-size:14.5px}
+.ref{margin:16px auto 0; display:inline-block; padding:10px 16px; border-radius:6px; background:var(--surface-3); font-weight:700; font-size:18px; letter-spacing:.04em; user-select:all}
+.done-acts{display:grid; gap:8px; margin-top:18px}
+.next{padding:14px 16px; margin-top:12px}
+.next ol{margin:6px 0 0; padding-left:20px; font-size:14px; color:var(--ink-2)}
+.next li{margin:4px 0}
+
+.restore{display:flex; gap:10px; align-items:center; justify-content:space-between; padding:11px 14px; margin-bottom:12px; font-size:13.5px}
+.restore button{background:none; border:0; color:var(--link); font-weight:600; cursor:pointer; font-size:13.5px; padding:6px 0}
+.stamp{text-align:center; font-size:11.5px; color:var(--ink-3); margin-top:22px}
+
+/* ---------- the saved copy (print / Save as PDF) ---------- */
+#print{display:none}
+@media print{
+  @page{margin:16mm 15mm}
+  body{background:#fff; color:#000}
+  body > *:not(#print){display:none !important}
+  #print{display:block; font-size:10.5pt; line-height:1.4}
+  #print h1{font-size:18pt; margin:0 0 4pt}
+  #print h2{font-size:12pt; margin:14pt 0 6pt}
+  #print .pr-k p{margin:0 0 6pt}
+  #print .pr-grid{display:grid; grid-template-columns:1fr 1fr; gap:6pt 16pt; border:1px solid #888; padding:10pt; margin-top:8pt; break-inside:avoid}
+  #print .pr-grid div b{display:block; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; color:#444}
+  #print .lp{line-height:0; margin-bottom:10pt}
+  #print .lp svg{height:22px; width:auto}
+}
+</style>
+</head>
+<body class="no-bar">
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+<symbol id="mismo-logo" viewBox="0 0 708 108"><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="var(--logo-body, #0d314c)"><path d="M5917 1065 c-169 -46 -279 -153 -335 -323 -21 -65 -25 -96 -25 -197
+0 -101 4 -132 25 -197 57 -172 168 -280 335 -323 84 -22 723 -22 808 0 222 58
+355 253 355 520 0 270 -132 459 -361 520 -74 20 -730 20 -802 0z m692 -320
+c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
+-297 0 -307 2 -346 83 -30 61 -31 198 -2 262 41 93 68 100 368 97 219 -2 243
+-4 274 -22z M0 545 l0 -515 225 0 225 0 2 296 3 296 116 -294 116 -293 197 0 198
+0 119 295 118 295 1 -297 0 -298 225 0 225 0 0 515 0 515 -337 -2 -338 -3
+-104 -264 c-80 -204 -107 -260 -113 -245 -5 10 -52 129 -106 264 l-98 245
+-337 3 -337 2 0 -515z M1892 1044 l-22 -15 0 -483 c0 -455 1 -484 18 -499 16 -15 48 -17
+246 -17 128 0 235 4 246 10 32 17 34 57 4 95 -33 44 -64 143 -64 206 l0 49
+203 0 c191 0 205 -1 222 -20 10 -11 34 -24 54 -30 49 -13 586 -13 612 0 22 12
+26 62 7 78 -8 6 -174 15 -413 21 -502 15 -549 23 -628 110 -43 48 -57 93 -57
+187 0 82 19 156 55 208 30 44 32 77 7 99 -27 25 -456 25 -490 1z M3716 1044 c-23 -22 -20 -31 19 -77 43 -49 78 -155 73 -218 l-3 -44
+-204 -3 c-194 -2 -205 -1 -218 17 -24 35 -78 41 -355 41 -255 0 -269 -1 -288
+-20 -27 -27 -26 -58 3 -70 12 -5 202 -14 422 -19 421 -12 476 -18 555 -62 92
+-51 132 -159 111 -299 -12 -77 -34 -129 -77 -179 -23 -28 -25 -36 -16 -57 l12
+-24 215 0 215 0 2 306 3 306 120 -303 120 -304 197 -3 196 -2 118 296 119 297
+3 -296 2 -297 225 0 225 0 0 515 0 515 -338 0 -337 0 -104 -265 c-58 -146
+-106 -263 -108 -261 -2 2 -50 120 -107 262 l-104 259 -340 3 c-300 2 -342 0
+-356 -14z"/></g><g transform="translate(0.000000,108.000000) scale(0.100000,-0.100000)" fill="var(--logo-s, #74bfeb)"><path d="M2485 1046 c-44 -20 -111 -94 -136 -151 -27 -60 -37 -198 -20 -263
+13 -48 68 -115 114 -138 64 -34 162 -43 562 -55 239 -6 405 -15 413 -21 19
+-16 15 -66 -7 -78 -26 -13 -563 -13 -612 0 -20 6 -44 19 -54 30 -17 19 -31 20
+-222 20 l-203 0 0 -49 c0 -81 34 -172 86 -230 78 -87 31 -81 672 -81 l568 0
+46 29 c79 50 122 121 139 231 21 140 -19 248 -111 299 -79 44 -134 50 -555 62
+-220 5 -410 14 -422 19 -29 12 -30 43 -3 70 19 19 33 20 288 20 277 0 331 -6
+355 -41 13 -18 24 -19 218 -17 l204 3 3 44 c4 60 -31 168 -70 215 -17 21 -52
+52 -77 67 l-45 29 -550 0 c-440 -1 -557 -3 -581 -14z"/></g></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-go" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-tick" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+<symbol id="i-gem" viewBox="0 0 24 24"><path d="M6 4h12l3 5-9 11L3 9z M3 9h18 M9 4l3 16 3-16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z M14 3v5h5 M10 13h6 M10 17h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="mast">
+  <div class="mast-in">
+    <a class="m-back" id="m-back" href="/mymismo/" aria-label="Back"><svg><use href="#i-back"/></svg></a>
+    <div class="lplate"><svg viewBox="0 0 708 108" role="img" aria-label="MISMO"><use href="#mismo-logo"/></svg></div>
+    <div class="vrule"></div>
+    <div class="appname">Sponsor a Summit</div>
+  </div>
+  <div class="steps" id="steps" hidden>
+    <div class="steps-in">
+      <div class="steps-lbl"><span id="steps-n">Step 1 of 5</span><b id="steps-name">Choose a Summit</b></div>
+      <div class="segs" id="segs"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- 1. pick a summit -->
+  <section class="step on" id="s-start" data-step="start">
+    <div class="card restore" id="restore" hidden><span>We kept what you picked last time.</span><button type="button" id="restore-clear">Start Over</button></div>
+    <div class="hero">
+      <div class="eye">MISMO 2027 Summits</div>
+      <h1>Sponsor a Summit</h1>
+      <p>Put your brand in the room where the mortgage industry builds its standards, and in front of the people who choose its technology.</p>
+      <div class="hero-stats" id="hero-stats"></div>
+    </div>
+    <h2 class="h-sec">Choose a Summit</h2>
+    <div class="progs" id="prog-list"></div>
+    <h2 class="h-sec">Who&rsquo;s in the Room</h2>
+    <p class="lead" id="room-lead">Registrants across the three 2026 Summits.</p>
+    <div class="card room" id="room"></div>
+    <h2 class="h-sec">Sponsors in Their Own Words</h2>
+    <div class="quotes" id="quotes"></div>
+    <div class="dots" id="qdots"></div>
+    <div class="card ask"><svg><use href="#i-mail"/></svg><div>Questions, or want something custom? Email <a href="mailto:kbradshaw@mismo.org">kbradshaw@mismo.org</a> or <a href="mailto:amoses@mismo.org">amoses@mismo.org</a>.</div></div>
+    <div class="stamp">Version cde324f2</div>
+  </section>
+
+  <!-- 2. pick a level -->
+  <section class="step" id="s-level" data-step="level">
+    <div class="card sel-head"><div class="sh-in"><h2 id="lv-name"></h2><p id="lv-when"></p>
+      <div class="live" id="avail-stamp"><i></i><span>Availability as of this week</span></div></div></div>
+    <div class="tiers" id="tier-list"></div>
+  </section>
+
+  <!-- 3. pick an opportunity -->
+  <section class="step" id="s-opp" data-step="opp">
+    <h2 class="h-sec">Choose Your Opportunity</h2>
+    <p class="lead" id="op-lead"></p>
+    <div class="opps" id="opp-list"></div>
+    <h2 class="h-sec" id="inc-h">Included With Your Level</h2>
+    <div class="card inc" id="inc"></div>
+  </section>
+
+  <!-- 4. your details -->
+  <section class="step" id="s-details" data-step="details">
+    <h2 class="h-sec">Your Details</h2>
+    <p class="lead">Who we&rsquo;ll confirm with and invoice.</p>
+    <div class="card form">
+      <label class="fld" data-f="company"><span>Company</span><input id="f-company" autocomplete="organization" enterkeyhint="next"><div class="err">Add your company&rsquo;s name.</div></label>
+      <label class="fld" data-f="contact"><span>Your Name</span><input id="f-contact" autocomplete="name" enterkeyhint="next"><div class="err">Add your name.</div></label>
+      <label class="fld" data-f="email"><span>Email</span><input id="f-email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" enterkeyhint="next"><div class="err">Add an email address we can reach you at.</div></label>
+      <label class="fld" data-f="phone"><span>Phone</span><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="done"><div class="err">Add a phone number.</div></label>
+      <div class="trap" aria-hidden="true"><label for="f-website">Website</label><input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+    </div>
+    <h2 class="h-sec">Your Logo</h2>
+    <p class="lead">For the signs, screens and website. High resolution, with a transparent background if you have one.</p>
+    <label class="card logo-pick" id="logo-pick">
+      <input type="file" id="f-logo" accept=".png,.svg,.eps,.ai,.pdf,image/png,image/svg+xml,application/pdf,application/postscript" aria-label="Choose your logo file">
+      <div class="lp-thumb" id="lp-thumb"><svg><use href="#i-up"/></svg></div>
+      <div><div class="lp-main" id="lp-main">Choose Your Logo File</div><div class="lp-sub" id="lp-sub">PNG, SVG, EPS, AI or PDF &middot; up to 10 MB</div></div>
+    </label>
+    <p class="lp-msg" id="lp-msg" hidden></p>
+  </section>
+
+  <!-- 5. review and sign -->
+  <section class="step" id="s-sign" data-step="sign">
+    <h2 class="h-sec">Review and Sign</h2>
+    <dl class="card sum" id="sum"></dl>
+    <h2 class="h-sec">Sponsor Contract</h2>
+    <div class="card k-box">
+      <div class="k-head"><b>MISMO Event Sponsor Contract</b><span>Version 2027-v1</span></div>
+      <div class="k-peek" id="k-peek"></div>
+      <button type="button" class="btn wide" id="read-contract"><svg><use href="#i-doc"/></svg>Read the Full Contract</button>
+    </div>
+    <label class="card agree" id="agree"><input type="checkbox" id="f-agree"><span>I have read and agree to the MISMO Event Sponsor Contract on behalf of <b id="agree-co">my company</b>.</span></label>
+    <div class="card form">
+      <label class="fld" data-f="signer"><span>Signer Name</span><input id="f-signer-name" autocomplete="name"><div class="err">Add the name of the person signing.</div></label>
+      <label class="fld" data-f="title"><span>Signer Title</span><input id="f-signer-title" autocomplete="organization-title"><div class="err">Add their title.</div></label>
+      <label class="fld" data-f="date"><span>Date</span><input id="f-signer-date" type="date"><div class="err">Add today&rsquo;s date.</div></label>
+    </div>
+    <p class="fine">Submitting sends your application and signature to MISMO&rsquo;s sponsorship team, who confirm it and send the invoice. Nothing is charged here.</p>
+    <div class="card msg err" id="send-err" hidden></div>
+  </section>
+
+  <!-- 6. sent -->
+  <section class="step" id="s-done" data-step="done">
+    <div class="card done">
+      <div class="ok"><svg><use href="#i-tick"/></svg></div>
+      <h2>Application Sent</h2>
+      <p id="done-lead">Thank you. MISMO&rsquo;s sponsorship team has it.</p>
+      <div class="ref" id="done-ref"></div>
+      <p id="done-mail"></p>
+      <div class="done-acts">
+        <button type="button" class="btn primary wide" id="signed-pdf-btn"><svg><use href="#i-doc"/></svg>Save a Signed Copy (PDF)</button>
+        <a class="btn wide" id="done-home" href="/mymismo/">Back to MyMISMO</a>
+      </div>
+    </div>
+    <div class="card next"><b>What Happens Next</b>
+      <ol><li>A confirmation email is on its way to you now. If it isn&rsquo;t there within the hour, check your junk folder.</li>
+      <li>MISMO confirms your sponsorship and sends the invoice, usually within two working days.</li>
+      <li>Keep your reference. If you haven&rsquo;t heard back, send it to <a href="mailto:kbradshaw@mismo.org">kbradshaw@mismo.org</a>.</li></ol></div>
+  </section>
+</main>
+
+<div class="bar" id="bar">
+  <div class="bar-in">
+    <div class="bar-sum" id="bar-sum"><b></b><span></span></div>
+    <button type="button" class="btn primary" id="go">Continue</button>
+  </div>
+</div>
+
+<div class="sheet" id="contract-sheet" role="dialog" aria-modal="true" aria-labelledby="k-title" aria-hidden="true">
+  <div class="sheet-hd"><h2 id="k-title">MISMO Event Sponsor Contract<small>Version 2027-v1</small></h2><button type="button" class="x" id="k-close" aria-label="Close"><svg><use href="#i-x"/></svg></button></div>
+  <div class="sheet-bd contract-box" id="k-body" data-contract-version="2027-v1">
+      <p><strong>Scope.</strong> This agreement relates to the event presented by or on behalf of, the Mortgage Information Standards Maintenance Organization, Inc. (&ldquo;MISMO&rdquo;), as identified in the companion Sponsorship Program and Application (&ldquo;Application&rdquo;). The completed Application incorporates by reference all of the terms of this Sponsor Contract. In submitting a signed Application, Sponsor agrees to the terms set forth in this Contract. The term &ldquo;Contract,&rdquo; as used herein, refers to the terms set forth in this Sponsor Contract. &ldquo;Event&rdquo; refers to the referenced MISMO conference, education session, or workshop. &ldquo;Sponsor&rdquo; is an entity whose Sponsorship Application has been accepted by MISMO. Subject to the availability of sponsorships at the level selected, the Application for Sponsorship for a particular Event becomes a binding contract upon MISMO&rsquo;s issuance of a confirmation notice after receiving a fully completed Application and good funds in the amount owed.</p>
+      <p><strong>Objectives of MISMO Events.</strong> MISMO&rsquo;s objective for each Event will vary depending upon the target audience of the event. It may provide a unique educational framework for the dissemination of the newest ideas in the real estate finance industry, or in-depth training, or a workshop to provide opportunities for industry participants to address specific issues of interest. These objectives are accomplished through the assembly of individuals from either a broad or targeted range of industry participants. Events typically involve the presentation of program activities to facilitate the exchange of information directed at solving needs related to the financing of either commercial or residential real estate, or both.</p>
+      <p><strong>Terms of Sponsorship.</strong> Sponsor agrees to sponsor the Event and to make a contribution in the amount and in the manner specified in the Application for the Sponsorship level selected by Sponsor. It is understood and agreed that Sponsor&rsquo;s sponsorship of the Event is not contingent upon any specific attendance levels or other manner of participation by MISMO subscribers and non-subscribers at the Event. The payment schedule for the sponsorship contribution is set forth in the Application. To the extent that any portion of a payment under this Section 1(a) would not (if made as a separate payment) be deemed a qualified sponsorship payment under Section 513(i) of the Code, such portion of the payment and the other portion of such payment shall be deemed and treated as separate payments.</p>
+      <p>During the term of this Contract, MISMO hereby agrees to identify and acknowledge Sponsor as a sponsor of the Event at the level identified on the Application. Such identification and acknowledgment may include displaying Sponsor&rsquo;s corporate logo and certain other identifying information [as permitted in connection with qualified sponsorship payments under Section 513(i) of the Internal Revenue Code of 1986 (the &ldquo;Code&rdquo;) and the Treasury regulations thereunder] on the MISMO Event Website in connection with the Event, and on other appropriate promotional media and materials in connection with the Event, including on the Mortgage Bankers Association website.</p>
+      <p>For those sponsorship levels that include priority opportunity for meeting room and/or exhibit space assignments, as stated in the Application, MISMO will process meeting room and exhibit space requests on a first come/first served and space-available basis. Availability will be limited. In addition, meeting room and exhibit space requests will be subject to additional production charges, based on space size and use.</p>
+      <p><strong>Name and Logo Usage.</strong> Sponsor hereby grants MISMO a limited, non-exclusive, revocable license to use Sponsor&rsquo;s name, acronym, and logo during the term of this Contract for the purpose of identifying and acknowledging Sponsor&rsquo;s sponsorship of the Event. The placement, form, content, appearance, and all other aspects of such identification and acknowledgement shall be determined by MISMO in its sole discretion, which determination shall not be unreasonable. Notwithstanding the foregoing, MISMO will make commercially reasonable efforts to confer with Sponsor before making its decision(s).</p>
+      <p>On or before applicable deadlines, Sponsor shall provide to MISMO all necessary logos and other information, content and materials (in printed, electronic and/or other form) for use in connection with its sponsorship of the Event.</p>
+      <p>MISMO hereby grants to Sponsor a limited, non-exclusive, revocable license to use MISMO&rsquo;s name, acronym, and logo from the effective date of this Contract through the date of the Event, for the purpose of promoting Sponsor&rsquo;s sponsorship of the Event.</p>
+      <p>A party&rsquo;s name, acronym, logos and other trademarks (&ldquo;Marks&rdquo;) are and will remain its property. Neither party will take any action that jeopardizes the other party&rsquo;s proprietary rights or acquire any rights in the Marks, nor revise or alter the Marks in any way. The Marks must be displayed in the same form (and colors) as provided by each party.</p>
+      <p><strong>Event Website Hyperlink.</strong> During the term of this Contract, MISMO will maintain an Internet hyperlink on the MISMO Event website/page. In connection with such hyperlink, Sponsor agrees and acknowledges that MISMO does not endorse, approve, certify, or control Sponsor&rsquo;s website and does not warrant, guarantee, or make any representations regarding the accuracy, completeness, efficacy, timeliness, merchantability, or fitness for a particular purpose of the content or data located on such site. Reference on the Sponsor website to any specific product, process or service does not constitute or imply endorsement, recommendation or favoring by MISMO. MISMO is not responsible for, and expressly disclaims all liability for, damages of any kind arising out of use, reference to, reliance on, or performance of such content or data. Sponsor agrees to display a commercially reasonable privacy policy and to employ commercially reasonable security on its website.</p>
+      <p><strong>Cancellation and Force Majeure.</strong> Sponsor specifically recognizes that MISMO will be harmed if Sponsor cancels its sponsorship at any time after this Contract goes into effect. Should Sponsor cancel participation at anytime (except as permitted in Section H (i)(b) due to MISMO&rsquo;s material breach) or fail to make any payment that becomes due, Sponsor forfeits all monies paid and all right to sponsorship benefits. Upon MISMO&rsquo;s cancellation of the Event for any reason, the liability of MISMO shall be limited to a refund of fees paid by Sponsor. In the event of any cancellation, all rights, duties, liabilities, and obligations hereunder shall terminate.</p>
+      <p>Neither MISMO nor Sponsor shall be liable for any delays resulting from circumstances or causes beyond its reasonable control, including, without limitation, fire or other casualty, global pandemic, act of God, strike or labor dispute, war, act of terrorism, or other violence, or any law, order or requirement of any governmental agency or authority provided that the party experiencing the delay works diligently to overcome the cause of the delay as expeditiously as possible.</p>
+      <p><strong>General Terms and Conditions.</strong> The following shall govern term and termination of this Contract: This Contract shall commence as specified in the first paragraph of this Sponsor Contract and will terminate at the conclusion of the parties&rsquo; obligations pertaining to the Event.</p>
+      <p>In the event either party commits a material breach of any provision contained herein, which remains uncured after thirty (30) days written notice specifying the breach, the non-breaching party may terminate this Contract. Upon expiration or termination of this Contract each party agrees to return any intellectual property provided by the other party and discontinue use of the other party&rsquo;s intellectual property. In the event this Contract is terminated for material breach of a party following the commencement of the Sponsorship activities, the parties agree to nonetheless cooperate to the extent necessary to avoid interruption of the Event which may include continued use of Sponsor&rsquo;s name in printed materials related to the Event. Such cooperation shall not be construed or operate to waive any claim or defense a party may have.</p>
+      <p>Sponsor agrees to indemnify and hold harmless the Indemnitees from any and all claims, damages, losses or exchanges, however incurred, and including reasonable attorneys&rsquo; fees and costs, arising from any claim resulting, in whole or in part, from (a) Sponsor&rsquo;s breach of this Contract; (b) the negligent or willful act or omission by Sponsor or any of its employees, agents, vendors, contractors, or subcontractors in connection with the use of the Mailing List; (c) MISMO&rsquo;s publication of Sponsor&rsquo;s Marks pursuant to this Contract; and (d) the contents or subject matter of Sponsor&rsquo;s website linked to any MISMO website. Sponsor specifically warrants that it owns and has all rights to the Marks licensed hereunder.</p>
+      <p>Sponsor shall, at its sole expense, carry and keep in full force and effect at all times during the term of this Contract appropriate levels of insurance applicable to its activities under this Contract. Sponsor acknowledges that MISMO does not maintain insurance covering Sponsor&rsquo;s property, and that it is the sole responsibility of Sponsor to maintain appropriate insurance covering losses by Sponsor relative to its property.</p>
+      <p>IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR EXEMPLARY DAMAGES SUCH AS, BUT NOT LIMITED TO, LOSS OF REVENUE OR ANTICIPATED PROFITS OR LOST BUSINESS, WHETHER IN AN ACTION IN CONTRACT OR TORT EVEN IF THE OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+      <p>MISMO MAKES NO REPRESENTATIONS OR WARRANTIES, AND SPECIFICALLY DISCLAIMS ANY REPRESENTATIONS OR WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING (WITHOUT LIMITATION) ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NONINFRINGEMENT OF THIRD PARTY RIGHTS AND IMPLIED WARRANTIES ARISING FROM COURSE OF DEALING OR A COURSE OF PERFORMANCE. WITHOUT LIMITING THE FOREGOING, SPONSOR ACKNOWLEDGES THAT THE MISMO EVENT WEBSITE IS OPERATED ON AN "AS IS" BASIS, MISMO MAKES NO WARRANTY THAT ITS SITE WILL BE ERROR-FREE OR THAT ACCESS THERETO WILL BE UNINTERRUPTED.</p>
+      <p>Sponsor shall comply with all Federal, state, and local laws and MISMO has no responsibility for Sponsor compliance with applicable laws.</p>
+      <p>It is not the intention of Sponsor or MISMO that the parties exchange any confidential information during the term of this Contract. However, should either party decide to share such information in its performance of this Contract, it shall so notify the other party, and if such party has no objection to receiving the information, the following terms will apply: (a) The parties agree that, during and after the term of this Agreement, neither party shall, directly or indirectly, without the express written consent of the non-disclosing party, divulge, use, sell, exchange, furnish, give away, or transfer in any way any Confidential Information (as hereinafter defined) of the other party. The parties acknowledge that any Confidential Information that has been disclosed to the Non-Disclosing Party by the Disclosing Party (both terms as hereinafter defined) has been disclosed solely for the performance of its duties hereunder. The parties agree that all Confidential Information is the exclusive property of the Disclosing Party. If either party is served with any form of process to obtain any Confidential Information, the party served shall, to the extent permitted by applicable law, immediately notify the other party who shall, in addition to the efforts of the party served, if any, have the right to seek to quash such process. (b) The term &ldquo;Confidential Information&rdquo; shall include, without limitation, information disclosed or provided by one party (the &ldquo;Disclosing Party&rdquo;) to the other party (the &ldquo;Non-Disclosing Party&rdquo;) which that Disclosing Party has designated as confidential; the names, addresses, and telephone numbers of all customers, subscribers, and members, and any other personally identifiable information or any other information relating to any customers, subscribers, and members, and all lists or other records containing any such information; and all financial, technical, business, credit, all financial and business information relating to either party, including without limitation, all market analyses and market expansion plans, all revenue and profit analyses and projections and all commission structures and statements; all technical information relating to either party, including, without limitation, all implemented or planned product and service improvements or changes; and all other information relating to the operations of either party which was disclosed or provided to the other Non-Disclosing Party or became known to the Non-Disclosing Party through its relationship with the Disclosing Party; and all other information known about the Disclosing Party by the Non-Disclosing Party not generally known to the public. The confidentiality provisions under this section shall survive the termination or expiration of this Agreement.</p>
+      <p>This Contract and the rights granted to Sponsor hereunder are non-exclusive and, among other things, MISMO reserves the absolute right to enter into similar agreements with third parties related to additional sponsorship opportunities for the Event.</p>
+      <p>This Contract shall be governed by, construed, and enforced according to the laws of the District of Columbia (excluding its choice of law rules). The parties hereby agree to submit themselves to the personal jurisdiction of the courts of Washington, D.C., which shall be the exclusive venue for any disputes relating to this Contract.</p>
+      <p>MISMO shall have full power in the interpretation and enforcement of the terms and conditions contained in this Contract, and the power to make, from time to time, such reasonable amendments thereto and to set such further terms and conditions as it shall consider necessary for the proper conduct of the Event, provided, such new terms and conditions do not materially alter or diminish the contractual rights of Sponsor. The failure of MISMO to enforce a term or condition of this Contract in one instance shall not be construed to limit MISMO&rsquo;s right to enforce the term or condition in any other instance. Neither shall it be construed to affect a waiver of any other term or condition of this Contract. Sponsor shall not assign or delegate Sponsor&rsquo;s rights or obligations under this Contract without MISMO&rsquo;s prior written consent.</p>
+      <p>This Contract may be amended or modified at any time by a writing executed by both of the parties hereto.</p>
+      <p>All provisions of this Contract are severable. If any provision or portion hereof is determined to be unenforceable in arbitration or by a court of competent jurisdiction, then the remaining portion of the agreement shall remain in full force and effect.</p>
+      <p>All rights and remedies herein are cumulative and in addition to any and all other rights and remedies available at law or in equity.</p>
+      <p>The representations, warranties, limitation of liability, confidentiality, accrued payment obligations, and indemnities set forth in this Contract shall survive the expiration or other termination hereof.</p>
+      <p>This Contract constitutes the sole agreement of the parties with respect to the subject matter hereof and supersedes all previous written and oral agreements and understandings between the parties with respect to such subject matter. This Contract may be executed in one or more counterparts, each of which shall be deemed an original and all of which taken together shall constitute one and the same instrument.</p>
+  </div>
+  <div class="sheet-ft"><button type="button" class="btn primary wide" id="k-done">Done Reading</button></div>
+</div>
+
+<div id="print"></div>
+
+<script>
+(function(){
+  "use strict";
+  var APP = {"programs":{"series":{"name":"2027 Summit Series","short":"Series","when":"Winter, Spring and Fall 2027","where":"New Orleans, Salt Lake City and Bethesda","save":10,"blurb":"Your brand at all three 2027 Summits, with the same opportunity at each.","summits":["Winter","Spring","Fall"],"package":"","label":"2027 Summit Series · Winter + Spring + Fall · 10% series discount included","tiers":{"diamond":{"name":"Diamond Sponsor","price":"$60,750","cap":1,"oppName":"Diamond Exclusive","avail":"1 available · exclusive","regs":"8 complimentary registrations","benefits":["Official Diamond Sponsor recognition","Premium logo placement across event materials","Recognition from the main stage throughout the Summit","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","8 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast","Exclusive: Opening Remarks or moderator/panelist role, plus workgroup thank you recognition"],"opportunities":null},"platinum":{"name":"Platinum Sponsor","price":"$40,500","regs":"6 complimentary registrations","benefits":["Premium logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","6 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast"],"opportunities":[{"id":"reception","name":"Reception Sponsor","cap":2,"note":"1 available, 1 sold","sold":false,"days":["Monday","Tuesday"],"soldDays":["Tuesday"]},{"id":"badge","name":"Badge Sponsor","cap":1,"note":"Sold","sold":true},{"id":"aidemo","name":"AI Demo / Case Study Sponsor","cap":3,"note":"3 available","sold":false},{"id":"wifi","name":"Wi-Fi Sponsor","cap":1,"note":"Sold","sold":true}]},"gold":{"name":"Gold Sponsor","price":"$27,000","regs":"5 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","Branded swag chair drop on General Session Day","5 complimentary Summit registrations"],"opportunities":[{"id":"workshop","name":"Workshop Sponsor","cap":5,"note":"4 available, 1 sold","sold":false},{"id":"sessionintro","name":"Session Introduction","cap":5,"note":"5 available","sold":false}]},"silver":{"name":"Silver Sponsor","price":"$20,250","regs":"4 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","4 complimentary Summit registrations","Branded giveaway near the registration area"],"opportunities":[{"id":"eventapp","name":"Event App Sponsor","cap":1,"note":"1 available","sold":false},{"id":"newcomer","name":"Newcomer Luncheon Sponsor","cap":1,"note":"1 available","sold":false},{"id":"banner","name":"Banner Sponsor","cap":5,"note":"5 available","sold":false},{"id":"silverbrand","name":"Silver Branding Sponsor","cap":null,"note":"Unlimited","sold":false}]},"bronze":{"name":"Bronze Sponsor","price":"$13,500","regs":"2 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","2 complimentary Summit registrations"],"opportunities":[{"id":"breakfast","name":"Breakfast Sponsor","cap":4,"note":"4 available","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":[],"multiDay":true},{"id":"livestream","name":"Livestream Sponsor","cap":1,"note":"1 available","sold":false},{"id":"morningcoffee","name":"Morning Coffee Break Sponsor","cap":4,"note":"3 available, 1 sold","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":["Monday"],"multiDay":true},{"id":"afternoonsnack","name":"Afternoon Snack Break Sponsor","cap":4,"note":"4 available","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":[],"multiDay":true}]}},"icon":""},"winter":{"name":"Winter Summit","short":"Winter","when":"January 11–14, 2027","where":"New Orleans, LA","venue":"InterContinental New Orleans","city":"New Orleans, LA","save":0,"blurb":"Open the year with the industry in New Orleans.","summits":["Winter"],"opens":"2027-01-11","package":"","label":"MISMO Winter Summit 2027 · Jan 11–14, 2027 · New Orleans, LA","tiers":{"diamond":{"name":"Diamond Sponsor","price":"$22,500","cap":1,"oppName":"Diamond Exclusive","avail":"1 available · exclusive","regs":"8 complimentary registrations","benefits":["Official Diamond Sponsor recognition","Premium logo placement across event materials","Recognition from the main stage throughout the Summit","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","8 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast","Exclusive: Opening Remarks or moderator/panelist role, plus workgroup thank you recognition"],"opportunities":null},"platinum":{"name":"Platinum Sponsor","price":"$15,000","regs":"6 complimentary registrations","benefits":["Premium logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","6 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast"],"opportunities":[{"id":"reception","name":"Reception Sponsor","cap":2,"note":"1 available, 1 sold","sold":false,"days":["Monday","Tuesday"],"soldDays":["Tuesday"]},{"id":"badge","name":"Badge Sponsor","cap":1,"note":"Sold","sold":true},{"id":"aidemo","name":"AI Demo / Case Study Sponsor","cap":3,"note":"3 available","sold":false},{"id":"wifi","name":"Wi-Fi Sponsor","cap":1,"note":"Sold","sold":true}]},"gold":{"name":"Gold Sponsor","price":"$10,000","regs":"5 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","Branded swag chair drop on General Session Day","5 complimentary Summit registrations"],"opportunities":[{"id":"workshop","name":"Workshop Sponsor","cap":5,"note":"4 available, 1 sold","sold":false},{"id":"sessionintro","name":"Session Introduction","cap":5,"note":"5 available","sold":false}]},"silver":{"name":"Silver Sponsor","price":"$7,500","regs":"4 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","4 complimentary Summit registrations","Branded giveaway near the registration area"],"opportunities":[{"id":"eventapp","name":"Event App Sponsor","cap":1,"note":"1 available","sold":false},{"id":"newcomer","name":"Newcomer Luncheon Sponsor","cap":1,"note":"1 available","sold":false},{"id":"banner","name":"Banner Sponsor","cap":5,"note":"5 available","sold":false},{"id":"silverbrand","name":"Silver Branding Sponsor","cap":null,"note":"Unlimited","sold":false}]},"bronze":{"name":"Bronze Sponsor","price":"$5,000","regs":"2 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","2 complimentary Summit registrations"],"opportunities":[{"id":"breakfast","name":"Breakfast Sponsor","cap":4,"note":"4 available","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":[],"multiDay":true},{"id":"livestream","name":"Livestream Sponsor","cap":1,"note":"1 available","sold":false},{"id":"morningcoffee","name":"Morning Coffee Break Sponsor","cap":4,"note":"4 available","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":[],"multiDay":true},{"id":"afternoonsnack","name":"Afternoon Snack Break Sponsor","cap":4,"note":"4 available","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":[],"multiDay":true}]}},"icon":""},"spring":{"name":"Spring Summit","short":"Spring","when":"June 7–10, 2027","where":"Salt Lake City, UT","venue":"Salt Lake Marriott Downtown at City Creek","city":"Salt Lake City, UT","save":0,"blurb":"One summit, one city: Salt Lake City, UT.","summits":["Spring"],"opens":"2027-06-07","package":"","label":"MISMO Spring Summit 2027 · Jun 7–10, 2027 · Salt Lake City, UT","tiers":{"diamond":{"name":"Diamond Sponsor","price":"$22,500","cap":1,"oppName":"Diamond Exclusive","avail":"1 available · exclusive","regs":"8 complimentary registrations","benefits":["Official Diamond Sponsor recognition","Premium logo placement across event materials","Recognition from the main stage throughout the Summit","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","8 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast","Exclusive: Opening Remarks or moderator/panelist role, plus workgroup thank you recognition"],"opportunities":null},"platinum":{"name":"Platinum Sponsor","price":"$15,000","regs":"6 complimentary registrations","benefits":["Premium logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","6 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast"],"opportunities":[{"id":"reception","name":"Reception Sponsor","cap":2,"note":"1 available, 1 sold","sold":false,"days":["Monday","Tuesday"],"soldDays":["Tuesday"]},{"id":"badge","name":"Badge Sponsor","cap":1,"note":"Sold","sold":true},{"id":"aidemo","name":"AI Demo / Case Study Sponsor","cap":3,"note":"2 available, 1 sold","sold":false},{"id":"wifi","name":"Wi-Fi Sponsor","cap":1,"note":"Sold","sold":true}]},"gold":{"name":"Gold Sponsor","price":"$10,000","regs":"5 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","Branded swag chair drop on General Session Day","5 complimentary Summit registrations"],"opportunities":[{"id":"workshop","name":"Workshop Sponsor","cap":5,"note":"4 available, 1 sold","sold":false},{"id":"sessionintro","name":"Session Introduction","cap":5,"note":"5 available","sold":false}]},"silver":{"name":"Silver Sponsor","price":"$7,500","regs":"4 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","4 complimentary Summit registrations","Branded giveaway near the registration area"],"opportunities":[{"id":"eventapp","name":"Event App Sponsor","cap":1,"note":"1 available","sold":false},{"id":"newcomer","name":"Newcomer Luncheon Sponsor","cap":1,"note":"1 available","sold":false},{"id":"banner","name":"Banner Sponsor","cap":5,"note":"5 available","sold":false},{"id":"silverbrand","name":"Silver Branding Sponsor","cap":null,"note":"Unlimited","sold":false}]},"bronze":{"name":"Bronze Sponsor","price":"$5,000","regs":"2 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","2 complimentary Summit registrations"],"opportunities":[{"id":"breakfast","name":"Breakfast Sponsor","cap":4,"note":"4 available","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":[],"multiDay":true},{"id":"livestream","name":"Livestream Sponsor","cap":1,"note":"1 available","sold":false},{"id":"morningcoffee","name":"Morning Coffee Break Sponsor","cap":4,"note":"3 available, 1 sold","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":["Tuesday"],"multiDay":true},{"id":"afternoonsnack","name":"Afternoon Snack Break Sponsor","cap":4,"note":"3 available, 1 sold","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":["Tuesday"],"multiDay":true}]}},"icon":"<path d=\"M12 21v-8.6\"/><path d=\"M12 12.4c0-4.3 3-7.4 8-7.4 0 4.3-3 7.4-8 7.4z\"/><path d=\"M12 14.6c0-3.4-2.6-6-7-6 0 3.4 2.6 6 7 6z\"/>"},"fall":{"name":"Fall Summit","short":"Fall","when":"September 13–16, 2027","where":"Bethesda, MD","venue":"The Bethesdan Hotel","city":"Bethesda, MD","save":0,"blurb":"One summit, one city: Bethesda, MD.","summits":["Fall"],"opens":"2027-09-13","package":"","label":"MISMO Fall Summit 2027 · Sep 13–16, 2027 · Bethesda, MD","tiers":{"diamond":{"name":"Diamond Sponsor","price":"$22,500","cap":1,"oppName":"Diamond Exclusive","avail":"1 available · exclusive","regs":"8 complimentary registrations","benefits":["Official Diamond Sponsor recognition","Premium logo placement across event materials","Recognition from the main stage throughout the Summit","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","8 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast","Exclusive: Opening Remarks or moderator/panelist role, plus workgroup thank you recognition"],"opportunities":null},"platinum":{"name":"Platinum Sponsor","price":"$15,000","regs":"6 complimentary registrations","benefits":["Premium logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","6 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast"],"opportunities":[{"id":"reception","name":"Reception Sponsor","cap":2,"note":"1 available, 1 sold","sold":false,"days":["Monday","Tuesday"],"soldDays":["Tuesday"]},{"id":"badge","name":"Badge Sponsor","cap":1,"note":"Sold","sold":true},{"id":"aidemo","name":"AI Demo / Case Study Sponsor","cap":3,"note":"3 available","sold":false},{"id":"wifi","name":"Wi-Fi Sponsor","cap":1,"note":"Sold","sold":true}]},"gold":{"name":"Gold Sponsor","price":"$10,000","regs":"5 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","Branded swag chair drop on General Session Day","5 complimentary Summit registrations"],"opportunities":[{"id":"workshop","name":"Workshop Sponsor","cap":5,"note":"3 available, 2 sold","sold":false},{"id":"sessionintro","name":"Session Introduction","cap":5,"note":"5 available","sold":false}]},"silver":{"name":"Silver Sponsor","price":"$7,500","regs":"4 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","4 complimentary Summit registrations","Branded giveaway near the registration area"],"opportunities":[{"id":"eventapp","name":"Event App Sponsor","cap":1,"note":"1 available","sold":false},{"id":"newcomer","name":"Newcomer Luncheon Sponsor","cap":1,"note":"1 available","sold":false},{"id":"banner","name":"Banner Sponsor","cap":5,"note":"5 available","sold":false},{"id":"silverbrand","name":"Silver Branding Sponsor","cap":null,"note":"Unlimited","sold":false}]},"bronze":{"name":"Bronze Sponsor","price":"$5,000","regs":"2 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","2 complimentary Summit registrations"],"opportunities":[{"id":"breakfast","name":"Breakfast Sponsor","cap":4,"note":"4 available","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":[],"multiDay":true},{"id":"livestream","name":"Livestream Sponsor","cap":1,"note":"1 available","sold":false},{"id":"morningcoffee","name":"Morning Coffee Break Sponsor","cap":4,"note":"3 available, 1 sold","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":["Tuesday"],"multiDay":true},{"id":"afternoonsnack","name":"Afternoon Snack Break Sponsor","cap":4,"note":"3 available, 1 sold","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":["Tuesday"],"multiDay":true}]}},"icon":"<path d=\"M5 19C5 10.6 10.4 5 20 4c-.6 9.8-6.4 15-15 15z\"/><path d=\"M5 19l8.4-8.4\"/>"},"springfall":{"name":"Spring & Fall Summits","short":"Spring & Fall","when":"June 7–10 and September 13–16, 2027","where":"Salt Lake City and Bethesda","save":10,"blurb":"The same opportunity at both summits, for sponsors joining after Winter.","summits":["Spring","Fall"],"package":"springfall","label":"MISMO Spring & Fall 2027 Summits · Jun 7–10, 2027 (Salt Lake City, UT) and Sep 13–16, 2027 (Bethesda, MD) · 10% package discount","tiers":{"diamond":{"name":"Diamond Sponsor","price":"$40,500","cap":1,"oppName":"Diamond Exclusive","avail":"1 available · exclusive","regs":"8 complimentary registrations","benefits":["Official Diamond Sponsor recognition","Premium logo placement across event materials","Recognition from the main stage throughout the Summit","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","8 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast","Exclusive: Opening Remarks or moderator/panelist role, plus workgroup thank you recognition"],"opportunities":null},"platinum":{"name":"Platinum Sponsor","price":"$27,000","regs":"6 complimentary registrations","benefits":["Premium logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","6 complimentary Summit registrations","Branded swag chair drop on General Session Day","Opportunity to appear on MISMO Mic'd Up podcast"],"opportunities":[{"id":"reception","name":"Reception Sponsor","cap":2,"note":"1 available, 1 sold","sold":false,"days":["Monday","Tuesday"],"soldDays":["Tuesday"]},{"id":"badge","name":"Badge Sponsor","cap":1,"note":"Sold","sold":true},{"id":"aidemo","name":"AI Demo / Case Study Sponsor","cap":3,"note":"2 available, 1 sold","sold":false},{"id":"wifi","name":"Wi-Fi Sponsor","cap":1,"note":"Sold","sold":true}]},"gold":{"name":"Gold Sponsor","price":"$18,000","regs":"5 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","Branded swag chair drop on General Session Day","5 complimentary Summit registrations"],"opportunities":[{"id":"workshop","name":"Workshop Sponsor","cap":5,"note":"3 available, 2 sold","sold":false},{"id":"sessionintro","name":"Session Introduction","cap":5,"note":"5 available","sold":false}]},"silver":{"name":"Silver Sponsor","price":"$13,500","regs":"4 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","4 complimentary Summit registrations","Branded giveaway near the registration area"],"opportunities":[{"id":"eventapp","name":"Event App Sponsor","cap":1,"note":"1 available","sold":false},{"id":"newcomer","name":"Newcomer Luncheon Sponsor","cap":1,"note":"1 available","sold":false},{"id":"banner","name":"Banner Sponsor","cap":5,"note":"5 available","sold":false},{"id":"silverbrand","name":"Silver Branding Sponsor","cap":null,"note":"Unlimited","sold":false}]},"bronze":{"name":"Bronze Sponsor","price":"$9,000","regs":"2 complimentary registrations","benefits":["Logo placement across event materials","Dedicated LinkedIn recognition post","Pre- and post-event attendee lists","2 complimentary Summit registrations"],"opportunities":[{"id":"breakfast","name":"Breakfast Sponsor","cap":4,"note":"4 available","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":[],"multiDay":true},{"id":"livestream","name":"Livestream Sponsor","cap":1,"note":"1 available","sold":false},{"id":"morningcoffee","name":"Morning Coffee Break Sponsor","cap":4,"note":"3 available, 1 sold","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":["Tuesday"],"multiDay":true},{"id":"afternoonsnack","name":"Afternoon Snack Break Sponsor","cap":4,"note":"3 available, 1 sold","sold":false,"days":["Monday","Tuesday","Wednesday","Thursday"],"soldDays":["Tuesday"],"multiDay":true}]}},"icon":""}},"order":["series","winter","spring","fall","springfall"],"groups":{"series-winter":["series","winter"],"spring":["spring"],"fall":["fall"],"spring-fall":["springfall"]},"contractVersion":"2027-v1","stats":[{"n":"1,080","l":"Registrations across the three 2026 Summits · 683 unique people"},{"n":"313","l":"Unique organizations across the same three Summits"},{"n":"45%","l":"Are VPs or above"},{"n":"+46%","l":"More lender organizations in 2026 than 2025"}],"quotes":[{"img":"data:image/jpeg;base64,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","text":"MISMO helps bring together the organizations and leaders working to make mortgage finance more efficient, transparent, and connected. Sponsoring the Summits reflects Optimal Blue’s commitment to collaboration, industry progress, and the standards that help move the entire mortgage ecosystem forward. We’re proud to support MISMO.","who":"Sara Holtz","role":"CMO, Optimal Blue"},{"img":"data:image/jpeg;base64,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","text":"Factual Data considers MISMO a crucial element in our mission of Helping Lenders Expand Homeownership. By sponsoring and participating in the summit, we're able to work even more closely with our technical partners and lender customers to help drive innovation and success in the industry.","who":"Heather Mowry","role":"Vice President, Strategic Solutions, Factual Data"},{"img":"data:image/jpeg;base64,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","text":"Guidehouse is dedicated to fostering collaboration within the mortgage industry. Sponsoring MISMO summits provides a unique platform to connect with industry leaders and innovators from across the country — creating a community where ideas are exchanged, partnerships are formed, and the future of the industry is shaped together.","who":"Michael McCarthy","role":"Managing Consultant, Financial Services, Guidehouse"},{"img":"data:image/jpeg;base64,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","text":"MISMO’s effectiveness is driven by the commitment of its members, who invest not only through participation and sponsorship, but through the generous contribution of their time, expertise, and intellectual capital to advance the industry. At FundingShield, we are proud to support and participate in a community of industry leaders who collaborate to solve shared challenges, strengthen standards, and create lasting benefits for the mortgage ecosystem. The betterment of the industry depends on organizations and individuals willing to contribute beyond their own interests, and MISMO brings together exactly that kind of leadership.","who":"Ike Suri","role":"CEO, FundingShield"}],"room":[{"k":"Service Provider","n":234,"o":98},{"k":"Tech Provider","n":204,"o":93},{"k":"Lender/Servicer","n":159,"o":83},{"k":"GSE","n":59,"o":9},{"k":"Government agency","n":27,"o":14}]};
+
+  /* The same two flows the prospectus pages use (copied from them by tools/build_app.py). The
+     Intake address is public by design; SUBMIT_SECRET keeps junk out. */
+  var SUBMIT_ENDPOINT = "https://default867e5d11bde4499fb45e61572f9f33.7c.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/28/workflows/b11fe7bcb02748988ed5a065111f915c/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=tl9_JTtwnQQTYW3C6w1EPUlKd_yxcvATU4s7rMLpSxM";
+  var SUBMIT_SECRET = "mismo-2027-prospectus";
+  var AVAIL_ENDPOINT = "https://default867e5d11bde4499fb45e61572f9f33.7c.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/20/workflows/269b42e0741b4baaa54c90e87327fd7a/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=O91UOz6MY9dG7V94X9XUbXHNqnuz7Dg_jO_OmpaEvv4";
+  /* Which prospectuses to offer: the Sponsorship Portal's Publish on MyMISMO boxes, made public by
+     the website's sponsors job. Until that file is there, Series + Winter. ?show=all previews all. */
+  var PUBLISHED_FEED = "/sponsors/prospectus-app.json";
+  var DEFAULT_PUBLISHED = {"series-winter":true};
+  var STORE_KEY = "mismo2027.app.reserve.v1";
+  var TIER_ORDER = ["diamond","platinum","gold","silver","bronze"];
+  var SEASONS = ["Winter","Spring","Fall"];
+  var PROGRAM_SEASONS = {winter:["Winter"], spring:["Spring"], fall:["Fall"], series:SEASONS, springfall:["Spring","Fall"]};
+  var PROGRAM_LIST = {series:"Summit Series", winter:"Winter Summit", spring:"Spring Summit", fall:"Fall Summit", springfall:"Summit Series"};
+  var LOGO_MAX = 10 * 1024 * 1024;
+  var LOGO_TYPES = {png:"image/png", svg:"image/svg+xml", eps:"application/postscript", ai:"application/postscript", pdf:"application/pdf"};
+  var STEP_NAMES = {start:"Choose a Summit", level:"Choose Your Level", opp:"Choose Your Opportunity", details:"Your Details", sign:"Review and Sign"};
+  var PAGE_OPENED = Date.now();
+  var PRACTICE = /[?&]practice(\b|=|&|$)/.test(location.search);
+
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = function(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]; }); };
+  var P = APP.programs;
+  var state = {program:null, tier:null, opp:null, day:null, multi:false};
+  var step = "start";
+  var published = null;     // the program keys on offer
+  var logo = null, logoUrl = null;
+  var live = false;
+  var sent = null;
+
+  /* ---------- prices ---------- */
+  function num(price){ return Number(String(price || "").replace(/[^0-9.]/g, "")) || 0; }
+  function money(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+  function lowest(k){ return Math.min.apply(null, TIER_ORDER.map(function(t){ return num(P[k].tiers[t].price); })); }
+
+  /* ---------- which programs are on offer ---------- */
+  function setPublished(pages){
+    var keys = [];
+    Object.keys(APP.groups).forEach(function(g){ if(pages[g]) keys = keys.concat(APP.groups[g]); });
+    published = APP.order.filter(function(k){ return keys.indexOf(k) >= 0; });
+    paintPrograms();
+    if(state.program && published.indexOf(state.program) < 0 && step !== "done"){ clearSel(); show("start", true); }
+  }
+  function loadPublished(){
+    if(/[?&]show=all\b/.test(location.search)){ var all = {}; Object.keys(APP.groups).forEach(function(g){ all[g] = true; }); setPublished(all); return; }
+    setPublished(DEFAULT_PUBLISHED);
+    fetch(PUBLISHED_FEED + "?t=" + Date.now(), {cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(j){ var pg = j && (j.pages || j); if(pg && typeof pg === "object") setPublished(pg); })
+      .catch(function(){ /* keep the default */ });
+  }
+
+  /* ---------- the start page ---------- */
+  function paintStart(){
+    $("hero-stats").innerHTML = APP.stats.map(function(s){
+      var l = s.l.replace(/ · .*$/, "");
+      return "<div><b>" + esc(s.n) + "</b><span>" + esc(l) + "</span></div>"; }).join("");
+    var tot = APP.room.reduce(function(a, r){ return a + r.n; }, 0) || 1;
+    var max = Math.max.apply(null, APP.room.map(function(r){ return r.n; }));
+    $("room-lead").textContent = "Registrants across the three 2026 Summits: " + tot.toLocaleString("en-US") + " people.";
+    $("room").innerHTML = APP.room.map(function(r){
+      return '<div class="room-row"><b>' + esc(r.k) + '</b><span>' + Math.round(r.n * 100 / tot) + '% &middot; ' + r.o + ' orgs</span><div class="rbar"><i style="width:' + (r.n * 100 / max).toFixed(1) + '%"></i></div></div>';
+    }).join("");
+    $("quotes").innerHTML = APP.quotes.map(function(q, i){
+      return '<figure class="card quote" data-q="' + i + '"><p>' + esc(q.text) + '</p><figcaption class="q-who">' +
+        (q.img ? '<img src="' + q.img + '" alt="">' : "") + '<div><b>' + esc(q.who) + '</b><span>' + esc(q.role) + '</span></div></figcaption></figure>';
+    }).join("");
+    $("qdots").innerHTML = APP.quotes.map(function(_, i){ return '<i' + (i ? "" : ' class="on"') + '></i>'; }).join("");
+    var qs = $("quotes");
+    qs.addEventListener("scroll", function(){
+      var w = qs.firstElementChild ? qs.firstElementChild.getBoundingClientRect().width + 10 : 1;
+      var n = Math.round(qs.scrollLeft / w);
+      Array.prototype.forEach.call($("qdots").children, function(d, i){ d.classList.toggle("on", i === n); });
+    }, {passive:true});
+    qs.addEventListener("click", function(e){ var f = e.target.closest(".quote"); if(f) f.classList.toggle("open"); });
+  }
+  function paintPrograms(){
+    var el = $("prog-list");
+    if(!published.length){
+      el.innerHTML = '<div class="card none">Sponsorships for the next MISMO Summits open soon. Email <a href="mailto:kbradshaw@mismo.org">kbradshaw@mismo.org</a> to be the first to hear.</div>';
+      return;
+    }
+    el.innerHTML = published.map(function(k){
+      var p = P[k];
+      return '<button type="button" class="prog' + (k === "series" ? " feature" : "") + '" data-prog="' + k + '">' +
+        '<span class="p-name">' + esc(p.name) + (p.save ? ' <span class="tag sky">Save ' + p.save + '%</span>' : "") + '</span>' +
+        '<span class="p-when">' + esc(p.when) + ' &middot; ' + esc(p.where) + '</span>' +
+        '<span class="p-foot">From <b>' + money(lowest(k)) + '</b> &middot; 5 levels</span>' +
+        '<span class="p-go"><svg><use href="#i-go"/></svg></span></button>';
+    }).join("");
+  }
+  $("prog-list").addEventListener("click", function(e){
+    var b = e.target.closest(".prog"); if(!b) return;
+    var k = b.getAttribute("data-prog");
+    if(state.program !== k){ state.program = k; state.tier = null; state.opp = null; state.day = null; state.multi = false; }
+    save(); show("level");
+  });
+
+  /* ---------- levels ---------- */
+  function tierOut(t){ return t.opportunities ? t.opportunities.every(function(o){ return o.sold; }) : !!t.soldOut; }
+  function tierChip(t){
+    if(!t.opportunities){
+      if(t.soldOut) return '<span class="tag bad">Sold</span>';
+      return '<span class="tag good">Open &middot; Exclusive</span>';
+    }
+    var open = t.opportunities.filter(function(o){ return !o.sold; }).length;
+    if(!open) return '<span class="tag bad">Sold Out</span>';
+    return '<span class="tag good">' + open + ' of ' + t.opportunities.length + ' Open</span>';
+  }
+  function paintLevels(){
+    var p = P[state.program]; if(!p) return;
+    $("lv-name").textContent = p.name;
+    $("lv-when").textContent = p.when + " · " + (p.venue ? p.venue + ", " + p.city : p.where) + (p.save ? " · " + p.save + "% off included" : "");
+    $("tier-list").innerHTML = TIER_ORDER.map(function(tid){
+      var t = p.tiers[tid]; if(!t) return "";
+      var out = tierOut(t), sel = state.tier === tid;
+      var ben = t.benefits || [], showAll = sel;
+      var list = (showAll ? ben : ben.slice(0, 3)).map(function(b){ return '<li><svg><use href="#i-tick"/></svg><span>' + esc(b) + '</span></li>'; }).join("");
+      var more = !showAll && ben.length > 3 ? '<div class="t-more">+ ' + (ben.length - 3) + ' more benefits</div>' : "";
+      var opps = t.opportunities ? '<div class="t-opps">Choose one: ' + esc(t.opportunities.map(function(o){ return o.name.replace(/ Sponsor$/, ""); }).join(", ")) + '</div>' :
+        '<div class="t-opps">One sponsor only. The exclusive is included.</div>';
+      return '<button type="button" class="tier' + (sel ? " sel" : "") + (out ? " out" : "") + '" data-tier="' + tid + '" style="--tc:var(--t-' + tid + ')"' + (out ? ' aria-disabled="true"' : "") + ' aria-pressed="' + sel + '">' +
+        '<div class="t-top"><span class="t-eye">' + esc(t.name.replace(/ Sponsor$/, "")) + '</span><span class="t-right">' + tierChip(t) + '<span class="t-check"><svg><use href="#i-tick"/></svg></span></span></div>' +
+        '<div class="t-price">' + esc(t.price) + (state.program === "series" ? '<small>for all three</small>' : (p.summits.length > 1 ? '<small>for both</small>' : "")) + '</div>' +
+        '<div class="t-regs">' + esc(t.regs) + '</div>' +
+        '<ul class="t-ben">' + list + '</ul>' + more + opps + '</button>';
+    }).join("");
+  }
+  $("tier-list").addEventListener("click", function(e){
+    var b = e.target.closest(".tier"); if(!b || b.classList.contains("out")) return;
+    var tid = b.getAttribute("data-tier");
+    if(state.tier !== tid){ state.tier = tid; state.opp = null; state.day = null; state.multi = false; }
+    paintLevels(); paintBar(); save();
+    var again = document.querySelector('.tier[data-tier="' + tid + '"]');
+    if(again && again.scrollIntoView){ var r = again.getBoundingClientRect(); if(r.bottom > innerHeight - 90 || r.top < 110) again.scrollIntoView({block:"nearest", behavior:"smooth"}); }
+  });
+
+  /* ---------- opportunities ---------- */
+  function curTier(){ var p = P[state.program]; return p && state.tier ? p.tiers[state.tier] : null; }
+  function curOpp(){ var t = curTier(); if(!t || !t.opportunities) return null; return t.opportunities.filter(function(o){ return o.id === state.opp; })[0] || null; }
+  /* "Jan 11" for a day of a single summit; "Each summit" when the day repeats at several */
+  function dateOf(d){
+    var p = P[state.program], i = ["Monday","Tuesday","Wednesday","Thursday","Friday"].indexOf(d);
+    if(!p || !p.opens || i < 0) return p && p.summits.length > 1 ? "Each summit" : d;
+    var x = new Date(p.opens + "T12:00:00"); x.setDate(x.getDate() + i);
+    return x.toLocaleDateString("en-US", {month:"short", day:"numeric"});
+  }
+  function oppStatus(o){
+    if(o.note === "Unlimited") return '<span class="tag good">Open</span>';
+    if(o.sold) return '<span class="tag bad">Sold</span>';
+    var left = /^(\d+) available/.exec(o.note || "");
+    return '<span class="tag good">' + (left ? left[1] + " Left" : esc(o.note)) + '</span>';
+  }
+  function paintOpps(){
+    var t = curTier(); if(!t) return;
+    $("inc-h").textContent = "Included With " + t.name.replace(/ Sponsor$/, "");
+    $("inc").innerHTML = '<div class="inc-regs">' + esc(t.regs) + '</div><ul class="t-ben">' + (t.benefits || []).map(function(b){
+      return '<li><svg><use href="#i-tick"/></svg><span>' + esc(b) + '</span></li>'; }).join("") + '</ul>';
+    var el = $("opp-list");
+    if(!t.opportunities){
+      $("op-lead").textContent = "Diamond is one sponsor per summit.";
+      el.innerHTML = '<div class="card diamond-note"><svg><use href="#i-gem"/></svg><div><b>Diamond Exclusive is included.</b><br><span style="color:var(--ink-2); font-size:14px">' + esc((t.benefits || []).slice(-1)[0] || "") + '</span></div></div>';
+      return;
+    }
+    $("op-lead").textContent = "Your " + t.name.replace(/ Sponsor$/, "") + " sponsorship includes one of these. Each one is first come, first served.";
+    el.innerHTML = t.opportunities.map(function(o){
+      var sel = state.opp === o.id, more = "";
+      if(sel && o.days){
+        more = '<div class="opp-more"><div class="o-lbl">' + (o.id === "reception" ? "Choose your evening" : "Choose your day") + '</div><div class="days">' +
+          o.days.map(function(d){
+            var gone = (o.soldDays || []).indexOf(d) >= 0;
+            return '<button type="button" class="day' + (state.day === d ? " sel" : "") + '" data-day="' + d + '"' + (gone ? " disabled" : "") + '>' + d.slice(0, 3) + '<small>' + (gone ? "Taken" : dateOf(d)) + '</small></button>';
+          }).join("") + '</div>' +
+          (o.multiDay ? '<label class="multi"><input type="checkbox" id="f-multi"' + (state.multi ? " checked" : "") + '><span><b>I&rsquo;d like more than one day</b><span>The team will be in touch with a rate for the extra days. Pick your first day above.</span></span></label>' : "") +
+          '</div>';
+      }
+      var sub = o.days ? (o.days.length === 1 ? o.days[0] : o.days.length + " days to choose from") : (o.cap == null ? "Open to every " + t.name.replace(/ Sponsor$/, "") + " sponsor" : (o.cap === 1 ? "One sponsor" : o.cap + " sponsors"));
+      return '<div class="opp' + (sel ? " sel" : "") + (o.sold ? " out" : "") + '" data-opp="' + o.id + '"><button type="button" class="opp-row"' + (o.sold ? ' aria-disabled="true"' : "") + ' aria-pressed="' + sel + '">' +
+        '<span class="radio"></span><span class="o-name">' + esc(o.name) + '<span class="o-sub">' + esc(sub) + '</span></span>' + oppStatus(o) + '</button>' + more + '</div>';
+    }).join("");
+  }
+  $("opp-list").addEventListener("click", function(e){
+    var d = e.target.closest(".day");
+    if(d){ if(!d.disabled){ state.day = d.getAttribute("data-day"); paintOpps(); paintBar(); save(); } return; }
+    var row = e.target.closest(".opp-row"); if(!row) return;
+    var box = row.parentNode; if(box.classList.contains("out")) return;
+    var id = box.getAttribute("data-opp");
+    if(state.opp !== id){ state.opp = id; state.day = null; state.multi = false; }
+    paintOpps(); paintBar(); save();
+  });
+  $("opp-list").addEventListener("change", function(e){ if(e.target.id === "f-multi"){ state.multi = e.target.checked; save(); } });
+
+  /* ---------- details and logo ---------- */
+  var FIELDS = {company:"f-company", contact:"f-contact", email:"f-email", phone:"f-phone", signer:"f-signer-name", title:"f-signer-title", date:"f-signer-date"};
+  function val(k){ return ($(FIELDS[k]).value || "").trim(); }
+  function okEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s); }
+  function okPhone(s){ return (s.replace(/\D/g, "").length >= 7); }
+  Object.keys(FIELDS).forEach(function(k){
+    $(FIELDS[k]).addEventListener("input", function(){ var f = $(FIELDS[k]).closest(".fld"); f.classList.remove("bad"); paintBar(); save(); });
+  });
+  ["f-company","f-contact","f-email"].forEach(function(id, i, a){
+    $(id).addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); $(a[i + 1] || "f-phone").focus(); } });
+  });
+  /* the contact is usually the signer: fill it in once, never over what they typed */
+  $("f-contact").addEventListener("change", function(){ if(!val("signer")) $("f-signer-name").value = val("contact"); });
+
+  function fmtBytes(n){ return n >= 1048576 ? (n / 1048576).toFixed(1).replace(/\.0$/, "") + " MB" : Math.max(1, Math.round(n / 1024)) + " KB"; }
+  function logoSay(t){ var m = $("lp-msg"); m.textContent = t || ""; m.hidden = !t; $("logo-pick").classList.toggle("bad", !!t); }
+  function paintLogo(){
+    var pick = $("logo-pick"), th = $("lp-thumb");
+    pick.classList.toggle("has", !!logo);
+    if(!logo){ $("lp-main").textContent = "Choose Your Logo File"; $("lp-sub").innerHTML = "PNG, SVG, EPS, AI or PDF &middot; up to 10 MB"; th.innerHTML = '<svg><use href="#i-up"/></svg>'; return; }
+    $("lp-main").textContent = logo.name;
+    $("lp-sub").textContent = fmtBytes(logo.size) + " · attached · tap to change";
+    if(logoUrl && (logo.ext === "png" || logo.ext === "svg")) th.innerHTML = '<img alt="" src="' + logoUrl + '">';
+    else th.innerHTML = '<span class="ext">' + esc(logo.ext) + '</span>';
+  }
+  $("f-logo").addEventListener("change", function(e){
+    var file = e.target.files && e.target.files[0]; if(!file) return;
+    var ext = (String(file.name).split(".").pop() || "").toLowerCase();
+    if(!LOGO_TYPES[ext]) return logoSay("That file type can’t be used. Please choose a PNG, SVG, EPS, AI or PDF file.");
+    if(file.size > LOGO_MAX) return logoSay("That file is " + fmtBytes(file.size) + ". The limit is 10 MB, so please choose a smaller version.");
+    if(!file.size) return logoSay("That file is empty. Please choose another.");
+    var r = new FileReader();
+    r.onload = function(){
+      var url = String(r.result || ""), i = url.indexOf(",");
+      if(i < 0) return logoSay("That file couldn’t be read. Please try again.");
+      if(logoUrl){ try{ URL.revokeObjectURL(logoUrl); }catch(x){} }
+      try{ logoUrl = URL.createObjectURL(file); }catch(x){ logoUrl = null; }
+      logo = {name:file.name, ext:ext, type:file.type || LOGO_TYPES[ext], size:file.size, data:url.slice(i + 1)};
+      logoSay(""); paintLogo(); paintBar();
+    };
+    r.onerror = function(){ logoSay("That file couldn’t be read. Please try again."); };
+    r.readAsDataURL(file);
+  });
+  function safeFileName(s){
+    return String(s || "").replace(/["*:<>?\/\\|#%~&{}]+/g, " ").replace(/\s+/g, " ").trim().replace(/^[.\s]+|[.\s]+$/g, "").slice(0, 120) || "logo";
+  }
+
+  /* ---------- review ---------- */
+  function oppLabel(){
+    var t = curTier(); if(!t) return "—";
+    if(!t.opportunities) return "Included — Diamond exclusive";
+    var o = curOpp(); if(!o) return "Not yet selected";
+    if(o.days) return o.name + (state.day ? " — " + state.day : " — day not yet selected");
+    return o.name;
+  }
+  function paintSum(){
+    var p = P[state.program], t = curTier(); if(!p || !t) return;
+    var rows = [["Summit", p.name + " · " + p.when, "start"], ["Level", t.name, "level"],
+      ["Opportunity", oppLabel().replace("Included — Diamond exclusive", "Diamond Exclusive (included)") + (state.multi ? " (interested in more days)" : ""), t.opportunities ? "opp" : ""],
+      ["Company", val("company"), "details"], ["Contact", [val("contact"), val("email"), val("phone")].filter(Boolean).join("\n"), "details"],
+      ["Logo", logo ? logo.name : "", "details"]];
+    $("sum").innerHTML = rows.map(function(r){
+      return '<div class="sum-row"><dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd>' + (r[2] ? '<button type="button" data-edit="' + r[2] + '">Edit</button>' : "<span></span>") + '</div>';
+    }).join("") + '<div class="sum-total"><span>Sponsorship</span><b>' + esc(t.price) + '</b></div>';
+    $("agree-co").textContent = val("company") || "my company";
+  }
+  $("sum").addEventListener("click", function(e){ var b = e.target.closest("[data-edit]"); if(b) show(b.getAttribute("data-edit"), true); });
+
+  /* ---------- the contract ---------- */
+  (function(){
+    var ps = $("k-body").querySelectorAll("p");
+    $("k-peek").innerHTML = Array.prototype.slice.call(ps, 0, 2).map(function(p){ return p.outerHTML; }).join("");
+  })();
+  var sheetOpen = false;
+  function openSheet(){ sheetOpen = true; var s = $("contract-sheet"); s.classList.add("on"); s.setAttribute("aria-hidden", "false"); $("k-body").scrollTop = 0; document.body.style.overflow = "hidden"; setTimeout(function(){ $("k-close").focus(); }, 50); if(window.MismoBack) MismoBack.check(); }
+  function closeSheet(){ sheetOpen = false; var s = $("contract-sheet"); s.classList.remove("on"); s.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; $("read-contract").focus(); if(window.MismoBack) MismoBack.check(); }
+  $("read-contract").addEventListener("click", openSheet);
+  $("k-peek").addEventListener("click", openSheet);
+  $("k-close").addEventListener("click", closeSheet);
+  $("k-done").addEventListener("click", closeSheet);
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && sheetOpen) closeSheet(); });
+  $("f-agree").addEventListener("change", function(){ $("agree").classList.remove("bad"); paintBar(); });
+
+  /* ---------- steps ---------- */
+  function flow(){ var t = curTier(); return ["start","level"].concat(t && !t.opportunities ? [] : ["opp"]).concat(["details","sign"]); }
+  function missing(s){
+    var t = curTier();
+    if(s === "level") return t ? "" : "Choose a level to continue";
+    if(s === "opp"){
+      if(!t || !t.opportunities) return "";
+      var o = curOpp(); if(!o) return "Choose an opportunity to continue";
+      if(o.days && !state.day) return "Choose your day to continue";
+      return "";
+    }
+    if(s === "details"){
+      if(!val("company")) return "company"; if(!val("contact")) return "contact";
+      if(!okEmail(val("email"))) return "email"; if(!okPhone(val("phone"))) return "phone";
+      if(!logo) return "logo"; return "";
+    }
+    if(s === "sign"){
+      if(!$("f-agree").checked) return "agree"; if(!val("signer")) return "signer"; if(!val("title")) return "title"; if(!val("date")) return "date";
+      return "";
+    }
+    return "";
+  }
+  var HINTS = {company:"Add your company to continue", contact:"Add your name to continue", email:"Check your email address", phone:"Add a phone number to continue",
+    logo:"Add your logo to continue", agree:"Check the box to agree to the contract", signer:"Add the signer’s name", title:"Add the signer’s title", date:"Add the date"};
+  var nagged = false;
+  function paintBar(){
+    var t = curTier(), p = P[state.program];
+    var b = $("bar-sum").firstElementChild, s = $("bar-sum").lastElementChild;
+    if(!p){ return; }
+    var o = curOpp();
+    b.textContent = t ? t.name.replace(/ Sponsor$/, "") + " · " + t.price : p.name;
+    var sub = t ? (t.opportunities ? (o ? o.name + (state.day ? ", " + state.day : "") : "Opportunity not chosen yet") : "Diamond Exclusive") : "Choose a level below";
+    var m = missing(step);
+    if(nagged && m){ s.textContent = HINTS[m] || m; s.className = "hint"; }
+    else { s.textContent = sub; s.className = ""; }
+    $("go").textContent = step === "sign" ? (sending ? "Sending…" : "Submit") : "Continue";
+    $("go").disabled = !!sending;
+  }
+  function paintSteps(){
+    var f = flow(), i = f.indexOf(step);
+    $("steps").hidden = (step === "start" || step === "done");
+    var n = ["start","level","opp","details","sign"].indexOf(step);
+    $("steps-n").textContent = "Step " + (n + 1) + " of 5";
+    $("steps-name").textContent = STEP_NAMES[step] || "";
+    Array.prototype.forEach.call($("segs").children, function(seg, k){
+      var key = ["start","level","opp","details","sign"][k];
+      var skipped = key === "opp" && f.indexOf("opp") < 0;
+      seg.className = (k < n || skipped) ? "sg-done" : (k === n ? "sg-now" : "");
+    });
+    void i;
+  }
+  function show(s, back){
+    if(s === step) return;
+    var was = step;
+    step = s;
+    nagged = false;
+    document.querySelectorAll(".step").forEach(function(el){ el.classList.toggle("on", el.getAttribute("data-step") === s); el.classList.toggle("back", !!back); });
+    document.body.classList.toggle("no-bar", s === "start" || s === "done");
+    if(s === "level") paintLevels();
+    if(s === "opp") paintOpps();
+    if(s === "sign"){ paintSum(); if(!val("date")) $("f-signer-date").value = todayIso(); if(!val("signer") && val("contact")) $("f-signer-name").value = val("contact"); }
+    paintSteps(); paintBar();
+    var bk = $("m-back");
+    if(s === "start" || s === "done"){ bk.setAttribute("href", "/mymismo/"); bk.setAttribute("aria-label", "Back to MyMISMO"); }
+    else { bk.setAttribute("href", "#"); bk.setAttribute("aria-label", "Back"); }
+    window.scrollTo(0, 0);
+    if(was !== s && window.MismoBack) MismoBack.check();
+    save();
+  }
+  function prev(){
+    var f = flow(), i = f.indexOf(step);
+    if(i > 0) show(f[i - 1], true);
+  }
+  $("m-back").addEventListener("click", function(e){
+    if(step === "start" || step === "done") return;     // a real link to MyMISMO
+    e.preventDefault(); prev();
+  });
+  function flag(m){
+    nagged = true; paintBar();
+    if(m === "logo"){ logoSay("Please add your logo file to continue."); $("logo-pick").scrollIntoView({block:"center", behavior:"smooth"}); return; }
+    if(m === "agree"){ $("agree").classList.add("bad"); $("agree").scrollIntoView({block:"center", behavior:"smooth"}); return; }
+    if(FIELDS[m]){ var f = $(FIELDS[m]).closest(".fld"); f.classList.add("bad"); $(FIELDS[m]).focus(); f.scrollIntoView({block:"center", behavior:"smooth"}); return; }
+    var first = document.querySelector(step === "level" ? ".tier:not(.out)" : ".opp.sel .day:not(:disabled), .opp:not(.out)");
+    if(first) first.scrollIntoView({block:"center", behavior:"smooth"});
+  }
+  $("go").addEventListener("click", function(){
+    var m = missing(step);
+    if(m) return flag(m);
+    if(step === "sign") return submit();
+    var f = flow(), i = f.indexOf(step);
+    show(f[i + 1]);
+  });
+
+  /* ---------- availability (the prospectus pages' summit-aware count, on the app's data) ---------- */
+  function cellText(v){ if(v === null || v === undefined) return ""; if(typeof v === "object") return String(v.Value || v.value || ""); return String(v); }
+  function oppKey(s){
+    return String(s || "").replace(/[—–]/g, "-").replace(/\s+-\s+(Monday|Tuesday|Wednesday|Thursday|Friday)\b.*$/i, "")
+      .replace(/\(.*?\)/g, " ").toLowerCase().replace(/[^a-z0-9]+/g, "");
+  }
+  function dayName(v){ var m = /(Monday|Tuesday|Wednesday|Thursday|Friday)/i.exec(cellText(v).trim()); return m ? m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase() : ""; }
+  function noteFor(cap, taken){
+    if(cap === null || cap === undefined) return {note:"Unlimited", sold:false};
+    var left = Math.max(0, cap - taken);
+    if(left === 0) return {note:"Sold", sold:true};
+    return {note: taken ? (left + " available, " + taken + " sold") : (left + " available"), sold:false};
+  }
+  function seasonOf(v){ var m = /(Winter|Spring|Fall|Series)/i.exec(cellText(v)); return m ? m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase() : ""; }
+  function parseLines(v){ var s = cellText(v).trim(); if(!s) return null; try{ var a = JSON.parse(s); return (Array.isArray(a) && a.length) ? a : null; }catch(e){ return null; } }
+  function slotKey(tier, opp){ return /^\s*diamond\s*$/i.test(cellText(tier)) ? "diamond" : oppKey(cellText(opp)); }
+  function slotsOf(r, legacy){
+    var key = slotKey(r.tier, r.opportunity), day = dayName(r.day) || dayName(r.opportunity);
+    var all = function(){ return SEASONS.map(function(s){ return {season:s, key:key, day:day}; }); };
+    if(legacy) return all();
+    var se = seasonOf(r.program);
+    if(se === "Series"){
+      var lines = parseLines(r.lines);
+      if(!lines) return all();
+      return lines.map(function(l){ return {season:seasonOf(l.s), key:slotKey(l.tier, l.opp), day:dayName(l.day) || dayName(l.opp)}; });
+    }
+    return se ? [{season:se, key:key, day:day}] : [];
+  }
+  function applyAvailability(rows){
+    if(!Array.isArray(rows)) return false;
+    var legacy = !rows.some(function(r){ return r && Object.prototype.hasOwnProperty.call(r, "program"); });
+    var taken = {}, days = {};
+    SEASONS.forEach(function(s){ taken[s] = {}; days[s] = {}; });
+    rows.forEach(function(r){
+      if(!r) return;
+      slotsOf(r, legacy).forEach(function(sl){
+        if(!sl.key || !taken[sl.season]) return;
+        taken[sl.season][sl.key] = (taken[sl.season][sl.key] || 0) + 1;
+        if(sl.day) (days[sl.season][sl.key] = days[sl.season][sl.key] || {})[sl.day] = 1;
+      });
+    });
+    var countFor = function(prog, key){ return Math.max.apply(null, PROGRAM_SEASONS[prog].map(function(s){ return taken[s][key] || 0; })); };
+    var daysFor = function(prog, key){ var out = {}; PROGRAM_SEASONS[prog].forEach(function(s){ Object.keys(days[s][key] || {}).forEach(function(d){ out[d] = 1; }); }); return out; };
+    APP.order.forEach(function(prog){
+      /* an answer from before the flow sent Program can't tell one summit from another: the
+         Spring and Fall pages keep their built-in snapshot then, and so does the app */
+      if(legacy && rows.length && prog !== "winter" && prog !== "series") return;
+      TIER_ORDER.forEach(function(tid){
+        var t = P[prog].tiers[tid]; if(!t) return;
+        if(!t.opportunities){
+          if(t.cap !== undefined && t.oppName){ var d = noteFor(t.cap, countFor(prog, "diamond")); t.avail = d.sold ? "Sold" : (d.note + " · exclusive"); t.soldOut = d.sold; }
+          return;
+        }
+        t.opportunities.forEach(function(o){
+          var k = oppKey(o.name);
+          if(o.days){
+            var gone = daysFor(prog, k), sold = o.days.filter(function(x){ return gone[x]; });
+            o.soldDays = sold;
+            var r2 = noteFor(o.days.length, Math.max(sold.length, countFor(prog, k))); o.note = r2.note; o.sold = r2.sold;
+          } else { var r3 = noteFor(o.cap, countFor(prog, k)); o.note = r3.note; o.sold = r3.sold; }
+        });
+      });
+    });
+    /* a choice that has just gone comes off, so nobody applies for something already taken */
+    var t = curTier();
+    if(t && tierOut(t) && step !== "done"){ state.tier = null; state.opp = null; state.day = null; }
+    var o = curOpp();
+    if(o && o.sold){ state.opp = null; state.day = null; }
+    if(o && state.day && (o.soldDays || []).indexOf(state.day) >= 0) state.day = null;
+    live = true;
+    var st = $("avail-stamp"); st.classList.add("on"); st.lastElementChild.textContent = "Live availability, checked just now";
+    if(step === "level") paintLevels();
+    if(step === "opp") paintOpps();
+    paintBar();
+    return true;
+  }
+  window.__app = {state:function(){ return JSON.parse(JSON.stringify(state)); }, programs:P, step:function(){ return step; }, published:function(){ return published.slice(); }};
+  function loadAvailability(){
+    if(!AVAIL_ENDPOINT) return;
+    fetch(AVAIL_ENDPOINT, {method:"POST", headers:{"Content-Type":"text/plain"}, body:"{}"})
+      .then(function(res){ if(!res.ok) throw new Error("status " + res.status); return res.json(); })
+      .then(function(rows){ applyAvailability(Array.isArray(rows) ? rows : (rows && rows.value) || []); })
+      .catch(function(){ /* keep the built-in snapshot */ });
+  }
+
+  /* ---------- sending ---------- */
+  var sending = false;
+  function todayIso(){ var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function makeReference(){
+    var d = new Date(), p = function(n){ return (n < 10 ? "0" : "") + n; };
+    return "SP-" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+  }
+  /* the same fields, in the same wording, as the prospectus pages send */
+  function payloadFor(reference){
+    var p = P[state.program], t = curTier(), trap = $("f-website");
+    return {
+      secret: SUBMIT_SECRET, reference: reference, submittedAt: new Date().toISOString(), source: "prospectus-web",
+      program: PROGRAM_LIST[state.program] || "Winter Summit",
+      summits: (PROGRAM_SEASONS[state.program] || []).join(","),
+      package: p.package || "",
+      programLabel: p.label,
+      tier: state.tier.charAt(0).toUpperCase() + state.tier.slice(1),
+      tierName: t.name, price: t.price,
+      opportunity: oppLabel(), day: state.day || "", multiDayInterest: !!state.multi,
+      company: val("company"), contactName: val("contact"), contactEmail: val("email"), contactPhone: val("phone"),
+      logoFileName: safeFileName(reference + " - " + val("company")) + "." + logo.ext,
+      logoContentType: logo.type, logoBase64: logo.data,
+      signerName: val("signer"), signerTitle: val("title"), signedDate: val("date"), agreed: true,
+      contractVersion: $("k-body").getAttribute("data-contract-version") || "",
+      hp: trap ? trap.value : "", secondsOnPage: Math.round((Date.now() - PAGE_OPENED) / 1000)
+    };
+  }
+  function submit(){
+    if(sending) return;
+    var payload = payloadFor(makeReference());
+    var err = $("send-err"); err.hidden = true;
+    sending = true; paintBar();
+    var ctl = (typeof AbortController === "function") ? new AbortController() : null;
+    if(ctl) setTimeout(function(){ ctl.abort(); }, 90000);
+    fetch(SUBMIT_ENDPOINT, {method:"POST", signal: ctl ? ctl.signal : undefined, headers:{"Content-Type":"text/plain"}, body: JSON.stringify(payload)})
+      .then(function(res){ return res.json().catch(function(){ return {}; }).then(function(j){ if(!res.ok || !j || j.ok !== true) throw new Error("not received"); }); })
+      .then(function(){ sending = false; done(payload); })
+      .catch(function(){
+        sending = false; paintBar();
+        var lines = ["Reference: " + payload.reference, "Company: " + payload.company,
+          "Contact: " + payload.contactName + " (" + payload.contactEmail + (payload.contactPhone ? ", " + payload.contactPhone : "") + ")",
+          "Program: " + payload.programLabel, "Level: " + payload.tierName + " (" + payload.price + ")", "Opportunity: " + payload.opportunity,
+          "Signed by: " + payload.signerName + ", " + payload.signerTitle + ", " + payload.signedDate, "", "Our logo is attached."];
+        var mail = "mailto:kbradshaw@mismo.org?subject=" + encodeURIComponent("Sponsorship application " + payload.reference + " — " + payload.company) +
+          "&body=" + encodeURIComponent("The MyMISMO app couldn’t send our sponsorship application, so here it is by email.\n\n" + lines.join("\n"));
+        err.innerHTML = "<b>Your application didn&rsquo;t reach MISMO.</b> Nothing was sent, and everything you entered is still here. Please try Submit again in a moment. If it still won&rsquo;t go (some company networks block it), <a href=\"" + esc(mail) + "\">email it to kbradshaw@mismo.org</a> instead: the details are filled in for you, just attach your logo.";
+        err.hidden = false; err.scrollIntoView({block:"center", behavior:"smooth"});
+      });
+  }
+  function done(p){
+    sent = p;
+    $("done-ref").textContent = p.reference;
+    $("done-lead").textContent = "Thank you" + (p.contactName ? ", " + p.contactName.split(" ")[0] : "") + ". " + p.company + "’s " + p.tierName.replace(/ Sponsor$/, "") + " application for the " + P[state.program].name + " is with MISMO’s sponsorship team. Your reference:";
+    $("done-mail").textContent = "A confirmation email is on its way to " + p.contactEmail + ".";
+    buildPrint(p);
+    try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+    show("done");
+  }
+  function buildPrint(p){
+    var day = function(v){ var d = v ? new Date(String(v).slice(0, 10) + "T12:00:00") : null; return d && !isNaN(d) ? d.toLocaleDateString("en-US", {month:"long", day:"numeric", year:"numeric"}) : (v || ""); };
+    var rows = [["Sponsor", p.company], ["Program", p.programLabel], ["Level", p.tierName + (p.price ? " (" + p.price + ")" : "")], ["Opportunity", p.opportunity],
+      ["Contact", [p.contactName, p.contactEmail].filter(Boolean).join(", ")], ["Signed By", p.signerName], ["Title", p.signerTitle], ["Date Signed", day(p.signedDate)],
+      ["Reference", p.reference], ["Contract Version", p.contractVersion]];
+    $("print").innerHTML = '<div class="lp"><svg viewBox="0 0 708 108"><use href="#mismo-logo"/></svg></div><h1>MISMO Event Sponsor Contract</h1>' +
+      '<div class="pr-k">' + $("k-body").innerHTML + '</div><h2>Signed Application</h2><p>Agreed to online by checking the agreement box and submitting this application to MISMO on ' +
+      esc(day(p.submittedAt.slice(0, 10))) + '.</p><div class="pr-grid">' + rows.filter(function(r){ return r[1]; }).map(function(r){ return "<div><b>" + esc(r[0]) + "</b>" + esc(r[1]) + "</div>"; }).join("") + '</div>';
+    document.title = "MISMO Signed Sponsor Contract - " + p.company + " - " + p.reference;
+  }
+  $("signed-pdf-btn").addEventListener("click", function(){ window.print(); });
+
+  /* ---------- keep the selections on this phone (never the logo, never once sent) ---------- */
+  function save(){
+    if(step === "done") return;
+    var d = {at:Date.now(), state:state, step:step, f:{}};
+    Object.keys(FIELDS).forEach(function(k){ if(k !== "date") d.f[k] = val(k); });
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(d)); }catch(e){}
+  }
+  function restore(){
+    var d = null;
+    try{ d = JSON.parse(localStorage.getItem(STORE_KEY) || "null"); }catch(e){}
+    if(!d || !d.state || !d.state.program || !P[d.state.program] || Date.now() - (d.at || 0) > 30 * 864e5) return;
+    state = {program:d.state.program, tier:d.state.tier || null, opp:d.state.opp || null, day:d.state.day || null, multi:!!d.state.multi};
+    Object.keys(d.f || {}).forEach(function(k){ if(FIELDS[k] && d.f[k]) $(FIELDS[k]).value = d.f[k]; });
+    $("restore").hidden = false;
+  }
+  function clearSel(){ state = {program:null, tier:null, opp:null, day:null, multi:false}; }
+  $("restore-clear").addEventListener("click", function(){
+    try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+    clearSel(); Object.keys(FIELDS).forEach(function(k){ $(FIELDS[k]).value = ""; }); logo = null; paintLogo();
+    $("restore").hidden = true;
+  });
+
+  /* ---------- Back: each step is a page; the contract sheet is a layer ---------- */
+  if(window.MismoBack){
+    MismoBack.layer({isOpen:function(){ return sheetOpen; }, close:closeSheet});
+    MismoBack.pages({current:function(){ return step; }, go:function(n){ if(STEP_NAMES[n] || n === "done") show(n, flow().indexOf(n) < flow().indexOf(step)); }});
+  }
+
+  restore();
+  paintStart();
+  loadPublished();
+  loadAvailability();
+  paintLogo();
+  if(/[?&]from=mymismo\b/.test(location.search) || /\/mymismo\//.test(document.referrer || "")) document.body.classList.add("in-app");
+})();
+</script>
+</body>
+</html>
