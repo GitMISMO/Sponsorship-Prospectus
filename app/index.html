@@ -277,6 +277,7 @@ body.no-bar main{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
 .msg{padding:14px 16px; margin-top:12px; font-size:14px}
 .msg.err{border-color:var(--bad); background:var(--bad-wash)}
 .msg.err b{color:var(--bad)}
+.msg.warn{border-left:4px solid var(--warn); margin:0 0 12px}
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid var(--border-strong); background:var(--surface); color:var(--ink);
@@ -296,6 +297,8 @@ body.no-bar main{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
 .bar-sum span.hint{color:var(--bad); font-weight:600}
 .bar .btn{height:50px; min-width:132px; font-size:16px}
 body.no-bar .bar{display:none}
+/* ?practice: the practice card sits in the bottom corner; keep it above the bar */
+body:not(.no-bar) #practice-bar{bottom:calc(var(--bar-h) + 14px + env(safe-area-inset-bottom)) !important}
 
 /* ---------- the contract sheet ---------- */
 .sheet{position:fixed; inset:0; z-index:40; display:flex; flex-direction:column; background:var(--surface); transform:translateY(100%); transition:transform .28s ease; visibility:hidden}
@@ -417,13 +420,14 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     <div class="quotes" id="quotes"></div>
     <div class="dots" id="qdots"></div>
     <div class="card ask"><svg><use href="#i-mail"/></svg><div>Questions, or want something custom? Email <a href="mailto:kbradshaw@mismo.org">kbradshaw@mismo.org</a> or <a href="mailto:amoses@mismo.org">amoses@mismo.org</a>.</div></div>
-    <div class="stamp">Version 7e200340</div>
+    <div class="stamp">Version 44776fa3</div>
   </section>
 
   <!-- 2. pick a level -->
   <section class="step" id="s-level" data-step="level">
     <div class="card sel-head"><div class="sh-in"><h2 id="lv-name"></h2><p id="lv-when"></p>
       <div class="live" id="avail-stamp"><i></i><span>Availability as of this week</span></div></div></div>
+    <div class="card msg warn" id="lv-gone" hidden></div>
     <div class="tiers" id="tier-list"></div>
   </section>
 
@@ -431,6 +435,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   <section class="step" id="s-opp" data-step="opp">
     <h2 class="h-sec">Choose Your Opportunity</h2>
     <p class="lead" id="op-lead"></p>
+    <div class="card msg warn" id="op-gone" hidden></div>
     <div class="opps" id="opp-list"></div>
     <h2 class="h-sec" id="inc-h">Included With Your Level</h2>
     <div class="card inc" id="inc"></div>
@@ -582,20 +587,21 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   function lowest(k){ return Math.min.apply(null, TIER_ORDER.map(function(t){ return num(P[k].tiers[t].price); })); }
 
   /* ---------- which programs are on offer ---------- */
-  function setPublished(pages){
+  /* final: the real answer is in (the feed, or no feed), so a restored pick that isn't on offer can go */
+  function setPublished(pages, final){
     var keys = [];
     Object.keys(APP.groups).forEach(function(g){ if(pages[g]) keys = keys.concat(APP.groups[g]); });
     published = APP.order.filter(function(k){ return keys.indexOf(k) >= 0; });
     paintPrograms();
-    if(state.program && published.indexOf(state.program) < 0 && step !== "done"){ clearSel(); show("start", true); }
+    if(final && state.program && published.indexOf(state.program) < 0 && step !== "done"){ clearSel(); $("restore").hidden = true; show("start", true); }
   }
   function loadPublished(){
-    if(/[?&]show=all\b/.test(location.search)){ var all = {}; Object.keys(APP.groups).forEach(function(g){ all[g] = true; }); setPublished(all); return; }
-    setPublished(DEFAULT_PUBLISHED);
+    if(/[?&]show=all\b/.test(location.search)){ var all = {}; Object.keys(APP.groups).forEach(function(g){ all[g] = true; }); setPublished(all, true); return; }
+    setPublished(DEFAULT_PUBLISHED, false);
     fetch(PUBLISHED_FEED + "?t=" + Date.now(), {cache:"no-store"})
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-      .then(function(j){ var pg = j && (j.pages || j); if(pg && typeof pg === "object") setPublished(pg); })
-      .catch(function(){ /* keep the default */ });
+      .then(function(j){ var pg = j && (j.pages || j); if(!pg || typeof pg !== "object") throw 0; setPublished(pg, true); })
+      .catch(function(){ setPublished(DEFAULT_PUBLISHED, true); /* keep the default */ });
   }
 
   /* ---------- the start page ---------- */
@@ -666,18 +672,21 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
       var more = !showAll && ben.length > 3 ? '<div class="t-more">+ ' + (ben.length - 3) + ' more benefits</div>' : "";
       var opps = t.opportunities ? '<div class="t-opps">Choose one: ' + esc(t.opportunities.map(function(o){ return o.name.replace(/ Sponsor$/, ""); }).join(", ")) + '</div>' :
         '<div class="t-opps">One sponsor only. The exclusive is included.</div>';
-      return '<button type="button" class="tier' + (sel ? " sel" : "") + (out ? " out" : "") + '" data-tier="' + tid + '" style="--tc:var(--t-' + tid + ')"' + (out ? ' aria-disabled="true"' : "") + ' aria-pressed="' + sel + '">' +
+      return '<div role="button" tabindex="' + (out ? "-1" : "0") + '" class="tier' + (sel ? " sel" : "") + (out ? " out" : "") + '" data-tier="' + tid + '" style="--tc:var(--t-' + tid + ')"' + (out ? ' aria-disabled="true"' : "") + ' aria-pressed="' + sel + '">' +
         '<div class="t-top"><span class="t-eye">' + esc(t.name.replace(/ Sponsor$/, "")) + '</span><span class="t-right">' + tierChip(t) + '<span class="t-check"><svg><use href="#i-tick"/></svg></span></span></div>' +
         '<div class="t-price">' + esc(t.price) + (state.program === "series" ? '<small>for all three</small>' : (p.summits.length > 1 ? '<small>for both</small>' : "")) + '</div>' +
         '<div class="t-regs">' + esc(t.regs) + '</div>' +
-        '<ul class="t-ben">' + list + '</ul>' + more + opps + '</button>';
+        '<ul class="t-ben">' + list + '</ul>' + more + opps + '</div>';
     }).join("");
   }
+  $("tier-list").addEventListener("keydown", function(e){
+    if((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("tier")){ e.preventDefault(); e.target.click(); }
+  });
   $("tier-list").addEventListener("click", function(e){
     var b = e.target.closest(".tier"); if(!b || b.classList.contains("out")) return;
     var tid = b.getAttribute("data-tier");
     if(state.tier !== tid){ state.tier = tid; state.opp = null; state.day = null; state.multi = false; }
-    paintLevels(); paintBar(); save();
+    paintLevels(); paintBar(); save(); hideGone();
     var again = document.querySelector('.tier[data-tier="' + tid + '"]');
     if(again && again.scrollIntoView){ var r = again.getBoundingClientRect(); if(r.bottom > innerHeight - 90 || r.top < 110) again.scrollIntoView({block:"nearest", behavior:"smooth"}); }
   });
@@ -733,7 +742,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     var box = row.parentNode; if(box.classList.contains("out")) return;
     var id = box.getAttribute("data-opp");
     if(state.opp !== id){ state.opp = id; state.day = null; state.multi = false; }
-    paintOpps(); paintBar(); save();
+    paintOpps(); paintBar(); save(); hideGone();
   });
   $("opp-list").addEventListener("change", function(e){ if(e.target.id === "f-multi"){ state.multi = e.target.checked; save(); } });
 
@@ -871,7 +880,20 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     });
     void i;
   }
+  /* the first step before s that isn't finished, or "" */
+  function gapBefore(s){
+    if(s === "start") return "";
+    if(!state.program || !P[state.program]) return "start";
+    var f = flow(), i = f.indexOf(s); if(i < 0) i = f.length;
+    for(var k = 1; k < i; k++) if(missing(f[k])) return f[k];
+    return "";
+  }
   function show(s, back){
+    if(s === "done" && !sent) s = "sign";
+    if(s !== "done" && s !== "start"){
+      if(flow().indexOf(s) < 0) s = "details";            // Diamond has no opportunity step
+      var g = gapBefore(s); if(g){ s = g; back = true; }
+    }
     if(s === step) return;
     var was = step;
     step = s;
@@ -908,7 +930,7 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
   $("go").addEventListener("click", function(){
     var m = missing(step);
     if(m) return flag(m);
-    if(step === "sign") return submit();
+    if(step === "sign"){ var g = gapBefore("sign"); if(g){ show(g, true); nagged = true; paintBar(); return; } return submit(); }
     var f = flow(), i = f.indexOf(step);
     show(f[i + 1]);
   });
@@ -976,22 +998,34 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
         });
       });
     });
-    /* a choice that has just gone comes off, so nobody applies for something already taken */
-    var t = curTier();
-    if(t && tierOut(t) && step !== "done"){ state.tier = null; state.opp = null; state.day = null; }
+    /* a choice that has just gone comes off, so nobody applies for something already taken;
+       they're taken back to that step and told why */
+    var t = curTier(), gone = null, back = null;
+    if(t && tierOut(t) && step !== "done"){ gone = t.name.replace(/ Sponsor$/, "") + " has just sold out"; back = "level"; state.tier = null; state.opp = null; state.day = null; }
     var o = curOpp();
-    if(o && o.sold){ state.opp = null; state.day = null; }
-    if(o && state.day && (o.soldDays || []).indexOf(state.day) >= 0) state.day = null;
+    if(!gone && o && o.sold && step !== "done"){ gone = o.name + " has just been taken"; back = "opp"; state.opp = null; state.day = null; }
+    if(!gone && o && state.day && (o.soldDays || []).indexOf(state.day) >= 0 && step !== "done"){ gone = state.day + " for " + o.name + " has just been taken"; back = "opp"; state.day = null; }
     live = true;
+    if(gone){
+      var el = $(back === "level" ? "lv-gone" : "op-gone");
+      el.textContent = "Sorry — " + gone + ". Please choose another; everything else you entered is kept.";
+      el.hidden = false; save();
+      if(step !== "start" && step !== "level" && !(back === "opp" && step === "opp")) show(back, true);
+    }
     var st = $("avail-stamp"); st.classList.add("on"); st.lastElementChild.textContent = "Live availability, checked just now";
     if(step === "level") paintLevels();
     if(step === "opp") paintOpps();
     paintBar();
     return true;
   }
-  window.__app = {state:function(){ return JSON.parse(JSON.stringify(state)); }, programs:P, step:function(){ return step; }, published:function(){ return published.slice(); }};
+  /* read-only view for the checks (and recheck: ask the Availability flow again) */
+  window.__app = {state:function(){ return JSON.parse(JSON.stringify(state)); }, programs:P, step:function(){ return step; }, published:function(){ return published.slice(); },
+    recheck:function(){ loadAvailability(); }};
+  function hideGone(){ $("lv-gone").hidden = true; $("op-gone").hidden = true; }
+  var availAt = 0;
   function loadAvailability(){
     if(!AVAIL_ENDPOINT) return;
+    availAt = Date.now();
     fetch(AVAIL_ENDPOINT, {method:"POST", headers:{"Content-Type":"text/plain"}, body:"{}"})
       .then(function(res){ if(!res.ok) throw new Error("status " + res.status); return res.json(); })
       .then(function(rows){ applyAvailability(Array.isArray(rows) ? rows : (rows && rows.value) || []); })
@@ -1084,24 +1118,32 @@ c57 -33 76 -84 76 -200 0 -116 -19 -167 -76 -200 -32 -19 -52 -20 -294 -20
     $("restore").hidden = false;
   }
   function clearSel(){ state = {program:null, tier:null, opp:null, day:null, multi:false}; }
-  $("restore-clear").addEventListener("click", function(){
+  function startOver(){
     try{ localStorage.removeItem(STORE_KEY); }catch(e){}
     clearSel(); Object.keys(FIELDS).forEach(function(k){ $(FIELDS[k]).value = ""; }); logo = null; paintLogo();
+    $("f-agree").checked = false; $("send-err").hidden = true; hideGone(); sent = null;
     $("restore").hidden = true;
-  });
+  }
+  $("restore-clear").addEventListener("click", startOver);
 
   /* ---------- Back: each step is a page; the contract sheet is a layer ---------- */
   if(window.MismoBack){
     MismoBack.layer({isOpen:function(){ return sheetOpen; }, close:closeSheet});
-    MismoBack.pages({current:function(){ return step; }, go:function(n){ if(STEP_NAMES[n] || n === "done") show(n, flow().indexOf(n) < flow().indexOf(step)); }});
+    MismoBack.pages({current:function(){ return step; }, go:function(n){
+      if(sent && n !== "done"){ startOver(); show("start", true); return; }
+      if(STEP_NAMES[n] || n === "done") show(n, flow().indexOf(n) < flow().indexOf(step));
+    }});
   }
+
+  document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState === "visible" && step !== "done" && Date.now() - availAt > 60000) loadAvailability();
+  });
 
   restore();
   paintStart();
   loadPublished();
   loadAvailability();
   paintLogo();
-  if(/[?&]from=mymismo\b/.test(location.search) || /\/mymismo\//.test(document.referrer || "")) document.body.classList.add("in-app");
 })();
 </script>
 </body>
