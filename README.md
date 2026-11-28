@@ -8,6 +8,7 @@ The public sponsorship prospectuses, at resources.mismo.org/Sponsorship-Prospect
 | `spring-2027/` | Spring 2027 Summit |
 | `fall-2027/` | Fall 2027 Summit |
 | `spring-fall-2027/` | Spring & Fall 2027 package, 10% off (for after the Winter Summit) |
+| `app/` | The phone version for the MyMISMO app: every published program in one step-by-step page |
 
 Applications go to the Sponsorship Intake flow and land in the Sponsorship Portal (the
 `sponsorship` repo). Availability comes from the Sponsorship Availability flow.
@@ -35,6 +36,32 @@ Prospectuses tab.
 
 **A price change:** edit `catalog.json`, run `node tests/apply-catalog.js` in the sponsorship
 repo (it updates the template and the portal too), then run the build.
+
+## The MyMISMO App Version (`app/`)
+
+resources.mismo.org/Sponsorship-Prospectus/app/ is the prospectus made for a phone, opened from
+the MyMISMO app's Sponsor a Summit button (Jonna, November 27, 2026). Five steps with a bar along
+the bottom: choose a summit, choose a level (price, registrations, benefits, live availability),
+choose the opportunity and day, your details and logo, then review, read the contract and sign.
+It sends exactly what the prospectus pages send, to the same Intake flow, with the same contract
+version, so the portal can't tell them apart; the confirmation offers Save a Signed Copy (PDF).
+
+- **Nothing in it is typed by hand.** `tools/build_app.py` (run by `tools/build.py`) makes
+  `app/index.html` from `tools/app-template.html` (the app's layout and script), the built pages
+  (each program's tiers, prices, benefits, opportunities and built-in availability, the flow
+  addresses), and `tools/template.html` (the contract, the audience figures, the quotes, the logo).
+  Change wording or prices where you always do and rebuild; change the app's look in
+  `tools/app-template.html`.
+- **Which programs it offers** is set in the Sponsorship Portal: Prospectuses tab, the Publish on
+  MyMISMO box on each card (saved in `settings/main.mymismo`). The website's sponsors job copies the
+  boxes to the public `resources.mismo.org/sponsors/prospectus-app.json`
+  (`{"pages":{"series-winter":true,"spring":false,"fall":false,"spring-fall":false}}`), and the
+  app reads that when it opens. Until that file exists, the app offers the Series and Winter. Add
+  `?show=all` to see every program (for checking one before publishing it).
+- Availability is counted per summit with the same rules as the pages (a Series slot must be free
+  at all three; a package at both); the checks compare the app's count with each page's.
+- Selections (never the logo) are kept on the phone for 30 days in case someone leaves part way;
+  Start Over clears them. `?practice` works here too.
 
 ## Download PDF
 
